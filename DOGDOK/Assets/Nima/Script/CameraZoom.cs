@@ -45,7 +45,7 @@ public class CameraZoom : MonoBehaviour
         //transform.localPosition = currentZoomDistance;
         //transform.localEulerAngles = currentZoomAngle;
     }
-
+    
     // Update is called once per frame
     void Update()
     {
