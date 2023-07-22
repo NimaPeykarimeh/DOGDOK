@@ -5,7 +5,7 @@ using UnityEngine;
 public class GridDisplayEditor : Editor
 {
     private SerializedProperty gridSize;
-    private SerializedProperty cellSize;
+    public SerializedProperty cellSize;
 
     private void OnEnable()
     {
