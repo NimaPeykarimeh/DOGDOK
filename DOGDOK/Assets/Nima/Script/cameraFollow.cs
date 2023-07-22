@@ -12,10 +12,14 @@ public class cameraFollow : MonoBehaviour
     [SerializeField] float currentFollowSpeed;
     public float maxDistance;
 
+    //[SerializeField] int maxRotation = 30;
+    //[SerializeField] float rotationSensitivity;
+    //[SerializeField] int screenResX;
     private void Start()
     {
         currentFollowSpeed = defaultFollowSpeed;
         playerMovement = player.GetComponent<CharacterMovement>();
+        //screenResX = Screen.width;
     }
 
 
@@ -31,5 +35,7 @@ public class cameraFollow : MonoBehaviour
             currentFollowSpeed = defaultFollowSpeed;
         }
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, currentFollowSpeed * Time.deltaTime);
+        //float turnRotation = Mathf.Clamp( (Input.mousePosition.x - (screenResX / 2)) * rotationSensitivity, -maxRotation,maxRotation);
+        //transform.eulerAngles = new Vector3(0,turnRotation ,0);
     }
 }

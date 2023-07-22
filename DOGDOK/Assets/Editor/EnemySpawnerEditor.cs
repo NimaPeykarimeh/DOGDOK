@@ -20,6 +20,22 @@ public class EnemySpawnerEditor : Editor
         EditorGUILayout.PropertyField(spawnPosition);
         EditorGUILayout.PropertyField(spawnSize);
 
+        // Display a button to update the Box Collider size
+        if (GUILayout.Button("Update Collider Size"))
+        {
+            EnemySpawnArea spawner = (EnemySpawnArea)target;
+            BoxCollider boxCollider = spawner.GetComponent<BoxCollider>();
+
+            if (boxCollider != null)
+            {
+                boxCollider.size = spawner.spawnSize;
+            }
+            else
+            {
+                Debug.LogWarning("Box Collider component not found on the EnemySpawner GameObject.");
+            }
+        }
+
         serializedObject.ApplyModifiedProperties();
     }
 
