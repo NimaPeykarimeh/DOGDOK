@@ -2900,7 +2900,7 @@ MonoBehaviour:
   center: {fileID: 0}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   gizmoTimer: 0
   gizmoDuration: 0.1
 --- !u!1 &1423220026
@@ -3305,7 +3305,7 @@ MonoBehaviour:
   center: {fileID: 1931236204}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   gizmoTimer: 0
   gizmoDuration: 0.1
 --- !u!1 &1538103084
