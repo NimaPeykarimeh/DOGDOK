@@ -25,10 +25,10 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isInventoryOpen && Input.GetKeyDown(KeyCode.Tab)) // Envanter Açýkken Kapama
+        if (isInventoryOpen && Input.GetKeyDown(KeyCode.Tab)) // Envanter Açýkken Kapama
         {
             animator.SetBool("isShowing", false);
-            isInventoryOpen = true;
+            isInventoryOpen = false;
         }
         else if (Input.GetKeyDown(KeyCode.Tab)) // Envanter Kapalýyken Açma
         {
@@ -37,9 +37,9 @@ public class InventoryManager : MonoBehaviour
                 UIAmount[i].text = InventorySlots[i].ToString();
             }
             animator.SetBool("isShowing", true);
-            isInventoryOpen = false;
+            isInventoryOpen = true;
         }
-        else if (isInventoryOpen) // Envanter Açýk Duruyorsa.
+        else if(isInventoryOpen) // Envanter Açýk Duruyorsa.
         {
             for (int i = 0; i < InventorySlots.Length; i++)
             {
