@@ -11,7 +11,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Animator animator;
     [HideInInspector] public int[] InventorySlots;
     [SerializeField] private TextMeshProUGUI[] UIAmount = new TextMeshProUGUI[6];
-    // Start is called before the first frame update
+
     void Start()
     {
         isInventoryOpen = false;
@@ -22,10 +22,9 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (isInventoryOpen && Input.GetKeyDown(KeyCode.Tab)) // Envanter Açýkken Kapama
+        if (isInventoryOpen && Input.GetKeyDown(KeyCode.I)) // Envanter Açýkken Kapama
         {
             animator.SetBool("isShowing", false);
             isInventoryOpen = false;
@@ -47,7 +46,14 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+    //TODO
+    //Gather Resources method olarak Ekle
+    //Switch Case'i resource gatherlamayý ekle
+    //Kaynaklarý Dictionary'e çevir
 
+    //Tab'a basarak silah seçme sekmesi
+    //WorkStation yanýnda E'ye basýnca tablet açýlsýn, butona basýlýnca grid sisteme geçsin
+    //Build, Gridleri takip etsin. Grid boþ mu kontrolü yapan method.
     public void UseResources(int resourceType, int usageAmount) //kaynaðýn türünü sayý cinsinden ve miktarýný giriniz.
     {
         int lastingResource = InventorySlots[resourceType] - usageAmount;

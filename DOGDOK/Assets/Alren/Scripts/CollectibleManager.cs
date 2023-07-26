@@ -19,7 +19,6 @@ public class CollectibleManager : MonoBehaviour
         if (other.CompareTag("Collectible") && Input.GetMouseButton(0) && objectName == other.gameObject.name)
         {
             timer += Time.deltaTime;
-            //print(timer);
             if (timer > 0.501f)
             {
                 Destroy(other.gameObject);
