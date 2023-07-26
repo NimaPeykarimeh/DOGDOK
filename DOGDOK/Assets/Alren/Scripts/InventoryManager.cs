@@ -11,6 +11,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Animator animator;
     [HideInInspector] public int[] InventorySlots;
     [SerializeField] private TextMeshProUGUI[] UIAmount = new TextMeshProUGUI[6];
+    [SerializeField] private CollectibleManager CollectibleManager;
 
     void Start()
     {
@@ -38,7 +39,7 @@ public class InventoryManager : MonoBehaviour
             animator.SetBool("isShowing", true);
             isInventoryOpen = true;
         }
-        else if(isInventoryOpen) // Envanter Açýk Duruyorsa.
+        else if (isInventoryOpen) // Envanter Açýk Duruyorsa.
         {
             for (int i = 0; i < InventorySlots.Length; i++)
             {
@@ -54,13 +55,20 @@ public class InventoryManager : MonoBehaviour
     //Tab'a basarak silah seçme sekmesi
     //WorkStation yanýnda E'ye basýnca tablet açýlsýn, butona basýlýnca grid sisteme geçsin
     //Build, Gridleri takip etsin. Grid boþ mu kontrolü yapan method.
-    public void UseResources(int resourceType, int usageAmount) //kaynaðýn türünü sayý cinsinden ve miktarýný giriniz.
+    public void UseResources(string resourceName, int usageAmount) //kaynaðýn türünü sayý cinsinden ve miktarýný giriniz.
     {
-        int lastingResource = InventorySlots[resourceType] - usageAmount;
-        if (lastingResource < 0)
+        if (CollectibleManager.resourceIndices.TryGetValue(resourceName, out int resourceType))
         {
-            Console.WriteLine("Can't");
+            int lastingResource = InventorySlots[resourceType] - usageAmount;
+            if (lastingResource < 0)
+            {
+                Debug.Log("Can't");
+            }
+            else
+            {
+                InventorySlots[resourceType] = lastingResource;
+            }
         }
-        else InventorySlots[resourceType] = lastingResource;
+
     }
 }
