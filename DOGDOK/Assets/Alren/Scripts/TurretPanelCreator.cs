@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class TurretPanelCreator : MonoBehaviour
 {
-    public List<Build> builds;
+    public List<Build1> builds;
     [SerializeField] GameObject buildingCard;
     [SerializeField] GameObject resourceBar;
     void Start()
@@ -18,7 +18,7 @@ public class TurretPanelCreator : MonoBehaviour
     {
         for (int i = 0; i < builds.Count; i++)
         {
-            Build _currentBuild = builds[i];
+            Build1 _currentBuild = builds[i];
             GameObject _card = Instantiate(buildingCard, transform.position, transform.rotation);
             _card.transform.parent = transform;
             _card.GetComponent<RectTransform>().localScale = Vector3.one;

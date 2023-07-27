@@ -3242,7 +3242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ee3c8659db5ac04abb0102c388a0f98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TurretPanel: {fileID: 0}
+  TurretPanel: {fileID: 5759223}
 --- !u!1 &953577064
 GameObject:
   m_ObjectHideFlags: 0
@@ -7819,7 +7819,7 @@ MonoBehaviour:
   - {fileID: 1267747149}
   - {fileID: 605740924}
   - {fileID: 897777009}
-  CollectibleManager: {fileID: 0}
+  CollectibleManager: {fileID: 1528637172}
 --- !u!224 &2114946035
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7878,7 +7878,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6086075837841075516}
   - component: {fileID: 6086075837841075519}
-  - component: {fileID: 6086075837841075518}
   - component: {fileID: 6086075837841075520}
   m_Layer: 5
   m_Name: Turret Panel
@@ -7887,23 +7886,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &6086075837841075518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6086075837841075517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aeb5a89c16026846ad45c9b8872e765, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  builds:
-  - {fileID: 11400000, guid: 22549359bb567c340951f2518b74e854, type: 2}
-  - {fileID: 11400000, guid: 8e2221669e0408d459f8552be1504b9c, type: 2}
-  buildingCard: {fileID: 3629211748714300768, guid: 1d3830266eceaf74fb21eb5212ab4672, type: 3}
-  resourceBar: {fileID: 7928022691904910421, guid: 55581d0fd4ca29a4189590be459b0f76, type: 3}
 --- !u!114 &6086075837841075519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7941,7 +7923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   builds:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 1c45739f1efdefa47943175c24820913, type: 2}
+  - {fileID: 11400000, guid: 63e81a2499c82d948abd2e435b1c9bd3, type: 2}
   buildingCard: {fileID: 3629211748714300768, guid: d45c7a2e44d9c3446b11c8cc889040c8, type: 3}
   resourceBar: {fileID: 7928022691904910421, guid: 65d093b1b5ba84e46b9ba47b2474eb09, type: 3}
