@@ -17,7 +17,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] Transform shootPoint;
     [SerializeField] float fireInterval;
     [SerializeField] float fireTimer;
-    NoiseMaker noiseMaker;
+    [SerializeField] NoiseMaker noiseMaker;
     
 
     private void Start()

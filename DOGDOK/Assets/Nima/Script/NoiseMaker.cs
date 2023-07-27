@@ -43,6 +43,7 @@ public class NoiseMaker : MonoBehaviour
         foreach (Collider collider in hitColliders)
         {
             // Do something with the detected enemy (e.g., damage, apply an effect, etc.)
+            collider.gameObject.GetComponent<EnemyFollow>().isAlerted = true;
             Debug.Log("Enemy detected: " + collider.gameObject.name);
         }
         
