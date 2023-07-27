@@ -5092,6 +5092,7 @@ GameObject:
   - component: {fileID: 1419088087}
   - component: {fileID: 1419088086}
   - component: {fileID: 1419088090}
+  - component: {fileID: 1419088091}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -5113,6 +5114,7 @@ Transform:
   m_Children:
   - {fileID: 1474616675}
   - {fileID: 338814225}
+  - {fileID: 1920507520}
   m_Father: {fileID: 158083101}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
@@ -5128,17 +5130,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da149199a56a224ca60da863f524857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 5
+  shooting: {fileID: 1419088091}
+  isShooting: 0
+  fireInterval: 0.5
+  fireTimer: 1.310565
+  fireRate: 2
   damage: 0
   shootRange: 15
   noiseRange: 10
-  isShooting: 0
   isAutomatic: 0
   isPiercing: 0
   shootPoint: {fileID: 1474616675}
-  fireInterval: 0
-  fireTimer: 0
-  noiseMaker: {fileID: 0}
+  isAccelerating: 1
+  accelerationDuration: 5
+  maxAcceleration: 10
+  accelerationTimer: 0
+  acceleration: 1
 --- !u!136 &1419088087
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5222,6 +5229,19 @@ MonoBehaviour:
     m_Bits: 64
   gizmoTimer: 0
   gizmoDuration: 0.1
+--- !u!114 &1419088091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419088084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ac03f5acfed88468f846772a286681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoPooling: {fileID: 1920507521}
 --- !u!1 &1423220026
 GameObject:
   m_ObjectHideFlags: 0
@@ -5901,7 +5921,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1528637162}
   m_LocalRotation: {x: 0.0021001399, y: -0, z: -0, w: 0.9999978}
-  m_LocalPosition: {x: 0, y: 1.16, z: 0}
+  m_LocalPosition: {x: -0.876, y: 1.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6764,8 +6784,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1752367139}
-  m_LocalRotation: {x: -0, y: 0.50212944, z: -0, w: 0.8647925}
-  m_LocalPosition: {x: -6.58, y: -0.09000003, z: 14.61}
+  m_LocalRotation: {x: -0, y: 0.80869174, z: -0, w: 0.58823276}
+  m_LocalPosition: {x: -5.4, y: -0.09000003, z: 11.72}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -6775,7 +6795,7 @@ Transform:
   - {fileID: 663761050}
   m_Father: {fileID: 0}
   m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 60.282, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 107.937, z: 0}
 --- !u!1 &1778815319
 GameObject:
   m_ObjectHideFlags: 0
@@ -7332,6 +7352,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1917271349}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1920507519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1920507520}
+  - component: {fileID: 1920507521}
+  m_Layer: 0
+  m_Name: Ammos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1920507520
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920507519}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.035, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1419088085}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1920507521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920507519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377d6870aefba8941813139a0e4eba36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoPrefab: {fileID: 6661396178395260907, guid: ad69e222b6cdffa459480f3ce56cb5f4, type: 3}
+  creatAmount: 30
 --- !u!1 &1931236203
 GameObject:
   m_ObjectHideFlags: 0
@@ -7645,7 +7711,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2078037633}
   m_LocalRotation: {x: -0, y: 0.50212944, z: -0, w: 0.8647925}
-  m_LocalPosition: {x: -9.29, y: -0.09000003, z: 6.08}
+  m_LocalPosition: {x: -9.38, y: -0.09000003, z: 5.32}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
