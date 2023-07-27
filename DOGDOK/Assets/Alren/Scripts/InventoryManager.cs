@@ -57,7 +57,7 @@ public class InventoryManager : MonoBehaviour
     //Build, Gridleri takip etsin. Grid boþ mu kontrolü yapan method.
     public void UseResources(string resourceName, int usageAmount) //kaynaðýn türünü sayý cinsinden ve miktarýný giriniz.
     {
-        if (CollectibleManager.resourceIndices.TryGetValue(resourceName, out int resourceType))
+        if (CollectibleManager.resourceIndices.TryGetValue(resourceName, out int resourceType)) //kaynaðýn ismine göre kaynak türünü döndürüyor.
         {
             int lastingResource = InventorySlots[resourceType] - usageAmount;
             if (lastingResource < 0)
