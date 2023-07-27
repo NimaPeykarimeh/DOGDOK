@@ -17,7 +17,7 @@ public class Ammo : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void OnEnable()
+    private void OnEnable()//fix scaling
     {
         ammoTimer = 0;
         rb.velocity = Vector3.zero;

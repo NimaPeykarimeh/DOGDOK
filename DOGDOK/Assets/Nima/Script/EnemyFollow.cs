@@ -10,6 +10,8 @@ public class EnemyFollow : MonoBehaviour
     public bool isAlerted;
     [SerializeField] bool isPathOpen;
 
+    [SerializeField] float maxMovementSpeed;
+    [SerializeField] float minMovementSpeed;
     [SerializeField] float movementSpeed;
     [SerializeField] float rotationDuration;
     [SerializeField] float rotationTimer;
@@ -30,6 +32,7 @@ public class EnemyFollow : MonoBehaviour
     void Start()
     {
         randomSign = Random.Range(0, 2) == 0 ? -1 : 1;
+        movementSpeed = Random.Range(minMovementSpeed,maxMovementSpeed);
     }
 
     // Update is called once per frame
