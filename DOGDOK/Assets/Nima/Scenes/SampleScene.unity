@@ -314,7 +314,7 @@ MonoBehaviour:
     m_Bits: 128
   pivotRotation: {x: 0, y: 0, z: 0, w: 0}
   rayCount: 8
-  rayRange: 2
+  rayRange: 3
 --- !u!143 &15374561
 CharacterController:
   m_ObjectHideFlags: 0
@@ -461,7 +461,7 @@ MonoBehaviour:
     m_Bits: 128
   pivotRotation: {x: 0, y: 0, z: 0, w: 0}
   rayCount: 8
-  rayRange: 2
+  rayRange: 3
 --- !u!143 &19556702
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2262,7 +2262,7 @@ MonoBehaviour:
     m_Bits: 128
   pivotRotation: {x: 0, y: 0, z: 0, w: 0}
   rayCount: 8
-  rayRange: 2
+  rayRange: 3
 --- !u!143 &557702817
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2359,7 +2359,7 @@ Transform:
   m_Children:
   - {fileID: 922702406}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &603289732
 GameObject:
@@ -3411,7 +3411,7 @@ MonoBehaviour:
     m_Bits: 128
   pivotRotation: {x: 0, y: 0, z: 0, w: 0}
   rayCount: 8
-  rayRange: 2
+  rayRange: 3
 --- !u!143 &961081675
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4603,7 +4603,7 @@ MonoBehaviour:
     m_Bits: 128
   pivotRotation: {x: 0, y: 0, z: 0, w: 0}
   rayCount: 8
-  rayRange: 2
+  rayRange: 3
 --- !u!143 &1328523181
 CharacterController:
   m_ObjectHideFlags: 0
@@ -5689,7 +5689,7 @@ MonoBehaviour:
     m_Bits: 128
   pivotRotation: {x: 0, y: 0, z: 0, w: 0}
   rayCount: 8
-  rayRange: 2
+  rayRange: 3
 --- !u!143 &1518769157
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6308,7 +6308,7 @@ MonoBehaviour:
     m_Bits: 128
   pivotRotation: {x: 0, y: 0, z: 0, w: 0}
   rayCount: 8
-  rayRange: 2
+  rayRange: 3
 --- !u!143 &1660485168
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6774,7 +6774,7 @@ Transform:
   - {fileID: 488298703}
   - {fileID: 663761050}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 60.282, z: 0}
 --- !u!1 &1778815319
 GameObject:
@@ -7411,7 +7411,7 @@ MonoBehaviour:
     m_Bits: 128
   pivotRotation: {x: 0, y: 0, z: 0, w: 0}
   rayCount: 8
-  rayRange: 2
+  rayRange: 3
 --- !u!143 &1934380827
 CharacterController:
   m_ObjectHideFlags: 0
@@ -7654,7 +7654,7 @@ Transform:
   - {fileID: 1113696694}
   - {fileID: 469603305}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 60.282, z: 0}
 --- !u!1 &2140540254
 GameObject:
