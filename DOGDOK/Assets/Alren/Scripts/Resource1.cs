@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 [CreateAssetMenu(menuName ="Resource1")]
 public class Resource1 : ScriptableObject
 {
+    public int id;
     public string resourceName;
     public Sprite resourceImage;
-
+    public Mesh resourceMesh;
 }

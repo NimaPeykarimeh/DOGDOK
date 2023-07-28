@@ -30,7 +30,7 @@ public class InventoryManager : MonoBehaviour
             animator.SetBool("isShowing", false);
             isInventoryOpen = false;
         }
-        else if (Input.GetKeyDown(KeyCode.Tab)) // Envanter Kapalýyken Açma
+        else if (Input.GetKeyDown(KeyCode.I)) // Envanter Kapalýyken Açma
         {
             for (int i = 0; i < InventorySlots.Length; i++)
             {
@@ -57,18 +57,18 @@ public class InventoryManager : MonoBehaviour
     //Build, Gridleri takip etsin. Grid boþ mu kontrolü yapan method.
     public void UseResources(string resourceName, int usageAmount) //kaynaðýn türünü sayý cinsinden ve miktarýný giriniz.
     {
-        if (CollectibleManager.resourceIndices.TryGetValue(resourceName, out int resourceType)) //kaynaðýn ismine göre kaynak türünü döndürüyor.
-        {
-            int lastingResource = InventorySlots[resourceType] - usageAmount;
-            if (lastingResource < 0)
-            {
-                Debug.Log("Can't");
-            }
-            else
-            {
-                InventorySlots[resourceType] = lastingResource;
-            }
-        }
+        //if (CollectibleManager.resourceIndices.TryGetValue(resourceName, out int resourceType)) //kaynaðýn ismine göre kaynak türünü döndürüyor.
+        //{
+        //    int lastingResource = InventorySlots[resourceType] - usageAmount;
+        //    if (lastingResource < 0)
+        //    {
+        //        Debug.Log("Can't");
+        //    }
+        //    else
+        //    {
+        //        InventorySlots[resourceType] = lastingResource;
+        //    }
+        //}
 
     }
 }

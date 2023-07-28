@@ -1,3 +1,4 @@
+using Mono.Cecil;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,46 +8,49 @@ public class CollectibleManager : MonoBehaviour
     private float timer;
     private string objectName;
     [SerializeField] private InventoryManager InventoryManager;
-    public Dictionary<string, int> resourceIndices;
+    public List<Resource1> resourceIndices = new List<Resource1>();
 
     private void Start()
     {
-        resourceIndices = new Dictionary<string, int>
+        for (int i = 0; i < resourceIndices.Count; i++)
         {
-            { "Stone", 0 },
-            { "Plank", 1 },
-            { "Plate", 2 },
-            { "Circuit", 3 },
-            { "MetalComposite", 4 },
-            { "Energy", 5 }
-        };
+            print(resourceIndices[i].resourceName);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-
         timer = 0;
-        objectName = other.gameObject.name; //iki farklý trigger arasý triggerdan çýkmadan geçiþ yaparken bug yaþanmasýn diye if'te de kullandým.
+        objectName = other.gameObject.name;
     }
     private void OnTriggerStay(Collider other)
     {
+        print(other.gameObject.name);
+        print(objectName);
         //Sol týk'a basýlý tutulduðu ve alanda durduðu sürece loot yapar.
-        if (other.CompareTag("Collectible") && Input.GetMouseButton(0) && objectName == other.gameObject.name)
+        if (other.CompareTag("Collectible") && Input.GetKey(KeyCode.Mouse0))
         {
-            timer += Time.deltaTime;
-            if (timer > 0.501f)
+            timer += 10 * Time.deltaTime;
+            if (timer > 5)
             {
                 Destroy(other.gameObject);
-                if (resourceIndices.TryGetValue(objectName, out int resourceType))
+                for (int i = 0; i < resourceIndices.Count; i++)
                 {
-                    InventoryManager.InventorySlots[resourceType]++;
-                }
+                    if (resourceIndices[i].resourceName == objectName)
+                    {
+                        InventoryManager.InventorySlots[i]++;
+                        break;
+                    }
+                }                
+                //if (resourceIndices.TryGetValue(objectName, out int resourceType))
+                //{
+                //    InventoryManager.InventorySlots[resourceType]++;
+                //}
             }
         }
         else
         {
             timer = 0;
-            objectName = other.gameObject.name;
         }
     }
 }
