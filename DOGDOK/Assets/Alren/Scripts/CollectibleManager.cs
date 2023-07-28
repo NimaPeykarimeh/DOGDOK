@@ -6,27 +6,26 @@ using UnityEngine;
 public class CollectibleManager : MonoBehaviour
 {
     private float timer;
-    private string objectName;
+    private int objectID;
     [SerializeField] private InventoryManager InventoryManager;
     public List<Resource1> resourceIndices = new List<Resource1>();
 
     private void Start()
     {
-        for (int i = 0; i < resourceIndices.Count; i++)
-        {
-            print(resourceIndices[i].resourceName);
-        }
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         timer = 0;
-        objectName = other.gameObject.name;
+        if (other.CompareTag("Collectible"))
+        {
+            objectID = other.gameObject.GetComponent<ResourceCreation>().id;
+        }
+        
     }
     private void OnTriggerStay(Collider other)
     {
-        print(other.gameObject.name);
-        print(objectName);
         //Sol týk'a basýlý tutulduðu ve alanda durduðu sürece loot yapar.
         if (other.CompareTag("Collectible") && Input.GetKey(KeyCode.Mouse0))
         {
@@ -36,7 +35,7 @@ public class CollectibleManager : MonoBehaviour
                 Destroy(other.gameObject);
                 for (int i = 0; i < resourceIndices.Count; i++)
                 {
-                    if (resourceIndices[i].resourceName == objectName)
+                    if (resourceIndices[i].id == objectID)
                     {
                         InventoryManager.InventorySlots[i]++;
                         break;
