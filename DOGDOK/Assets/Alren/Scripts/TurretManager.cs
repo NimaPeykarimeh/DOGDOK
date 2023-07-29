@@ -17,12 +17,13 @@ public class TurretManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isOpen && Input.GetKeyDown(KeyCode.T)) //Açma
+        if (!isOpen && Input.GetKeyDown(KeyCode.E)) //Açma
         {
             isOpen = true;
             TurretPanel.SetActive(true);
+            TurretPanel.GetComponent<TurretPanelCreator>().UpdateRequiredResource();
         }
-        else if(isOpen && Input.GetKeyDown(KeyCode.T)) //Kapama
+        else if(isOpen && Input.GetKeyDown(KeyCode.E)) //Kapama
         {
             isOpen = false;
             TurretPanel.SetActive(false);

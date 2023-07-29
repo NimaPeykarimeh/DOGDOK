@@ -9,8 +9,11 @@ public class TurretPanelCreator : MonoBehaviour
     public List<Build1> builds;
     [SerializeField] GameObject buildingCard;
     [SerializeField] GameObject resourceBar;
-    void Start()
+    [SerializeField] InventoryManager InventoryManager;
+    private List<TextMeshProUGUI> requiredTexts;
+    private void Awake()
     {
+        requiredTexts = new List<TextMeshProUGUI>();
         SetupPanel();
     }
 
@@ -34,12 +37,36 @@ public class TurretPanelCreator : MonoBehaviour
                 _resourceBar.GetComponent<RectTransform>().localScale = Vector3.one;
 
                 _resourceBar.transform.Find("ResourceImage").GetComponent<Image>().sprite = _currentBuild.requiredResource[j].resourceImage;
-                _resourceBar.transform.Find("Required").GetComponent<TextMeshProUGUI>().text = "0/" + _currentBuild.requiredAmount[j].ToString();
+                requiredTexts.Add(_resourceBar.transform.Find("Required").GetComponent<TextMeshProUGUI>());
+                requiredTexts[j].text =
+                    //InventoryManager.InventorySlots[_currentBuild.requiredResource[j].id].ToString()
+                    "0"
+                    + "/"
+                    + _currentBuild.requiredAmount[j].ToString();
+                //_resourceBar.transform.Find("Required").GetComponent<TextMeshProUGUI>().text =
+                //InventoryManager.InventorySlots[_currentBuild.requiredResource[j].id].ToString()
+                //    + "/"
+                //    + _currentBuild.requiredAmount[j].ToString();
+            }
+        }
+    }
+
+    public void UpdateRequiredResource()
+    {
+        int z = 0;
+        for (int i = 0; i < builds.Count; i++)
+        {
+            Build1 _currentBuild = builds[i];
+            for (int j = 0; j < _currentBuild.requiredResource.Count; j++)
+            {
+                requiredTexts[z++].text =
+                    InventoryManager.InventorySlots[_currentBuild.requiredResource[j].id].ToString()
+                    + "/"
+                    + _currentBuild.requiredAmount[j].ToString();
             }
 
         }
     }
-
     // Update is called once per frame
     void Update()
     {

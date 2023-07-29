@@ -8214,7 +8214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &6086075837841075519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8255,4 +8255,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1c45739f1efdefa47943175c24820913, type: 2}
   - {fileID: 11400000, guid: 63e81a2499c82d948abd2e435b1c9bd3, type: 2}
   buildingCard: {fileID: 3629211748714300768, guid: d45c7a2e44d9c3446b11c8cc889040c8, type: 3}
-  resourceBar: {fileID: 7928022691904910421, guid: 65d093b1b5ba84e46b9ba47b2474eb09, type: 3}
+  resourceBar: {fileID: 2677021098549008036, guid: 97526d334a4c1924283f0bf7c1bc81ad, type: 3}
