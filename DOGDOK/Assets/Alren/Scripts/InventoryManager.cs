@@ -17,10 +17,7 @@ public class InventoryManager : MonoBehaviour
     {
         isInventoryOpen = false;
         InventorySlots = new int[6];
-        for (int i = 0; i < InventorySlots.Length; i++)
-        {
-            InventorySlots[i] = 0;
-        }
+        Array.Clear(InventorySlots, 0, 6);
     }
 
     void Update()

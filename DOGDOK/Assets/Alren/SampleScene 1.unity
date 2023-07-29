@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18383397, g: 0.22854075, b: 0.30058143, a: 1}
+  m_IndirectSpecularColor: {r: 0.18383369, g: 0.22854021, b: 0.30058086, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -924,6 +924,7 @@ GameObject:
   - component: {fileID: 319937917}
   - component: {fileID: 319937916}
   - component: {fileID: 319937920}
+  - component: {fileID: 319937921}
   m_Layer: 0
   m_Name: Energy
   m_TagString: Collectible
@@ -1007,7 +1008,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1032400585}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &319937920
 BoxCollider:
@@ -1022,6 +1023,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 4, z: 3}
   m_Center: {x: 0, y: 4, z: 0}
+--- !u!114 &319937921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319937915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollectibleManager: {fileID: 1528637172}
+  id: 0
+  isRandomized: 0
 --- !u!1 &379355739
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,6 +1323,7 @@ GameObject:
   - component: {fileID: 438777568}
   - component: {fileID: 438777567}
   - component: {fileID: 438777572}
+  - component: {fileID: 438777573}
   m_Layer: 0
   m_Name: Stone
   m_TagString: Collectible
@@ -1390,7 +1407,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1032400585}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &438777572
 BoxCollider:
@@ -1405,6 +1422,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 4, z: 3}
   m_Center: {x: 0, y: 4, z: 0}
+--- !u!114 &438777573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438777566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollectibleManager: {fileID: 1528637172}
+  id: 0
+  isRandomized: 0
 --- !u!1 &533549094
 GameObject:
   m_ObjectHideFlags: 0
@@ -2443,6 +2475,7 @@ GameObject:
   - component: {fileID: 843013986}
   - component: {fileID: 843013985}
   - component: {fileID: 843013984}
+  - component: {fileID: 843013988}
   m_Layer: 0
   m_Name: Stone
   m_TagString: Collectible
@@ -2463,7 +2496,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1032400585}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &843013984
 BoxCollider:
@@ -2541,6 +2574,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 843013982}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &843013988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843013982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollectibleManager: {fileID: 1528637172}
+  id: 0
+  isRandomized: 0
 --- !u!1 &845747307
 GameObject:
   m_ObjectHideFlags: 0
@@ -3489,6 +3537,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1319369026}
   - {fileID: 438777570}
   - {fileID: 1727550825}
   - {fileID: 2074060140}
@@ -3497,7 +3546,6 @@ Transform:
   - {fileID: 319937919}
   - {fileID: 1746824843}
   - {fileID: 843013983}
-  - {fileID: 1319369026}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4455,6 +4503,7 @@ GameObject:
   - component: {fileID: 1296516983}
   - component: {fileID: 1296516982}
   - component: {fileID: 1296516986}
+  - component: {fileID: 1296516987}
   m_Layer: 0
   m_Name: Circuit
   m_TagString: Collectible
@@ -4538,7 +4587,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1032400585}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1296516986
 BoxCollider:
@@ -4553,6 +4602,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 4, z: 3}
   m_Center: {x: 0, y: 4, z: 0}
+--- !u!114 &1296516987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296516981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollectibleManager: {fileID: 1528637172}
+  id: 0
+  isRandomized: 0
 --- !u!1 &1313647203
 GameObject:
   m_ObjectHideFlags: 0
@@ -4684,7 +4748,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1032400585}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1319369027
 MonoBehaviour:
@@ -4700,6 +4764,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollectibleManager: {fileID: 1528637172}
   id: 0
+  isRandomized: 1
 --- !u!65 &1319369028
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5560,6 +5625,10 @@ MonoBehaviour:
   resourceIndices:
   - {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   - {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  - {fileID: 11400000, guid: 4f8fa77bfd5566d46a801ef7a39f83c7, type: 2}
+  - {fileID: 11400000, guid: 4a86babbc9e7f964cb25ab3fac7d7f3a, type: 2}
+  - {fileID: 11400000, guid: 85c9facaf3e40ed469804a6de893d382, type: 2}
+  - {fileID: 11400000, guid: a94dac6c3ffb85942badd54a09312df1, type: 2}
 --- !u!1 &1538103084
 GameObject:
   m_ObjectHideFlags: 0
@@ -5991,6 +6060,7 @@ GameObject:
   - component: {fileID: 1727550823}
   - component: {fileID: 1727550822}
   - component: {fileID: 1727550826}
+  - component: {fileID: 1727550827}
   m_Layer: 0
   m_Name: Plank
   m_TagString: Collectible
@@ -6074,7 +6144,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1032400585}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1727550826
 BoxCollider:
@@ -6089,6 +6159,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 4, z: 3}
   m_Center: {x: 0, y: 4, z: 0}
+--- !u!114 &1727550827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727550821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollectibleManager: {fileID: 1528637172}
+  id: 0
+  isRandomized: 0
 --- !u!1 &1731915141
 GameObject:
   m_ObjectHideFlags: 0
@@ -6246,6 +6331,7 @@ GameObject:
   - component: {fileID: 1746824846}
   - component: {fileID: 1746824845}
   - component: {fileID: 1746824844}
+  - component: {fileID: 1746824848}
   m_Layer: 0
   m_Name: Stone
   m_TagString: Collectible
@@ -6266,7 +6352,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1032400585}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1746824844
 BoxCollider:
@@ -6344,6 +6430,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1746824842}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1746824848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746824842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollectibleManager: {fileID: 1528637172}
+  id: 0
+  isRandomized: 0
 --- !u!1 &1757584440
 GameObject:
   m_ObjectHideFlags: 0
@@ -6357,6 +6458,7 @@ GameObject:
   - component: {fileID: 1757584442}
   - component: {fileID: 1757584441}
   - component: {fileID: 1757584445}
+  - component: {fileID: 1757584446}
   m_Layer: 0
   m_Name: MetalComposite
   m_TagString: Collectible
@@ -6440,7 +6542,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1032400585}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1757584445
 BoxCollider:
@@ -6455,6 +6557,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 4, z: 3}
   m_Center: {x: 0, y: 4, z: 0}
+--- !u!114 &1757584446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757584440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollectibleManager: {fileID: 1528637172}
+  id: 0
+  isRandomized: 0
 --- !u!1 &1778815319
 GameObject:
   m_ObjectHideFlags: 0
@@ -7352,6 +7469,7 @@ GameObject:
   - component: {fileID: 2074060138}
   - component: {fileID: 2074060137}
   - component: {fileID: 2074060141}
+  - component: {fileID: 2074060142}
   m_Layer: 0
   m_Name: Plate
   m_TagString: Collectible
@@ -7435,7 +7553,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1032400585}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2074060141
 BoxCollider:
@@ -7450,6 +7568,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 4, z: 3}
   m_Center: {x: 0, y: 4, z: 0}
+--- !u!114 &2074060142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074060136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollectibleManager: {fileID: 1528637172}
+  id: 0
+  isRandomized: 0
 --- !u!1 &2085516416
 GameObject:
   m_ObjectHideFlags: 0
