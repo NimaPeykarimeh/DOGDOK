@@ -21,13 +21,18 @@ public class AmmoPooling : MonoBehaviour
             GameObject _ammo = Instantiate(ammoPrefab, transform);
             _ammo.SetActive(false);
             _ammo.transform.localPosition = Vector3.zero;
+            _ammo.transform.localScale = Vector3.one;
             _ammo.GetComponent<Ammo>().ammoPooling = this;
         }
     }
 
-    public void SpawnAmmo()
+    public void SpawnAmmo(float _distance)
     {
         GameObject _ammo = transform.GetChild(0).gameObject;
+
+        Ammo _ammoComponent = _ammo.GetComponent<Ammo>();
+        
+        _ammoComponent.ammoLifeTime = _distance / _ammoComponent.speed;
         _ammo.SetActive(true);
         _ammo.transform.parent = null;
         
@@ -38,6 +43,7 @@ public class AmmoPooling : MonoBehaviour
         _ammo.transform.parent = transform;
         _ammo.transform.localPosition = Vector3.zero;
         _ammo.transform.rotation = transform.rotation;
+        _ammo.transform.localScale = Vector3.one;
         _ammo.SetActive(false);
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Shooting))]
@@ -27,6 +28,11 @@ public class WeaponController : MonoBehaviour
     [SerializeField] float maxAcceleration = 2;
     [SerializeField] float accelerationTimer;
     [SerializeField] float acceleration = 1;
+
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] List<AudioClip> gunSounds;
+    [SerializeField] float minPitch;
+    [SerializeField] float maxPitch;
 
     private void Start()
     {
@@ -65,6 +71,8 @@ public class WeaponController : MonoBehaviour
         {
             fireTimer = 0;
             shooting.Shoot(shootPoint,shootRange,noiseRange,isPiercing);
+            audioSource.pitch = Mathf.Lerp(minPitch,maxPitch,accelerationTimer/accelerationDuration);
+            audioSource.PlayOneShot(gunSounds[0]);
 
         }
 

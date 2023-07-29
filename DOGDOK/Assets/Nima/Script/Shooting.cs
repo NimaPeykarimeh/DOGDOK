@@ -9,6 +9,7 @@ public class Shooting : MonoBehaviour
 
     NoiseMaker noiseMaker;
     [SerializeField] AmmoPooling ammoPooling;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +24,8 @@ public class Shooting : MonoBehaviour
 
     public void Shoot(Transform _shootingPoint, float _shootingRange,float _noiseRange,bool _isPiercing)
     {
+
         
-        ammoPooling.SpawnAmmo();
         Ray ray = new Ray(_shootingPoint.position, _shootingPoint.forward);
         Debug.DrawRay(ray.origin, ray.direction * _shootingRange, Color.red, 0.1f);
 
@@ -36,9 +37,15 @@ public class Shooting : MonoBehaviour
             {
                 if (hit.transform.tag != null)
                 {
-                    Debug.Log(hit.transform.tag);
+                        ammoPooling.SpawnAmmo(hit.distance);
                 }
+                
             }
+            else
+            {
+                ammoPooling.SpawnAmmo(50);
+            }
+
         }
         else // Piercing ammo
         {

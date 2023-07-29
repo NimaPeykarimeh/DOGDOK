@@ -7,20 +7,26 @@ public class Ammo : MonoBehaviour
     public AmmoPooling ammoPooling;
     [SerializeField] Rigidbody rb;
 
-    [SerializeField] float speed;
+    public float speed;
 
-    [SerializeField] float ammoLifeTime;
+    public float ammoLifeTime;
     [SerializeField] float ammoTimer;
+    [SerializeField] TrailRenderer trail;
+
+    Vector3 startPos;
+    Vector3 endPos;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+
     }
 
-    private void OnEnable()//fix scaling
+    private void OnEnable()
     {
         ammoTimer = 0;
-        rb.velocity = Vector3.zero;
+        //transform.localScale = Vector3.one;
+        trail.Clear();
+
     }
 
     // Update is called once per frame
@@ -29,12 +35,10 @@ public class Ammo : MonoBehaviour
         ammoTimer += Time.deltaTime;
         if (ammoTimer >= ammoLifeTime)
         {
+
             ammoPooling.BackToThePool(this.gameObject);
         }
+        transform.Translate(-transform.forward * speed * Time.deltaTime);
     }
 
-    private void FixedUpdate()
-    {
-        rb.AddForce(transform.up * speed * Time.fixedDeltaTime,ForceMode.Impulse);
-    }
 }
