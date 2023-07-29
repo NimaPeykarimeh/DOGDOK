@@ -13,14 +13,14 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] UIAmount = new TextMeshProUGUI[6];
     [SerializeField] private CollectibleManager CollectibleManager;
 
+    private void Awake()
+    {
+        InventorySlots = new int[6];
+        Array.Clear(InventorySlots, 0, 6);
+    }
     void Start()
     {
         isInventoryOpen = false;
-        InventorySlots = new int[6];
-        for (int i = 0; i < InventorySlots.Length; i++)
-        {
-            InventorySlots[i] = 0;
-        }
     }
 
     void Update()

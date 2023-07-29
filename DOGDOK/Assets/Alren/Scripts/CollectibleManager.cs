@@ -40,11 +40,9 @@ public class CollectibleManager : MonoBehaviour
                         InventoryManager.InventorySlots[i]++;
                         break;
                     }
-                }                
-                //if (resourceIndices.TryGetValue(objectName, out int resourceType))
-                //{
-                //    InventoryManager.InventorySlots[resourceType]++;
-                //}
+                    else if (resourceIndices[i].id == -1)
+                        print("NULL ID");
+                }
             }
         }
         else
