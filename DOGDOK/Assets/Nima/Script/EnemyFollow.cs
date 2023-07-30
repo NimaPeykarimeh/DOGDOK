@@ -24,14 +24,16 @@ public class EnemyFollow : MonoBehaviour
     Quaternion startingRotation;
     Quaternion rotationToLook;
     [SerializeField] Quaternion pivotRotation;
+    [SerializeField] float currentAngle;
+    [SerializeField] float targetRotation;
+    [SerializeField] float directionDelta;
     public int rayCount = 8; // Number of rays to cast
     public float rayRange = 10f; // Length of the 
 
-    int randomSign;
     // Start is called before the first frame update
     void Start()
     {
-        randomSign = Random.Range(0, 2) == 0 ? -1 : 1;
+
         movementSpeed = Random.Range(minMovementSpeed,maxMovementSpeed);
     }
 
@@ -67,7 +69,26 @@ public class EnemyFollow : MonoBehaviour
         
         
     }
-    
+    int NormalizeAngle(float _angle)
+    {
+        if (_angle > 180)
+        {
+            _angle -= 360;
+        }
+        else if (_angle < -180)
+        {
+            _angle += 360;
+        }
+
+        if (_angle > 0)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
+    }
     void GetNewDirection()
     {
         
@@ -75,12 +96,17 @@ public class EnemyFollow : MonoBehaviour
         directionToTarget.y = 0;
 
         pivotRotation = Quaternion.LookRotation(directionToTarget);
+        targetRotation = pivotRotation.eulerAngles.y;
+        currentAngle = transform.rotation.eulerAngles.y;
+        directionDelta = currentAngle - targetRotation;
+
+        int _rotationDirection = NormalizeAngle(directionDelta);
         //Quaternion castRotation;
 
         for (int i = 0; i < rayCount; i++)
         {
 
-            float angle = (randomSign * i * (360f / rayCount) ); //*dirMult
+            float angle = (i * (360f / rayCount)) * _rotationDirection; //
             //if (i>0)
             //{
             //   angle -= (i - 1) * (360f / rayCount);

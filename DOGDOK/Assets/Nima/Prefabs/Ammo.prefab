@@ -163,7 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoPooling: {fileID: 0}
   rb: {fileID: 0}
-  speed: 50
+  speed: 150
   ammoLifeTime: 1
   ammoTimer: 0
   trail: {fileID: 340336793418662469}

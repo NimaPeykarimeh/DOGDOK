@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class Ammo : MonoBehaviour
 {
+    [HideInInspector]
     public AmmoPooling ammoPooling;
-    [SerializeField] Rigidbody rb;
+
+    [HideInInspector] 
+    public float ammoLifeTime;
+
+    float ammoTimer;
+    TrailRenderer trail;
 
     public float speed;
-
-    public float ammoLifeTime;
-    [SerializeField] float ammoTimer;
-    [SerializeField] TrailRenderer trail;
-
-    Vector3 startPos;
-    Vector3 endPos;
 
     void Start()
     {
@@ -24,7 +23,6 @@ public class Ammo : MonoBehaviour
     private void OnEnable()
     {
         ammoTimer = 0;
-        //transform.localScale = Vector3.one;
         trail.Clear();
 
     }
