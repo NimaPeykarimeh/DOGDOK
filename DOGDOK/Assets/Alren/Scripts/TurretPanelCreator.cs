@@ -9,7 +9,7 @@ public class TurretPanelCreator : MonoBehaviour
     public List<Build1> builds;
     [SerializeField] GameObject buildingCard;
     [SerializeField] GameObject resourceBar;
-    [SerializeField] InventoryManager InventoryManager;
+    [SerializeField] CollectibleManager CollectibleManager;
     private List<TextMeshProUGUI> requiredTexts;
     private void Awake()
     {
@@ -59,10 +59,10 @@ public class TurretPanelCreator : MonoBehaviour
             Build1 _currentBuild = builds[i];
             for (int j = 0; j < _currentBuild.requiredResource.Count; j++)
             {
-                requiredTexts[z++].text =
-                    InventoryManager.InventorySlots[_currentBuild.requiredResource[j].id].ToString()
-                    + "/"
-                    + _currentBuild.requiredAmount[j].ToString();
+                //requiredTexts[z++].text =
+                    //CollectibleManager.resourceIndices[_currentBuild.requiredResource[j].id].ToString()
+                    //+ "/"
+                    //+ _currentBuild.requiredAmount[j].ToString();
             }
 
         }

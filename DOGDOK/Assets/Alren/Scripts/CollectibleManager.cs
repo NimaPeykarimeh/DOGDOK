@@ -6,13 +6,17 @@ using UnityEngine;
 public class CollectibleManager : MonoBehaviour
 {
     private float timer;
-    private int objectID;
+    private Resource1 resource;
     [SerializeField] private InventoryManager InventoryManager;
-    public List<Resource1> resourceIndices = new List<Resource1>();
+    [HideInInspector] public Dictionary<Resource1, int> resourceIndices = new Dictionary<Resource1, int>();
+    [SerializeField] private List<Resource1> resources = new();
 
-    private void Start()
+    private void Awake()
     {
-
+        foreach(var res in resources)
+        {
+            resourceIndices.Add(res, 0);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,28 +24,25 @@ public class CollectibleManager : MonoBehaviour
         timer = 0;
         if (other.CompareTag("Collectible"))
         {
-            objectID = other.gameObject.GetComponent<ResourceCreation>().id;
+            resource = other.gameObject.GetComponent<ResourceCreation>().resource;
         }
-        
+
     }
     private void OnTriggerStay(Collider other)
     {
-        //Sol týk'a basýlý tutulduðu ve alanda durduðu sürece loot yapar.
         if (other.CompareTag("Collectible") && Input.GetKey(KeyCode.Mouse0))
         {
             timer += 10 * Time.deltaTime;
-            if (timer > 5)
+            if (timer > 5.03f)
             {
                 Destroy(other.gameObject);
-                for (int i = 0; i < resourceIndices.Count; i++)
+                foreach (var element in resourceIndices)
                 {
-                    if (resourceIndices[i].id == objectID)
+                    if (element.Key == resource)
                     {
-                        InventoryManager.InventorySlots[i]++;
+                        resourceIndices[element.Key]++;
                         break;
                     }
-                    else if (resourceIndices[i].id == -1)
-                        print("NULL ID");
                 }
             }
         }

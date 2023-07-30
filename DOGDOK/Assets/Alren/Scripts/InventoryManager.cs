@@ -9,14 +9,12 @@ public class InventoryManager : MonoBehaviour
 {
     private bool isInventoryOpen;
     [SerializeField] private Animator animator;
-    [HideInInspector] public int[] InventorySlots;
-    [SerializeField] private TextMeshProUGUI[] UIAmount = new TextMeshProUGUI[6];
+    [SerializeField] private List<TextMeshProUGUI> UIAmount = new();
     [SerializeField] private CollectibleManager CollectibleManager;
 
     private void Awake()
     {
-        InventorySlots = new int[6];
-        Array.Clear(InventorySlots, 0, 6);
+
     }
     void Start()
     {
@@ -32,30 +30,31 @@ public class InventoryManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.I)) // Envanter Kapalýyken Açma
         {
-            for (int i = 0; i < InventorySlots.Length; i++)
+            int i = 0;
+            foreach (var element in CollectibleManager.resourceIndices)
             {
-                UIAmount[i].text = InventorySlots[i].ToString();
+                UIAmount[i].text = CollectibleManager.resourceIndices[element.Key].ToString();
+                i++;
             }
             animator.SetBool("isShowing", true);
             isInventoryOpen = true;
         }
         else if (isInventoryOpen) // Envanter Açýk Duruyorsa.
         {
-            for (int i = 0; i < InventorySlots.Length; i++)
+            int i = 0;
+            foreach (var element in CollectibleManager.resourceIndices)
             {
-                UIAmount[i].text = InventorySlots[i].ToString();
+                UIAmount[i].text = CollectibleManager.resourceIndices[element.Key].ToString();
+                i++;
             }
         }
     }
     //TODO
-    //Gather Resources method olarak Ekle
-    //Switch Case'i resource gatherlamayý ekle
-    //Kaynaklarý Dictionary'e çevir
 
     //Tab'a basarak silah seçme sekmesi
     //WorkStation yanýnda E'ye basýnca tablet açýlsýn, butona basýlýnca grid sisteme geçsin
     //Build, Gridleri takip etsin. Grid boþ mu kontrolü yapan method.
-    public void UseResources(string resourceName, int usageAmount) //kaynaðýn türünü sayý cinsinden ve miktarýný giriniz.
+    public void UseResources(Dictionary<Resource1,int> neededResources) //kaynaðýn türünü sayý cinsinden ve miktarýný giriniz.
     {
         //if (CollectibleManager.resourceIndices.TryGetValue(resourceName, out int resourceType)) //kaynaðýn ismine göre kaynak türünü döndürüyor.
         //{
