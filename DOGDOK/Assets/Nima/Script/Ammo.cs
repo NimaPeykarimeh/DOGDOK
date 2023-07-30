@@ -15,10 +15,7 @@ public class Ammo : MonoBehaviour
 
     public float speed;
 
-    void Start()
-    {
 
-    }
 
     private void OnEnable()
     {

@@ -9,7 +9,7 @@ public class Shooting : MonoBehaviour
 
     NoiseMaker noiseMaker;
     [SerializeField] AmmoPooling ammoPooling;
-    
+    [SerializeField] GameObject enemyHitParticle;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +38,10 @@ public class Shooting : MonoBehaviour
                 if (hit.transform.tag != null)
                 {
                         ammoPooling.SpawnAmmo(hit.distance);
+                    if (hit.transform.CompareTag("Enemy"))
+                    {
+                        Instantiate(enemyHitParticle,hit.point,hit.transform.rotation);
+                    }
                 }
                 
             }
