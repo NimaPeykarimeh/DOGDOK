@@ -72,7 +72,6 @@ public class InventoryManager : MonoBehaviour
         int i = 0;
         foreach (var element in resourceIndices.Values)
         {
-            print(i);
             UIAmount[i].text = element.ToString();
             i++;
         }

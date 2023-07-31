@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -54,10 +55,11 @@ public class TurretPanelCreator : MonoBehaviour
             Build1 _currentBuild = builds[i];
             for (int j = 0; j < _currentBuild.requiredResource.Count; j++)
             {
-                requiredTexts[z++].text =
-                    InventoryManager.resourceIndices[_currentBuild.requiredResource[j]].ToString()
-                    + "/"
-                    + _currentBuild.requiredAmount[j].ToString();
+                StringBuilder str = new StringBuilder();
+                str.Append(InventoryManager.resourceIndices[_currentBuild.requiredResource[j]].ToString());
+                str.Append("/");
+                str.Append(_currentBuild.requiredAmount[j].ToString());
+                requiredTexts[z++].text = str.ToString();
             }
 
         }
