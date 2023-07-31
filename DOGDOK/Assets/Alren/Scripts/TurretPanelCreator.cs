@@ -9,7 +9,7 @@ public class TurretPanelCreator : MonoBehaviour
     public List<Build1> builds;
     [SerializeField] GameObject buildingCard;
     [SerializeField] GameObject resourceBar;
-    [SerializeField] CollectibleManager CollectibleManager;
+    [SerializeField] InventoryManager InventoryManager;
     private List<TextMeshProUGUI> requiredTexts;
     private void Awake()
     {
@@ -39,14 +39,9 @@ public class TurretPanelCreator : MonoBehaviour
                 _resourceBar.transform.Find("ResourceImage").GetComponent<Image>().sprite = _currentBuild.requiredResource[j].resourceImage;
                 requiredTexts.Add(_resourceBar.transform.Find("Required").GetComponent<TextMeshProUGUI>());
                 requiredTexts[j].text =
-                    //InventoryManager.InventorySlots[_currentBuild.requiredResource[j].id].ToString()
                     "0"
                     + "/"
                     + _currentBuild.requiredAmount[j].ToString();
-                //_resourceBar.transform.Find("Required").GetComponent<TextMeshProUGUI>().text =
-                //InventoryManager.InventorySlots[_currentBuild.requiredResource[j].id].ToString()
-                //    + "/"
-                //    + _currentBuild.requiredAmount[j].ToString();
             }
         }
     }
@@ -59,17 +54,12 @@ public class TurretPanelCreator : MonoBehaviour
             Build1 _currentBuild = builds[i];
             for (int j = 0; j < _currentBuild.requiredResource.Count; j++)
             {
-                //requiredTexts[z++].text =
-                    //CollectibleManager.resourceIndices[_currentBuild.requiredResource[j].id].ToString()
-                    //+ "/"
-                    //+ _currentBuild.requiredAmount[j].ToString();
+                requiredTexts[z++].text =
+                    InventoryManager.resourceIndices[_currentBuild.requiredResource[j]].ToString()
+                    + "/"
+                    + _currentBuild.requiredAmount[j].ToString();
             }
 
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

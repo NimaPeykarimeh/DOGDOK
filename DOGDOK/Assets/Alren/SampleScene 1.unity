@@ -8253,4 +8253,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 63e81a2499c82d948abd2e435b1c9bd3, type: 2}
   buildingCard: {fileID: 3629211748714300768, guid: d45c7a2e44d9c3446b11c8cc889040c8, type: 3}
   resourceBar: {fileID: 2677021098549008036, guid: 97526d334a4c1924283f0bf7c1bc81ad, type: 3}
-  CollectibleManager: {fileID: 1528637172}
+  InventoryManager: {fileID: 2114946034}

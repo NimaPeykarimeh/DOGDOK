@@ -14,7 +14,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject InventoryPanel;
     [SerializeField] private GameObject resBlockPrefab;
     [SerializeField] private List<Resource1> resources = new();
-    
+
 
     [HideInInspector] public Dictionary<Resource1, int> resourceIndices = new Dictionary<Resource1, int>();
 
@@ -70,7 +70,7 @@ public class InventoryManager : MonoBehaviour
     private void UpdateInventoryMenu()
     {
         int i = 0;
-        foreach(var element in resourceIndices.Values)
+        foreach (var element in resourceIndices.Values)
         {
             print(i);
             UIAmount[i].text = element.ToString();
@@ -83,20 +83,18 @@ public class InventoryManager : MonoBehaviour
     //Tab'a basarak silah seçme sekmesi
     //WorkStation yanýnda E'ye basýnca tablet açýlsýn, butona basýlýnca grid sisteme geçsin
     //Build, Gridleri takip etsin. Grid boþ mu kontrolü yapan method.
-    public void UseResources(Dictionary<Resource1, int> neededResources) //kaynaðýn türünü sayý cinsinden ve miktarýný giriniz.
+    public bool UseResources(Dictionary<Resource1, int> neededResources) //kaynaðýn türünü sayý cinsinden ve miktarýný giriniz.
     {
-        //if (resourceIndices.TryGetValue(resourceName, out int resourceType)) //kaynaðýn ismine göre kaynak türünü döndürüyor.
-        //{
-        //    int lastingResource = InventorySlots[resourceType] - usageAmount;
-        //    if (lastingResource < 0)
-        //    {
-        //        Debug.Log("Can't");
-        //    }
-        //    else
-        //    {
-        //        InventorySlots[resourceType] = lastingResource;
-        //    }
-        //}
-
+        foreach (var need in neededResources)
+        {
+            foreach (var have in resourceIndices)
+            {
+                if (have.Key == need.Key && have.Value - need.Value < 0)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
