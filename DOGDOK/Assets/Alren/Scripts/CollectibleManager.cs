@@ -3,21 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectibleManager : MonoBehaviour
+public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün yapýldýðý script. Collect yapýlýnca miktara ekleme yapýlýyor.
 {
     private float timer;
     private Resource1 resource;
     [SerializeField] private InventoryManager InventoryManager;
-    [HideInInspector] public Dictionary<Resource1, int> resourceIndices = new Dictionary<Resource1, int>();
-    [SerializeField] private List<Resource1> resources = new();
-
-    private void Awake()
-    {
-        foreach(var res in resources)
-        {
-            resourceIndices.Add(res, 0);
-        }
-    }
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -36,11 +27,11 @@ public class CollectibleManager : MonoBehaviour
             if (timer > 5.03f)
             {
                 Destroy(other.gameObject);
-                foreach (var element in resourceIndices)
+                foreach (var element in InventoryManager.resourceIndices)
                 {
                     if (element.Key == resource)
                     {
-                        resourceIndices[element.Key]++;
+                        InventoryManager.resourceIndices[element.Key]++;
                         break;
                     }
                 }

@@ -11,10 +11,18 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private List<TextMeshProUGUI> UIAmount = new();
     [SerializeField] private CollectibleManager CollectibleManager;
+    [SerializeField] private List<Resource1> resources = new();
+    [HideInInspector] public Dictionary<Resource1, int> resourceIndices = new Dictionary<Resource1, int>();
 
     private void Awake()
     {
-
+        int i = 0;
+        foreach (var res in resources)
+        {
+            res.id = i;
+            resourceIndices.Add(res, 0);
+            i++;
+        }
     }
     void Start()
     {
@@ -31,9 +39,9 @@ public class InventoryManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.I)) // Envanter Kapalýyken Açma
         {
             int i = 0;
-            foreach (var element in CollectibleManager.resourceIndices)
+            foreach (var element in resourceIndices)
             {
-                UIAmount[i].text = CollectibleManager.resourceIndices[element.Key].ToString();
+                UIAmount[i].text = resourceIndices[element.Key].ToString();
                 i++;
             }
             animator.SetBool("isShowing", true);
@@ -42,9 +50,9 @@ public class InventoryManager : MonoBehaviour
         else if (isInventoryOpen) // Envanter Açýk Duruyorsa.
         {
             int i = 0;
-            foreach (var element in CollectibleManager.resourceIndices)
+            foreach (var element in resourceIndices)
             {
-                UIAmount[i].text = CollectibleManager.resourceIndices[element.Key].ToString();
+                UIAmount[i].text = resourceIndices[element.Key].ToString();
                 i++;
             }
         }
