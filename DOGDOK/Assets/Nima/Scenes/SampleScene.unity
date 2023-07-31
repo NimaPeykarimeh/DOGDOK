@@ -329,8 +329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c30e46d525d154d84cd6aa00a1e0a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationLimit: 180
-  rotationSensitivity: 0.7
+  rotationLimit: 30
+  rotationSensitivity: 0.05
   cameraObject: {fileID: 64389627}
   width: 0
   height: 0
@@ -1148,28 +1148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81cc53ca3ef2bd4fa72254986d77008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 369540639}
-  player: {fileID: 1528637162}
-  isAlerted: 0
-  isPathOpen: 0
-  maxMovementSpeed: 4
-  minMovementSpeed: 2
-  movementSpeed: 3
-  rotationDuration: 0.3
-  rotationTimer: 0
-  isRotating: 0
-  rotateFreqDuration: 0.3
-  rotateFreqTimer: 0
-  obstacleLayer:
-    m_Bits: 128
-  startingRotation: {x: 0, y: 0, z: 0, w: 0}
-  rotationToLook: {x: 0, y: 0, z: 0, w: 0}
-  pivotRotation: {x: 0, y: 0, z: 0, w: 0}
-  currentAngle: 0
-  targetRotation: 0
-  directionDelta: 0
-  rayCount: 8
-  rayRange: 3
 --- !u!143 &369540639
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1949,28 +1927,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81cc53ca3ef2bd4fa72254986d77008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 557702817}
-  player: {fileID: 1528637162}
-  isAlerted: 0
-  isPathOpen: 0
-  maxMovementSpeed: 4
-  minMovementSpeed: 2
-  movementSpeed: 3
-  rotationDuration: 0.3
-  rotationTimer: 0
-  isRotating: 0
-  rotateFreqDuration: 0.3
-  rotateFreqTimer: 0
-  obstacleLayer:
-    m_Bits: 128
-  startingRotation: {x: 0, y: 0, z: 0, w: 0}
-  rotationToLook: {x: 0, y: 0, z: 0, w: 0}
-  pivotRotation: {x: 0, y: 0, z: 0, w: 0}
-  currentAngle: 0
-  targetRotation: 0
-  directionDelta: 0
-  rayCount: 8
-  rayRange: 3
 --- !u!143 &557702817
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2620,7 +2576,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.3
+  m_Intensity: 0.64
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2663,7 +2619,7 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
+  m_ColorTemperature: 5348
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -2677,14 +2633,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.8892053, y: -0.10108706, z: 0.2382618, w: 0.37726212}
+  m_LocalRotation: {x: 0.8630441, y: -0.116231784, z: 0.23125193, w: 0.433783}
   m_LocalPosition: {x: 0, y: 9.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 134.02, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 126.63, y: -30, z: 0}
 --- !u!114 &705507996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8582,28 +8538,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81cc53ca3ef2bd4fa72254986d77008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 1162401045}
-  player: {fileID: 1528637162}
-  isAlerted: 0
-  isPathOpen: 0
-  maxMovementSpeed: 4
-  minMovementSpeed: 2
-  movementSpeed: 3
-  rotationDuration: 0.3
-  rotationTimer: 0
-  isRotating: 0
-  rotateFreqDuration: 0.3
-  rotateFreqTimer: 0
-  obstacleLayer:
-    m_Bits: 128
-  startingRotation: {x: 0, y: 0, z: 0, w: 0}
-  rotationToLook: {x: 0, y: 0, z: 0, w: 0}
-  pivotRotation: {x: 0, y: 0, z: 0, w: 0}
-  currentAngle: 0
-  targetRotation: 0
-  directionDelta: 0
-  rayCount: 8
-  rayRange: 3
 --- !u!143 &1162401045
 CharacterController:
   m_ObjectHideFlags: 0
@@ -10361,13 +10295,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 1.85
+  m_Radius: 0.26
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.15, z: 0}
 --- !u!4 &1528637167
 Transform:
   m_ObjectHideFlags: 0
@@ -10376,7 +10310,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1528637162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.148, z: 0}
+  m_LocalPosition: {x: 0, y: 1.148, z: 1.118}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10398,6 +10332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92aa2d22414c15f4caf8ad56766dc995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementThreshold: 0.01
+  animator: {fileID: 1836880623}
   movementSpeed: 5
   walkSpeed: 2
   runSpeed: 5
@@ -11036,14 +10972,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1731915141}
-  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 14, z: -8}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 0, y: 7, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 64389629}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!20 &1731915144
 Camera:
   m_ObjectHideFlags: 0
@@ -11100,7 +11036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxZoomAngle: {x: 50, y: 0, z: 0}
-  maxZoomDistance: {x: 0, y: 7.5, z: -6}
+  maxZoomDistance: {x: 0, y: 7, z: -4}
   minZoomAngle: {x: 60, y: 0, z: 0}
   minZoomDistance: {x: 0, y: 14, z: -8}
   currentZoomDistance: {x: 0, y: 0, z: 0}
@@ -12080,28 +12016,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81cc53ca3ef2bd4fa72254986d77008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 2136287945}
-  player: {fileID: 1528637162}
-  isAlerted: 0
-  isPathOpen: 0
-  maxMovementSpeed: 4
-  minMovementSpeed: 2
-  movementSpeed: 3
-  rotationDuration: 0.3
-  rotationTimer: 0
-  isRotating: 0
-  rotateFreqDuration: 0.3
-  rotateFreqTimer: 0
-  obstacleLayer:
-    m_Bits: 128
-  startingRotation: {x: 0, y: 0, z: 0, w: 0}
-  rotationToLook: {x: 0, y: 0, z: 0, w: 0}
-  pivotRotation: {x: 0, y: 0, z: 0, w: 0}
-  currentAngle: 0
-  targetRotation: 0
-  directionDelta: 0
-  rayCount: 8
-  rayRange: 3
 --- !u!143 &2136287945
 CharacterController:
   m_ObjectHideFlags: 0
