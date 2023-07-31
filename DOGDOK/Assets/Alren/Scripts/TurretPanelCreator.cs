@@ -29,6 +29,7 @@ public class TurretPanelCreator : MonoBehaviour
 
             _card.transform.Find("TurretImage").GetComponent<Image>().sprite = _currentBuild.buildingImage;
             _card.transform.Find("TurretName").GetComponent<TextMeshProUGUI>().text = _currentBuild.buildingName;
+            _card.GetComponent<CraftBuilding>().id = i;
 
             for (int j = 0; j < _currentBuild.requiredResource.Count; j++)
             {
@@ -55,13 +56,12 @@ public class TurretPanelCreator : MonoBehaviour
             Build1 _currentBuild = builds[i];
             for (int j = 0; j < _currentBuild.requiredResource.Count; j++)
             {
-                StringBuilder str = new StringBuilder();
+                StringBuilder str = new ();
                 str.Append(InventoryManager.resourceIndices[_currentBuild.requiredResource[j]].ToString());
                 str.Append("/");
                 str.Append(_currentBuild.requiredAmount[j].ToString());
                 requiredTexts[z++].text = str.ToString();
             }
-
         }
     }
 }

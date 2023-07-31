@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private List<Resource1> resources = new();
 
 
-    [HideInInspector] public Dictionary<Resource1, int> resourceIndices = new Dictionary<Resource1, int>();
+    [HideInInspector] public Dictionary<Resource1, int> resourceIndices = new ();
 
     private void Awake() //resource id'leri otomatik atanýyor.
     {
@@ -62,7 +63,7 @@ public class InventoryManager : MonoBehaviour
             GameObject resBlock = Instantiate(resBlockPrefab, InventoryPanel.transform);
             resBlock.transform.Find("resText").GetComponent<TextMeshProUGUI>().text = element.resourceName;
             UIAmount.Add(resBlock.transform.Find("resAmountText").GetComponent<TextMeshProUGUI>());
-            UIAmount[i].text = "5";
+            UIAmount[i].text = "0";
             i++;
         }
     }
@@ -84,13 +85,29 @@ public class InventoryManager : MonoBehaviour
     //Build, Gridleri takip etsin. Grid boþ mu kontrolü yapan method.
     public bool UseResources(Dictionary<Resource1, int> neededResources) //kaynaðýn türünü sayý cinsinden ve miktarýný giriniz.
     {
+        //Kaynak yeterliliði kontrolü
         foreach (var need in neededResources)
         {
             foreach (var have in resourceIndices)
             {
-                if (have.Key == need.Key && have.Value - need.Value < 0)
+                if (have.Key == need.Key)
                 {
-                    return false;
+                    if(have.Value - need.Value < 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+        Dictionary<Resource1, int> tempHave = resourceIndices.ToDictionary(entry => entry.Key, entry => entry.Value);
+        //Deðeri Güncelle
+        foreach (var need in neededResources)
+        {
+            foreach (var have in tempHave)
+            {
+                if (have.Key == need.Key)
+                {
+                    resourceIndices[have.Key] -= need.Value;
                 }
             }
         }
