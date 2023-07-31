@@ -11,17 +11,19 @@ public class Ammo : MonoBehaviour
     public float ammoLifeTime;
 
     float ammoTimer;
-    TrailRenderer trail;
+    public TrailRenderer trail;
 
     public float speed;
 
-
+    private void Awake()
+    {
+        trail = GetComponent<TrailRenderer>();
+    }
 
     private void OnEnable()
     {
         ammoTimer = 0;
         trail.Clear();
-
     }
 
     // Update is called once per frame

@@ -5,27 +5,28 @@ using UnityEngine;
 
 public class EnemyTeleportManager : MonoBehaviour
 {
-    EnemyFollow EnemyFollow;
+    EnemyController enemyController;
     [SerializeField] SkinnedMeshRenderer mesh;
     [SerializeField] Material material;
 
     [SerializeField] float dissolveDuration;
     [SerializeField] float dissolveTimer;
 
-
+    public bool isTeleporting;
     bool isDissolving;
     bool isGenerating;
     Vector3 positionToTeleport;
     private void Start()
     {
-        EnemyFollow = GetComponent<EnemyFollow>();
+        enemyController = GetComponent<EnemyController>();
         material = mesh.material;
         
     }
     public void Teleport(Vector3 _positon)
     {
-        EnemyFollow.isAlerted = false;
+        enemyController.isAlerted = false;
         isDissolving = true;
+        isTeleporting = true;
         isGenerating = false;
         positionToTeleport= new Vector3(_positon.x,transform.position.y,_positon.z);
     }
@@ -52,7 +53,8 @@ public class EnemyTeleportManager : MonoBehaviour
             if (_dissolveRatio <= 0)
             {
                 isGenerating = false;
-                EnemyFollow.isAlerted = true;
+                isTeleporting = false;
+                enemyController.isAlerted = true;
                 _dissolveRatio = 0;
                 
             }

@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
 {
-    [SerializeField] CharacterController characterController;
-    [SerializeField] GameObject player;
+    
+    [SerializeField] EnemyController enemyController;
 
-    public bool isAlerted;
-    [SerializeField] bool isPathOpen;
 
-    [SerializeField] float maxMovementSpeed;
-    [SerializeField] float minMovementSpeed;
-    [SerializeField] float movementSpeed;
+    
     [SerializeField] float rotationDuration;
     [SerializeField] float rotationTimer;
 
@@ -33,15 +29,15 @@ public class EnemyFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        movementSpeed = Random.Range(minMovementSpeed,maxMovementSpeed);
+        enemyController = GetComponent<EnemyController>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (isAlerted)
+        if (enemyController.isAlerted)
         {
             rotateFreqTimer += Time.deltaTime;
             if (rotateFreqTimer >= rotateFreqDuration)
@@ -60,14 +56,7 @@ public class EnemyFollow : MonoBehaviour
                 
                 }
             }
-
-            characterController.Move(transform.forward * movementSpeed * Time.deltaTime);
-
         }
-        
-        
-        
-        
     }
     int NormalizeAngle(float _angle)
     {
@@ -92,7 +81,7 @@ public class EnemyFollow : MonoBehaviour
     void GetNewDirection()
     {
         
-        Vector3 directionToTarget = player.transform.position - transform.position;
+        Vector3 directionToTarget = enemyController.player.transform.position - transform.position;
         directionToTarget.y = 0;
 
         pivotRotation = Quaternion.LookRotation(directionToTarget);
@@ -121,7 +110,6 @@ public class EnemyFollow : MonoBehaviour
             // Perform actions based on raycast hits here
             if (Physics.Raycast(ray, out RaycastHit hit, rayRange, obstacleLayer))
             {
-                isPathOpen = false;
 
                 // You can check the hit object and do something based on the hit result
                 Debug.Log("Hit object: " + hit.collider.gameObject.name);
@@ -133,7 +121,6 @@ public class EnemyFollow : MonoBehaviour
                 pivotRotation = Quaternion.LookRotation(direction);
                 rotationToLook = pivotRotation;
                 rotationTimer = 0;
-                isPathOpen = true;
                 Debug.Log(i);
                 return;
             }

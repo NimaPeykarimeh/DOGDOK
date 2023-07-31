@@ -52,13 +52,14 @@ public class Teleporter : MonoBehaviour
 
                 Vector3 positonToTeleport = new Vector3(positionToTeleportX,0,positionToTeleportZ);
 
-                if (i < enemiesTeleport.Count)
+                if (enemiesTeleport.Count > 0)
                 {
-                    enemiesTeleport[i].Teleport(positonToTeleport);
-                    enemiesTeleport.RemoveAt(i);
+                    enemiesTeleport[0].Teleport(positonToTeleport);
+                    enemiesTeleport.RemoveAt(0);
                     if (enemiesTeleport.Count == 0)
                     {
                         isEntered = false;
+                        break;
                     }
                 }
                 else

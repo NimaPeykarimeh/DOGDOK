@@ -19,6 +19,7 @@ public class AmmoPooling : MonoBehaviour
         for (int i = 0; i < creatAmount; i++)
         {
             GameObject _ammo = Instantiate(ammoPrefab, transform);
+
             _ammo.SetActive(false);
             _ammo.transform.localPosition = Vector3.zero;
             _ammo.transform.localScale = Vector3.one;

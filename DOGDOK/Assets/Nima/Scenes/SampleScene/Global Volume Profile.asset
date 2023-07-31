@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7457149701749978407
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
+  m_Name: DepthOfField
+  m_EditorClassIdentifier: 
+  active: 0
+  mode:
+    m_OverrideState: 1
+    m_Value: 2
+  gaussianStart:
+    m_OverrideState: 1
+    m_Value: 20
+  gaussianEnd:
+    m_OverrideState: 1
+    m_Value: 12.4
+  gaussianMaxRadius:
+    m_OverrideState: 1
+    m_Value: 1.135
+  highQualitySampling:
+    m_OverrideState: 0
+    m_Value: 0
+  focusDistance:
+    m_OverrideState: 1
+    m_Value: 22.05
+  aperture:
+    m_OverrideState: 1
+    m_Value: 2.6
+  focalLength:
+    m_OverrideState: 1
+    m_Value: 184
+  bladeCount:
+    m_OverrideState: 0
+    m_Value: 3
+  bladeCurvature:
+    m_OverrideState: 0
+    m_Value: 1
+  bladeRotation:
+    m_OverrideState: 0
+    m_Value: 0
 --- !u!114 &-5831424747353974229
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -92,6 +138,7 @@ MonoBehaviour:
   - {fileID: 6720641934488086534}
   - {fileID: -3976276529203062615}
   - {fileID: 198954362176553155}
+  - {fileID: -7457149701749978407}
 --- !u!114 &198954362176553155
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -106,14 +153,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   lift:
-    m_OverrideState: 1
-    m_Value: {x: 0.9560432, y: 0.9601001, z: 1, w: 0.0034471345}
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
     m_Value: {x: 0.93597335, y: 0.9694695, z: 1, w: -0.048367586}
   gain:
     m_OverrideState: 0
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_Value: {x: 1, y: 0.94653517, z: 0.8126349, w: 0.014825795}
 --- !u!114 &3523719932669315538
 MonoBehaviour:
   m_ObjectHideFlags: 3
