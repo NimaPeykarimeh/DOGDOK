@@ -7,9 +7,9 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
 {
     private float timer;
     private Resource1 resource;
+
     [SerializeField] private InventoryManager InventoryManager;
     
-
     private void OnTriggerEnter(Collider other)
     {
         timer = 0;
@@ -29,7 +29,7 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
                 Destroy(other.gameObject);
                 foreach (var element in InventoryManager.resourceIndices)
                 {
-                    if (element.Key == resource)
+                    if (element.Key.id == resource.id)
                     {
                         InventoryManager.resourceIndices[element.Key]++;
                         break;

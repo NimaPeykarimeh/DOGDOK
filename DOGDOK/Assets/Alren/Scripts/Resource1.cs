@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Resource1")]
 public class Resource1 : ScriptableObject
 {
-    public int id;
+    [HideInInspector] public int id;
     public string resourceName;
     public Sprite resourceImage;
     public Mesh resourceMesh;

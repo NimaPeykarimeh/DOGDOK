@@ -8,13 +8,17 @@ using TMPro;
 public class InventoryManager : MonoBehaviour
 {
     private bool isInventoryOpen;
-    [SerializeField] private Animator animator;
-    [SerializeField] private List<TextMeshProUGUI> UIAmount = new();
-    [SerializeField] private CollectibleManager CollectibleManager;
+    private Animator animator;
+    private List<TextMeshProUGUI> UIAmount = new();
+
+    [SerializeField] private GameObject InventoryPanel;
+    [SerializeField] private GameObject resBlockPrefab;
     [SerializeField] private List<Resource1> resources = new();
+    
+
     [HideInInspector] public Dictionary<Resource1, int> resourceIndices = new Dictionary<Resource1, int>();
 
-    private void Awake()
+    private void Awake() //resource id'leri otomatik atanýyor.
     {
         int i = 0;
         foreach (var res in resources)
@@ -26,6 +30,8 @@ public class InventoryManager : MonoBehaviour
     }
     void Start()
     {
+        CreateInventoryMenu();
+        animator = InventoryPanel.GetComponent<Animator>();
         isInventoryOpen = false;
     }
 
@@ -38,33 +44,48 @@ public class InventoryManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.I)) // Envanter Kapalýyken Açma
         {
-            int i = 0;
-            foreach (var element in resourceIndices)
-            {
-                UIAmount[i].text = resourceIndices[element.Key].ToString();
-                i++;
-            }
+            UpdateInventoryMenu();
             animator.SetBool("isShowing", true);
             isInventoryOpen = true;
         }
         else if (isInventoryOpen) // Envanter Açýk Duruyorsa.
         {
-            int i = 0;
-            foreach (var element in resourceIndices)
-            {
-                UIAmount[i].text = resourceIndices[element.Key].ToString();
-                i++;
-            }
+            UpdateInventoryMenu();
         }
     }
+
+    private void CreateInventoryMenu()
+    {
+        int i = 0;
+        foreach (var element in resources)
+        {
+            GameObject resBlock = Instantiate(resBlockPrefab, InventoryPanel.transform);
+            resBlock.transform.Find("resText").GetComponent<TextMeshProUGUI>().text = element.resourceName;
+            UIAmount.Add(resBlock.transform.Find("resAmountText").GetComponent<TextMeshProUGUI>());
+            UIAmount[i].text = "5";
+            i++;
+        }
+    }
+
+    private void UpdateInventoryMenu()
+    {
+        int i = 0;
+        foreach(var element in resourceIndices.Values)
+        {
+            print(i);
+            UIAmount[i].text = element.ToString();
+            i++;
+        }
+    }
+
     //TODO
 
     //Tab'a basarak silah seçme sekmesi
     //WorkStation yanýnda E'ye basýnca tablet açýlsýn, butona basýlýnca grid sisteme geçsin
     //Build, Gridleri takip etsin. Grid boþ mu kontrolü yapan method.
-    public void UseResources(Dictionary<Resource1,int> neededResources) //kaynaðýn türünü sayý cinsinden ve miktarýný giriniz.
+    public void UseResources(Dictionary<Resource1, int> neededResources) //kaynaðýn türünü sayý cinsinden ve miktarýný giriniz.
     {
-        //if (CollectibleManager.resourceIndices.TryGetValue(resourceName, out int resourceType)) //kaynaðýn ismine göre kaynak türünü döndürüyor.
+        //if (resourceIndices.TryGetValue(resourceName, out int resourceType)) //kaynaðýn ismine göre kaynak türünü döndürüyor.
         //{
         //    int lastingResource = InventorySlots[resourceType] - usageAmount;
         //    if (lastingResource < 0)
