@@ -1,74 +1,128 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(NoiseMaker))]
 public class CharacterMovement : MonoBehaviour
 {
-    public float movementThreshold = 0.01f;
-    [SerializeField] Animator animator;
+    PlayerController playerController;
+
     [Header("Movement")]
+    float moveX;
+    float moveZ;
+    [SerializeField] Vector3 move;
+    public float currentSpeed;
+    public float currentMovementSpeed;
+    [SerializeField] float walkingSpeed;
+    [SerializeField] float runningSpeed;
     public float turnSpeed = 10f;
-    public float movementSpeed;
-    [SerializeField] float walkSpeed;
-    [SerializeField] float runSpeed;
+
+    [Header("Acceleration")]
+    [SerializeField] float accelerationDuration;
+    [SerializeField] float accelerationTimer;
+    float firstSpeed;
+    float lastSpeed;
+    bool isAccelerating;
+
+    [Space]
 
     public  CharacterController characterController;
     public Vector3 mousePosition;
     [SerializeField] GameObject mainCamera;
+    [Header("Noise")]
     NoiseMaker noiseMaker;
     [SerializeField] float noiseRange;
     [SerializeField] Transform noiseCenter;
     // Start is called before the first frame update
     void Start()
     {
+        playerController = GetComponent<PlayerController>();
         characterController = GetComponent<CharacterController>();
         noiseMaker = GetComponent<NoiseMaker>();
     }
 
     void MovePlayer()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        Vector3 move = (mainCamera.transform.right * x + mainCamera.transform.forward * z);
-        move.Normalize();
-        //move = Vector3.ClampMagnitude(move, 1f);
-
-        characterController.Move(move * movementSpeed * Time.deltaTime);
-        RotateTowards(move);
-        animator.SetFloat("MovementSpeed",move.magnitude * movementSpeed);
+        characterController.Move(move * currentMovementSpeed * Time.deltaTime);
+        if (!playerController.isAiming)
+        {
+            RotateTowards(move);
+        }
     }
+    //
     private void RotateTowards(Vector3 targetDirection)
     {
-        if (targetDirection != Vector3.zero)
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+    }
+
+    void ToggleRunState()
+    {
+        if (playerController.isRunning)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+            playerController.isWalking = true;
+            playerController.isRunning = false;
+            //movementSpeed = walkSpeed;
+            noiseRange = walkingSpeed;
+            
+            isAccelerating = true;
+            firstSpeed = runningSpeed;
+            lastSpeed = walkingSpeed;
         }
+        else
+        {
+            playerController.isWalking = false;
+            playerController.isRunning = true;
+            //movementSpeed = runSpeed;
+            noiseRange = runningSpeed;
+
+            isAccelerating = true;
+            firstSpeed = walkingSpeed;
+            lastSpeed = runningSpeed;
+        }   
+    }
+    float GetMovement()
+    {
+        moveX = Input.GetAxis("Horizontal");
+        moveZ = Input.GetAxis("Vertical");
+        move = (mainCamera.transform.right * moveX + mainCamera.transform.forward * moveZ);
+        move.Normalize();
+        return move.magnitude;
+
     }
     void Update()
     {
-        MovePlayer();
+        currentSpeed = GetMovement() * currentMovementSpeed;
 
+        if (currentSpeed > 0)
+        {
+            MovePlayer();
+            playerController.isMoving = true;
+        }
+        else
+        {
+            playerController.isMoving = false;
+        }
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            movementSpeed = runSpeed;
-            noiseRange = runSpeed;
+            ToggleRunState();
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            movementSpeed = walkSpeed;
-            noiseRange = walkSpeed;
+            ToggleRunState();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (isAccelerating)
         {
-
-            noiseMaker.MakeNoise(noiseRange, noiseCenter);
+            accelerationTimer += Time.deltaTime;
+            currentMovementSpeed = Mathf.Lerp(firstSpeed,lastSpeed,accelerationTimer/accelerationDuration);
+            if (accelerationTimer > accelerationDuration)
+            {
+                isAccelerating = false;
+                accelerationTimer = 0;
+                currentMovementSpeed = lastSpeed;
+            }
         }
+
     }
 
 
