@@ -76,13 +76,19 @@ public class InventoryManager : MonoBehaviour
                 if (hit.collider.gameObject.CompareTag("Ground"))
                 {
                     positionToPlace = PlaceObjectOnGrid(positionToPlace);
-                    turretPrefab.transform.localScale = GridDisplay.cellSize * currentBuild.buildingSize;
-                    positionToPlace.y += turretPrefab.transform.localScale.y / 2;
+                    turretPrefab.transform.localScale = GridDisplay.cellSize * currentBuild.buildingSize; //scale'i !!!!!!
+                    positionToPlace.y += turretPrefab.transform.localScale.y / 2; //küp yüksekliði
                     Instantiate(turretPrefab, positionToPlace, transform.rotation);
                     currentBuild = null;
                 }
             }
         }
+
+        // Turretlarý grid'e tam oturt.
+        // Zombieleri takip eden silah namlusu
+        // NULL kontrolü yap.
+        // Player'dan uzaksa yapamasýn.
+
         Vector3 PlaceObjectOnGrid(Vector3 position)
         {
             int x = Mathf.RoundToInt(position.x / GridDisplay.cellSize);

@@ -7900,10 +7900,10 @@ MonoBehaviour:
   resources:
   - {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   - {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  - {fileID: 11400000, guid: 4a86babbc9e7f964cb25ab3fac7d7f3a, type: 2}
   - {fileID: 11400000, guid: 4f8fa77bfd5566d46a801ef7a39f83c7, type: 2}
   - {fileID: 11400000, guid: 85c9facaf3e40ed469804a6de893d382, type: 2}
   - {fileID: 11400000, guid: a94dac6c3ffb85942badd54a09312df1, type: 2}
-  - {fileID: 11400000, guid: 4a86babbc9e7f964cb25ab3fac7d7f3a, type: 2}
 --- !u!224 &2114946035
 RectTransform:
   m_ObjectHideFlags: 0
