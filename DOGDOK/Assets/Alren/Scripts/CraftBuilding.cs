@@ -27,6 +27,7 @@ public class CraftBuilding : MonoBehaviour
         if (InventoryManager.UseResources(needs))
         {
             print("it can");
+            InventoryManager.setCurrentBuild(TurretPanelCreator.builds[id]);
         }
         else print("it cant");
     }

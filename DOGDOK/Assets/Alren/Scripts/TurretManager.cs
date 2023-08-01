@@ -7,9 +7,11 @@ public class TurretManager : MonoBehaviour
 {
     [SerializeField] private GameObject TurretPanel;
     private bool isOpen;
+    private Build1 currentBuild;
     // Start is called before the first frame update
     void Start()
     {
+        currentBuild = null;
         isOpen = false;
         TurretPanel.SetActive(false);
     }

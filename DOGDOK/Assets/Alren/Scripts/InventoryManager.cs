@@ -11,13 +11,15 @@ public class InventoryManager : MonoBehaviour
     private bool isInventoryOpen;
     private Animator animator;
     private List<TextMeshProUGUI> UIAmount = new();
+    private Build1 currentBuild;
 
+    [SerializeField] private GridDisplay GridDisplay;
+    [SerializeField] private GameObject turretPrefab;
     [SerializeField] private GameObject InventoryPanel;
     [SerializeField] private GameObject resBlockPrefab;
     [SerializeField] private List<Resource1> resources = new();
 
-
-    [HideInInspector] public Dictionary<Resource1, int> resourceIndices = new ();
+    [HideInInspector] public Dictionary<Resource1, int> resourceIndices = new();
 
     private void Awake() //resource id'leri otomatik atanýyor.
     {
@@ -53,7 +55,47 @@ public class InventoryManager : MonoBehaviour
         {
             UpdateInventoryMenu();
         }
+
+        if (currentBuild != null)
+        {
+            CreateTurret();
+        }
     }
+
+    private void CreateTurret()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                Vector3 positionToPlace = hit.point;
+
+                if (hit.collider.gameObject.CompareTag("Ground"))
+                {
+                    positionToPlace = PlaceObjectOnGrid(positionToPlace);
+                    turretPrefab.transform.localScale = GridDisplay.cellSize * currentBuild.buildingSize;
+                    positionToPlace.y += turretPrefab.transform.localScale.y / 2;
+                    Instantiate(turretPrefab, positionToPlace, transform.rotation);
+                    currentBuild = null;
+                }
+            }
+        }
+        Vector3 PlaceObjectOnGrid(Vector3 position)
+        {
+            int x = Mathf.RoundToInt(position.x / GridDisplay.cellSize);
+            int y = Mathf.RoundToInt(position.y / GridDisplay.cellSize);
+            int z = Mathf.RoundToInt(position.z / GridDisplay.cellSize);
+            Vector3 snappedPosition = new Vector3(x * GridDisplay.cellSize - GridDisplay.cellSize / 2
+                , y * GridDisplay.cellSize
+                , z * GridDisplay.cellSize - GridDisplay.cellSize / 2);
+            return snappedPosition;
+        }
+    }
+
+
 
     private void CreateInventoryMenu()
     {
@@ -92,7 +134,7 @@ public class InventoryManager : MonoBehaviour
             {
                 if (have.Key == need.Key)
                 {
-                    if(have.Value - need.Value < 0)
+                    if (have.Value - need.Value < 0)
                     {
                         return false;
                     }
@@ -112,5 +154,10 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public void setCurrentBuild(Build1 build)
+    {
+        currentBuild = build;
     }
 }
