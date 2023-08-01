@@ -28,7 +28,7 @@ public class cameraFollow : MonoBehaviour
     {
         if (Vector3.Distance(transform.position,player.transform.position) >= maxDistance)
         {
-            currentFollowSpeed = playerMovement.movementSpeed;
+            currentFollowSpeed = playerMovement.currentMovementSpeed;
         }
         else
         {
