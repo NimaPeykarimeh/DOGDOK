@@ -23,5 +23,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         animator.SetFloat("MovementSpeed", characterMovement.currentSpeed);
+        
+        if (isAiming)
+        {
+            animator.SetLayerWeight(1,1);
+        }
+        else
+        {
+            animator.SetLayerWeight(1, 0);
+        }
     }
 }

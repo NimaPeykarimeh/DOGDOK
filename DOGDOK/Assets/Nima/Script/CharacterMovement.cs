@@ -91,7 +91,8 @@ public class CharacterMovement : MonoBehaviour
     void Update()
     {
         currentSpeed = GetMovement() * currentMovementSpeed;
-
+        playerController.animator.SetFloat("DirX",moveX);
+        playerController.animator.SetFloat("DirY", moveZ);
         if (currentSpeed > 0)
         {
             MovePlayer();
