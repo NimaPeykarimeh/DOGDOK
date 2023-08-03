@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
-[CreateAssetMenu(menuName ="Resource1")]
+[CreateAssetMenu(menuName = "Resource1")]
 public class Resource1 : ScriptableObject
 {
     [HideInInspector] public int id;

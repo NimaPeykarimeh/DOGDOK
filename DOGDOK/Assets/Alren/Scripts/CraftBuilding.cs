@@ -19,7 +19,7 @@ public class CraftBuilding : MonoBehaviour
     {
         Dictionary<Resource1, int> needs = new();
         //     TurretPanelCreator.builds[id].requiredResource, TurretPanelCreator.builds[id].requiredAmount
-        for(int i = 0; i<  TurretPanelCreator.builds[id].requiredResource.Count; i++)
+        for (int i = 0; i < TurretPanelCreator.builds[id].requiredResource.Count; i++)
         {
             needs.Add(TurretPanelCreator.builds[id].requiredResource[i], TurretPanelCreator.builds[id].requiredAmount[i]);
         }

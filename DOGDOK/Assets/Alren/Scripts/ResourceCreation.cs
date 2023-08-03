@@ -12,9 +12,9 @@ public class ResourceCreation : MonoBehaviour
         if (isRandomized)
         {
             int index = Random.Range(0, InventoryManager.resourceIndices.Count);
-            foreach(var element in InventoryManager.resourceIndices.Keys)
+            foreach (var element in InventoryManager.resourceIndices.Keys)
             {
-                if(element.id == index)
+                if (element.id == index)
                 {
                     resource = element;
                     gameObject.GetComponent<MeshFilter>().mesh = element.resourceMesh;

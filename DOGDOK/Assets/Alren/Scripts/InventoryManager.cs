@@ -75,7 +75,7 @@ public class InventoryManager : MonoBehaviour
 
                 if (hit.collider.gameObject.CompareTag("Ground"))
                 {
-                    positionToPlace = PlaceObjectOnGrid(positionToPlace);
+                    positionToPlace = PlaceObjectOnGrid(positionToPlace, currentBuild.buildingSize);
                     turretPrefab.transform.localScale = GridDisplay.cellSize * currentBuild.buildingSize; //scale'i !!!!!!
                     positionToPlace.y += turretPrefab.transform.localScale.y / 2; //küp yüksekliði
                     Instantiate(turretPrefab, positionToPlace, transform.rotation);
@@ -84,19 +84,30 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        // Turretlarý grid'e tam oturt.
+        // Turretlarý grid'e tam oturt. DONE
         // Zombieleri takip eden silah namlusu
         // NULL kontrolü yap.
         // Player'dan uzaksa yapamasýn.
 
-        Vector3 PlaceObjectOnGrid(Vector3 position)
+        Vector3 PlaceObjectOnGrid(Vector3 position, Vector3 size)
         {
-            int x = Mathf.RoundToInt(position.x / GridDisplay.cellSize);
-            int y = Mathf.RoundToInt(position.y / GridDisplay.cellSize);
-            int z = Mathf.RoundToInt(position.z / GridDisplay.cellSize);
-            Vector3 snappedPosition = new Vector3(x * GridDisplay.cellSize - GridDisplay.cellSize / 2
-                , y * GridDisplay.cellSize
-                , z * GridDisplay.cellSize - GridDisplay.cellSize / 2);
+            float x = Mathf.RoundToInt(position.x / GridDisplay.cellSize);
+            x = x * GridDisplay.cellSize - GridDisplay.cellSize / 2;
+            if (size.x % 2 == 0)
+            {
+                x -= GridDisplay.cellSize / 2;
+            }
+
+            float y = Mathf.RoundToInt(position.y / GridDisplay.cellSize);
+
+            float z = Mathf.RoundToInt(position.z / GridDisplay.cellSize);
+            z = z * GridDisplay.cellSize - GridDisplay.cellSize / 2;
+            if (size.z % 2 == 0)
+            {
+                z -= GridDisplay.cellSize / 2;
+            }
+
+            Vector3 snappedPosition = new Vector3(x, y * GridDisplay.cellSize, z);
             return snappedPosition;
         }
     }

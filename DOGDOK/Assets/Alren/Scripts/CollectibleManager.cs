@@ -9,7 +9,7 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
     private Resource1 resource;
 
     [SerializeField] private InventoryManager InventoryManager;
-    
+
     private void OnTriggerEnter(Collider other)
     {
         timer = 0;

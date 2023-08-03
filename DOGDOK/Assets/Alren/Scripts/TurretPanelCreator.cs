@@ -56,7 +56,7 @@ public class TurretPanelCreator : MonoBehaviour
             Build1 _currentBuild = builds[i];
             for (int j = 0; j < _currentBuild.requiredResource.Count; j++)
             {
-                StringBuilder str = new ();
+                StringBuilder str = new();
                 str.Append(InventoryManager.resourceIndices[_currentBuild.requiredResource[j]].ToString());
                 str.Append("/");
                 str.Append(_currentBuild.requiredAmount[j].ToString());

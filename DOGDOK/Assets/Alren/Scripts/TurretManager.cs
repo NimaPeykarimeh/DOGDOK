@@ -25,7 +25,7 @@ public class TurretManager : MonoBehaviour
             TurretPanel.SetActive(true);
             TurretPanel.GetComponent<TurretPanelCreator>().UpdateRequiredResource();
         }
-        else if(isOpen && Input.GetKeyDown(KeyCode.E)) //Kapama
+        else if (isOpen && Input.GetKeyDown(KeyCode.E)) //Kapama
         {
             isOpen = false;
             TurretPanel.SetActive(false);
