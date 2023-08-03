@@ -83,7 +83,12 @@ public class CharacterMovement : MonoBehaviour
     {
         moveX = Input.GetAxis("Horizontal");
         moveZ = Input.GetAxis("Vertical");
-        move = (mainCamera.transform.right * moveX + mainCamera.transform.forward * moveZ);
+
+        Vector3 cameraForward = mainCamera.transform.forward;
+        cameraForward.y = 0;
+        Vector3 cameraRight = mainCamera.transform.right;
+        cameraRight.y = 0;
+        move = (cameraRight * moveX + cameraForward * moveZ);
         move.Normalize();
         return move.magnitude;
 

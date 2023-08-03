@@ -6,7 +6,6 @@ public class PlayerMouseLook : MonoBehaviour
 {
     PlayerController playerController;
     [SerializeField] Camera mainCamera;
-    [SerializeField] Vector3 _mousePosition;
     [SerializeField] float rotateSpeed;
     [SerializeField] LayerMask groundLayer;
     void Start()
@@ -40,8 +39,9 @@ public class PlayerMouseLook : MonoBehaviour
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
         {
             // Get the point on the ground where the ray hits
-            _mousePosition = hit.point;
-            Vector3 directionToTarget = _mousePosition - transform.position;
+            
+            Vector3 directionToTarget = hit.point - transform.position;
+            directionToTarget.Normalize();
             directionToTarget.y = 0; // Ignore the Y-axis for 2D rotation
 
             Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);

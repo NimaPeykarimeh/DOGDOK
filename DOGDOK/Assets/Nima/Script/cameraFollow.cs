@@ -6,6 +6,7 @@ public class cameraFollow : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject player;
+    [SerializeField] Vector3 offset;
     CharacterMovement playerMovement;
 
     [SerializeField] float defaultFollowSpeed;
@@ -34,7 +35,7 @@ public class cameraFollow : MonoBehaviour
         {
             currentFollowSpeed = defaultFollowSpeed;
         }
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, currentFollowSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position + offset, currentFollowSpeed * Time.deltaTime);
         //float turnRotation = Mathf.Clamp( (Input.mousePosition.x - (screenResX / 2)) * rotationSensitivity, -maxRotation,maxRotation);
         //transform.eulerAngles = new Vector3(0,turnRotation ,0);
     }
