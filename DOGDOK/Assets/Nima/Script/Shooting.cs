@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-
+    
     NoiseMaker noiseMaker;
     [SerializeField] AmmoPooling ammoPooling;
     [SerializeField] GameObject enemyHitParticle;
@@ -22,11 +22,11 @@ public class Shooting : MonoBehaviour
         
     }
 
-    public void Shoot(Transform _shootingPoint, float _shootingRange,float _noiseRange,bool _isPiercing)
+    public void Shoot(Transform _shootingPoint,Vector3 _targetPosition, float _shootingRange,float _noiseRange,bool _isPiercing)
     {
 
-        
-        Ray ray = new Ray(_shootingPoint.position, _shootingPoint.forward);
+        Vector3 _direction = (_targetPosition - _shootingPoint.position).normalized;
+        Ray ray = new Ray(_shootingPoint.position, _direction);
         Debug.DrawRay(ray.origin, ray.direction * _shootingRange, Color.red, 0.1f);
 
         noiseMaker.MakeNoise(_noiseRange, _shootingPoint);

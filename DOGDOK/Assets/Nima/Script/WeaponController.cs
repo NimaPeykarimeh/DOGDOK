@@ -6,11 +6,14 @@ using UnityEngine;
 [RequireComponent(typeof(Shooting))]
 public class WeaponController : MonoBehaviour
 {
+
+    [Header("Reference")]
+    [SerializeField] PlayerController playerController;
     [SerializeField] Shooting shooting;
 
+    [Space]
 
     [SerializeField] bool isShooting;
-
     [SerializeField] float fireInterval;
     [SerializeField] float fireTimer;
 
@@ -70,7 +73,7 @@ public class WeaponController : MonoBehaviour
         if (isShooting && fireTimer >= fireInterval)
         {
             fireTimer = 0;
-            shooting.Shoot(shootPoint,shootRange,noiseRange,isPiercing);
+            shooting.Shoot(shootPoint,playerController.GetAimHitInfo().point,shootRange,noiseRange,isPiercing);
             audioSource.pitch = Mathf.Lerp(minPitch,maxPitch,accelerationTimer/accelerationDuration);
             audioSource.PlayOneShot(gunSounds[0]);
 

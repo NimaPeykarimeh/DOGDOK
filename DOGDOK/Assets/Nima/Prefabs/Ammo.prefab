@@ -163,7 +163,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoPooling: {fileID: 0}
   ammoLifeTime: 1
-  speed: 150
+  trail: {fileID: 0}
+  speed: 50
 --- !u!96 &340336793418662469
 TrailRenderer:
   serializedVersion: 2

@@ -23,6 +23,7 @@ public class EnemyFollow : MonoBehaviour
     [SerializeField] float currentAngle;
     [SerializeField] float targetRotation;
     [SerializeField] float directionDelta;
+    [SerializeField] Transform rayCastCenter;
     public int rayCount = 8; // Number of rays to cast
     public float rayRange = 10f; // Length of the 
 
@@ -104,7 +105,7 @@ public class EnemyFollow : MonoBehaviour
             Quaternion rotation = Quaternion.Euler(0f, angle, 0f);
             Vector3 direction = rotation * pivotRotation * Vector3.forward;
 
-            Ray ray = new Ray(transform.position, direction);
+            Ray ray = new Ray(rayCastCenter.position, direction);
             Debug.DrawRay(ray.origin, ray.direction * rayRange, Color.red);
 
             // Perform actions based on raycast hits here
