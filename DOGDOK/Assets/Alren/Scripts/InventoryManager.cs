@@ -12,6 +12,7 @@ public class InventoryManager : MonoBehaviour
     private Animator animator;
     private List<TextMeshProUGUI> UIAmount = new();
     private Build1 currentBuild;
+    private Transform cubeLocation;
 
     [SerializeField] private GridDisplay GridDisplay;
     [SerializeField] private GameObject turretPrefab;
@@ -56,63 +57,78 @@ public class InventoryManager : MonoBehaviour
             UpdateInventoryMenu();
         }
 
-        if (currentBuild != null)
+        if (currentBuild != null) // Turret'ý yarat ve location'ýný al.
         {
-            CreateTurret();
+            cubeLocation = CreateTurret();
+        }
+        else if (cubeLocation != null) // Mouse'u takip ederek Turret'ýn koyulacaðý yere bak ve güncelle.
+        {
+            TrackMouseForBuilding();
         }
     }
 
-    private void CreateTurret()
+    private Transform CreateTurret()
     {
-        if (Input.GetMouseButtonDown(0))
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            Vector3 positionToPlace = hit.point;
 
-            if (Physics.Raycast(ray, out hit))
+            if (hit.collider.gameObject.CompareTag("Ground"))
             {
-                Vector3 positionToPlace = hit.point;
-
-                if (hit.collider.gameObject.CompareTag("Ground"))
-                {
-                    positionToPlace = PlaceObjectOnGrid(positionToPlace, currentBuild.buildingSize);
-                    turretPrefab.transform.localScale = GridDisplay.cellSize * currentBuild.buildingSize; //scale'i !!!!!!
-                    positionToPlace.y += turretPrefab.transform.localScale.y / 2; //küp yüksekliði
-                    Instantiate(turretPrefab, positionToPlace, transform.rotation);
-                    currentBuild = null;
-                }
+                positionToPlace = PlaceObjectOnGrid(positionToPlace, currentBuild.buildingSize);
+                turretPrefab.transform.localScale = GridDisplay.cellSize * currentBuild.buildingSize; //scale'i !!!!!!
+                positionToPlace.y += turretPrefab.transform.localScale.y / 2; //küp yüksekliði
+                Transform t = Instantiate(turretPrefab, positionToPlace, transform.rotation).GetComponent<Transform>();
+                currentBuild = null;
+                return t;
             }
         }
+        return null;
 
-        // Turretlarý grid'e tam oturt. DONE
         // Zombieleri takip eden silah namlusu
         // NULL kontrolü yap.
         // Player'dan uzaksa yapamasýn.
-
-        Vector3 PlaceObjectOnGrid(Vector3 position, Vector3 size)
+    }
+    private Vector3 PlaceObjectOnGrid(Vector3 position, Vector3 size)
+    {
+        float x = Mathf.RoundToInt(position.x / GridDisplay.cellSize);
+        x = x * GridDisplay.cellSize - GridDisplay.cellSize / 2;
+        if (size.x % 2 == 0)
         {
-            float x = Mathf.RoundToInt(position.x / GridDisplay.cellSize);
-            x = x * GridDisplay.cellSize - GridDisplay.cellSize / 2;
-            if (size.x % 2 == 0)
-            {
-                x -= GridDisplay.cellSize / 2;
-            }
-
-            float y = Mathf.RoundToInt(position.y / GridDisplay.cellSize);
-
-            float z = Mathf.RoundToInt(position.z / GridDisplay.cellSize);
-            z = z * GridDisplay.cellSize - GridDisplay.cellSize / 2;
-            if (size.z % 2 == 0)
-            {
-                z -= GridDisplay.cellSize / 2;
-            }
-
-            Vector3 snappedPosition = new Vector3(x, y * GridDisplay.cellSize, z);
-            return snappedPosition;
+            x -= GridDisplay.cellSize / 2;
         }
+
+        float y = Mathf.RoundToInt(position.y / GridDisplay.cellSize);
+
+        float z = Mathf.RoundToInt(position.z / GridDisplay.cellSize);
+        z = z * GridDisplay.cellSize - GridDisplay.cellSize / 2;
+        if (size.z % 2 == 0)
+        {
+            z -= GridDisplay.cellSize / 2;
+        }
+
+        Vector3 snappedPosition = new Vector3(x, y * GridDisplay.cellSize, z);
+        return snappedPosition;
     }
 
-
+    private void TrackMouseForBuilding()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            Vector3 positionToPlace = hit.point;
+            cubeLocation.position = PlaceObjectOnGrid(positionToPlace, cubeLocation.localScale);
+            if (Input.GetMouseButtonDown(0))
+            {
+                cubeLocation.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                cubeLocation = null;
+            }
+        }
+    }
 
     private void CreateInventoryMenu()
     {

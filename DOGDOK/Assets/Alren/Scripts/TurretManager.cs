@@ -23,12 +23,14 @@ public class TurretManager : MonoBehaviour
         {
             isOpen = true;
             TurretPanel.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
             TurretPanel.GetComponent<TurretPanelCreator>().UpdateRequiredResource();
         }
         else if (isOpen && Input.GetKeyDown(KeyCode.E)) //Kapama
         {
             isOpen = false;
             TurretPanel.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 }
