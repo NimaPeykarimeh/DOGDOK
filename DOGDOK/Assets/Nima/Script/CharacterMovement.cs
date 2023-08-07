@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 [RequireComponent(typeof(NoiseMaker))]
@@ -5,19 +6,27 @@ public class CharacterMovement : MonoBehaviour
 {
     PlayerController playerController;
 
+    [SerializeField] GameObject playerObject;
+
     [Header("Movement")]
     float moveX;
     float moveZ;
+    Vector3 playerInput;
+    [SerializeField] float inputMagnitude;
     [SerializeField] Vector3 move;
-    public float currentSpeed;
+    MoveStates currentMoveState;
+    [Header("Speeds")]
+    public float currentVelocity;
+    [SerializeField] float speedToMove;
     public float currentMovementSpeed;
-    [SerializeField] float walkingSpeed;
-    [SerializeField] float runningSpeed;
+    public float walkingSpeed;
+    public float runningSpeed;
     public float turnSpeed = 10f;
 
     [Header("Acceleration")]
     [SerializeField] float accelerationDuration;
     [SerializeField] float accelerationTimer;
+    [SerializeField] float accelerationSpeed;
     float firstSpeed;
     float lastSpeed;
     bool isAccelerating;
@@ -30,6 +39,13 @@ public class CharacterMovement : MonoBehaviour
     NoiseMaker noiseMaker;
     [SerializeField] float noiseRange;
     [SerializeField] Transform noiseCenter;
+
+    public enum MoveStates
+    {
+        Run,
+        Walk
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +58,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (playerController.currentState == PlayerController.PlayerStates.Basic)
         {
-            characterController.Move(move * currentMovementSpeed * Time.deltaTime);
+            characterController.Move(move * currentVelocity * Time.deltaTime);
             if (!playerController.isAiming && move.magnitude > 0)
             {
                 RotateTowards(move);
@@ -50,7 +66,7 @@ public class CharacterMovement : MonoBehaviour
         }
         else
         {
-            characterController.Move(move * currentMovementSpeed * Time.deltaTime);
+            characterController.Move(move * currentVelocity * Time.deltaTime);
 
             RotateTowards(playerController.mainCamera.transform.forward);
         }
@@ -62,83 +78,98 @@ public class CharacterMovement : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
         targetRotation.x = 0;
         targetRotation.z = 0;
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+        playerObject.transform.rotation = Quaternion.Slerp(playerObject.transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
     }
 
-    void ToggleRunState()
+    public void ToggleRunState(MoveStates _state)
     {
-        if (playerController.isRunning)
+        currentMoveState = _state;
+        if (_state == MoveStates.Walk)
         {
             playerController.isWalking = true;
             playerController.isRunning = false;
             //movementSpeed = walkSpeed;
             noiseRange = walkingSpeed;
-            
-            isAccelerating = true;
-            firstSpeed = runningSpeed;
-            lastSpeed = walkingSpeed;
+            //isAccelerating = true;
+
+            currentMovementSpeed = walkingSpeed;
         }
-        else
+        else if(_state == MoveStates.Run && playerController.currentState != PlayerController.PlayerStates.Combat)//
         {
             playerController.isWalking = false;
             playerController.isRunning = true;
-            //movementSpeed = runSpeed;
             noiseRange = runningSpeed;
 
-            isAccelerating = true;
-            firstSpeed = walkingSpeed;
-            lastSpeed = runningSpeed;
+            //isAccelerating = true;
+
+            currentMovementSpeed = runningSpeed;
         }   
     }
-    float GetMovement()
-    {
-        moveX = Input.GetAxis("Horizontal");
-        moveZ = Input.GetAxis("Vertical");
 
+    void Accelarate()
+    {
+        isAccelerating = true;
+    }
+
+    void GetMovementDirection()
+    {
+        
+        //get The forward and right direction of camera
         Vector3 cameraForward = playerController.mainCamera.transform.forward;
         Vector3 cameraRight = playerController.mainCamera.transform.right;
+
+        //reset the one to prevent vertical rotation
         cameraRight.y = 0;
         cameraForward.y = 0;
+
         move = (cameraRight * moveX + cameraForward * moveZ);
         move.Normalize();
-        return move.magnitude;
+        //return move.magnitude;
+    }
 
+    void GetPlayerInput()
+    {
+        //get Player Input
+        moveX = Input.GetAxis("Horizontal");
+        moveZ = Input.GetAxis("Vertical");
+        playerInput = new Vector3(moveX,0f,moveZ).normalized;
+        inputMagnitude = playerInput.magnitude;
     }
     void Update()
     {
-        currentSpeed = GetMovement() * currentMovementSpeed;
-        playerController.animator.SetFloat("DirX",moveX);
-        playerController.animator.SetFloat("DirY", moveZ);
+        //currentSpeed = GetMovement() * currentMovementSpeed;
+        GetPlayerInput();
+        if (inputMagnitude > 0)
+        {
+            playerController.animator.SetFloat("DirX",moveX, 0.1f, Time.deltaTime);
+            playerController.animator.SetFloat("DirY", moveZ,0.1f, Time.deltaTime);
+            //currentVelocity = inputMagnitude * currentMovementSpeed;
+        }
+        speedToMove = inputMagnitude * currentMovementSpeed;
+        GetMovementDirection();
         MovePlayer();
-        if (currentSpeed > 0)
-        {
-            
-            playerController.isMoving = true;
-        }
-        else
-        {
-            playerController.isMoving = false;
-        }
+        
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            ToggleRunState();
+            ToggleRunState(MoveStates.Run);
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            ToggleRunState();
+            ToggleRunState(MoveStates.Walk);
         }
-
+        Accelarate();
         if (isAccelerating)
         {
-            accelerationTimer += Time.deltaTime;
-            currentMovementSpeed = Mathf.Lerp(firstSpeed,lastSpeed,accelerationTimer/accelerationDuration);
-            if (accelerationTimer > accelerationDuration)
-            {
-                isAccelerating = false;
-                accelerationTimer = 0;
-                currentMovementSpeed = lastSpeed;
-            }
+            currentVelocity = Mathf.Lerp(currentVelocity, speedToMove, accelerationSpeed * Time.deltaTime);
+            //accelerationTimer += Time.deltaTime;
+            //currentMovementSpeed = Mathf.Lerp(firstSpeed,lastSpeed,accelerationTimer/accelerationDuration);
+            //if (accelerationTimer > accelerationDuration)
+            //{
+            //    isAccelerating = false;
+            //    accelerationTimer = 0;
+            //    currentMovementSpeed = lastSpeed;
+            //}
         }
 
     }

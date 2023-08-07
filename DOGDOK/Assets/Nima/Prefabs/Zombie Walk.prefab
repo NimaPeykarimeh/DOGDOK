@@ -1274,6 +1274,7 @@ GameObject:
   - component: {fileID: 919132147925547875}
   - component: {fileID: 919132147925547876}
   - component: {fileID: 919132147925547877}
+  - component: {fileID: -4859333179514968786}
   m_Layer: 6
   m_Name: Zombie Walk
   m_TagString: Enemy
@@ -1409,10 +1410,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f49109d18ed122438007e5ce1a11c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMovementSpeed: 2
-  minMovementSpeed: 1
+  maxMovementSpeed: 0.7
+  minMovementSpeed: 0.5
   movementSpeed: 0
   gravity: -9.8
+--- !u!114 &-4859333179514968786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4452290907956169991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2cf1da05865d6d48b62ac73e1787228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4471475954355285596
 GameObject:
   m_ObjectHideFlags: 0

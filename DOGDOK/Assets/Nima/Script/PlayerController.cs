@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
@@ -21,8 +22,8 @@ public class PlayerController : MonoBehaviour
         public bool isWalking;
     
     [Header("CameraObjects")]
-        [SerializeField] CinemachineFreeLook combatCamera;
-        [SerializeField] CinemachineFreeLook basicCamera;
+        [SerializeField] GameObject combatCamera;
+        [SerializeField] GameObject basicCamera;
         public PlayerStates currentState;
         [SerializeField] Vector2 lastMouseValue;
 
@@ -32,11 +33,11 @@ public class PlayerController : MonoBehaviour
         public float layerWeightSpeed = 5f;
         [SerializeField] float aimDistance;
         public float maxRaycastDistance = 100f;
-
     public enum PlayerStates
     {
         Basic,
-        Combat
+        Combat,
+        Run
     }
 
     void Start()
@@ -44,7 +45,6 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         characterMovement = GetComponent<CharacterMovement>();
         playerMouseLook = GetComponent<PlayerMouseLook>();
-
     }
 
     public RaycastHit GetAimHitInfo()
@@ -71,22 +71,26 @@ public class PlayerController : MonoBehaviour
     {
         if (_state == PlayerStates.Basic)
         {
-            lastMouseValue = new Vector2(combatCamera.m_XAxis.Value,combatCamera.m_YAxis.Value);
-            combatCamera.gameObject.SetActive(false);
-            basicCamera.gameObject.SetActive(true);
-            basicCamera.m_XAxis.Value = lastMouseValue.x;
-            basicCamera.m_YAxis.Value = lastMouseValue.y;
+            //lastMouseValue = new Vector2(combatCamera.m_XAxis.Value,combatCamera.m_YAxis.Value);
+            combatCamera.SetActive(false);
+            basicCamera.SetActive(true);
+            //basicCamera.m_XAxis.Value = lastMouseValue.x;
+            //basicCamera.m_YAxis.Value = lastMouseValue.y;
 
         }
         if (_state == PlayerStates.Combat)
         {
-            lastMouseValue = new Vector2(basicCamera.m_XAxis.Value, basicCamera.m_YAxis.Value);
-            basicCamera.gameObject.SetActive(false);
-            combatCamera.gameObject.SetActive(true);
-            combatCamera.m_XAxis.Value = lastMouseValue.x;
-            combatCamera.m_YAxis.Value = lastMouseValue.y;
+            //lastMouseValue = new Vector2(basicCamera.m_XAxis.Value, basicCamera.m_YAxis.Value);
+            basicCamera.SetActive(false);
+            combatCamera.SetActive(true);
+            //combatCamera.m_XAxis.Value = lastMouseValue.x;
+            //combatCamera.m_YAxis.Value = lastMouseValue.y;
+            characterMovement.ToggleRunState(CharacterMovement.MoveStates.Walk);
         }
-
+        if (_state == PlayerStates.Run)
+        {
+            //characterMovement.currentMovementSpeed
+        }
         currentState = _state;
         
     }
@@ -94,16 +98,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator.SetFloat("MovementSpeed", characterMovement.currentSpeed);
+        animator.SetFloat("MovementSpeed", characterMovement.currentVelocity / characterMovement.runningSpeed);
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            ChangePlayerState(PlayerStates.Combat);
-        }
-        if (Input.GetMouseButtonUp(1))
-        {
-            ChangePlayerState(PlayerStates.Basic);
-        }
 
         if (currentState == PlayerStates.Combat)
         {
@@ -111,7 +107,7 @@ public class PlayerController : MonoBehaviour
             animator.SetLayerWeight(1, newWeight);
             aimDistance = GetAimHitInfo().distance;
         }
-        else
+        else if(currentState == PlayerStates.Basic)
         {
             float newWeight = Mathf.Lerp(animator.GetLayerWeight(1), 0f, Time.deltaTime * layerWeightSpeed);
             animator.SetLayerWeight(1, newWeight);

@@ -32,9 +32,9 @@ public class EnemySpawner : MonoBehaviour
         CreatePooler(maxEnemyCount);
     }
 
-    private void BackToPooler()
+    public void BackToPooler(Transform _enemy)
     {
-        //
+        _enemy.SetParent(transform);
     }
 
     private void CreatePooler(int count)
@@ -44,6 +44,7 @@ public class EnemySpawner : MonoBehaviour
             
             GameObject _spawnedEnemy = Instantiate(enemyPrefab, transform.position, transform.rotation);
             _spawnedEnemy.transform.parent = transform;
+            _spawnedEnemy.GetComponent<EnemyHealth>().enemySpawner = this;
             _spawnedEnemy.gameObject.SetActive(false);
 
         }
@@ -63,7 +64,7 @@ public class EnemySpawner : MonoBehaviour
 
             float x = Random.Range(_spawnArea.x - (_spawnSize.x / 2), _spawnArea.x + (_spawnSize.x / 2));
             float z = Random.Range(_spawnArea.z - (_spawnSize.z / 2), _spawnArea.z + (_spawnSize.z / 2));
-            float y = _spawnArea.z + _spawnSize.z / 2;
+            float y = _spawnArea.y + _spawnSize.y / 2;
 
             Vector3 _randomPositon = new Vector3(x, y, z);
             _spawnedEnemy.transform.position = _randomPositon;
