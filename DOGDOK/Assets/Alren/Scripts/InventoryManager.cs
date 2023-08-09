@@ -120,15 +120,21 @@ public class InventoryManager : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        Vector3 positionToPlace;
+        if (Physics.Raycast(ray, out hit, 16f))
         {
-            Vector3 positionToPlace = hit.point;
-            cubeLocation.position = PlaceObjectOnGrid(positionToPlace, cubeLocation.localScale);
-            if (Input.GetMouseButtonDown(0) && TurretNullControl.isViable)
-            {
-                cubeLocation.gameObject.GetComponent<BoxCollider>().isTrigger = false;
-                cubeLocation = null;
-            }
+            positionToPlace = hit.point;
+        }
+        else
+        {
+            positionToPlace = ray.GetPoint(16f);
+        }
+        positionToPlace.y = 0;
+        cubeLocation.position = PlaceObjectOnGrid(positionToPlace, cubeLocation.localScale);
+        if (Input.GetMouseButtonDown(0) && TurretNullControl.isViable)
+        {
+            cubeLocation.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+            cubeLocation = null;
         }
     }
 
