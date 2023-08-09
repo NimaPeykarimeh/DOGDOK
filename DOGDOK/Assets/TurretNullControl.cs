@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TurretNullControl : MonoBehaviour
 {
-    [HideInInspector] public bool isViable = true;
+    [HideInInspector] public bool isViable;
     private bool isColliding;
     private Renderer Renderer;
     [SerializeField] private TurretGroundedControl TurretGroundedControl;
@@ -18,24 +18,14 @@ public class TurretNullControl : MonoBehaviour
         Renderer.material.color = Color.green;
         isViable = false;
         isColliding = false;
-        TurretGroundedControl.isGrounded = false; // Ýnþa etme spamlanýrsa bug oluþabilir.
+        TurretGroundedControl.isGrounded = false; 
     }
 
     private void Update()
     {
         isViable = !isColliding && TurretGroundedControl.isGrounded;
-        if (isViable)
-        {
-            Renderer.material.color = Color.green;
-        }
-        else Renderer.material.color = Color.red;
+        Renderer.material.color = isViable ? Color.green : Color.red;
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        isColliding = true;
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        isColliding = false;
-    }
+    private void OnTriggerEnter(Collider other) => isColliding = true;
+    private void OnTriggerExit(Collider other) => isColliding = false;
 }

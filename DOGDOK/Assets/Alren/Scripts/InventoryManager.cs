@@ -154,12 +154,6 @@ public class InventoryManager : MonoBehaviour
             i++;
         }
     }
-
-    //TODO
-
-    //Tab'a basarak silah seçme sekmesi
-    //WorkStation yanýnda E'ye basýnca tablet açýlsýn, butona basýlýnca grid sisteme geçsin
-    //Build, Gridleri takip etsin. Grid boþ mu kontrolü yapan method.
     public bool UseResources(Dictionary<Resource1, int> neededResources) //kaynaðýn türünü sayý cinsinden ve miktarýný giriniz.
     {
         //Kaynak yeterliliði kontrolü
@@ -190,9 +184,5 @@ public class InventoryManager : MonoBehaviour
         }
         return true;
     }
-
-    public void SetCurrentBuild(Build1 build)
-    {
-        currentBuild = build;
-    }
+    public void SetCurrentBuild(Build1 build) => currentBuild = build;
 }
