@@ -35,6 +35,7 @@ public class EnemySpawner : MonoBehaviour
     public void BackToPooler(Transform _enemy)
     {
         _enemy.SetParent(transform);
+        _enemy.gameObject.SetActive(false);
     }
 
     private void CreatePooler(int count)
@@ -44,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
             
             GameObject _spawnedEnemy = Instantiate(enemyPrefab, transform.position, transform.rotation);
             _spawnedEnemy.transform.parent = transform;
-            _spawnedEnemy.GetComponent<EnemyHealth>().enemySpawner = this;
+            _spawnedEnemy.GetComponent<EnemyController>().enemySpawner = this;
             _spawnedEnemy.gameObject.SetActive(false);
 
         }

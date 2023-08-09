@@ -17,16 +17,19 @@ public class CharacterMovement : MonoBehaviour
     MoveStates currentMoveState;
     [Header("Speeds")]
     public float currentVelocity;
-    [SerializeField] float speedToMove;
+    public float speedToMove;
     public float currentMovementSpeed;
     public float walkingSpeed;
     public float runningSpeed;
     public float turnSpeed = 10f;
-
+    public bool isRunning;
     [Header("Acceleration")]
-    [SerializeField] float accelerationDuration;
+
+    [SerializeField] float accelerationDuration = 1f;
     [SerializeField] float accelerationTimer;
+    [SerializeField] float decelerationDuration;
     [SerializeField] float accelerationSpeed;
+    [SerializeField] float decelerationSpeed;
     float firstSpeed;
     float lastSpeed;
     bool isAccelerating;
@@ -94,7 +97,7 @@ public class CharacterMovement : MonoBehaviour
 
             currentMovementSpeed = walkingSpeed;
         }
-        else if(_state == MoveStates.Run && playerController.currentState != PlayerController.PlayerStates.Combat)//
+        else if(_state == MoveStates.Run && playerController.canRun)
         {
             playerController.isWalking = false;
             playerController.isRunning = true;
@@ -109,6 +112,8 @@ public class CharacterMovement : MonoBehaviour
     void Accelarate()
     {
         isAccelerating = true;
+        firstSpeed = currentVelocity;
+
     }
 
     void GetMovementDirection()
@@ -122,8 +127,7 @@ public class CharacterMovement : MonoBehaviour
         cameraRight.y = 0;
         cameraForward.y = 0;
 
-        move = (cameraRight * moveX + cameraForward * moveZ);
-        move.Normalize();
+        move = (cameraRight * moveX + cameraForward * moveZ).normalized;
         //return move.magnitude;
     }
 
@@ -153,15 +157,26 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             ToggleRunState(MoveStates.Run);
+            isRunning = true;
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             ToggleRunState(MoveStates.Walk);
+            isRunning = false;
         }
         Accelarate();
         if (isAccelerating)
         {
-            currentVelocity = Mathf.Lerp(currentVelocity, speedToMove, accelerationSpeed * Time.deltaTime);
+            if (currentVelocity < speedToMove)
+            {
+                //accelerationTimer = Mathf.Clamp(accelerationTimer + (Time.deltaTime * accelerationSpeed), 0, accelerationDuration);
+                currentVelocity = Mathf.MoveTowards(currentVelocity, speedToMove, accelerationSpeed * Time.deltaTime);
+            }
+            else
+            {
+                //accelerationTimer = Mathf.Clamp(accelerationTimer - (Time.deltaTime * decelerationSpeed), 0, accelerationDuration);
+                currentVelocity = Mathf.MoveTowards(currentVelocity, speedToMove, decelerationSpeed * Time.deltaTime);
+            }
             //accelerationTimer += Time.deltaTime;
             //currentMovementSpeed = Mathf.Lerp(firstSpeed,lastSpeed,accelerationTimer/accelerationDuration);
             //if (accelerationTimer > accelerationDuration)

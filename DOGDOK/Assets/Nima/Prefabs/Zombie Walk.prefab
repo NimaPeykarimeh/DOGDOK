@@ -485,6 +485,37 @@ Transform:
   m_Father: {fileID: 1340807998259365374}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1492819112777368719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2574548186161237254}
+  m_Layer: 6
+  m_Name: Foot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2574548186161237254
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492819112777368719}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3927814324438800317}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1518487412093101711
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,7 +781,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6090923764765944618}
   m_Layer: 6
-  m_Name: RayCenter
+  m_Name: RotationRayCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1297,6 +1328,7 @@ Transform:
   - {fileID: 8433767100736908255}
   - {fileID: 8850194070745904937}
   - {fileID: 6090923764765944618}
+  - {fileID: 2574548186161237254}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1317,7 +1349,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Center: {x: 0, y: 0.98, z: 0}
 --- !u!114 &3533319289659018922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1397,7 +1429,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  enemySpawner: {fileID: 0}
   isAlerted: 0
+  isGrounded: 0
+  isGroundedLimit: 5
+  isGroundedTimer: 5
+  offset: 0
+  center: {fileID: 2574548186161237254}
+  radius: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &919132147925547877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1414,6 +1456,7 @@ MonoBehaviour:
   minMovementSpeed: 0.5
   movementSpeed: 0
   gravity: -9.8
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &-4859333179514968786
 MonoBehaviour:
   m_ObjectHideFlags: 0
