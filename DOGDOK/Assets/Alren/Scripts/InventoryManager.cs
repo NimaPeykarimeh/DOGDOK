@@ -13,6 +13,7 @@ public class InventoryManager : MonoBehaviour
     private List<TextMeshProUGUI> UIAmount = new();
     private Build1 currentBuild;
     private Transform cubeLocation;
+    private TurretNullControl TurretNullControl;
 
     [SerializeField] private GridDisplay GridDisplay;
     [SerializeField] private GameObject turretPrefab;
@@ -82,6 +83,7 @@ public class InventoryManager : MonoBehaviour
                 turretPrefab.transform.localScale = GridDisplay.cellSize * currentBuild.buildingSize; //scale'i !!!!!!
                 positionToPlace.y += turretPrefab.transform.localScale.y / 2; //küp yüksekliði
                 Transform t = Instantiate(turretPrefab, positionToPlace, transform.rotation).GetComponent<Transform>();
+                TurretNullControl = t.GetComponent<TurretNullControl>();
                 currentBuild = null;
                 return t;
             }
@@ -110,7 +112,7 @@ public class InventoryManager : MonoBehaviour
             z -= GridDisplay.cellSize / 2;
         }
 
-        Vector3 snappedPosition = new Vector3(x, y * GridDisplay.cellSize, z);
+        Vector3 snappedPosition = new Vector3(x, y * GridDisplay.cellSize + GridDisplay.cellSize/2, z);
         return snappedPosition;
     }
 
@@ -122,7 +124,7 @@ public class InventoryManager : MonoBehaviour
         {
             Vector3 positionToPlace = hit.point;
             cubeLocation.position = PlaceObjectOnGrid(positionToPlace, cubeLocation.localScale);
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && TurretNullControl.isViable)
             {
                 cubeLocation.gameObject.GetComponent<BoxCollider>().isTrigger = false;
                 cubeLocation = null;

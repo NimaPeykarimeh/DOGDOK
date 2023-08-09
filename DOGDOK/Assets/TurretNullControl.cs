@@ -5,8 +5,9 @@ using UnityEngine;
 public class TurretNullControl : MonoBehaviour
 {
     [HideInInspector] public bool isViable = true;
+    private bool isColliding;
     private Renderer Renderer;
-    // Start is called before the first frame update
+    [SerializeField] private TurretGroundedControl TurretGroundedControl;
 
     private void Awake()
     {
@@ -15,22 +16,26 @@ public class TurretNullControl : MonoBehaviour
     private void Start()
     {
         Renderer.material.color = Color.green;
-        isViable = true; // Ýnþa etme spamlanýrsa bug oluþabilir.
+        isViable = false;
+        isColliding = false;
+        TurretGroundedControl.isGrounded = false; // Ýnþa etme spamlanýrsa bug oluþabilir.
     }
-    private void OnTriggerStay(Collider other)
+
+    private void Update()
     {
-        if (!other.CompareTag("Ground"))
+        isViable = !isColliding && TurretGroundedControl.isGrounded;
+        if (isViable)
         {
-            print("a");
-            
-            isViable = false;
-            Renderer.material.color = Color.red;
-        }
-        else
-        {
-            print("b");
             Renderer.material.color = Color.green;
-            isViable = true;
         }
+        else Renderer.material.color = Color.red;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        isColliding = true;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        isColliding = false;
     }
 }

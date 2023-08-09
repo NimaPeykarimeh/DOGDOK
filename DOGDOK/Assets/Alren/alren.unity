@@ -23302,9 +23302,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6e899153e544bd4aa4d536490999826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretLayerMask:
-    serializedVersion: 2
-    m_Bits: 520
   GridDisplay: {fileID: 5759224}
   turretPrefab: {fileID: 5171845913975774813, guid: 27f76c6d1c44de349887069b33991a98, type: 3}
   InventoryPanel: {fileID: 4742757257587904783}
