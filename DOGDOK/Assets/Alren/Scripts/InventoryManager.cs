@@ -100,7 +100,7 @@ public class InventoryManager : MonoBehaviour
         x = x * GridDisplay.cellSize - GridDisplay.cellSize / 2;
         if (size.x % 2 == 0)
         {
-            x -= GridDisplay.cellSize / 2;
+            x += GridDisplay.cellSize / 2;
         }
 
         float y = Mathf.RoundToInt(position.y / GridDisplay.cellSize);
@@ -109,7 +109,7 @@ public class InventoryManager : MonoBehaviour
         z = z * GridDisplay.cellSize - GridDisplay.cellSize / 2;
         if (size.z % 2 == 0)
         {
-            z -= GridDisplay.cellSize / 2;
+            z += GridDisplay.cellSize / 2;
         }
 
         Vector3 snappedPosition = new Vector3(x, y * GridDisplay.cellSize + GridDisplay.cellSize/2, z);
