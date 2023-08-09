@@ -7,11 +7,9 @@ public class TurretManager : MonoBehaviour
 {
     [SerializeField] private GameObject TurretPanel;
     private bool isOpen;
-    private Build1 currentBuild;
     // Start is called before the first frame update
     void Start()
     {
-        currentBuild = null;
         isOpen = false;
         TurretPanel.SetActive(false);
     }
@@ -21,16 +19,27 @@ public class TurretManager : MonoBehaviour
     {
         if (!isOpen && Input.GetKeyDown(KeyCode.E)) //Açma
         {
-            isOpen = true;
-            TurretPanel.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            TurretPanel.GetComponent<TurretPanelCreator>().UpdateRequiredResource();
+            OpenCraftScreen();
         }
         else if (isOpen && Input.GetKeyDown(KeyCode.E)) //Kapama
         {
-            isOpen = false;
-            TurretPanel.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
+            CloseCraftScreen();
         }
+        else if(isOpen)
+        {
+            TurretPanel.GetComponent<TurretPanelCreator>().UpdateRequiredResource();
+        }
+    }
+    public void OpenCraftScreen()
+    {
+        isOpen = true;
+        TurretPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+    }
+    public void CloseCraftScreen()
+    {
+        isOpen = false;
+        TurretPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

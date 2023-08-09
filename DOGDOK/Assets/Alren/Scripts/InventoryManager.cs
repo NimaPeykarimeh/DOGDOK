@@ -189,7 +189,7 @@ public class InventoryManager : MonoBehaviour
         return true;
     }
 
-    public void setCurrentBuild(Build1 build)
+    public void SetCurrentBuild(Build1 build)
     {
         currentBuild = build;
     }

@@ -7,12 +7,14 @@ public class CraftBuilding : MonoBehaviour
     [HideInInspector] public int id;
     [SerializeField] private InventoryManager InventoryManager;
     [SerializeField] private TurretPanelCreator TurretPanelCreator;
+    [SerializeField] private TurretManager TurretManager;
     // Start is called before the first frame update
 
     private void Awake()
     {
         InventoryManager = GameObject.Find("UI & Manager/Inventory Manager").GetComponent<InventoryManager>();
         TurretPanelCreator = GameObject.Find("UI & Manager/Canvas/Panel/Turret Panel").GetComponent<TurretPanelCreator>();
+        TurretManager = GameObject.Find("UI & Manager/Turret Manager").GetComponent<TurretManager>();
     }
 
     public void UseButtonClick()
@@ -27,7 +29,8 @@ public class CraftBuilding : MonoBehaviour
         if (InventoryManager.UseResources(needs))
         {
             print("it can");
-            InventoryManager.setCurrentBuild(TurretPanelCreator.builds[id]);
+            TurretManager.CloseCraftScreen();
+            InventoryManager.SetCurrentBuild(TurretPanelCreator.builds[id]);
         }
         else print("it cant");
     }
