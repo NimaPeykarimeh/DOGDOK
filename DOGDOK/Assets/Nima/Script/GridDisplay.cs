@@ -7,6 +7,7 @@ public class GridDisplayEditor : Editor
     private SerializedProperty gridSize;
     public SerializedProperty cellSize;
 
+
     private void OnEnable()
     {
         gridSize = serializedObject.FindProperty("gridSize");
