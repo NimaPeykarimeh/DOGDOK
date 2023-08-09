@@ -100,7 +100,7 @@ public class InventoryManager : MonoBehaviour
         x = x * GridDisplay.cellSize - GridDisplay.cellSize / 2;
         if (size.x % 2 == 0)
         {
-            x -= GridDisplay.cellSize / 2;
+            x += GridDisplay.cellSize / 2;
         }
 
         float y = Mathf.RoundToInt(position.y / GridDisplay.cellSize);
@@ -109,7 +109,7 @@ public class InventoryManager : MonoBehaviour
         z = z * GridDisplay.cellSize - GridDisplay.cellSize / 2;
         if (size.z % 2 == 0)
         {
-            z -= GridDisplay.cellSize / 2;
+            z += GridDisplay.cellSize / 2;
         }
 
         Vector3 snappedPosition = new Vector3(x, y * GridDisplay.cellSize + GridDisplay.cellSize/2, z);
@@ -120,15 +120,21 @@ public class InventoryManager : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        Vector3 positionToPlace;
+        if (Physics.Raycast(ray, out hit, 16f))
         {
-            Vector3 positionToPlace = hit.point;
-            cubeLocation.position = PlaceObjectOnGrid(positionToPlace, cubeLocation.localScale);
-            if (Input.GetMouseButtonDown(0) && TurretNullControl.isViable)
-            {
-                cubeLocation.gameObject.GetComponent<BoxCollider>().isTrigger = false;
-                cubeLocation = null;
-            }
+            positionToPlace = hit.point;
+        }
+        else
+        {
+            positionToPlace = ray.GetPoint(16f);
+        }
+        positionToPlace.y = 0;
+        cubeLocation.position = PlaceObjectOnGrid(positionToPlace, cubeLocation.localScale);
+        if (Input.GetMouseButtonDown(0) && TurretNullControl.isViable)
+        {
+            cubeLocation.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+            cubeLocation = null;
         }
     }
 
