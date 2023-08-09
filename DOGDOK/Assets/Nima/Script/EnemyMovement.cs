@@ -11,8 +11,8 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float minMovementSpeed;
     [SerializeField] float movementSpeed;
 
-    [SerializeField] float gravity = -9.8f;
-    Vector3 velocity;
+    public float gravity = -9.8f;
+    public Vector3 velocity;
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -20,7 +20,10 @@ public class EnemyMovement : MonoBehaviour
         teleportManager = GetComponent<EnemyTeleportManager>();
         movementSpeed = Random.Range(minMovementSpeed, maxMovementSpeed);
     }
-
+    private void OnEnable()//fix later for organizing
+    {
+        velocity.y = -0.2f;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -30,6 +33,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 characterController.Move(transform.forward * movementSpeed * Time.deltaTime);
             }
+
             velocity.y += gravity * Time.deltaTime;
             characterController.Move(velocity * Time.deltaTime);
         }

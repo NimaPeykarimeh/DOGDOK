@@ -19,18 +19,22 @@ public class PlayerController : MonoBehaviour
         public bool isShooting;
         public bool isMoving;
         public bool isRunning;
-        public bool isWalking;
-    
+        public bool isWalking = true;
+        public bool canRun = true;
+
     [Header("CameraObjects")]
         [SerializeField] GameObject combatCamera;
         [SerializeField] GameObject basicCamera;
-        public PlayerStates currentState;
+        public PlayerStates currentState = PlayerStates.Basic;
         [SerializeField] Vector2 lastMouseValue;
 
-
+    [Header("Animation Weights")]
+        public float aimLayerWeightSpeed = 3f;
+        [SerializeField] int aimWeightLayerIndex = 1;
+    private float currentWeight;
+    private float newWeight;    
 
     [Header("Other")]
-        public float layerWeightSpeed = 5f;
         [SerializeField] float aimDistance;
         public float maxRaycastDistance = 100f;
     public enum PlayerStates
@@ -69,6 +73,7 @@ public class PlayerController : MonoBehaviour
 
     public void ChangePlayerState(PlayerStates _state)
     {
+        Debug.Log("State Changed");
         if (_state == PlayerStates.Basic)
         {
             //lastMouseValue = new Vector2(combatCamera.m_XAxis.Value,combatCamera.m_YAxis.Value);
@@ -86,6 +91,21 @@ public class PlayerController : MonoBehaviour
             //combatCamera.m_XAxis.Value = lastMouseValue.x;
             //combatCamera.m_YAxis.Value = lastMouseValue.y;
             characterMovement.ToggleRunState(CharacterMovement.MoveStates.Walk);
+            //chande animaton weight
+            currentWeight = animator.GetLayerWeight(aimWeightLayerIndex);
+            newWeight = 1f;//Start Aim Animation
+            canRun = false;
+        }
+        if (currentState == PlayerStates.Combat)
+        {
+            canRun = true;
+            currentWeight = animator.GetLayerWeight(aimWeightLayerIndex);
+            newWeight = 0f;//end Aim Animation
+            if (characterMovement.isRunning)
+            {
+                
+                characterMovement.ToggleRunState(CharacterMovement.MoveStates.Run);
+            }
         }
         if (_state == PlayerStates.Run)
         {
@@ -98,19 +118,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator.SetFloat("MovementSpeed", characterMovement.currentVelocity / characterMovement.runningSpeed);
-
-
-        if (currentState == PlayerStates.Combat)
+        if (characterMovement.currentVelocity != characterMovement.speedToMove)//when player's changing speed
         {
-            float newWeight = Mathf.Lerp(animator.GetLayerWeight(1), 1f, Time.deltaTime * layerWeightSpeed);
-            animator.SetLayerWeight(1, newWeight);
-            aimDistance = GetAimHitInfo().distance;
+            animator.SetFloat("MovementSpeed", characterMovement.currentVelocity / characterMovement.runningSpeed);
         }
-        else if(currentState == PlayerStates.Basic)
+        //animator.SetFloat("VelocityDir", characterMovement.speedToMove - characterMovement.currentVelocity);
+
+        if (newWeight != currentWeight)
         {
-            float newWeight = Mathf.Lerp(animator.GetLayerWeight(1), 0f, Time.deltaTime * layerWeightSpeed);
-            animator.SetLayerWeight(1, newWeight);
+            currentWeight = Mathf.MoveTowards(currentWeight,newWeight,aimLayerWeightSpeed * Time.deltaTime);
+            animator.SetLayerWeight(aimWeightLayerIndex,currentWeight);
+        }
+        else
+        {
+            Debug.Log("Layer Changed");
         }
     }
 }
