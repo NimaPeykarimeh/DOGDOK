@@ -20,13 +20,12 @@ public class CraftBuilding : MonoBehaviour
     public void UseButtonClick()
     {
         Dictionary<Resource1, int> needs = new();
-        //     TurretPanelCreator.builds[id].requiredResource, TurretPanelCreator.builds[id].requiredAmount
         for (int i = 0; i < TurretPanelCreator.builds[id].requiredResource.Count; i++)
         {
             needs.Add(TurretPanelCreator.builds[id].requiredResource[i], TurretPanelCreator.builds[id].requiredAmount[i]);
         }
 
-        if (InventoryManager.UseResources(needs))
+        if (InventoryManager.CheckResources(needs))
         {
             print("it can");
             TurretManager.CloseCraftScreen();
