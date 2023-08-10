@@ -12,8 +12,9 @@ public class InventoryManager : MonoBehaviour
     private Animator animator;
     private List<TextMeshProUGUI> UIAmount = new();
     private Build1 currentBuild;
-    private Transform cubeLocation;
+    private Transform cubeTransform;
     private TurretNullControl TurretNullControl;
+    private Dictionary<Resource1, int> currentNeeds;
 
     [SerializeField] private GridDisplay GridDisplay;
     [SerializeField] private GameObject turretPrefab;
@@ -60,14 +61,16 @@ public class InventoryManager : MonoBehaviour
 
         if (currentBuild != null) // Turret'ý yarat ve location'ýný al.
         {
-            cubeLocation = CreateTurret();
+            cubeTransform = CreateTurret();
         }
-        else if (cubeLocation != null) // Mouse'u takip ederek Turret'ýn koyulacaðý yere bak ve güncelle.
+        else if (cubeTransform != null) // Mouse'u takip ederek Turret'ýn koyulacaðý yere bak ve güncelle.
         {
             TrackMouseForBuilding();
         }
     }
 
+    #region Turret Building
+    public void SetCurrentBuild(Build1 build) => currentBuild = build;
     private Transform CreateTurret()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -89,10 +92,6 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return null;
-
-        // Zombieleri takip eden silah namlusu
-        // NULL kontrolü yap.
-        // Player'dan uzaksa yapamasýn.
     }
     private Vector3 PlaceObjectOnGrid(Vector3 position, Vector3 size)
     {
@@ -112,7 +111,7 @@ public class InventoryManager : MonoBehaviour
             z += GridDisplay.cellSize / 2;
         }
 
-        Vector3 snappedPosition = new Vector3(x, y * GridDisplay.cellSize + GridDisplay.cellSize/2, z);
+        Vector3 snappedPosition = new Vector3(x, y * GridDisplay.cellSize + GridDisplay.cellSize / 2, z);
         return snappedPosition;
     }
 
@@ -121,6 +120,7 @@ public class InventoryManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Vector3 positionToPlace;
+        RaycastHit hitInfo;
         if (Physics.Raycast(ray, out hit, 16f))
         {
             positionToPlace = hit.point;
@@ -130,15 +130,30 @@ public class InventoryManager : MonoBehaviour
             positionToPlace = ray.GetPoint(16f);
         }
         positionToPlace.y = 0;
-        cubeLocation.position = PlaceObjectOnGrid(positionToPlace, cubeLocation.localScale);
+        cubeTransform.position = PlaceObjectOnGrid(positionToPlace, cubeTransform.localScale);
         if (Input.GetMouseButtonDown(0) && TurretNullControl.isViable)
         {
-            cubeLocation.gameObject.GetComponent<BoxCollider>().isTrigger = false;
-            cubeLocation = null;
+            if(!Physics.BoxCast(cubeTransform.position, new Vector3(0.01f,0.01f,0.01f), Vector3.one ,cubeTransform.rotation, cubeTransform.localScale.z/2))
+            {
+                UseResources(currentNeeds);
+                cubeTransform.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                cubeTransform.gameObject.GetComponent<TurretNullControl>().enabled = false;
+                cubeTransform = null;
+                return;
+            }
+        }
+        else if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.E))
+        {
+            currentNeeds = null;
+            Destroy(cubeTransform.gameObject);
+            cubeTransform = null;
+            return;
         }
     }
+    #endregion
 
-    private void CreateInventoryMenu()
+    #region Inventory UI  
+    private void CreateInventoryMenu() //Envanter'i prefablerden yaratma
     {
         int i = 0;
         foreach (var element in resources)
@@ -150,8 +165,7 @@ public class InventoryManager : MonoBehaviour
             i++;
         }
     }
-
-    private void UpdateInventoryMenu()
+    private void UpdateInventoryMenu() //Envanter ürün bilgilerini güncelleme
     {
         int i = 0;
         foreach (var element in resourceIndices.Values)
@@ -160,9 +174,12 @@ public class InventoryManager : MonoBehaviour
             i++;
         }
     }
-    public bool UseResources(Dictionary<Resource1, int> neededResources) //kaynaðýn türünü sayý cinsinden ve miktarýný giriniz.
+    #endregion
+
+    #region Inventory Operations
+    public bool CheckResources(Dictionary<Resource1, int> neededResources) //Kaynak yeterliliði kontrolü
     {
-        //Kaynak yeterliliði kontrolü
+        
         foreach (var need in neededResources)
         {
             foreach (var have in resourceIndices)
@@ -176,6 +193,11 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
+        currentNeeds = neededResources.ToDictionary(entry => entry.Key, entry => entry.Value);
+        return true;
+    }
+    public void UseResources(Dictionary<Resource1, int> neededResources) //Kaynak harcanýmý
+    {
         Dictionary<Resource1, int> tempHave = resourceIndices.ToDictionary(entry => entry.Key, entry => entry.Value);
         //Deðeri Güncelle
         foreach (var need in neededResources)
@@ -188,7 +210,7 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
-        return true;
+        currentNeeds.Clear();
     }
-    public void SetCurrentBuild(Build1 build) => currentBuild = build;
+    #endregion
 }
