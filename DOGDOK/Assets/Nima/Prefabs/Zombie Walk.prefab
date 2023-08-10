@@ -1364,9 +1364,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mesh: {fileID: 4651953534826387076}
   material: {fileID: 0}
-  dissolveDuration: 0.5
-  dissolveTimer: 0
   isTeleporting: 0
+  dissolveStart: -0.2
+  dissolveEnd: 1
+  dissolveDuration: 1
+  dissolveTimer: 0
 --- !u!95 &4221251847429007321
 Animator:
   serializedVersion: 5

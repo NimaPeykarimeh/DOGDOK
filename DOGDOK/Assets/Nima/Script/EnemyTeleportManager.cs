@@ -9,13 +9,17 @@ public class EnemyTeleportManager : MonoBehaviour
     [SerializeField] SkinnedMeshRenderer mesh;
     [SerializeField] Material material;
 
-    [SerializeField] float dissolveDuration;
-    [SerializeField] float dissolveTimer;
-
     public bool isTeleporting;
     bool isDissolving;
     bool isGenerating;
     Vector3 positionToTeleport;
+
+    [Header("Disolving time")]
+    [SerializeField] float dissolveStart = -0.2f;
+    [SerializeField] float dissolveEnd = 1f;
+    [SerializeField] float dissolveDuration;
+    [SerializeField] float dissolveTimer;
+
     private void Start()
     {
         enemyController = GetComponent<EnemyController>();
@@ -35,13 +39,13 @@ public class EnemyTeleportManager : MonoBehaviour
         if (isDissolving)
         {
             dissolveTimer += Time.deltaTime;
-            float _dissolveRatio = dissolveTimer/dissolveDuration;
-            if (_dissolveRatio >= 1)
+            float _dissolveRatio = Mathf.Lerp(dissolveStart, dissolveEnd, dissolveTimer / dissolveDuration); 
+            if (_dissolveRatio >= dissolveEnd)
             {
                 transform.position = positionToTeleport;
                 isDissolving = false;
                 isGenerating = true;
-                _dissolveRatio = 1;
+                _dissolveRatio = dissolveEnd;
             }
             material.SetFloat("_Dissolve", _dissolveRatio);
         }
@@ -49,13 +53,13 @@ public class EnemyTeleportManager : MonoBehaviour
         if (isGenerating)
         {
             dissolveTimer -= Time.deltaTime;
-            float _dissolveRatio = dissolveTimer / dissolveDuration;
-            if (_dissolveRatio <= 0)
+            float _dissolveRatio = Mathf.Lerp(dissolveStart, dissolveEnd, dissolveTimer / dissolveDuration);
+            if (_dissolveRatio <= dissolveStart)
             {
                 isGenerating = false;
                 isTeleporting = false;
                 enemyController.isAlerted = true;
-                _dissolveRatio = 0;
+                _dissolveRatio = dissolveStart;
                 
             }
             material.SetFloat("_Dissolve", _dissolveRatio);
