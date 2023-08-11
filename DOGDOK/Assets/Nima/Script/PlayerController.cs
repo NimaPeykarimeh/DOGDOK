@@ -10,8 +10,9 @@ public class PlayerController : MonoBehaviour
 {
     [Header("References")]
         public GameObject mainCamera;
+        public AimPlayer aimPlayer;
         public CharacterMovement characterMovement;
-        public PlayerMouseLook playerMouseLook;
+        //public PlayerMouseLook playerMouseLook;
         public Animator animator;
 
     [Header("States")]
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Other")]
         [SerializeField] float aimDistance;
-        public float maxRaycastDistance = 100f;
+        
     public enum PlayerStates
     {
         Basic,
@@ -48,28 +49,10 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         characterMovement = GetComponent<CharacterMovement>();
-        playerMouseLook = GetComponent<PlayerMouseLook>();
+        aimPlayer = GetComponent<AimPlayer>();
+        //playerMouseLook = GetComponent<PlayerMouseLook>();
     }
 
-    public RaycastHit GetAimHitInfo()
-    {
-        RaycastHit hitInfo;
-
-        // Cast a ray from the camera's position and direction
-        Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
-
-        // Check if the ray hits anything within the specified distance
-        if (Physics.Raycast(ray, out hitInfo, maxRaycastDistance))
-        {
-            // Return the RaycastHit information
-            return hitInfo;
-        }
-        else
-        {
-            // If the ray doesn't hit anything, return an empty RaycastHit
-            return new RaycastHit();
-        }
-    }
 
     public void ChangePlayerState(PlayerStates _state)
     {

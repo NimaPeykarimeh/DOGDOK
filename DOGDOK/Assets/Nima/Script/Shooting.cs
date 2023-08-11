@@ -22,7 +22,7 @@ public class Shooting : MonoBehaviour
         
     }
 
-    public void Shoot(Transform _shootingPoint,Vector3 _targetPosition, float _shootingRange,float _noiseRange,bool _isPiercing)
+    public void Shoot(Transform _shootingPoint,Vector3 _targetPosition, float _shootingRange,float _noiseRange,bool _isPiercing, int _damage)
     {
 
         Vector3 _direction = (_targetPosition - _shootingPoint.position).normalized;
@@ -41,6 +41,7 @@ public class Shooting : MonoBehaviour
                     if (hit.transform.CompareTag("Enemy"))
                     {
                         Instantiate(enemyHitParticle,hit.point,hit.transform.rotation);
+                        hit.transform.gameObject.GetComponent<EnemyHealth>().GetDamage(_damage);
                     }
                 }
                 

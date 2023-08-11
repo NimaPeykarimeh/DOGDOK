@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     EnemyMovement enemyMovement;
-    public GameObject player;
+    public Transform player;
     public EnemySpawner enemySpawner;
     public bool isAlerted;
     public bool isGrounded = false;
@@ -21,7 +21,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         enemyMovement = GetComponent<EnemyMovement>();
-        player = GameObject.FindGameObjectWithTag("Player").gameObject;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
     private void OnEnable()//fix Later
     {

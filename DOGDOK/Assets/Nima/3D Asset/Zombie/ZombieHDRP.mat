@@ -254,6 +254,7 @@ Material:
     - _ZTestGBuffer: 3
     - _ZTestTransparent: 4
     - _ZWrite: 1
+    - _edgeOffset: 0
     - _emmisionnStrenght: 500
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}

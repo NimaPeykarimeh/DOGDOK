@@ -7,9 +7,11 @@ using static PlayerController;
 
 public class AimPlayer : MonoBehaviour
 {
+    [Header("Refrences")]
     PlayerController playerController;
-    [SerializeField] bool isAiming;
 
+    [Header("Other")]
+    [SerializeField] bool isAiming;
     [SerializeField] GameObject oriantation;
     [SerializeField] int verticalLimit;
     [SerializeField] float ySensitivity;
@@ -17,9 +19,12 @@ public class AimPlayer : MonoBehaviour
 
     float rotationX = 0f;
     float rotationY = 0f;
+    [Header("Raycast")]
+    public float maxRaycastDistance = 100f;
     void Start()
     {
         playerController = GetComponent<PlayerController>();
+        //mainCamera = playerController.mainCamera;
     }
 
     void RotateCamera()
@@ -33,6 +38,26 @@ public class AimPlayer : MonoBehaviour
         rotationY += mouseX;
 
         oriantation.transform.localRotation = Quaternion.Euler(rotationX, rotationY, 0f);
+    }
+
+    public Vector3 GetAimHitInfo()
+    {
+        RaycastHit hitInfo;
+
+        // Cast a ray from the camera's position and direction
+        Ray ray = new Ray(playerController.mainCamera.transform.position, playerController.mainCamera.transform.forward);
+
+        // Check if the ray hits anything within the specified distance
+        if (Physics.Raycast(ray, out hitInfo, maxRaycastDistance))
+        {
+            // Return the RaycastHit 
+            return hitInfo.point;
+        }
+        else
+        {
+            // If the ray doesn't hit anything, return an empty RaycastHit
+            return ray.GetPoint(maxRaycastDistance);
+        }
     }
 
     // Update is called once per frame

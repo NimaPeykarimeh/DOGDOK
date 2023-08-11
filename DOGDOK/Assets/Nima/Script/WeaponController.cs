@@ -73,7 +73,7 @@ public class WeaponController : MonoBehaviour
         if (isShooting && fireTimer >= fireInterval)
         {
             fireTimer = 0;
-            shooting.Shoot(shootPoint,playerController.GetAimHitInfo().point,shootRange,noiseRange,isPiercing);
+            shooting.Shoot(shootPoint,playerController.aimPlayer.GetAimHitInfo(),shootRange,noiseRange,isPiercing,damage);
             audioSource.pitch = Mathf.Lerp(minPitch,maxPitch,accelerationTimer/accelerationDuration);
             audioSource.PlayOneShot(gunSounds[0]);
 

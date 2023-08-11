@@ -1,20 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 
 public class EnemyFollow : MonoBehaviour
 {
     
     [SerializeField] EnemyController enemyController;
 
+    [Header("Zombie eyes")]
+    [SerializeField] LayerMask visibleLayers;
+    [SerializeField] Transform eyes;
+    [SerializeField] int visualAngleLimit = 90;
+    [SerializeField] float sinValue;
+    [SerializeField] bool isInAngle;
+    [SerializeField] int seeDistance = 10;
+    [SerializeField] bool isInDistance;
 
-    
+    [Header("Rotation")]
     [SerializeField] float rotationDuration;
     [SerializeField] float rotationTimer;
 
     [SerializeField] bool isRotating;
     [SerializeField] float rotateFreqDuration;
     [SerializeField] float rotateFreqTimer;
+
+    [Header("other")]
     [SerializeField] LayerMask obstacleLayer;
 
     Quaternion startingRotation;
@@ -34,9 +45,48 @@ public class EnemyFollow : MonoBehaviour
         
     }
 
+    void GetPlayerDirection()
+    {
+        Vector3 dirToTarget = Vector3.Normalize(enemyController.player.position - transform.position);
+        float dot = Vector3.Dot(transform.forward,dirToTarget);
+        sinValue = Mathf.Sin((visualAngleLimit/2) * Mathf.Deg2Rad);
+        isInAngle = (dot >= sinValue);
+    }
+
+
+    void GetPlayerDistance()
+    {
+        float _distance = Vector3.Distance(enemyController.player.position,transform.position);
+        isInDistance = _distance <= seeDistance;
+    }
+
+    void DetectThePlayer()
+    {
+        
+        if (isInDistance && isInAngle && !enemyController.isAlerted)
+        {
+            Vector3 _direction = enemyController.player.position - eyes.position;
+            _direction.y = 0;
+            Ray ray = new Ray(eyes.position, _direction);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, seeDistance, visibleLayers))
+            {
+                Debug.DrawLine(ray.origin, hit.point, Color.red);
+                if (hit.transform.CompareTag("Player"))
+                {
+                    enemyController.isAlerted = true;
+                }
+            }   
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
+        GetPlayerDirection();
+        GetPlayerDistance();
+        DetectThePlayer();
 
         if (enemyController.isAlerted)
         {
@@ -82,7 +132,7 @@ public class EnemyFollow : MonoBehaviour
     void GetNewDirection()
     {
         
-        Vector3 directionToTarget = enemyController.player.transform.position - transform.position;
+        Vector3 directionToTarget = enemyController.player.position - transform.position;
         directionToTarget.y = 0;
 
         pivotRotation = Quaternion.LookRotation(directionToTarget);
