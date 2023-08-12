@@ -40,7 +40,7 @@ public class CharacterMovement : MonoBehaviour
     public Vector3 mousePosition;
     [Header("Noise")]
     NoiseMaker noiseMaker;
-    [SerializeField] float noiseRange;
+    [SerializeField] float noiseMult;
     [SerializeField] Transform noiseCenter;
 
     public enum MoveStates
@@ -92,7 +92,6 @@ public class CharacterMovement : MonoBehaviour
             playerController.isWalking = true;
             playerController.isRunning = false;
             //movementSpeed = walkSpeed;
-            noiseRange = walkingSpeed;
             //isAccelerating = true;
 
             currentMovementSpeed = walkingSpeed;
@@ -101,7 +100,6 @@ public class CharacterMovement : MonoBehaviour
         {
             playerController.isWalking = false;
             playerController.isRunning = true;
-            noiseRange = runningSpeed;
 
             //isAccelerating = true;
 
@@ -141,13 +139,19 @@ public class CharacterMovement : MonoBehaviour
     }
     void Update()
     {
+        
         //currentSpeed = GetMovement() * currentMovementSpeed;
         GetPlayerInput();
         if (inputMagnitude > 0)
         {
             playerController.animator.SetFloat("DirX",moveX, 0.1f, Time.deltaTime);
             playerController.animator.SetFloat("DirY", moveZ,0.1f, Time.deltaTime);
+            
             //currentVelocity = inputMagnitude * currentMovementSpeed;
+        }
+        if (currentVelocity > 0 )
+        {
+            noiseMaker.MakeNoise(noiseMult * currentVelocity, noiseCenter);
         }
         speedToMove = inputMagnitude * currentMovementSpeed;
         GetMovementDirection();

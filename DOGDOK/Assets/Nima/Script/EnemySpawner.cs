@@ -51,6 +51,16 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    public Vector3 GetRandomPositionInSpawner()
+    {
+        Vector3 _spawnArea = enemySpawnArea.spawnPosition;
+        Vector3 _spawnSize = enemySpawnArea.spawnSize;
+
+        float x = Random.Range(_spawnArea.x - (_spawnSize.x / 2), _spawnArea.x + (_spawnSize.x / 2));
+        float z = Random.Range(_spawnArea.z - (_spawnSize.z / 2), _spawnArea.z + (_spawnSize.z / 2));
+        return new Vector3(x,0,z);//if the height of the ground is different change it
+    }
+
     private void SpawnEnemy()
     {
         if (transform.childCount <= 0)

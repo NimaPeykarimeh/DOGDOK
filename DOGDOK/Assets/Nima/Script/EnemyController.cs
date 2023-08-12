@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyController : MonoBehaviour
 {
     EnemyMovement enemyMovement;
+    EnemyFollow enemyFollow;
     public Transform player;
     public EnemySpawner enemySpawner;
     public bool isAlerted;
@@ -16,11 +16,17 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Transform center;
     [SerializeField] float radius;
     [SerializeField] LayerMask groundLayer;
-
+    [Header("Moving Around")]
+    public Vector3 positionToGo;
+    [SerializeField] float movingDistance = 5f;
+    public bool isMoving;
+    [SerializeField] float movingDuration = 10f;
+    [SerializeField] float movingTimer;
     // Start is called before the first frame update
     void Start()
     {
         enemyMovement = GetComponent<EnemyMovement>();
+        enemyFollow = GetComponent<EnemyFollow>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
     private void OnEnable()//fix Later
@@ -29,6 +35,24 @@ public class EnemyController : MonoBehaviour
     }
     private void Update()
     {
+        if (!isAlerted)
+        {
+            if (!isMoving)
+            {
+                isMoving = true;
+                movingTimer = movingDuration;
+
+                positionToGo = enemySpawner.GetRandomPositionInSpawner();
+            }
+            else
+            {
+                movingTimer -= Time.deltaTime;
+                if (movingTimer <= 0)
+                {
+                    isMoving = false;
+                }
+            }
+        }
         isGrounded = IsGrounded(center,radius,groundLayer);
         if (isGrounded)
         {
@@ -46,6 +70,11 @@ public class EnemyController : MonoBehaviour
 
     }
 
+    public void AlertPlayer(Vector3 _playerPosition)
+    {
+        isAlerted = true;
+        enemyFollow.positionToGo = _playerPosition;
+    }
     public bool IsGrounded(Transform center, float radius, LayerMask groundLayer)
     {
         Vector3 _center = center.position + new Vector3(0f, offset, 0f);// add offset from transform to vector

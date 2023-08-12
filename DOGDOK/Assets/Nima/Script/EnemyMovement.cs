@@ -29,7 +29,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (!teleportManager.isTeleporting)
         {
-            if (enemyController.isAlerted)
+            if (enemyController.isAlerted || enemyController.isMoving)
             {
                 characterController.Move(transform.forward * movementSpeed * Time.deltaTime);
             }

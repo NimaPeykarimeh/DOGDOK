@@ -12,10 +12,12 @@ public class EnemyFollow : MonoBehaviour
     [SerializeField] LayerMask visibleLayers;
     [SerializeField] Transform eyes;
     [SerializeField] int visualAngleLimit = 90;
-    [SerializeField] float sinValue;
+    [SerializeField] float cosValue;
     [SerializeField] bool isInAngle;
     [SerializeField] int seeDistance = 10;
     [SerializeField] bool isInDistance;
+
+    public Vector3 playerLastKnowPosition;
 
     [Header("Rotation")]
     [SerializeField] float rotationDuration;
@@ -26,6 +28,10 @@ public class EnemyFollow : MonoBehaviour
     [SerializeField] float rotateFreqTimer;
 
     [Header("other")]
+    [SerializeField] float _dis;
+    public Vector3 positionToGo;
+    [SerializeField] float reachTolerance = 1f;
+    [SerializeField] bool isPlayerPositionKnown;
     [SerializeField] LayerMask obstacleLayer;
 
     Quaternion startingRotation;
@@ -47,10 +53,14 @@ public class EnemyFollow : MonoBehaviour
 
     void GetPlayerDirection()
     {
-        Vector3 dirToTarget = Vector3.Normalize(enemyController.player.position - transform.position);
-        float dot = Vector3.Dot(transform.forward,dirToTarget);
-        sinValue = Mathf.Sin((visualAngleLimit/2) * Mathf.Deg2Rad);
-        isInAngle = (dot >= sinValue);
+        if (!enemyController.isAlerted)
+        {
+            Vector3 dirToTarget = Vector3.Normalize(enemyController.player.position - transform.position);
+            float dot = Vector3.Dot(transform.forward, dirToTarget);
+            cosValue = Mathf.Cos((visualAngleLimit / 2) * Mathf.Deg2Rad);
+            isInAngle = (dot >= cosValue);
+        }
+        
     }
 
 
@@ -63,7 +73,7 @@ public class EnemyFollow : MonoBehaviour
     void DetectThePlayer()
     {
         
-        if (isInDistance && isInAngle && !enemyController.isAlerted)
+        if (isInDistance && isInAngle)//!enemyController.isAlerted
         {
             Vector3 _direction = enemyController.player.position - eyes.position;
             _direction.y = 0;
@@ -75,7 +85,18 @@ public class EnemyFollow : MonoBehaviour
                 Debug.DrawLine(ray.origin, hit.point, Color.red);
                 if (hit.transform.CompareTag("Player"))
                 {
-                    enemyController.isAlerted = true;
+                    if (!enemyController.isAlerted)
+                    {
+                        enemyController.isAlerted = true;
+                    }
+                    isPlayerPositionKnown = true;
+                    playerLastKnowPosition = hit.transform.position;
+                    positionToGo = playerLastKnowPosition;
+
+                }
+                else
+                {
+                    isPlayerPositionKnown = false;
                 }
             }   
         }
@@ -88,24 +109,42 @@ public class EnemyFollow : MonoBehaviour
         GetPlayerDistance();
         DetectThePlayer();
 
+
+
         if (enemyController.isAlerted)
         {
-            rotateFreqTimer += Time.deltaTime;
-            if (rotateFreqTimer >= rotateFreqDuration)
+            _dis = Vector3.Distance(transform.position, positionToGo);
+            if (_dis <= reachTolerance)
             {
-                isRotating = true;
-                GetNewDirection();
-                rotateFreqTimer = 0;
+                enemyController.isAlerted = false;
             }
-            if (isRotating)
+
+        }
+        else if (enemyController.isMoving)
+        {
+            positionToGo = enemyController.positionToGo;
+            _dis = Vector3.Distance(transform.position, positionToGo);
+            if (_dis <= reachTolerance)
             {
-                rotationTimer += Time.deltaTime;
-                transform.rotation = Quaternion.Slerp(startingRotation, rotationToLook, rotationTimer / rotationDuration);
-                if (rotationTimer >= rotationDuration)
-                {
-                    isRotating = false;
-                
-                }
+                enemyController.isMoving = false;
+            }
+
+        }
+        rotateFreqTimer += Time.deltaTime;
+        if (rotateFreqTimer >= rotateFreqDuration)
+        {
+            isRotating = true;
+            GetNewDirection();
+            rotateFreqTimer = 0;
+        }
+        if (isRotating)
+        {
+            rotationTimer += Time.deltaTime;
+            transform.rotation = Quaternion.Slerp(startingRotation, rotationToLook, rotationTimer / rotationDuration);
+            if (rotationTimer >= rotationDuration)
+            {
+                isRotating = false;
+
             }
         }
     }
@@ -132,7 +171,7 @@ public class EnemyFollow : MonoBehaviour
     void GetNewDirection()
     {
         
-        Vector3 directionToTarget = enemyController.player.position - transform.position;
+        Vector3 directionToTarget = positionToGo - transform.position;
         directionToTarget.y = 0;
 
         pivotRotation = Quaternion.LookRotation(directionToTarget);
