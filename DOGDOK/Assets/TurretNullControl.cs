@@ -25,6 +25,7 @@ public class TurretNullControl : MonoBehaviour
     {
         isViable = !isColliding && TurretGroundedControl.isGrounded;
         Renderer.material.color = isViable ? Color.green : Color.red;
+        //Renderer.material.SetColor("_Main_Color", Color.red);
     }
     private void OnTriggerEnter(Collider other) => isColliding = true;
     private void OnTriggerExit(Collider other) => isColliding = false;

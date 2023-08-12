@@ -15,7 +15,7 @@ MonoBehaviour:
   buildingName: Turret
   buildingImage: {fileID: 21300000, guid: 516f974e5d1661e429a104e31b059995, type: 3}
   buildingDuration: 3
-  buildingSize: {x: 2, y: 1, z: 2}
+  buildingSize: {x: 3, y: 1, z: 3}
   requiredResource:
   - {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   - {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
