@@ -14,6 +14,8 @@ public class EnemyFollow : MonoBehaviour
     [SerializeField] int visualAngleLimit = 90;
     [SerializeField] float cosValue;
     [SerializeField] bool isInAngle;
+    [SerializeField] int alertedSeeDisntance = 20;
+    [SerializeField] int defaultSeeDistance = 10;
     [SerializeField] int seeDistance = 10;
     [SerializeField] bool isInDistance;
 
@@ -67,6 +69,14 @@ public class EnemyFollow : MonoBehaviour
     void GetPlayerDistance()
     {
         float _distance = Vector3.Distance(enemyController.player.position,transform.position);
+        if (enemyController.isAlerted)
+        {
+            seeDistance = alertedSeeDisntance;
+        }
+        else
+        {
+            seeDistance = defaultSeeDistance;
+        }
         isInDistance = _distance <= seeDistance;
     }
 
