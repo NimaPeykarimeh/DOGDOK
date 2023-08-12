@@ -23,6 +23,7 @@ public class TurretNullControl : MonoBehaviour
 
     private void Update()
     {
+
         isViable = !isColliding && TurretGroundedControl.isGrounded;
         Renderer.material.color = isViable ? Color.green : Color.red;
         //Renderer.material.SetColor("_Main_Color", Color.red);
