@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -18,17 +19,21 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float playerDistance;
     [SerializeField] float maxPlayerDistance;
     [SerializeField] float minPlayerDistance;
+    [SerializeField] int playerVisibleAngle = 90;
+    [SerializeField] Transform playerOriantation;
 
     [Header("Timer")]
     [SerializeField] float distanceTimer;
     [SerializeField] float distanceInterval;
-
+    [Header("Other")]
+    [SerializeField] float dot;
+    [SerializeField] float cosAngle;
 
     // Start is called before the first frame update
     void Start()
     {
         enemySpawnArea = GetComponent<EnemySpawnArea>();
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
         CreatePooler(maxEnemyCount);
     }
 
@@ -51,14 +56,41 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public Vector3 GetRandomPositionInSpawner()
+    public Vector3 GetRandomPositionInSpawner()//organize this!!
     {
+        int _tryLimit = 100;
+        
         Vector3 _spawnArea = enemySpawnArea.spawnPosition;
         Vector3 _spawnSize = enemySpawnArea.spawnSize;
+        
+        for (int i = 0; i < _tryLimit; i++)
+        {
+            Transform _playerTransform = playerOriantation;
 
-        float x = Random.Range(_spawnArea.x - (_spawnSize.x / 2), _spawnArea.x + (_spawnSize.x / 2));
-        float z = Random.Range(_spawnArea.z - (_spawnSize.z / 2), _spawnArea.z + (_spawnSize.z / 2));
-        return new Vector3(x,0,z);//if the height of the ground is different change it
+            Vector3 _forward = Quaternion.Euler(0f,playerOriantation.eulerAngles.y,0f) * Vector3.forward;
+
+            float _x = Random.Range(_spawnArea.x - (_spawnSize.x / 2), _spawnArea.x + (_spawnSize.x / 2));
+            float _y = _playerTransform.position.y;
+            float _z = Random.Range(_spawnArea.z - (_spawnSize.z / 2), _spawnArea.z + (_spawnSize.z / 2));
+
+            Vector3 _spawnPosition = new Vector3(_x, 0, _z);
+
+            Vector3 playerPosition = new Vector3(_playerTransform.position.x,0, _playerTransform.position.z);
+
+            Vector3 dirToPlayer = Vector3.Normalize(playerOriantation.position - _spawnPosition);
+
+            dot = Vector3.Dot(_forward, dirToPlayer);
+            cosAngle = -Mathf.Cos((playerVisibleAngle/2) * Mathf.Deg2Rad);
+            float _distance = Vector3.Distance(playerPosition, _spawnPosition);
+            if (dot > cosAngle && _distance > minPlayerDistance)
+            {
+                _spawnPosition.y = 0;//_spawnArea.y + _spawnSize.y / 2; ;
+                return _spawnPosition;
+            }
+        }
+        Debug.Log("couldn't spawn");
+
+        return Vector3.zero;//if the height of the ground is different change it
     }
 
     private void SpawnEnemy()
@@ -70,28 +102,25 @@ public class EnemySpawner : MonoBehaviour
         else
         {
             GameObject _spawnedEnemy = transform.GetChild(0).gameObject;
-            Vector3 _spawnArea = enemySpawnArea.spawnPosition;
-            Vector3 _spawnSize = enemySpawnArea.spawnSize;
-
-            float x = Random.Range(_spawnArea.x - (_spawnSize.x / 2), _spawnArea.x + (_spawnSize.x / 2));
-            float z = Random.Range(_spawnArea.z - (_spawnSize.z / 2), _spawnArea.z + (_spawnSize.z / 2));
-            float y = _spawnArea.y + _spawnSize.y / 2;
-
-            Vector3 _randomPositon = new Vector3(x, y, z);
-            _spawnedEnemy.transform.position = _randomPositon;
-
-            _spawnedEnemy.SetActive(true);
-            _spawnedEnemy.transform.parent = null;
-        
-            spawnTimer = 0;
-
+            Vector3 _randomPositon = GetRandomPositionInSpawner();
+            if (_randomPositon != Vector3.zero)
+            {
+                _spawnedEnemy.transform.position = _randomPositon;
+                _spawnedEnemy.SetActive(true);
+                _spawnedEnemy.transform.parent = null;
+                spawnTimer = 0;
+            }
+            else
+            {
+                Debug.Log("Vector was Zero");
+            }
         }
     }
 
     void CalculatePlayerDistance()//add one to each enemy
     {
         playerDistance = Vector3.Distance(transform.position,player.transform.position);
-        isSpawning = playerDistance < maxPlayerDistance && playerDistance > minPlayerDistance;
+        isSpawning = playerDistance < maxPlayerDistance; //playerDistance < maxPlayerDistance && playerDistance > minPlayerDistance;
         distanceTimer = 0;
     }
 

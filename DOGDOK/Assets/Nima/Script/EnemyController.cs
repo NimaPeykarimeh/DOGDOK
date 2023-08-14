@@ -42,7 +42,10 @@ public class EnemyController : MonoBehaviour
                 isMoving = true;
                 movingTimer = movingDuration;
 
-                positionToGo = enemySpawner.GetRandomPositionInSpawner();
+                //positionToGo = enemySpawner.GetRandomPositionInSpawner();
+                float ranX = Random.Range(-movingDistance,movingDistance);
+                float ranZ = Random.Range(-movingDistance, movingDistance);
+                positionToGo = transform.position + new Vector3(ranX,0,ranZ);
             }
             else
             {
@@ -70,10 +73,10 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    public void AlertPlayer(Vector3 _playerPosition)
+    public void AlertEnemy()//add a distance for zombie to be alerted if were too far
     {
         isAlerted = true;
-        enemyFollow.positionToGo = _playerPosition;
+        enemyFollow.positionToGo = player.position;
     }
     public bool IsGrounded(Transform center, float radius, LayerMask groundLayer)
     {

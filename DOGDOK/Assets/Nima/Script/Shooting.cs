@@ -10,16 +10,11 @@ public class Shooting : MonoBehaviour
     NoiseMaker noiseMaker;
     [SerializeField] AmmoPooling ammoPooling;
     [SerializeField] GameObject enemyHitParticle;
+    [SerializeField] LayerMask bulletHitLayer;
     // Start is called before the first frame update
     void Start()
     {
         noiseMaker = GetComponent<NoiseMaker>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Shoot(Transform _shootingPoint,Vector3 _targetPosition, float _shootingRange,float _noiseRange,bool _isPiercing, int _damage)
@@ -33,15 +28,15 @@ public class Shooting : MonoBehaviour
 
         if (!_isPiercing)
         {
-            if (Physics.Raycast(ray, out RaycastHit hit, _shootingRange))
+            if (Physics.Raycast(ray, out RaycastHit hit, _shootingRange,bulletHitLayer))
             {
                 if (hit.transform.tag != null)
                 {
                         ammoPooling.SpawnAmmo(hit.distance);
-                    if (hit.transform.CompareTag("Enemy"))
+                    if (hit.transform.CompareTag("EnemyBodyPart"))
                     {
                         Instantiate(enemyHitParticle,hit.point,hit.transform.rotation);
-                        hit.transform.gameObject.GetComponent<EnemyHealth>().GetDamage(_damage);
+                        hit.transform.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(_damage);
                     }
                 }
                 
@@ -55,10 +50,9 @@ public class Shooting : MonoBehaviour
         else // Piercing ammo
         {
             // Define the layer mask to exclude the trigger layer (replace "Trigger" with the name of your trigger layer).
-            int layerMask = ~LayerMask.GetMask("Trigger");
 
             // Cast the ray and get all hits along its path.
-            RaycastHit[] hits = Physics.RaycastAll(ray, _shootingRange, layerMask);
+            RaycastHit[] hits = Physics.RaycastAll(ray, _shootingRange, bulletHitLayer);
 
             // Process each hit along the ray's path.
             for (int i = 0; i < hits.Length; i++)

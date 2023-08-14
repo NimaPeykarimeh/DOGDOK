@@ -55,13 +55,13 @@ public class EnemyFollow : MonoBehaviour
 
     void GetPlayerDirection()
     {
-        if (!enemyController.isAlerted)
-        {
-            Vector3 dirToTarget = Vector3.Normalize(enemyController.player.position - transform.position);
-            float dot = Vector3.Dot(transform.forward, dirToTarget);
-            cosValue = Mathf.Cos((visualAngleLimit / 2) * Mathf.Deg2Rad);
-            isInAngle = (dot >= cosValue);
-        }
+        //if (!enemyController.isAlerted)
+        //{
+        //}
+        Vector3 dirToTarget = Vector3.Normalize(enemyController.player.position - transform.position);
+        float dot = Vector3.Dot(transform.forward, dirToTarget);
+        cosValue = Mathf.Cos((visualAngleLimit / 2) * Mathf.Deg2Rad);
+        isInAngle = (dot >= cosValue);
         
     }
 
@@ -208,20 +208,12 @@ public class EnemyFollow : MonoBehaviour
             Debug.DrawRay(ray.origin, ray.direction * rayRange, Color.red);
 
             // Perform actions based on raycast hits here
-            if (Physics.Raycast(ray, out RaycastHit hit, rayRange, obstacleLayer))
+            if (!Physics.Raycast(ray, out RaycastHit hit, rayRange, obstacleLayer))
             {
-
-                // You can check the hit object and do something based on the hit result
-                Debug.Log("Hit object: " + hit.collider.gameObject.name);
-            }
-            else
-            {
-
                 startingRotation = transform.rotation;
                 pivotRotation = Quaternion.LookRotation(direction);
                 rotationToLook = pivotRotation;
                 rotationTimer = 0;
-                Debug.Log(i);
                 return;
             }
         }

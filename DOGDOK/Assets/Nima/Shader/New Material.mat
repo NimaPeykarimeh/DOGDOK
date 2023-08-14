@@ -188,7 +188,7 @@ Material:
     - _DisplacementLockObjectScale: 1
     - _DisplacementLockTilingScale: 1
     - _DisplacementMode: 0
-    - _Dissolve: 0.75
+    - _Dissolve: 0.23
     - _DoubleSidedEnable: 1
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 1
@@ -280,7 +280,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     - _edgeOffset: 0
-    - _emmisionStrenght: 1
+    - _emmisionStrenght: 44.8
     - _emmisionnStrenght: 500
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
