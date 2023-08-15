@@ -82,23 +82,54 @@ public class InventoryManager : MonoBehaviour
     }
     private Vector3 PlaceObjectOnGrid(Vector3 position, Vector3 size)
     {
-        float x = Mathf.RoundToInt(position.x / GridDisplay.cellSize);
-        x = x * GridDisplay.cellSize - GridDisplay.cellSize / 2;
-        if (size.x % 2 == 0)
+        //float x = Mathf.RoundToInt(position.x / GridDisplay.cellSize);
+        //x = x * GridDisplay.cellSize - GridDisplay.cellSize / 2;
+        //if (size.x % 2 == 0)
+        //{
+        //    x += GridDisplay.cellSize / 2;
+        //}
+
+        //float y = //Mathf.RoundToInt(position.y / GridDisplay.cellSize);
+        //y = 0.05f; //yere tam bitiþik olursa sýkýntý çýkýyor.
+        //float z = Mathf.RoundToInt(position.z / GridDisplay.cellSize);
+        //z = z * GridDisplay.cellSize - GridDisplay.cellSize / 2;
+        //if (size.z % 2 == 0)
+        //{
+        //    z += GridDisplay.cellSize / 2;
+        //}
+
+        //Vector3 snappedPosition = new Vector3(x, y * GridDisplay.cellSize + GridDisplay.cellSize / 2, z);
+
+        //return snappedPosition;
+        float gridSize = GridDisplay.cellSize;
+
+        float xPosition;
+        float zPosition;
+
+        int xSize = Mathf.FloorToInt(size.x);
+        int zSize = Mathf.FloorToInt(size.z);
+        if (xSize % 2 == 0)
         {
-            x += GridDisplay.cellSize / 2;
+            xPosition = Mathf.Round(position.x / gridSize) * gridSize;
+        }
+        else
+        {
+            xPosition = Mathf.Round(position.x / gridSize) * gridSize + gridSize / 2f;
+        }
+        if (zSize % 2 == 0)
+        {
+            zPosition = Mathf.Round(position.z / gridSize) * gridSize;
+        }
+        else
+        {
+            zPosition = Mathf.Round(position.z / gridSize) * gridSize + gridSize / 2f;
         }
 
-        float y = //Mathf.RoundToInt(position.y / GridDisplay.cellSize);
-        y = 0.05f; //yere tam bitiþik olursa sýkýntý çýkýyor.
-        float z = Mathf.RoundToInt(position.z / GridDisplay.cellSize);
-        z = z * GridDisplay.cellSize - GridDisplay.cellSize / 2;
-        if (size.z % 2 == 0)
-        {
-            z += GridDisplay.cellSize / 2;
-        }
-
-        Vector3 snappedPosition = new Vector3(x, y * GridDisplay.cellSize + GridDisplay.cellSize / 2, z);
+        Vector3 snappedPosition = new Vector3(
+            xPosition,
+            0,
+            zPosition
+            );
         return snappedPosition;
     }
     private void TrackMouseForBuilding()
