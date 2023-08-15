@@ -13,7 +13,7 @@ public class TurretNullControl : MonoBehaviour
     }
     private void Start()
     {
-        //Renderer.material.SetColor("_MainColor_", Color.red);
+        Renderer.material.SetColor("_Main_Color", Color.red);
         isViable = false;
     }
 }
