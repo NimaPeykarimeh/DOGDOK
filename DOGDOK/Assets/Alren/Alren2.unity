@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2237.956, g: 1559.9326, b: 1513.875, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5468,8 +5468,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 2093696640}
-  aimPlayer: {fileID: 0}
-  characterMovement: {fileID: 0}
+  aimPlayer: {fileID: 673692002}
+  characterMovement: {fileID: 1528637168}
   animator: {fileID: 1447001862}
   isAiming: 0
   isShooting: 0
@@ -5570,7 +5570,7 @@ MonoBehaviour:
   verticalLimit: 45
   ySensitivity: 150
   xSensitivity: 150
-  aimObject: {fileID: 0}
+  aimObject: {fileID: 150543956}
   maxRaycastDistance: 100
 --- !u!114 &673692003
 MonoBehaviour:

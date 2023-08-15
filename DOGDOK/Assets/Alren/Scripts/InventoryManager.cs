@@ -159,7 +159,7 @@ public class InventoryManager : MonoBehaviour
         cubeTransform.position = PlaceObjectOnGrid(positionToPlace, cubeTransform.localScale);
         if (!Physics.CheckBox(cubeTransform.position, cubeTransform.localScale / 2, cubeTransform.rotation))
         {
-            //green turretRenderer.material.SetColor()
+            turretRenderer.material.SetColor("_Main_Color", Color.green);
             if (Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetKeyDown(KeyCode.E) && !Input.GetKeyDown(KeyCode.Escape))
             {
 
@@ -173,9 +173,8 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
-            //red turretRenderer.material.SetColor()
+            turretRenderer.material.SetColor("_Main_Color", Color.red);
         }
-
     }
 
     public void CancelBuilding()
@@ -262,3 +261,4 @@ public class InventoryManager : MonoBehaviour
     }
     #endregion
 }
+

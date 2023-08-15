@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TurretNullControl : MonoBehaviour
 {
-    [HideInInspector] public bool isViable;
     [HideInInspector] public Renderer Renderer;
 
     private void Awake()
@@ -14,6 +13,5 @@ public class TurretNullControl : MonoBehaviour
     private void Start()
     {
         Renderer.material.SetColor("_Main_Color", Color.red);
-        isViable = false;
     }
 }
