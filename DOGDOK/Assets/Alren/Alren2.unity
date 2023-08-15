@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 6583.2305, g: 4589.1562, b: 4451.3135, a: 1}
+  m_IndirectSpecularColor: {r: 2237.956, g: 1559.9326, b: 1513.875, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4429,6 +4429,7 @@ MonoBehaviour:
   bulletHitLayer:
     serializedVersion: 2
     m_Bits: 1929
+  shootingPoint: {fileID: 0}
 --- !u!114 &557702752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5480,6 +5481,7 @@ MonoBehaviour:
   basicCamera: {fileID: 1742430544}
   currentState: 0
   lastMouseValue: {x: 0, y: 0}
+  aimRig: {fileID: 0}
   aimLayerWeightSpeed: 1
   aimWeightLayerIndex: 1
   aimDistance: 0
@@ -5568,6 +5570,7 @@ MonoBehaviour:
   verticalLimit: 45
   ySensitivity: 150
   xSensitivity: 150
+  aimObject: {fileID: 0}
   maxRaycastDistance: 100
 --- !u!114 &673692003
 MonoBehaviour:
@@ -15385,6 +15388,7 @@ MonoBehaviour:
   bulletHitLayer:
     serializedVersion: 2
     m_Bits: 0
+  shootingPoint: {fileID: 0}
 --- !u!82 &1419088092
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16531,6 +16535,7 @@ MonoBehaviour:
   basicCamera: {fileID: 0}
   currentState: 0
   lastMouseValue: {x: 0, y: 0}
+  aimRig: {fileID: 0}
   aimLayerWeightSpeed: 5
   aimWeightLayerIndex: 0
   aimDistance: 0
@@ -20147,7 +20152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 130000
+  m_Intensity: 44156.848
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -20269,7 +20274,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 130000
+  m_Intensity: 44156.848
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

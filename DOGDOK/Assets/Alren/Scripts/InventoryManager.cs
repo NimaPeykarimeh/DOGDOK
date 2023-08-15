@@ -103,33 +103,43 @@ public class InventoryManager : MonoBehaviour
         //return snappedPosition;
         float gridSize = GridDisplay.cellSize;
 
-        float xPosition;
-        float zPosition;
+        float xPosition = Mathf.Round(position.x / gridSize) * gridSize;
+        float zPosition = Mathf.Round(position.z / gridSize) * gridSize;
 
         int xSize = Mathf.FloorToInt(size.x);
         int zSize = Mathf.FloorToInt(size.z);
-        if (xSize % 2 == 0)
+
+        if (xSize % 2 > 0)
         {
-            xPosition = Mathf.Round(position.x / gridSize) * gridSize;
-        }
-        else
-        {
-            xPosition = Mathf.Round(position.x / gridSize) * gridSize + gridSize / 2f;
-        }
-        if (zSize % 2 == 0)
-        {
-            zPosition = Mathf.Round(position.z / gridSize) * gridSize;
-        }
-        else
-        {
-            zPosition = Mathf.Round(position.z / gridSize) * gridSize + gridSize / 2f;
+            float xDistanceToCurrentGrid = Mathf.Abs(position.x - (xPosition - gridSize / 2));
+            float xDistanceToNextGrid = Mathf.Abs(position.x - (xPosition + gridSize / 2));
+
+            if (xDistanceToNextGrid < xDistanceToCurrentGrid)
+            {
+                xPosition += gridSize / 2f;
+            }
+            else
+            {
+                xPosition -= gridSize / 2f;
+            }
         }
 
-        Vector3 snappedPosition = new Vector3(
-            xPosition,
-            0,
-            zPosition
-            );
+        if (zSize % 2 > 0)
+        {
+            float zDistanceToCurrentGrid = Mathf.Abs(position.z - (zPosition - gridSize / 2));
+            float zDistanceToNextGrid = Mathf.Abs(position.z - (zPosition + gridSize / 2));
+
+            if (zDistanceToNextGrid < zDistanceToCurrentGrid)
+            {
+                zPosition += gridSize / 2f;
+            }
+            else
+            {
+                zPosition -= gridSize / 2f;
+            }
+        }
+
+        Vector3 snappedPosition = new Vector3(xPosition,0,zPosition);
         return snappedPosition;
     }
     private void TrackMouseForBuilding()
