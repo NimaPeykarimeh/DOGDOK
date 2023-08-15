@@ -7,6 +7,7 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
     private float timer;
     private int count;
     private Resource1 resource;
+    [SerializeField] private GameObject boyutbozar;
 
     [SerializeField] private InventoryManager InventoryManager;
 
@@ -22,7 +23,7 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Collectible") && Input.GetKey(KeyCode.Mouse0))
+        if (boyutbozar.activeInHierarchy && other.CompareTag("Collectible") && Input.GetKey(KeyCode.Mouse0))
         {
             timer += 10 * Time.deltaTime;
             if (timer > 5.03f)
