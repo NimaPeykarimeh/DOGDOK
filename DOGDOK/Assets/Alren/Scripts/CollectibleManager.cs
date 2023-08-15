@@ -5,6 +5,7 @@ using UnityEngine;
 public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün yapýldýðý script. Collect yapýlýnca miktara ekleme yapýlýyor.
 {
     private float timer;
+    private int count;
     private Resource1 resource;
 
     [SerializeField] private InventoryManager InventoryManager;
@@ -15,6 +16,7 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
         if (other.CompareTag("Collectible"))
         {
             resource = other.gameObject.GetComponent<ResourceCreation>().resource;
+            count = other.gameObject.GetComponent<ResourceCreation>().resourceCount;
         }
 
     }
@@ -30,7 +32,7 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
                 {
                     if (element.Key.id == resource.id)
                     {
-                        InventoryManager.resourceIndices[element.Key]++;
+                        InventoryManager.resourceIndices[element.Key] += count;
                         break;
                     }
                 }

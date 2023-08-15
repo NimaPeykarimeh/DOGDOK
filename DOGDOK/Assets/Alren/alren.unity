@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 107.84799, g: 77.227356, b: 78.04126, a: 1}
+  m_IndirectSpecularColor: {r: 107.887314, g: 77.23168, b: 77.98961, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -651,6 +651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &51540529
 BoxCollider:
@@ -947,6 +948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &94573715
 BoxCollider:
@@ -1318,6 +1320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &145081866
 BoxCollider:
@@ -1618,6 +1621,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &162310118
 BoxCollider:
@@ -2203,6 +2207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &204691936
 BoxCollider:
@@ -2362,6 +2367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &218493175
 BoxCollider:
@@ -2812,6 +2818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &282162633
 BoxCollider:
@@ -3308,6 +3315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &326732954
 BoxCollider:
@@ -3866,6 +3874,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &372146512
 BoxCollider:
@@ -4130,6 +4139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &375507930
 BoxCollider:
@@ -4456,6 +4466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &418103902
 BoxCollider:
@@ -4944,6 +4955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &489894876
 BoxCollider:
@@ -5071,6 +5083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &494410491
 BoxCollider:
@@ -5621,6 +5634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &548746641
 BoxCollider:
@@ -5881,6 +5895,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoPooling: {fileID: 1618908152}
   enemyHitParticle: {fileID: 7168533307631418940, guid: 1327c860fb971c246bf2bf47b286edd1, type: 3}
+  bulletHitLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &557702752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6571,6 +6588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &622143985
 BoxCollider:
@@ -12637,6 +12655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &777063951
 BoxCollider:
@@ -13023,6 +13042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &860588229
 BoxCollider:
@@ -13150,6 +13170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &881422317
 BoxCollider:
@@ -14030,6 +14051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &951735674
 BoxCollider:
@@ -14157,6 +14179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &959570832
 BoxCollider:
@@ -14902,6 +14925,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &1090087960
 BoxCollider:
@@ -16024,6 +16048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &1212611417
 BoxCollider:
@@ -16248,6 +16273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &1233549063
 BoxCollider:
@@ -16781,6 +16807,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &1332661404
 BoxCollider:
@@ -17209,8 +17236,12 @@ MonoBehaviour:
   playerDistance: 0
   maxPlayerDistance: 70
   minPlayerDistance: 20
+  playerVisibleAngle: 90
+  playerOriantation: {fileID: 0}
   distanceTimer: 0
   distanceInterval: 0
+  dot: 0
+  cosAngle: 0
 --- !u!114 &1401566028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17690,6 +17721,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoPooling: {fileID: 1920507521}
   enemyHitParticle: {fileID: 7168533307631418940, guid: 1327c860fb971c246bf2bf47b286edd1, type: 3}
+  bulletHitLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!82 &1419088092
 AudioSource:
   m_ObjectHideFlags: 0
@@ -18030,6 +18064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &1430516760
 BoxCollider:
@@ -18444,6 +18479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &1458472096
 BoxCollider:
@@ -18763,6 +18799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &1484145962
 BoxCollider:
@@ -18890,6 +18927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &1494609165
 BoxCollider:
@@ -19196,6 +19234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &1527425483
 BoxCollider:
@@ -20163,6 +20202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &1660018550
 BoxCollider:
@@ -21412,6 +21452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &1827731225
 BoxCollider:
@@ -21784,6 +21825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &1861589418
 BoxCollider:
@@ -22040,6 +22082,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &1895801350
 BoxCollider:
@@ -22846,6 +22889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &2009938704
 BoxCollider:
@@ -23327,6 +23371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &2051064636
 BoxCollider:
@@ -23454,6 +23499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &2060885136
 BoxCollider:
@@ -29284,6 +29330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!1 &6552298147164093063
 GameObject:
@@ -29508,6 +29555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: a94dac6c3ffb85942badd54a09312df1, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!1 &6552298147225598225
 GameObject:
@@ -29585,6 +29633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!23 &6552298147225598234
 MeshRenderer:
@@ -29762,6 +29811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 2
   isRandomized: 0
 --- !u!4 &6552298147479107092
 Transform:
@@ -29792,6 +29842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!1 &6552298147479107095
 GameObject:
@@ -29904,6 +29955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &6552298147629548085
 BoxCollider:
@@ -30122,6 +30174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &6552298147646543091
 BoxCollider:
@@ -30158,6 +30211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &6552298147712956741
 BoxCollider:
@@ -30397,6 +30451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!1 &6552298147765656714
 GameObject:
@@ -30517,6 +30572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!23 &6552298147914573086
 MeshRenderer:
@@ -30673,6 +30729,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!1 &6552298148020953599
 GameObject:
@@ -30724,6 +30781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!1 &6552298148036858719
 GameObject:
@@ -30898,6 +30956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!23 &6552298148051988462
 MeshRenderer:
@@ -31025,6 +31084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!23 &6552298148163687678
 MeshRenderer:
@@ -31152,6 +31212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!23 &6552298148237448306
 MeshRenderer:
@@ -31266,6 +31327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &6552298148579054821
 BoxCollider:
@@ -31482,6 +31544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 4a86babbc9e7f964cb25ab3fac7d7f3a, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!33 &6552298148583961914
 MeshFilter:
@@ -31582,6 +31645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!23 &6552298148595388570
 MeshRenderer:
@@ -31662,6 +31726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 1
 --- !u!1 &6552298148624026371
 GameObject:
@@ -31774,6 +31839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &6552298148627800885
 BoxCollider:
@@ -31963,6 +32029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!23 &6552298148837979186
 MeshRenderer:
@@ -32043,6 +32110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!1 &6552298148845619235
 GameObject:
@@ -32239,6 +32307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 4f8fa77bfd5566d46a801ef7a39f83c7, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!4 &6552298148940945198
 Transform:
@@ -32371,6 +32440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
+  resourceCount: 3
   isRandomized: 0
 --- !u!33 &6552298149031241514
 MeshFilter:
@@ -32500,6 +32570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!65 &6552298149165159631
 BoxCollider:
@@ -32620,6 +32691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 85c9facaf3e40ed469804a6de893d382, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!4 &6552298149196476030
 Transform:
@@ -32775,6 +32847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 4742757257479450908}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
+  resourceCount: 1
   isRandomized: 0
 --- !u!33 &6581927900551324598
 MeshFilter:
