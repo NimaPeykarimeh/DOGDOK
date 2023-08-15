@@ -9,11 +9,11 @@ public class TurretNullControl : MonoBehaviour
 
     private void Awake()
     {
-        Renderer = GetComponent<Renderer>();
+        Renderer = gameObject.GetComponent<Renderer>();
     }
     private void Start()
     {
-        Renderer.material.color = Color.green;
+        //Renderer.material.SetColor("_MainColor_", Color.red);
         isViable = false;
     }
 }

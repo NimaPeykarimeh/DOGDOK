@@ -14,6 +14,7 @@ public class InventoryManager : MonoBehaviour
     private Build1 currentBuild;
     private Transform cubeTransform;
     private Dictionary<Resource1, int> currentNeeds;
+    private Renderer turretRenderer;
 
     [SerializeField] private GridDisplay GridDisplay;
     [SerializeField] private GameObject turretPrefab;
@@ -72,6 +73,7 @@ public class InventoryManager : MonoBehaviour
                 turretPrefab.transform.localScale = GridDisplay.cellSize * currentBuild.buildingSize; //scale'i !!!!!!
                 positionToPlace.y += turretPrefab.transform.localScale.y / 2; //küp yüksekliði
                 Transform t = Instantiate(turretPrefab, positionToPlace, transform.rotation).GetComponent<Transform>();
+                turretRenderer = t.GetComponent<TurretNullControl>().Renderer;
                 currentBuild = null;
                 return t;
             }
@@ -114,11 +116,12 @@ public class InventoryManager : MonoBehaviour
         }
         positionToPlace.y = 0;
         cubeTransform.position = PlaceObjectOnGrid(positionToPlace, cubeTransform.localScale);
-        print(!Physics.CheckBox(cubeTransform.position, cubeTransform.localScale / 2, cubeTransform.rotation));
-        if (Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetKeyDown(KeyCode.E) && !Input.GetKeyDown(KeyCode.Escape))
+        if (!Physics.CheckBox(cubeTransform.position, cubeTransform.localScale / 2, cubeTransform.rotation))
         {
-            if (!Physics.CheckBox(cubeTransform.position, cubeTransform.localScale / 2, cubeTransform.rotation))
+            //green turretRenderer.material.SetColor()
+            if (Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetKeyDown(KeyCode.E) && !Input.GetKeyDown(KeyCode.Escape))
             {
+
                 UseResources(currentNeeds);
                 cubeTransform.gameObject.GetComponent<BoxCollider>().isTrigger = false;
                 cubeTransform.gameObject.GetComponent<TurretNullControl>().enabled = false;
@@ -127,6 +130,11 @@ public class InventoryManager : MonoBehaviour
                 return;
             }
         }
+        else
+        {
+            //red turretRenderer.material.SetColor()
+        }
+
     }
 
     public void CancelBuilding()

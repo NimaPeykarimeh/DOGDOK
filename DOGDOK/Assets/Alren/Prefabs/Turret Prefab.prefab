@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isViable: 0
+  Renderer: {fileID: 0}
 --- !u!54 &4082089617860342277
 Rigidbody:
   m_ObjectHideFlags: 0
