@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro.EditorUtilities;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
 
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
         [SerializeField] Vector2 lastMouseValue;
 
     [Header("Animation Weights")]
+    [SerializeField] Rig aimRig;
         public float aimLayerWeightSpeed = 3f;
         [SerializeField] int aimWeightLayerIndex = 1;
     private float currentWeight;
@@ -110,6 +112,7 @@ public class PlayerController : MonoBehaviour
         if (newWeight != currentWeight)
         {
             currentWeight = Mathf.MoveTowards(currentWeight,newWeight,aimLayerWeightSpeed * Time.deltaTime);
+            aimRig.weight = currentWeight;
             animator.SetLayerWeight(aimWeightLayerIndex,currentWeight);
         }
         else

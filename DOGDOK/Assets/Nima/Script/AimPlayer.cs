@@ -16,7 +16,7 @@ public class AimPlayer : MonoBehaviour
     [SerializeField] int verticalLimit;
     [SerializeField] float ySensitivity;
     [SerializeField] float xSensitivity;
-
+    [SerializeField] GameObject aimObject;
     float rotationX = 0f;
     float rotationY = 0f;
     [Header("Raycast")]
@@ -29,6 +29,7 @@ public class AimPlayer : MonoBehaviour
 
     void RotateCamera()
     {
+
         float mouseX = Input.GetAxis("Mouse X") * xSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * ySensitivity * Time.deltaTime;
 
@@ -47,6 +48,7 @@ public class AimPlayer : MonoBehaviour
         // Cast a ray from the camera's position and direction
         Ray ray = new Ray(playerController.mainCamera.transform.position, playerController.mainCamera.transform.forward);
 
+        aimObject.transform.position = ray.GetPoint(maxRaycastDistance);
         // Check if the ray hits anything within the specified distance
         if (Physics.Raycast(ray, out hitInfo, maxRaycastDistance))
         {
@@ -64,7 +66,7 @@ public class AimPlayer : MonoBehaviour
     void Update()
     {
         RotateCamera();
-
+        GetAimHitInfo();
         if (Input.GetMouseButtonDown(1))
         {
             playerController.ChangePlayerState(PlayerStates.Combat);

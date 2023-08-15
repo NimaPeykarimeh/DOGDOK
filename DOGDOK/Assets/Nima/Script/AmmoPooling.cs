@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using TMPro;
 using UnityEngine;
 
@@ -7,7 +6,7 @@ public class AmmoPooling : MonoBehaviour
 {
     [SerializeField] GameObject ammoPrefab;
     [SerializeField] int creatAmount;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +33,8 @@ public class AmmoPooling : MonoBehaviour
         Ammo _ammoComponent = _ammo.GetComponent<Ammo>();
         
         _ammoComponent.ammoLifeTime = _distance / _ammoComponent.speed;
+        _ammo.transform.localPosition = Vector3.zero;
+        _ammo.transform.localRotation= Quaternion.identity;
         _ammo.SetActive(true);
         _ammo.transform.parent = null;
         

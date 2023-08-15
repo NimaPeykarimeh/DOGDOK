@@ -14,7 +14,7 @@ public class Ammo : MonoBehaviour
     public TrailRenderer trail;
 
     public float speed;
-
+    public Transform direction;
     private void Awake()
     {
         trail = GetComponent<TrailRenderer>();
@@ -35,7 +35,7 @@ public class Ammo : MonoBehaviour
 
             ammoPooling.BackToThePool(this.gameObject);
         }
-        transform.Translate(-transform.forward * speed * Time.deltaTime);
+        transform.position += (transform.forward * speed * Time.deltaTime);
     }
 
 }

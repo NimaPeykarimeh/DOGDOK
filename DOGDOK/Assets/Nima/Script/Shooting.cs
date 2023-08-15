@@ -11,6 +11,7 @@ public class Shooting : MonoBehaviour
     [SerializeField] AmmoPooling ammoPooling;
     [SerializeField] GameObject enemyHitParticle;
     [SerializeField] LayerMask bulletHitLayer;
+    [SerializeField] Transform shootingPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class Shooting : MonoBehaviour
 
         Vector3 _direction = (_targetPosition - _shootingPoint.position).normalized;
         Ray ray = new Ray(_shootingPoint.position, _direction);
+        shootingPoint.forward = ray.direction;
         Debug.DrawRay(ray.origin, ray.direction * _shootingRange, Color.red, 0.1f);
 
         noiseMaker.MakeNoise(_noiseRange, _shootingPoint);
