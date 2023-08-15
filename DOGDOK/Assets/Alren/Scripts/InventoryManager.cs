@@ -21,6 +21,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject InventoryPanel;
     [SerializeField] private GameObject resBlockPrefab;
     [SerializeField] private List<Resource1> resources = new();
+    [SerializeField] private byte buildDistance;
 
     [HideInInspector] public bool isBuilding;
     [HideInInspector] public bool isOpen;
@@ -139,7 +140,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        Vector3 snappedPosition = new Vector3(xPosition,0,zPosition);
+        Vector3 snappedPosition = new Vector3(xPosition, 0.06f * GridDisplay.cellSize + GridDisplay.cellSize / 2, zPosition);
         return snappedPosition;
     }
     private void TrackMouseForBuilding()
@@ -147,13 +148,13 @@ public class InventoryManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Vector3 positionToPlace;
-        if (Physics.Raycast(ray, out hit, 16f))
+        if (Physics.Raycast(ray, out hit, buildDistance))
         {
             positionToPlace = hit.point;
         }
         else
         {
-            positionToPlace = ray.GetPoint(16f);
+            positionToPlace = ray.GetPoint(buildDistance);
         }
         positionToPlace.y = 0;
         cubeTransform.position = PlaceObjectOnGrid(positionToPlace, cubeTransform.localScale);
