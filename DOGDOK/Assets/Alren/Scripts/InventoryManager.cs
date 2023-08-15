@@ -5,15 +5,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using UnityEditor.PackageManager.Requests;
 
 public class InventoryManager : MonoBehaviour
 {
-    private bool isInventoryOpen;
     private Animator animator;
     private List<TextMeshProUGUI> UIAmount = new();
     private Build1 currentBuild;
     private Transform cubeTransform;
-    private TurretNullControl TurretNullControl;
     private Dictionary<Resource1, int> currentNeeds;
 
     [SerializeField] private GridDisplay GridDisplay;
@@ -22,6 +21,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject resBlockPrefab;
     [SerializeField] private List<Resource1> resources = new();
 
+    [HideInInspector] public bool isBuilding;
+    [HideInInspector] public bool isOpen;
     [HideInInspector] public Dictionary<Resource1, int> resourceIndices = new();
 
     private void Awake() //resource id'leri otomatik atanýyor.
@@ -38,27 +39,11 @@ public class InventoryManager : MonoBehaviour
     {
         CreateInventoryMenu();
         animator = InventoryPanel.GetComponent<Animator>();
-        isInventoryOpen = false;
+        isOpen = false;
     }
 
     void Update()
     {
-        if (isInventoryOpen && Input.GetKeyDown(KeyCode.I)) // Envanter Açýkken Kapama
-        {
-            animator.SetBool("isShowing", false);
-            isInventoryOpen = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.I)) // Envanter Kapalýyken Açma
-        {
-            UpdateInventoryMenu();
-            animator.SetBool("isShowing", true);
-            isInventoryOpen = true;
-        }
-        else if (isInventoryOpen) // Envanter Açýk Duruyorsa.
-        {
-            UpdateInventoryMenu();
-        }
-
         if (currentBuild != null) // Turret'ý yarat ve location'ýný al.
         {
             cubeTransform = CreateTurret();
@@ -75,6 +60,7 @@ public class InventoryManager : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+        isBuilding = true;
 
         if (Physics.Raycast(ray, out hit))
         {
@@ -86,7 +72,6 @@ public class InventoryManager : MonoBehaviour
                 turretPrefab.transform.localScale = GridDisplay.cellSize * currentBuild.buildingSize; //scale'i !!!!!!
                 positionToPlace.y += turretPrefab.transform.localScale.y / 2; //küp yüksekliði
                 Transform t = Instantiate(turretPrefab, positionToPlace, transform.rotation).GetComponent<Transform>();
-                TurretNullControl = t.GetComponent<TurretNullControl>();
                 currentBuild = null;
                 return t;
             }
@@ -130,24 +115,27 @@ public class InventoryManager : MonoBehaviour
         positionToPlace.y = 0;
         cubeTransform.position = PlaceObjectOnGrid(positionToPlace, cubeTransform.localScale);
         print(!Physics.CheckBox(cubeTransform.position, cubeTransform.localScale / 2, cubeTransform.rotation));
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetKeyDown(KeyCode.E) && !Input.GetKeyDown(KeyCode.Escape))
         {
             if (!Physics.CheckBox(cubeTransform.position, cubeTransform.localScale / 2, cubeTransform.rotation))
             {
                 UseResources(currentNeeds);
                 cubeTransform.gameObject.GetComponent<BoxCollider>().isTrigger = false;
                 cubeTransform.gameObject.GetComponent<TurretNullControl>().enabled = false;
+                isBuilding = false;
                 cubeTransform = null;
                 return;
             }
         }
-        else if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.E))
-        {
-            currentNeeds = null;
-            Destroy(cubeTransform.gameObject);
-            cubeTransform = null;
-            return;
-        }
+    }
+
+    public void CancelBuilding()
+    {
+        isBuilding = false;
+        currentNeeds = null;
+        Destroy(cubeTransform.gameObject);
+        cubeTransform = null;
+        return;
     }
     #endregion
 
@@ -164,7 +152,7 @@ public class InventoryManager : MonoBehaviour
             i++;
         }
     }
-    private void UpdateInventoryMenu() //Envanter ürün bilgilerini güncelleme
+    public void UpdateInventoryMenu() //Envanter ürün bilgilerini güncelleme
     {
         int i = 0;
         foreach (var element in resourceIndices.Values)
@@ -172,6 +160,18 @@ public class InventoryManager : MonoBehaviour
             UIAmount[i].text = element.ToString();
             i++;
         }
+    }
+    public void OpenInventoryMenu()
+    {
+        animator.SetBool("isShowing", true);
+        isOpen = true;
+        UpdateInventoryMenu();
+    }
+
+    public void CloseInventoryMenu()
+    {
+        animator.SetBool("isShowing", false);
+        isOpen = false;
     }
     #endregion
 
