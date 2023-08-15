@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class TurretManager : MonoBehaviour
 {
-    [SerializeField] private GameObject TurretPanel;
-    private bool isOpen;
+    public GameObject TurretPanel;
+    [HideInInspector] public bool isOpen;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,18 +17,7 @@ public class TurretManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isOpen && Input.GetKeyDown(KeyCode.E)) //Açma
-        {
-            OpenCraftScreen();
-        }
-        else if (isOpen && Input.GetKeyDown(KeyCode.E)) //Kapama
-        {
-            CloseCraftScreen();
-        }
-        else if(isOpen)
-        {
-            TurretPanel.GetComponent<TurretPanelCreator>().UpdateRequiredResource();
-        }
+        
     }
     public void OpenCraftScreen()
     {

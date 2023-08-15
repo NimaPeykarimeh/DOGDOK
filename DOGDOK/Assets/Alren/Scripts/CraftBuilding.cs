@@ -8,7 +8,6 @@ public class CraftBuilding : MonoBehaviour
     [SerializeField] private InventoryManager InventoryManager;
     [SerializeField] private TurretPanelCreator TurretPanelCreator;
     [SerializeField] private TurretManager TurretManager;
-    // Start is called before the first frame update
 
     private void Awake()
     {
