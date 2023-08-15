@@ -102,8 +102,8 @@ public class InventoryManager : MonoBehaviour
             x += GridDisplay.cellSize / 2;
         }
 
-        float y = Mathf.RoundToInt(position.y / GridDisplay.cellSize);
-
+        float y = //Mathf.RoundToInt(position.y / GridDisplay.cellSize);
+        y = 0.05f; //yere tam bitiþik olursa sýkýntý çýkýyor.
         float z = Mathf.RoundToInt(position.z / GridDisplay.cellSize);
         z = z * GridDisplay.cellSize - GridDisplay.cellSize / 2;
         if (size.z % 2 == 0)
@@ -114,13 +114,11 @@ public class InventoryManager : MonoBehaviour
         Vector3 snappedPosition = new Vector3(x, y * GridDisplay.cellSize + GridDisplay.cellSize / 2, z);
         return snappedPosition;
     }
-
     private void TrackMouseForBuilding()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Vector3 positionToPlace;
-        RaycastHit hitInfo;
         if (Physics.Raycast(ray, out hit, 16f))
         {
             positionToPlace = hit.point;
@@ -131,9 +129,10 @@ public class InventoryManager : MonoBehaviour
         }
         positionToPlace.y = 0;
         cubeTransform.position = PlaceObjectOnGrid(positionToPlace, cubeTransform.localScale);
-        if (Input.GetMouseButtonDown(0) && TurretNullControl.isViable)
+        print(!Physics.CheckBox(cubeTransform.position, cubeTransform.localScale / 2, cubeTransform.rotation));
+        if (Input.GetMouseButtonDown(0))
         {
-            if(!Physics.BoxCast(cubeTransform.position, new Vector3(0.01f,0.01f,0.01f), Vector3.one ,cubeTransform.rotation, cubeTransform.localScale.z/2))
+            if (!Physics.CheckBox(cubeTransform.position, cubeTransform.localScale / 2, cubeTransform.rotation))
             {
                 UseResources(currentNeeds);
                 cubeTransform.gameObject.GetComponent<BoxCollider>().isTrigger = false;
@@ -179,7 +178,7 @@ public class InventoryManager : MonoBehaviour
     #region Inventory Operations
     public bool CheckResources(Dictionary<Resource1, int> neededResources) //Kaynak yeterliliði kontrolü
     {
-        
+
         foreach (var need in neededResources)
         {
             foreach (var have in resourceIndices)

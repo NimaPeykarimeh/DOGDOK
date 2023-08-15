@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 6584.3926, g: 4589.9624, b: 4452.0205, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1158,7 +1158,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2e25e3a315055ee429105bed423139be, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e25e3a315055ee429105bed423139be, type: 3}
@@ -4296,7 +4296,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &557702749
 Transform:
   m_ObjectHideFlags: 0
@@ -5444,7 +5444,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 673691995}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7582786, y: -0.59650236, z: 0.31238484}
+  m_LocalPosition: {x: 6.28, y: -0.59650236, z: -1.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17899,7 +17899,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742430544}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0082784, y: 0.9864976, z: -2.6876152}
+  m_LocalPosition: {x: 6.53, y: 0.9864976, z: -4.4300003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -20317,7 +20317,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2093696640}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.83737516, y: 0.6446672, z: -0.537616}
+  m_LocalPosition: {x: 6.53, y: 0.9864976, z: -4.4300003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21129,7 +21129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -21265,7 +21265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -21357,7 +21357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -21435,7 +21435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -21537,7 +21537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -21691,7 +21691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -21819,7 +21819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -21921,7 +21921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -22148,9 +22148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
-  resourceCount: 2
+  resourceCount: 60
   isRandomized: 0
 --- !u!65 &125044896094030959
 BoxCollider:
@@ -22274,7 +22274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -22305,7 +22305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: a94dac6c3ffb85942badd54a09312df1, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -22509,7 +22509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -22637,7 +22637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -22765,7 +22765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -22817,7 +22817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -23029,7 +23029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 4f8fa77bfd5566d46a801ef7a39f83c7, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -23120,7 +23120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -23305,7 +23305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -23413,7 +23413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 85c9facaf3e40ed469804a6de893d382, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -23569,7 +23569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -23585,9 +23585,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
-  resourceCount: 3
+  resourceCount: 62
   isRandomized: 0
 --- !u!65 &125044896963129313
 BoxCollider:
@@ -23760,7 +23760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -23841,7 +23841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 1
@@ -24045,7 +24045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -24194,7 +24194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -24301,7 +24301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -24353,7 +24353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 4a86babbc9e7f964cb25ab3fac7d7f3a, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -29415,7 +29415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -29592,7 +29592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -29720,7 +29720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -29820,7 +29820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -29927,7 +29927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -30112,7 +30112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -30232,7 +30232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -30382,7 +30382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -30439,7 +30439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -30679,7 +30679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -30716,7 +30716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -30872,7 +30872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -31000,7 +31000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -31100,7 +31100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -31228,7 +31228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -31384,7 +31384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -31463,7 +31463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -31604,7 +31604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -31740,7 +31740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -31847,7 +31847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -31975,7 +31975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -32116,7 +32116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -32302,7 +32302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -32380,7 +32380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -32508,7 +32508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -32686,7 +32686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -32764,7 +32764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -32983,7 +32983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -33012,7 +33012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -33148,7 +33148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -33352,7 +33352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -33432,7 +33432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -33560,7 +33560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -33639,7 +33639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -33788,7 +33788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCount: 1
   isRandomized: 0
@@ -33992,7 +33992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 6432353063867247862}
   resource: {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   resourceCount: 1
   isRandomized: 0
