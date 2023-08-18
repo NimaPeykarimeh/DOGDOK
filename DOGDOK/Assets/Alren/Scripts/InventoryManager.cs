@@ -15,6 +15,7 @@ public class InventoryManager : MonoBehaviour
     private Transform cubeTransform;
     private Dictionary<Resource1, int> currentNeeds;
     private Renderer turretRenderer;
+    private BoxCollider turretCollider;
 
     [SerializeField] private GridDisplay GridDisplay;
     [SerializeField] private GameObject turretPrefab;
@@ -71,10 +72,11 @@ public class InventoryManager : MonoBehaviour
             if (hit.collider.gameObject.CompareTag("Ground"))
             {
                 positionToPlace = PlaceObjectOnGrid(positionToPlace, currentBuild.buildingSize);
-                turretPrefab.transform.localScale = GridDisplay.cellSize * currentBuild.buildingSize; //scale'i !!!!!!
+                //turretPrefab.transform.localScale = GridDisplay.cellSize * currentBuild.buildingSize; //scale'i !!!!!!
                 positionToPlace.y += turretPrefab.transform.localScale.y / 2; //küp yüksekliði
                 Transform t = Instantiate(turretPrefab, positionToPlace, transform.rotation).GetComponent<Transform>();
                 turretRenderer = t.GetComponent<TurretNullControl>().Renderer;
+                turretCollider = t.GetComponent<BoxCollider>();
                 currentBuild = null;
                 return t;
             }
@@ -158,12 +160,11 @@ public class InventoryManager : MonoBehaviour
         }
         positionToPlace.y = 0;
         cubeTransform.position = PlaceObjectOnGrid(positionToPlace, cubeTransform.localScale);
-        if (!Physics.CheckBox(cubeTransform.position, cubeTransform.localScale / 2, cubeTransform.rotation))
+        if (!Physics.CheckBox(cubeTransform.position + turretCollider.center, turretCollider.size / 2, turretCollider.transform.rotation))
         {
             turretRenderer.material.SetColor("_Main_Color", Color.green);
             if (Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetKeyDown(KeyCode.E) && !Input.GetKeyDown(KeyCode.Escape))
             {
-
                 UseResources(currentNeeds);
                 cubeTransform.gameObject.GetComponent<BoxCollider>().isTrigger = false;
                 cubeTransform.gameObject.GetComponent<TurretNullControl>().enabled = false;
