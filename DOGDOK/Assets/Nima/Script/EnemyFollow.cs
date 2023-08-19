@@ -121,7 +121,7 @@ public class EnemyFollow : MonoBehaviour
 
 
 
-        if (enemyController.isAlerted)
+        if (enemyController.isAlerted && !isPlayerPositionKnown)
         {
             _dis = Vector3.Distance(transform.position, positionToGo);
             if (_dis <= reachTolerance)
@@ -130,7 +130,7 @@ public class EnemyFollow : MonoBehaviour
             }
 
         }
-        else if (enemyController.isMoving)
+        else if (enemyController.isMoving && !enemyController.isAlerted)
         {
             positionToGo = enemyController.positionToGo;
             _dis = Vector3.Distance(transform.position, positionToGo);

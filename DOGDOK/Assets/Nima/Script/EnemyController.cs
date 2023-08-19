@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 public class EnemyController : MonoBehaviour
 {
     EnemyMovement enemyMovement;
+    public Animator animator;
     EnemyFollow enemyFollow;
     public Transform player;
     public EnemySpawner enemySpawner;
@@ -25,6 +26,7 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         enemyMovement = GetComponent<EnemyMovement>();
         enemyFollow = GetComponent<EnemyFollow>();
         player = GameObject.FindGameObjectWithTag("Player").transform;

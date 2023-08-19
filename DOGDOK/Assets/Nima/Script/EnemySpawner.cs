@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
@@ -28,7 +29,9 @@ public class EnemySpawner : MonoBehaviour
     [Header("Other")]
     [SerializeField] float dot;
     [SerializeField] float cosAngle;
-
+    [Header("SphereCast")]
+    [SerializeField] float sphereRadius;
+    [SerializeField] LayerMask spawnCheckLayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -84,13 +87,32 @@ public class EnemySpawner : MonoBehaviour
             float _distance = Vector3.Distance(playerPosition, _spawnPosition);
             if (dot > cosAngle && _distance > minPlayerDistance)
             {
-                _spawnPosition.y = 0;//_spawnArea.y + _spawnSize.y / 2; ;
-                return _spawnPosition;
+                _spawnPosition.y = _spawnArea.y + _spawnSize.y / 2;//0;
+
+                if (IsLocationEmpty(_spawnPosition) != Vector3.zero)
+                {
+                    return IsLocationEmpty(_spawnPosition);
+                }
             }
         }
         Debug.Log("couldn't spawn");
 
         return Vector3.zero;//if the height of the ground is different change it
+    }
+
+    Vector3 IsLocationEmpty(Vector3 _position)
+    {
+        RaycastHit hit;
+        Ray ray = new Ray(_position,Vector3.down);
+
+        if (Physics.SphereCast(ray,sphereRadius,out hit,30f, spawnCheckLayer))//maybe change 30 later depending on spawn height
+        {
+            if (hit.collider.CompareTag("Ground"))
+            {
+                return hit.point;
+            }
+        }
+        return Vector3.zero;
     }
 
     private void SpawnEnemy()

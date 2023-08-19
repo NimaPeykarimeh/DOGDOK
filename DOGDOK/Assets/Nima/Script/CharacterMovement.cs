@@ -1,5 +1,6 @@
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(NoiseMaker))]
 public class CharacterMovement : MonoBehaviour
@@ -23,6 +24,13 @@ public class CharacterMovement : MonoBehaviour
     public float runningSpeed;
     public float turnSpeed = 10f;
     public bool isRunning;
+
+    [Header("Stamina")]
+    [SerializeField] float maxStamina;
+    [SerializeField] float currentStamina;
+    [SerializeField] Image staminaImage;
+    [SerializeField] float staminaRegeneration;
+    [SerializeField] float staminaUsage;
     [Header("Acceleration")]
 
     [SerializeField] float accelerationDuration = 1f;
@@ -52,6 +60,7 @@ public class CharacterMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentStamina = maxStamina;
         playerController = GetComponent<PlayerController>();
         characterController = GetComponent<CharacterController>();
         noiseMaker = GetComponent<NoiseMaker>();
@@ -137,6 +146,30 @@ public class CharacterMovement : MonoBehaviour
         playerInput = new Vector3(moveX,0f,moveZ).normalized;
         inputMagnitude = playerInput.magnitude;
     }
+
+    void UpdateStamina()
+    {
+        if (playerController.isRunning)
+        {
+            currentStamina -= staminaUsage * Time.deltaTime;
+            if (currentStamina <= 0)
+            {
+                currentStamina = 0;
+                ToggleRunState(MoveStates.Walk);
+            }
+            staminaImage.fillAmount = currentStamina / maxStamina;
+        }
+        else if(!playerController.isRunning && currentStamina < maxStamina)
+        {
+            currentStamina += staminaRegeneration * Time.deltaTime;
+            if (currentStamina >= maxStamina)
+            {
+                currentStamina = maxStamina;
+            }
+            staminaImage.fillAmount = currentStamina / maxStamina;
+        }
+    }
+
     void Update()
     {
         
@@ -156,17 +189,18 @@ public class CharacterMovement : MonoBehaviour
         speedToMove = inputMagnitude * currentMovementSpeed;
         GetMovementDirection();
         MovePlayer();
+        UpdateStamina();
         
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             ToggleRunState(MoveStates.Run);
-            isRunning = true;
+            isRunning = true;//to make the player run after aim
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            ToggleRunState(MoveStates.Walk);
             isRunning = false;
+            ToggleRunState(MoveStates.Walk);
         }
         Accelarate();
         if (isAccelerating)
