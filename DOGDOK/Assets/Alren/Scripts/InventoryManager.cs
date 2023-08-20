@@ -17,6 +17,7 @@ public class InventoryManager : MonoBehaviour
     private Renderer turretRenderer;
     private BoxCollider turretCollider;
 
+    [SerializeField] private LayerMask GroundLayer;
     [SerializeField] private GridDisplay GridDisplay;
     [SerializeField] private GameObject turretPrefab;
     [SerializeField] private GameObject InventoryPanel;
@@ -142,7 +143,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        Vector3 snappedPosition = new Vector3(xPosition, 0.06f * GridDisplay.cellSize + GridDisplay.cellSize / 2, zPosition);
+        Vector3 snappedPosition = new Vector3(xPosition, position.y * GridDisplay.cellSize + GridDisplay.cellSize / 2, zPosition);
         return snappedPosition;
     }
     private void TrackMouseForBuilding()
@@ -150,7 +151,7 @@ public class InventoryManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Vector3 positionToPlace;
-        if (Physics.Raycast(ray, out hit, buildDistance))
+        if (Physics.Raycast(ray, out hit, buildDistance, GroundLayer))
         {
             positionToPlace = hit.point;
         }
@@ -158,7 +159,7 @@ public class InventoryManager : MonoBehaviour
         {
             positionToPlace = ray.GetPoint(buildDistance);
         }
-        positionToPlace.y = 0;
+        //positionToPlace.y = 0;
         cubeTransform.position = PlaceObjectOnGrid(positionToPlace, cubeTransform.localScale);
         if (!Physics.CheckBox(cubeTransform.position + turretCollider.center, turretCollider.size / 2, turretCollider.transform.rotation))
         {

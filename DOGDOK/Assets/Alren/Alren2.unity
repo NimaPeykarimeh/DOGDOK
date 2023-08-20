@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 2236.3486, g: 1558.4897, b: 1511.8308, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3406,7 +3406,7 @@ GameObject:
   - component: {fileID: 433963003}
   - component: {fileID: 433963002}
   - component: {fileID: 433963001}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Cube (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4463,6 +4463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 673691997}
   shooting: {fileID: 557702751}
+  aimPlayer: {fileID: 0}
   isShooting: 0
   fireInterval: 0.5
   fireTimer: 1.310565
@@ -4478,6 +4479,12 @@ MonoBehaviour:
   maxAcceleration: 10
   accelerationTimer: 0
   acceleration: 1
+  recoilTreshold: 0.1
+  isRecoilingUp: 0
+  isRecoilingDown: 0
+  maxRecoil: 0.3
+  recoilMagnitude: 1
+  recoilSpeed: 10
   audioSource: {fileID: 557702750}
   gunSounds:
   - {fileID: 8300000, guid: 84579fc31f6b3e346b141782d4be15d8, type: 3}
@@ -5526,6 +5533,11 @@ MonoBehaviour:
   runningSpeed: 5
   turnSpeed: 10
   isRunning: 0
+  maxStamina: 0
+  currentStamina: 0
+  staminaImage: {fileID: 0}
+  staminaRegeneration: 0
+  staminaUsage: 0
   accelerationDuration: 1
   accelerationTimer: 0
   decelerationDuration: 0
@@ -5568,9 +5580,25 @@ MonoBehaviour:
   isAiming: 0
   oriantation: {fileID: 1009716565}
   verticalLimit: 45
-  ySensitivity: 150
-  xSensitivity: 150
+  currentYSensitivity: 0
+  currentXSensitivity: 0
+  defalutYSensitivity: 150
+  defaultXSensitivity: 150
+  aimYSensitivity: 75
+  aimXSensitivity: 75
+  assistSensitivity: 50
+  aimAssistSpeed: 0
+  isAimedOnEnemy: 0
+  aimAssistLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  aimAssistSize: 1
+  aimLayer:
+    serializedVersion: 2
+    m_Bits: 0
   aimObject: {fileID: 150543956}
+  rotationX: 0
+  rotationY: 0
   maxRaycastDistance: 100
 --- !u!114 &673692003
 MonoBehaviour:
@@ -14906,6 +14934,10 @@ MonoBehaviour:
   distanceInterval: 0
   dot: 0
   cosAngle: 0
+  sphereRadius: 0
+  spawnCheckLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1401566028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15268,6 +15300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   shooting: {fileID: 1419088091}
+  aimPlayer: {fileID: 0}
   isShooting: 0
   fireInterval: 0.5
   fireTimer: 1.310565
@@ -15283,6 +15316,12 @@ MonoBehaviour:
   maxAcceleration: 10
   accelerationTimer: 0
   acceleration: 1
+  recoilTreshold: 0.1
+  isRecoilingUp: 0
+  isRecoilingDown: 0
+  maxRecoil: 0.3
+  recoilMagnitude: 1
+  recoilSpeed: 10
   audioSource: {fileID: 1419088092}
   gunSounds:
   - {fileID: 8300000, guid: 84579fc31f6b3e346b141782d4be15d8, type: 3}
@@ -16464,6 +16503,11 @@ MonoBehaviour:
   runningSpeed: 5
   turnSpeed: 10
   isRunning: 0
+  maxStamina: 0
+  currentStamina: 0
+  staminaImage: {fileID: 0}
+  staminaRegeneration: 0
+  staminaUsage: 0
   accelerationDuration: 1
   accelerationTimer: 0
   decelerationDuration: 0
@@ -29384,6 +29428,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6e899153e544bd4aa4d536490999826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 8
   GridDisplay: {fileID: 5759224}
   turretPrefab: {fileID: 494170418624871423, guid: d484ba6c47b07f84f8c222028a8760b6, type: 3}
   InventoryPanel: {fileID: 6432353063975701733}
@@ -29395,7 +29442,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4f8fa77bfd5566d46a801ef7a39f83c7, type: 2}
   - {fileID: 11400000, guid: 85c9facaf3e40ed469804a6de893d382, type: 2}
   - {fileID: 11400000, guid: a94dac6c3ffb85942badd54a09312df1, type: 2}
-  buildDistance: 6
+  buildDistance: 25
   isBuilding: 0
   isOpen: 0
 --- !u!224 &6432353063867247863
