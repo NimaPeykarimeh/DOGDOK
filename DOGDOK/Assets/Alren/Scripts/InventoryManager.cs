@@ -16,6 +16,7 @@ public class InventoryManager : MonoBehaviour
     private Dictionary<Resource1, int> currentNeeds;
     private Renderer turretRenderer;
     private BoxCollider turretCollider;
+    private bool isAired;
 
     [SerializeField] private LayerMask GroundLayer;
     [SerializeField] private GridDisplay GridDisplay;
@@ -154,16 +155,24 @@ public class InventoryManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit, buildDistance, GroundLayer))
         {
             positionToPlace = hit.point;
+            isAired = false;
         }
         else
         {
+            isAired = true;
             positionToPlace = ray.GetPoint(buildDistance);
+            ray = new Ray(positionToPlace, Vector3.down);
+            if (Physics.Raycast(ray, out hit, GroundLayer))
+            {
+                positionToPlace = hit.point;
+            }
         }
         //positionToPlace.y = 0;
         cubeTransform.position = PlaceObjectOnGrid(positionToPlace, cubeTransform.localScale);
-        if (!Physics.CheckBox(cubeTransform.position + turretCollider.center, turretCollider.size / 2, turretCollider.transform.rotation))
+        if (!isAired && !Physics.CheckBox(cubeTransform.position + turretCollider.center, turretCollider.size / 2, turretCollider.transform.rotation))
         {
-            turretRenderer.material.SetColor("_Main_Color", Color.green);
+            cubeTransform.gameObject.GetComponent<TurretNullControl>().TurretColorSelector(true);
+            //turretRenderer.material.SetColor("_Main_Color", Color.green);
             if (Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetKeyDown(KeyCode.E) && !Input.GetKeyDown(KeyCode.Escape))
             {
                 UseResources(currentNeeds);
@@ -176,7 +185,8 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
-            turretRenderer.material.SetColor("_Main_Color", Color.red);
+            cubeTransform.gameObject.GetComponent<TurretNullControl>().TurretColorSelector(false);
+            //turretRenderer.material.SetColor("_Main_Color", Color.red);
         }
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class TurretNullControl : MonoBehaviour
 {
     [HideInInspector] public Renderer Renderer;
+    private List <Renderer> smallChildsRenderer = new();
 
     private void Awake()
     {
@@ -20,8 +21,8 @@ public class TurretNullControl : MonoBehaviour
             {
                 Transform smallChild = child.GetChild(j);
                 Collider[] colliders = smallChild.GetComponents<Collider>();
-                //Renderer smallChildsRenderer = smallChild.GetComponent<Renderer>();
-                //smallChildsRenderer.material = sharedMaterial;
+                smallChildsRenderer.Add(smallChild.GetComponent<Renderer>());
+                smallChildsRenderer[j].material = sharedMaterial;
                 foreach (Collider collider in colliders)
                 {
                     collider.isTrigger = true;
@@ -29,5 +30,23 @@ public class TurretNullControl : MonoBehaviour
             }
         }
         Renderer.material.SetColor("_Main_Color", Color.red);
+    }
+
+    public void TurretColorSelector(bool viability)
+    {
+        if (viability)
+        {
+            for (int i = 0; i < smallChildsRenderer.Count; i++)
+            {
+                smallChildsRenderer[i].material.SetColor("_Main_Color", Color.green);
+            }
+            
+            return;
+        }
+        for (int i = 0; i < smallChildsRenderer.Count; i++)
+        {
+            smallChildsRenderer[i].material.SetColor("_Main_Color", Color.red);
+        }
+        
     }
 }
