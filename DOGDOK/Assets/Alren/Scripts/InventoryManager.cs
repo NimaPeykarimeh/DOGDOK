@@ -11,6 +11,7 @@ public class InventoryManager : MonoBehaviour
 {
     private Animator animator;
     private List<TextMeshProUGUI> UIAmount = new();
+    private bool buildingSelected;
     private Build1 currentBuild;
     private Transform cubeTransform;
     private Dictionary<Resource1, int> currentNeeds;
@@ -49,7 +50,7 @@ public class InventoryManager : MonoBehaviour
 
     void Update()
     {
-        if (currentBuild != null) // Turret'ý yarat ve location'ýný al.
+        if (buildingSelected) // Turret'ý yarat ve location'ýný al.
         {
             cubeTransform = CreateTurret();
         }
@@ -60,7 +61,11 @@ public class InventoryManager : MonoBehaviour
     }
 
     #region Turret Building
-    public void SetCurrentBuild(Build1 build) => currentBuild = build;
+    public void SetCurrentBuild(Build1 build)
+    {
+        buildingSelected = true; 
+        currentBuild = build;
+    }
     private Transform CreateTurret()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -79,7 +84,7 @@ public class InventoryManager : MonoBehaviour
                 Transform t = Instantiate(turretPrefab, positionToPlace, transform.rotation).GetComponent<Transform>();
                 turretRenderer = t.GetComponent<TurretNullControl>().Renderer;
                 turretCollider = t.GetComponent<BoxCollider>();
-                currentBuild = null;
+                buildingSelected = false;
                 return t;
             }
         }
@@ -168,7 +173,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
         //positionToPlace.y = 0;
-        cubeTransform.position = PlaceObjectOnGrid(positionToPlace, cubeTransform.localScale);
+        cubeTransform.position = PlaceObjectOnGrid(positionToPlace, currentBuild.buildingSize);
         if (!isAired && !Physics.CheckBox(cubeTransform.position + turretCollider.center, turretCollider.size / 2, turretCollider.transform.rotation))
         {
             cubeTransform.gameObject.GetComponent<TurretNullControl>().TurretColorSelector(true);
