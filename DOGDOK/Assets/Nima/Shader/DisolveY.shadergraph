@@ -939,10 +939,10 @@
     "m_Guid": {
         "m_GuidSerialized": "bc3712b6-2373-402d-a2da-7ddf68033ab3"
     },
-    "m_Name": "emmisionStrenght",
+    "m_Name": "Color Brightness",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "emmisionStrenght",
-    "m_DefaultReferenceName": "_emmisionStrenght",
+    "m_RefNameGeneratedByDisplayName": "Color Brightness",
+    "m_DefaultReferenceName": "_Color_Brightness",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -1553,7 +1553,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "506fb49e5a584341acaad2774fe84ebe",
     "m_Id": 0,
-    "m_DisplayName": "emmisionStrenght",
+    "m_DisplayName": "Color Brightness",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",

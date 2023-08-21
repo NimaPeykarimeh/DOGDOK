@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyTeleportManager : MonoBehaviour
 {
     EnemyController enemyController;
+    EnemyMovement enemyMovement;
     [SerializeField] SkinnedMeshRenderer mesh;
     [SerializeField] Material material;
 
@@ -22,6 +23,7 @@ public class EnemyTeleportManager : MonoBehaviour
 
     private void Start()
     {
+        enemyMovement = GetComponent<EnemyMovement>();
         enemyController = GetComponent<EnemyController>();
         material = mesh.material;
         
@@ -29,6 +31,7 @@ public class EnemyTeleportManager : MonoBehaviour
     public void Teleport(Vector3 _positon)
     {
         enemyController.isAlerted = false;
+        enemyMovement.canMove = false;
         isDissolving = true;
         isTeleporting = true;
         isGenerating = false;
@@ -58,6 +61,7 @@ public class EnemyTeleportManager : MonoBehaviour
             {
                 isGenerating = false;
                 isTeleporting = false;
+                enemyMovement.canMove = true;
                 enemyController.isAlerted = true;
                 _dissolveRatio = dissolveStart;
                 

@@ -10,7 +10,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float maxMovementSpeed;
     [SerializeField] float minMovementSpeed;
     [SerializeField] float movementSpeed;
-
+    public bool canMove;
     public float gravity = -9.8f;
     public Vector3 velocity;
     void Start()
@@ -27,7 +27,7 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!teleportManager.isTeleporting)
+        if (canMove)
         {
             if (enemyController.isAlerted || enemyController.isMoving)
             {

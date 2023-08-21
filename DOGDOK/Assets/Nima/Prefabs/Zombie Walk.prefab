@@ -1596,6 +1596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb67195d7d6f438498e951e1e0478647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   player: {fileID: 0}
   enemySpawner: {fileID: 0}
   isAlerted: 0
@@ -1628,6 +1629,7 @@ MonoBehaviour:
   maxMovementSpeed: 0.7
   minMovementSpeed: 0.5
   movementSpeed: 0
+  canMove: 1
   gravity: -9.8
   velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &-4859333179514968786
