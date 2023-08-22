@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
             currentWeight = Mathf.MoveTowards(currentWeight,newWeight,aimLayerWeightSpeed * Time.deltaTime);
             aimRig.weight = currentWeight;
             animator.SetLayerWeight(aimWeightLayerIndex,currentWeight);
-            weaponMat.SetFloat("_Dissolve",1-currentWeight);
+            weaponMat.SetFloat("_Dissolve",1 - currentWeight);
         }
         else
         {
