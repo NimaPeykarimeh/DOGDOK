@@ -85,7 +85,7 @@ public class EnemyFollow : MonoBehaviour
         
         if (isInDistance && isInAngle)//!enemyController.isAlerted
         {
-            Vector3 _direction = enemyController.player.position - eyes.position;
+            Vector3 _direction = (enemyController.player.position - eyes.position).normalized;
             _direction.y = 0;
             Ray ray = new Ray(eyes.position, _direction);
             RaycastHit hit;

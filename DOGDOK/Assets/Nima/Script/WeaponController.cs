@@ -18,6 +18,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] float fireTimer;
 
     [Header("WeaoponSettings")]
+    [SerializeField] Weapon weapon;
     [SerializeField] int fireRate;
     [SerializeField] int damage;
     [SerializeField] float shootRange;
@@ -41,17 +42,26 @@ public class WeaponController : MonoBehaviour
     [SerializeField] float recoilSpeed = 10f;
     float currentRecoil;
     float targetRecoil;
-
+    [Header("Info")]
+    [SerializeField] WeaponType weaponType;
     [SerializeField] AudioSource audioSource;
     [SerializeField] List<AudioClip> gunSounds;
     [SerializeField] float minPitch;
     [SerializeField] float maxPitch;
+
+    public enum WeaponType
+    {
+        OneHanded,
+        TwoHanded,
+        Melee
+    }
 
     private void Start()
     {
         shooting = GetComponent<Shooting>();
         fireInterval = (1 / (float)fireRate);
         fireTimer = fireInterval;
+        weaponType = weapon.weaponType;
     }
 
     void Recoil()
@@ -87,7 +97,7 @@ public class WeaponController : MonoBehaviour
         fireInterval = (1 / (float)fireRate);
         fireTimer += Time.deltaTime * acceleration;
 
-        if (isShooting && fireTimer >= fireInterval)
+        if (isShooting && fireTimer >= fireInterval && playerController.currentState == PlayerController.PlayerStates.Combat)
         {
             fireTimer = 0;
             Recoil();
