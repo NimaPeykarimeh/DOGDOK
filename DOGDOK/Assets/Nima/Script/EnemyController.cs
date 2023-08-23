@@ -3,9 +3,9 @@ using UnityEngine.UIElements;
 
 public class EnemyController : MonoBehaviour
 {
-    EnemyMovement enemyMovement;
+    public EnemyMovement enemyMovement;
     public Animator animator;
-    EnemyFollow enemyFollow;
+    public EnemyFollow enemyFollow;
     public Transform player;
     public EnemySpawner enemySpawner;
     public bool isAlerted;

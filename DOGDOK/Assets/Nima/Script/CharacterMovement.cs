@@ -179,7 +179,7 @@ public class CharacterMovement : MonoBehaviour
         {
             playerController.animator.SetFloat("DirX",moveX, 0.1f, Time.deltaTime);
             playerController.animator.SetFloat("DirY", moveZ,0.1f, Time.deltaTime);
-            
+            GetMovementDirection();
             //currentVelocity = inputMagnitude * currentMovementSpeed;
         }
         if (currentVelocity > 0 )
@@ -187,7 +187,7 @@ public class CharacterMovement : MonoBehaviour
             noiseMaker.MakeNoise(noiseMult * currentVelocity, noiseCenter);
         }
         speedToMove = inputMagnitude * currentMovementSpeed;
-        GetMovementDirection();
+        
         MovePlayer();
         UpdateStamina();
         

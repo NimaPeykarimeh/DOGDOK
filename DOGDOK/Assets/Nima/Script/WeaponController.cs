@@ -18,7 +18,6 @@ public class WeaponController : MonoBehaviour
     [SerializeField] float fireTimer;
 
     [Header("WeaoponSettings")]
-    [SerializeField] Weapon weapon;
     [SerializeField] int fireRate;
     [SerializeField] int damage;
     [SerializeField] float shootRange;
@@ -26,6 +25,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] bool isAutomatic;
     [SerializeField] bool isPiercing;
     [SerializeField] Transform shootPoint;
+    public float generatingDuration = 0.5f;
     [Header("Acceleration")]
     [SerializeField] bool isAccelerating;
     [SerializeField] float accelerationDuration = 5;
@@ -61,7 +61,6 @@ public class WeaponController : MonoBehaviour
         shooting = GetComponent<Shooting>();
         fireInterval = (1 / (float)fireRate);
         fireTimer = fireInterval;
-        weaponType = weapon.weaponType;
     }
 
     void Recoil()
@@ -72,16 +71,17 @@ public class WeaponController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1") && playerController.currentState == PlayerController.PlayerStates.Combat)
         {
             isShooting = true;
         }
-        else if (Input.GetButtonUp("Fire1"))
+        else
         {
             isShooting = false;
-
             accelerationTimer = 0;
         }
+
+
 
         if (isShooting && isAccelerating)
         {
@@ -97,7 +97,7 @@ public class WeaponController : MonoBehaviour
         fireInterval = (1 / (float)fireRate);
         fireTimer += Time.deltaTime * acceleration;
 
-        if (isShooting && fireTimer >= fireInterval && playerController.currentState == PlayerController.PlayerStates.Combat)
+        if (isShooting && fireTimer >= fireInterval )
         {
             fireTimer = 0;
             Recoil();

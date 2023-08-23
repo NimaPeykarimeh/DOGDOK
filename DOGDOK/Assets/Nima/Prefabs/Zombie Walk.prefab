@@ -1529,10 +1529,10 @@ Animator:
   m_GameObject: {fileID: 4452290907956169991}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f48d14f8fd639c541a94febfc97f9e71, type: 3}
-  m_Controller: {fileID: 9100000, guid: 269371335f2e1614ab886bc70ed2fe7f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9e9bb45d22994804f903918f4f5ec323, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1596,7 +1596,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb67195d7d6f438498e951e1e0478647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyMovement: {fileID: 0}
   animator: {fileID: 0}
+  enemyFollow: {fileID: 0}
   player: {fileID: 0}
   enemySpawner: {fileID: 0}
   isAlerted: 0
@@ -1626,9 +1628,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f49109d18ed122438007e5ce1a11c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMovementSpeed: 0.7
-  minMovementSpeed: 0.5
+  maxMovementSpeed: 0
+  minMovementSpeed: 0
   movementSpeed: 0
+  testVal: 0
   canMove: 1
   gravity: -9.8
   velocity: {x: 0, y: 0, z: 0}
@@ -1662,6 +1665,7 @@ MonoBehaviour:
   damage: 5
   attackInterval: 2
   attackDistance: 1
+  stopDelay: 0.3
 --- !u!1 &4471475954355285596
 GameObject:
   m_ObjectHideFlags: 0

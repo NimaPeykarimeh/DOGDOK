@@ -18,8 +18,13 @@ public class EnemyHealth : MonoBehaviour
 
     private void Dead()
     {
-        enemyController.enemySpawner.BackToPooler(transform);
+        //enemyController.enemySpawner.BackToPooler(transform);
+        enemyController.animator.SetFloat("DeathRandomizer", Random.Range(0f,1f));
+        enemyController.animator.SetTrigger("Dead");
         currentHealth = maxHealth;// change later
+        enemyController.enemyFollow.enabled = false;
+        enemyController.enemyMovement.enabled = false;
+        enemyController.enabled = false;
     }
 
     public void GetDamage(int _damage,EnemyBodyPartDamageDetection.BodyParts _bodyPart)
