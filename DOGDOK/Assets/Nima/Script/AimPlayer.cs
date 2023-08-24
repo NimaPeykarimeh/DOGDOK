@@ -12,7 +12,7 @@ public class AimPlayer : MonoBehaviour
     PlayerController playerController;
 
     [Header("Other")]
-    [SerializeField] bool isAiming;
+    public bool isAiming;
     [SerializeField] GameObject oriantation;
     [SerializeField] int verticalLimit;
     [Header("Sensitivity")]
@@ -40,6 +40,12 @@ public class AimPlayer : MonoBehaviour
     public float rotationY = 0f;
     [Header("Raycast")]
     public float maxRaycastDistance = 100f;
+    [Header("WeaponAnimation")]
+    [SerializeField] GameObject currentWeapon;
+    [SerializeField] float animationDuration;
+    float currentAnimationValue = 0f;
+    [SerializeField] Material wepMaterial;
+    
     void Start()
     {
         playerController = GetComponent<PlayerController>();
@@ -134,6 +140,20 @@ public class AimPlayer : MonoBehaviour
         if (Input.GetMouseButtonUp(1))
         {
             playerController.ChangePlayerState(PlayerStates.Basic);
+        }
+
+        if (isAiming)
+        {
+            currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, -0.05f, (1 / animationDuration) * Time.deltaTime);
+            wepMaterial = currentWeapon.GetComponent<Renderer>().material;
+            wepMaterial.SetFloat("_Dissolve", currentAnimationValue);
+
+        }
+        else
+        {
+            currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, 1, (1 / animationDuration) * Time.deltaTime);
+            wepMaterial = currentWeapon.GetComponent<Renderer>().material;
+            wepMaterial.SetFloat("_Dissolve", currentAnimationValue);
         }
     }
 }

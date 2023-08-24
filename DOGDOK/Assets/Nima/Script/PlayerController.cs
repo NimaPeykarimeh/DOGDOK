@@ -59,7 +59,6 @@ public class PlayerController : MonoBehaviour
 
     public void ChangePlayerState(PlayerStates _state)
     {
-        Debug.Log("State Changed");
         if (_state == PlayerStates.Basic)
         {
             //lastMouseValue = new Vector2(combatCamera.m_XAxis.Value,combatCamera.m_YAxis.Value);
@@ -80,11 +79,13 @@ public class PlayerController : MonoBehaviour
             //chande animaton weight
             currentWeight = animator.GetLayerWeight(aimWeightLayerIndex);
             newWeight = 1f;//Start Aim Animation
+            aimPlayer.isAiming = true;
             canRun = false;
         }
         if (currentState == PlayerStates.Combat)
         {
             canRun = true;
+            aimPlayer.isAiming = false;
             currentWeight = animator.GetLayerWeight(aimWeightLayerIndex);
             newWeight = 0f;//end Aim Animation
             if (characterMovement.isRunning)
@@ -115,7 +116,7 @@ public class PlayerController : MonoBehaviour
             currentWeight = Mathf.MoveTowards(currentWeight,newWeight,aimLayerWeightSpeed * Time.deltaTime);
             aimRig.weight = currentWeight;
             animator.SetLayerWeight(aimWeightLayerIndex,currentWeight);
-            weaponMat.SetFloat("_Dissolve",1 - currentWeight);
+            //weaponMat.SetFloat("_Dissolve",1 - currentWeight);
         }
         else
         {
