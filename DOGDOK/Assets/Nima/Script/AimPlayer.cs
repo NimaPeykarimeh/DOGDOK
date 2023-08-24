@@ -144,16 +144,16 @@ public class AimPlayer : MonoBehaviour
 
         if (isAiming)
         {
-            currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, -0.05f, (1 / animationDuration) * Time.deltaTime);
-            wepMaterial = currentWeapon.GetComponent<Renderer>().material;
-            wepMaterial.SetFloat("_Dissolve", currentAnimationValue);
+            //currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, -0.05f, (1 / animationDuration) * Time.deltaTime);
+            //wepMaterial = currentWeapon.GetComponent<Renderer>().material;
+            //wepMaterial.SetFloat("_Dissolve", currentAnimationValue);
 
         }
         else
         {
-            currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, 1, (1 / animationDuration) * Time.deltaTime);
-            wepMaterial = currentWeapon.GetComponent<Renderer>().material;
-            wepMaterial.SetFloat("_Dissolve", currentAnimationValue);
+            //currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, 1, (1 / animationDuration) * Time.deltaTime);
+            //wepMaterial = currentWeapon.GetComponent<Renderer>().material;
+            //wepMaterial.SetFloat("_Dissolve", currentAnimationValue);
         }
     }
 }
