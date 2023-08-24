@@ -25,7 +25,6 @@ public class WeaponController : MonoBehaviour
     [SerializeField] bool isAutomatic;
     [SerializeField] bool isPiercing;
     [SerializeField] Transform shootPoint;
-    public float generatingDuration = 0.5f;
     [Header("Acceleration")]
     [SerializeField] bool isAccelerating;
     [SerializeField] float accelerationDuration = 5;
@@ -42,8 +41,12 @@ public class WeaponController : MonoBehaviour
     [SerializeField] float recoilSpeed = 10f;
     float currentRecoil;
     float targetRecoil;
-    [Header("Info")]
-    [SerializeField] WeaponType weaponType;
+    [Header("Weapon Info")]
+    public float generatingDuration = 0.5f;
+    public float dissolvingDuration = 1f;
+    public WeaponType weaponType;
+    public Material weaponMaterial;
+
     [SerializeField] AudioSource audioSource;
     [SerializeField] List<AudioClip> gunSounds;
     [SerializeField] float minPitch;
@@ -58,6 +61,7 @@ public class WeaponController : MonoBehaviour
 
     private void Start()
     {
+        weaponMaterial = GetComponent<MeshRenderer>().material;
         shooting = GetComponent<Shooting>();
         fireInterval = (1 / (float)fireRate);
         fireTimer = fireInterval;
