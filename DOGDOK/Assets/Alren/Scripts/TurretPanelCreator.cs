@@ -61,6 +61,7 @@ public class TurretPanelCreator : MonoBehaviour
                 str.Append("/");
                 str.Append(_currentBuild.requiredAmount[j].ToString());
                 requiredTexts[z++].text = str.ToString();
+                //requiredTexts[z++].SetText(str.ToString());
             }
         }
     }

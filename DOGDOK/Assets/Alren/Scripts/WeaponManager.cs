@@ -1,21 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> weapons = new();
+    [SerializeField] private List<GameObject> Weapons = new();
     [SerializeField] private AimPlayer AimPlayer;
+    [SerializeField] private float shootDelayAfterChanging = 1f;
 
-    [Header("Animation Settings")]
-    [SerializeField] private float animationDuration = 3f;
+    private GameObject CurrentWeapon;
+    private WeaponController CurrentWeaponController;
+    private Renderer currentRenderer;
 
-    private float endAnimationValue = -0.1f;
-    private int currentWeaponIndex = 0;
     private float currentAnimationValue = 1f;
-    private bool isUpdating;
-    private Material currentMaterial;
+    private const float unsolvedValue = -0.1f;
+    private const float dissolvedValue = 1f;
+    private float generatingDuration;
+    private float dissolvingDuration;
 
+    private int currentWeaponIndex = 0;
+
+    private bool isGenerating; //Cismin generatingDuration sürecinin içinde olmasý durumunda true
+    private bool isDissolving; //Cismin dissolvingDuration sürecinin içinde olmasý durumunda true
+
+    private bool courutineCalled = false;
+    private bool canShoot;
+
+    private void Awake()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Weapons.Add(transform.GetChild(i).gameObject);
+        }
+    }
     void Start()
     {
         UpdateWeaponVisibility();
@@ -23,61 +41,135 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
-        if (isUpdating && AimPlayer.isAiming) //Aim Alýyorken ve Silahýn materyali tam yüklenmemiþken
+        if (isGenerating && AimPlayer.isAiming) 
         {
-            print("enter update");
-            UpdateWeaponMaterial();
+            GenerateWeaponMaterial();
         }
-        else if (!AimPlayer.isAiming) // Aim almýyorken silahý kayboldurtma
+        else if (!AimPlayer.isAiming) 
         {
-            isUpdating = false;
-            currentMaterial.SetFloat("_Dissolve", 1);
-            currentAnimationValue = 1; // Aim almayý býraktýðýnda saydamlýkta default deðere dön.
+            isGenerating = false;
+            isDissolving = true;
+            DissolveWeaponMaterial();
         }
-        else if (AimPlayer.isAiming) // Aim alýyorken silah deðiþtiðinde saydamlýkta deðiþiklik yapmadan devam ettir.
+        else if (!isGenerating) // && AimPlayer.isAiming
         {
-            UpdateWeaponMaterial();
+            isGenerating = true;
         }
+        WeaponSelectionInput();
+    }
 
+    private void WeaponSelectionInput()
+    {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll > 0)
         {
-            currentMaterial.SetFloat("_Dissolve", 1);
+            currentRenderer.material.SetFloat("_Dissolve", 1);
             SelectWeapon(currentWeaponIndex + 1);
         }
         else if (scroll < 0)
         {
-            currentMaterial.SetFloat("_Dissolve", 1);
+            currentRenderer.material.SetFloat("_Dissolve", 1);
             SelectWeapon(currentWeaponIndex - 1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha1) && currentWeaponIndex != 0)
+        {
+            currentWeaponIndex = 0;
+            SelectWeapon(currentWeaponIndex);
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && currentWeaponIndex != 1)
+        {
+            currentWeaponIndex = 1;
+            SelectWeapon(currentWeaponIndex);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && currentWeaponIndex != 2)
+        {
+            currentWeaponIndex = 2;
+            SelectWeapon(currentWeaponIndex);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4) && currentWeaponIndex != 3)
+        {
+            currentWeaponIndex = 3;
+            SelectWeapon(currentWeaponIndex);
         }
     }
 
     private void SelectWeapon(int nextWeaponIndex)
     {
-        weapons[currentWeaponIndex].SetActive(false);
+        CurrentWeapon.SetActive(false);
 
-        currentWeaponIndex = (nextWeaponIndex + weapons.Count) % weapons.Count;
+        currentWeaponIndex = (nextWeaponIndex + Weapons.Count) % Weapons.Count;
+
+        //StartCoroutine(Delay());
 
         UpdateWeaponVisibility();
     }
 
     private void UpdateWeaponVisibility()
     {
-        weapons[currentWeaponIndex].SetActive(true);
-        currentMaterial = weapons[currentWeaponIndex].GetComponent<Renderer>().material;
-        currentMaterial.SetFloat("_Dissolve", 1);
-        currentAnimationValue = 1;
-        isUpdating = true;
-    }
-    private void UpdateWeaponMaterial()
-    {
-        currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, endAnimationValue, (1 / animationDuration) * Time.deltaTime);
-        currentMaterial.SetFloat("_Dissolve", currentAnimationValue);
-        if (currentAnimationValue == endAnimationValue)
+        CurrentWeapon = Weapons[currentWeaponIndex];
+        CurrentWeapon.SetActive(true);
+
+        CurrentWeaponController = CurrentWeapon.GetComponent<WeaponController>();
+        //currentMaterial = CurrentWeaponController.weaponMaterial;
+        currentRenderer = CurrentWeapon.GetComponent<Renderer>();
+        generatingDuration = CurrentWeaponController.generatingDuration;
+        dissolvingDuration = CurrentWeaponController.dissolvingDuration;
+
+        if (AimPlayer.isAiming)
         {
-            print("updated");
-            isUpdating = false;
+            currentRenderer.material.SetFloat("_Dissolve", 1);
+            currentAnimationValue = 1;
+        }
+        else currentRenderer.material.SetFloat("_Dissolve", currentAnimationValue);
+
+        //currentAnimationValue = 1;
+
+        isGenerating = true;
+    }
+    private void GenerateWeaponMaterial()
+    {
+        currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, unsolvedValue, (1 / generatingDuration) * Time.deltaTime);
+        currentRenderer.material.SetFloat("_Dissolve", currentAnimationValue);
+        if (currentAnimationValue == unsolvedValue)
+        {
+            isGenerating = false;
         }
     }
+
+    private void DissolveWeaponMaterial()
+    {
+        currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, dissolvedValue, (1 / dissolvingDuration) * Time.deltaTime);
+        currentRenderer.material.SetFloat("_Dissolve", currentAnimationValue);
+        if (currentAnimationValue == dissolvedValue)
+        {
+            isDissolving = false;
+        }
+    }
+
+    //IEnumerator Delay()
+    //{
+    //    if (!courutineCalled)
+    //    {
+    //        courutineCalled = true;
+    //        yield return new WaitForSecondsRealtime(shootDelayAfterChanging);
+    //        if (courutineCalled)
+    //        {
+    //            canShoot = true;
+    //            print("yes");
+    //        }
+    //        else
+    //        {
+    //            print("no");
+    //            canShoot = false;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        print("no");
+    //        canShoot = false;
+    //    }
+    //    courutineCalled = false;
+    //}
 
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
-using UnityEditor.PackageManager.Requests;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -68,11 +67,9 @@ public class InventoryManager : MonoBehaviour
     }
     private Transform CreateTurret()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        isBuilding = true;
-
-        if (Physics.Raycast(ray, out hit))
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //kamerayý cachle daha optimize.
+        isBuilding = true; 
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
             Vector3 positionToPlace = hit.point;
 
@@ -81,11 +78,11 @@ public class InventoryManager : MonoBehaviour
                 positionToPlace = PlaceObjectOnGrid(positionToPlace, currentBuild.buildingSize);
                 //turretPrefab.transform.localScale = GridDisplay.cellSize * currentBuild.buildingSize; //scale'i !!!!!!
                 positionToPlace.y += turretPrefab.transform.localScale.y / 2; //küp yüksekliði
-                Transform t = Instantiate(turretPrefab, positionToPlace, transform.rotation).GetComponent<Transform>();
-                turretRenderer = t.GetComponent<TurretNullControl>().Renderer;
-                turretCollider = t.GetComponent<BoxCollider>();
+                Transform turretTransform = Instantiate(turretPrefab, positionToPlace, transform.rotation).GetComponent<Transform>();
+                turretRenderer = turretTransform.GetComponent<TurretNullControl>().Renderer;
+                turretCollider = turretTransform.GetComponent<BoxCollider>();
                 buildingSelected = false;
-                return t;
+                return turretTransform;
             }
         }
         return null;
@@ -155,9 +152,9 @@ public class InventoryManager : MonoBehaviour
     private void TrackMouseForBuilding()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
+
         Vector3 positionToPlace;
-        if (Physics.Raycast(ray, out hit, buildDistance, GroundLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, buildDistance, GroundLayer))
         {
             positionToPlace = hit.point;
             isAired = false;

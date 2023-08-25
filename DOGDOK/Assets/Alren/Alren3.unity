@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.6462045, g: 0.4431622, b: 0.4153735, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1234,7 +1234,6 @@ MonoBehaviour:
   isAutomatic: 0
   isPiercing: 0
   shootPoint: {fileID: 1244239695}
-  generatingDuration: 0.5
   isAccelerating: 1
   accelerationDuration: 5
   maxAcceleration: 10
@@ -1246,7 +1245,10 @@ MonoBehaviour:
   maxRecoil: 0.3
   recoilMagnitude: 1
   recoilSpeed: 10
+  generatingDuration: 0.5
+  dissolvingDuration: 1
   weaponType: 0
+  weaponMaterial: {fileID: 2100000, guid: 590e2e81003a64d4e99197fc73e1fbef, type: 2}
   audioSource: {fileID: 557702750}
   gunSounds:
   - {fileID: 8300000, guid: 84579fc31f6b3e346b141782d4be15d8, type: 3}
@@ -2804,6 +2806,82 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281838105}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &297212882
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 297212883}
+  - component: {fileID: 297212885}
+  - component: {fileID: 297212884}
+  m_Layer: 5
+  m_Name: Weapon Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &297212883
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297212882}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2710788454248573531}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &297212884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297212882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &297212885
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297212882}
+  m_CullTransparentMesh: 1
 --- !u!1 &303372008
 GameObject:
   m_ObjectHideFlags: 0
@@ -5624,7 +5702,6 @@ MonoBehaviour:
   isAutomatic: 0
   isPiercing: 0
   shootPoint: {fileID: 1240083976}
-  generatingDuration: 0.5
   isAccelerating: 1
   accelerationDuration: 5
   maxAcceleration: 10
@@ -5636,7 +5713,10 @@ MonoBehaviour:
   maxRecoil: 0.3
   recoilMagnitude: 1
   recoilSpeed: 10
+  generatingDuration: 0.5
+  dissolvingDuration: 1
   weaponType: 0
+  weaponMaterial: {fileID: 0}
   audioSource: {fileID: 557702750}
   gunSounds:
   - {fileID: 8300000, guid: 84579fc31f6b3e346b141782d4be15d8, type: 3}
@@ -12341,7 +12421,6 @@ MonoBehaviour:
   isAutomatic: 0
   isPiercing: 0
   shootPoint: {fileID: 0}
-  generatingDuration: 0.5
   isAccelerating: 0
   accelerationDuration: 5
   maxAcceleration: 2
@@ -12353,7 +12432,10 @@ MonoBehaviour:
   maxRecoil: 0.3
   recoilMagnitude: 1
   recoilSpeed: 10
+  generatingDuration: 0.5
+  dissolvingDuration: 1
   weaponType: 0
+  weaponMaterial: {fileID: 2100000, guid: 6b6a5767a3a848643aed3563078030a2, type: 2}
   audioSource: {fileID: 0}
   gunSounds: []
   minPitch: 0
@@ -12752,57 +12834,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815355136}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &832330351
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 832330352}
-  - component: {fileID: 832330353}
-  m_Layer: 0
-  m_Name: Weapon Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &832330352
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832330351}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2710788455400668778}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &832330353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832330351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd405d39c7a648540ba333b403a73de2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 119621323}
-  - {fileID: 752474207}
-  - {fileID: 1650086593}
-  - {fileID: 1129386897}
-  AimPlayer: {fileID: 673692002}
-  animationDuration: 2
 --- !u!1 &844018279
 GameObject:
   m_ObjectHideFlags: 0
@@ -15082,7 +15113,6 @@ MonoBehaviour:
   isAutomatic: 0
   isPiercing: 0
   shootPoint: {fileID: 0}
-  generatingDuration: 0.5
   isAccelerating: 0
   accelerationDuration: 5
   maxAcceleration: 2
@@ -15094,7 +15124,10 @@ MonoBehaviour:
   maxRecoil: 0.3
   recoilMagnitude: 1
   recoilSpeed: 10
+  generatingDuration: 0.5
+  dissolvingDuration: 1
   weaponType: 2
+  weaponMaterial: {fileID: 2100000, guid: 998c22956f6b73943993340b5a208a91, type: 2}
   audioSource: {fileID: 0}
   gunSounds: []
   minPitch: 0
@@ -16469,6 +16502,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1277628454}
+  - component: {fileID: 1277628455}
   m_Layer: 8
   m_Name: WeaponHolder 2
   m_TagString: Untagged
@@ -16495,6 +16529,21 @@ Transform:
   m_Father: {fileID: 344877353}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1277628455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277628453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd405d39c7a648540ba333b403a73de2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Weapons: []
+  AimPlayer: {fileID: 673692002}
+  shootDelayAfterChanging: 1
 --- !u!1 &1312554854
 GameObject:
   m_ObjectHideFlags: 0
@@ -17957,7 +18006,6 @@ MonoBehaviour:
   isAutomatic: 0
   isPiercing: 0
   shootPoint: {fileID: 1474616675}
-  generatingDuration: 0.5
   isAccelerating: 1
   accelerationDuration: 5
   maxAcceleration: 10
@@ -17969,7 +18017,10 @@ MonoBehaviour:
   maxRecoil: 0.3
   recoilMagnitude: 1
   recoilSpeed: 0
+  generatingDuration: 0.5
+  dissolvingDuration: 1
   weaponType: 0
+  weaponMaterial: {fileID: 0}
   audioSource: {fileID: 1419088092}
   gunSounds:
   - {fileID: 8300000, guid: 84579fc31f6b3e346b141782d4be15d8, type: 3}
@@ -18366,6 +18417,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1429695931}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1435410148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1435410149}
+  m_Layer: 0
+  m_Name: WeaponUI Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1435410149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435410148}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2710788455400668778}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1441070761
 GameObject:
   m_ObjectHideFlags: 0
@@ -20534,7 +20616,6 @@ MonoBehaviour:
   isAutomatic: 0
   isPiercing: 0
   shootPoint: {fileID: 0}
-  generatingDuration: 0.5
   isAccelerating: 0
   accelerationDuration: 5
   maxAcceleration: 2
@@ -20546,7 +20627,10 @@ MonoBehaviour:
   maxRecoil: 0.3
   recoilMagnitude: 1
   recoilSpeed: 10
+  generatingDuration: 0.5
+  dissolvingDuration: 1
   weaponType: 1
+  weaponMaterial: {fileID: 2100000, guid: 7040d17b205bec444b32a4abc43c81f7, type: 2}
   audioSource: {fileID: 0}
   gunSounds: []
   minPitch: 0
@@ -26751,6 +26835,7 @@ RectTransform:
   m_Children:
   - {fileID: 8208006060706342117}
   - {fileID: 2710788455573219899}
+  - {fileID: 297212883}
   m_Father: {fileID: 2710788454386182069}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -26794,7 +26879,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2710788455400668778}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2710788454386086574
 GameObject:
@@ -26994,10 +27079,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 832330352}
   - {fileID: 8996759068778900201}
   - {fileID: 2710788455414286890}
   - {fileID: 2710788454386086561}
+  - {fileID: 1435410149}
   - {fileID: 2710788454386182069}
   - {fileID: 2710788455179692600}
   m_Father: {fileID: 0}
@@ -27050,7 +27135,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2710788455400668778}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -39583,7 +39668,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2710788455400668778}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8996759068778900206
 GameObject:
