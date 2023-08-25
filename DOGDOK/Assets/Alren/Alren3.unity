@@ -1249,6 +1249,8 @@ MonoBehaviour:
   dissolvingDuration: 1
   weaponType: 0
   weaponMaterial: {fileID: 2100000, guid: 590e2e81003a64d4e99197fc73e1fbef, type: 2}
+  canShoot: 0
+  Weapon1: {fileID: 11400000, guid: 8e49e17d00837d848b8e74579611434e, type: 2}
   audioSource: {fileID: 557702750}
   gunSounds:
   - {fileID: 8300000, guid: 84579fc31f6b3e346b141782d4be15d8, type: 3}
@@ -5717,6 +5719,8 @@ MonoBehaviour:
   dissolvingDuration: 1
   weaponType: 0
   weaponMaterial: {fileID: 0}
+  canShoot: 0
+  Weapon1: {fileID: 0}
   audioSource: {fileID: 557702750}
   gunSounds:
   - {fileID: 8300000, guid: 84579fc31f6b3e346b141782d4be15d8, type: 3}
@@ -12436,6 +12440,8 @@ MonoBehaviour:
   dissolvingDuration: 1
   weaponType: 0
   weaponMaterial: {fileID: 2100000, guid: 6b6a5767a3a848643aed3563078030a2, type: 2}
+  canShoot: 0
+  Weapon1: {fileID: 11400000, guid: 0f3791f2d63fd0143b9b89a9e6f0b7de, type: 2}
   audioSource: {fileID: 0}
   gunSounds: []
   minPitch: 0
@@ -15128,6 +15134,8 @@ MonoBehaviour:
   dissolvingDuration: 1
   weaponType: 2
   weaponMaterial: {fileID: 2100000, guid: 998c22956f6b73943993340b5a208a91, type: 2}
+  canShoot: 0
+  Weapon1: {fileID: 11400000, guid: 3352e6d8499ae744e96f31b5ff616c33, type: 2}
   audioSource: {fileID: 0}
   gunSounds: []
   minPitch: 0
@@ -18021,6 +18029,8 @@ MonoBehaviour:
   dissolvingDuration: 1
   weaponType: 0
   weaponMaterial: {fileID: 0}
+  canShoot: 0
+  Weapon1: {fileID: 0}
   audioSource: {fileID: 1419088092}
   gunSounds:
   - {fileID: 8300000, guid: 84579fc31f6b3e346b141782d4be15d8, type: 3}
@@ -20631,6 +20641,8 @@ MonoBehaviour:
   dissolvingDuration: 1
   weaponType: 1
   weaponMaterial: {fileID: 2100000, guid: 7040d17b205bec444b32a4abc43c81f7, type: 2}
+  canShoot: 0
+  Weapon1: {fileID: 11400000, guid: 63db2070fb6811c4da7cb8c347c5c12e, type: 2}
   audioSource: {fileID: 0}
   gunSounds: []
   minPitch: 0

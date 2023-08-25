@@ -34,7 +34,6 @@ public class TurretPanelCreator : MonoBehaviour
             for (int j = 0; j < _currentBuild.requiredResource.Count; j++)
             {
                 GameObject _resourceBar = Instantiate(resourceBar, transform.position, transform.rotation);
-                Debug.Log(_resourceBar.name);
                 _resourceBar.transform.parent = _card.transform.Find("ResourceHolder").transform;
                 _resourceBar.GetComponent<RectTransform>().localScale = Vector3.one;
 

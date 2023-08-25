@@ -48,6 +48,7 @@ public class WeaponController : MonoBehaviour
     public WeaponType weaponType;
     public Material weaponMaterial;
     public bool canShoot;
+    public Weapon1 Weapon1;
 
     [SerializeField] AudioSource audioSource;
     [SerializeField] List<AudioClip> gunSounds;

@@ -8,8 +8,10 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private List<GameObject> Weapons = new();
     [SerializeField] private AimPlayer AimPlayer;
     [SerializeField] private float shootDelayAfterChanging = 1f;
+    [SerializeField] private WeaponUIManager weaponUIManager;
 
-    private GameObject CurrentWeapon;
+    private GameObject CurrentWeaponObject;
+    [HideInInspector] public Weapon1 CurrentWeapon1;
     private WeaponController CurrentWeaponController;
     private Renderer currentRenderer;
 
@@ -30,10 +32,11 @@ public class WeaponManager : MonoBehaviour
         {
             Weapons.Add(transform.GetChild(i).gameObject);
         }
+        UpdateWeaponVisibility();
     }
     void Start()
     {
-        UpdateWeaponVisibility();
+        
     }
 
     private void Update()
@@ -94,7 +97,7 @@ public class WeaponManager : MonoBehaviour
 
     private void SelectWeapon(int nextWeaponIndex)
     {
-        CurrentWeapon.SetActive(false);
+        CurrentWeaponObject.SetActive(false);
 
         currentWeaponIndex = (nextWeaponIndex + Weapons.Count) % Weapons.Count;
 
@@ -103,12 +106,14 @@ public class WeaponManager : MonoBehaviour
 
     private void UpdateWeaponVisibility()
     {
-        CurrentWeapon = Weapons[currentWeaponIndex];
-        CurrentWeapon.SetActive(true);
+        CurrentWeaponObject = Weapons[currentWeaponIndex];
+        CurrentWeaponObject.SetActive(true);
 
-        CurrentWeaponController = CurrentWeapon.GetComponent<WeaponController>();
-        //currentMaterial = CurrentWeaponController.weaponMaterial;
-        currentRenderer = CurrentWeapon.GetComponent<Renderer>();
+        CurrentWeaponController = CurrentWeaponObject.GetComponent<WeaponController>();
+        CurrentWeapon1 = CurrentWeaponController.Weapon1;
+        currentRenderer = CurrentWeaponObject.GetComponent<Renderer>();
+        weaponUIManager.SetWeaponImage();
+
         generatingDuration = CurrentWeaponController.generatingDuration;
         dissolvingDuration = CurrentWeaponController.dissolvingDuration;
 
@@ -118,7 +123,7 @@ public class WeaponManager : MonoBehaviour
             currentAnimationValue = 1;
         }
         else currentRenderer.material.SetFloat("_Dissolve", currentAnimationValue);
-
+        
         isGenerating = true;
     }
     private void GenerateWeaponMaterial()
