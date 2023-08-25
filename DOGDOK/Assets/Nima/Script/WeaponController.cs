@@ -25,6 +25,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] bool isAutomatic;
     [SerializeField] bool isPiercing;
     [SerializeField] Transform shootPoint;
+    
     [Header("Acceleration")]
     [SerializeField] bool isAccelerating;
     [SerializeField] float accelerationDuration = 5;
@@ -46,6 +47,7 @@ public class WeaponController : MonoBehaviour
     public float dissolvingDuration = 1f;
     public WeaponType weaponType;
     public Material weaponMaterial;
+    public bool canShoot;
 
     [SerializeField] AudioSource audioSource;
     [SerializeField] List<AudioClip> gunSounds;

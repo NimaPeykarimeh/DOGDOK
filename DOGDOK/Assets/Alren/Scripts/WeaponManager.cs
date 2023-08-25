@@ -24,9 +24,6 @@ public class WeaponManager : MonoBehaviour
     private bool isGenerating; //Cismin generatingDuration sürecinin içinde olmasý durumunda true
     private bool isDissolving; //Cismin dissolvingDuration sürecinin içinde olmasý durumunda true
 
-    private bool courutineCalled = false;
-    private bool canShoot;
-
     private void Awake()
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -47,6 +44,7 @@ public class WeaponManager : MonoBehaviour
         }
         else if (!AimPlayer.isAiming) 
         {
+            CurrentWeaponController.canShoot = false;
             isGenerating = false;
             isDissolving = true;
             DissolveWeaponMaterial();
@@ -100,8 +98,6 @@ public class WeaponManager : MonoBehaviour
 
         currentWeaponIndex = (nextWeaponIndex + Weapons.Count) % Weapons.Count;
 
-        //StartCoroutine(Delay());
-
         UpdateWeaponVisibility();
     }
 
@@ -123,8 +119,6 @@ public class WeaponManager : MonoBehaviour
         }
         else currentRenderer.material.SetFloat("_Dissolve", currentAnimationValue);
 
-        //currentAnimationValue = 1;
-
         isGenerating = true;
     }
     private void GenerateWeaponMaterial()
@@ -134,7 +128,9 @@ public class WeaponManager : MonoBehaviour
         if (currentAnimationValue == unsolvedValue)
         {
             isGenerating = false;
+            CurrentWeaponController.canShoot = true;
         }
+        else CurrentWeaponController.canShoot = false;
     }
 
     private void DissolveWeaponMaterial()
@@ -146,30 +142,4 @@ public class WeaponManager : MonoBehaviour
             isDissolving = false;
         }
     }
-
-    //IEnumerator Delay()
-    //{
-    //    if (!courutineCalled)
-    //    {
-    //        courutineCalled = true;
-    //        yield return new WaitForSecondsRealtime(shootDelayAfterChanging);
-    //        if (courutineCalled)
-    //        {
-    //            canShoot = true;
-    //            print("yes");
-    //        }
-    //        else
-    //        {
-    //            print("no");
-    //            canShoot = false;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        print("no");
-    //        canShoot = false;
-    //    }
-    //    courutineCalled = false;
-    //}
-
 }
