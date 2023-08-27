@@ -104,7 +104,7 @@ public class WeaponController : MonoBehaviour
         fireInterval = (1 / (float)fireRate);
         fireTimer += Time.deltaTime * acceleration;
 
-        if (isShooting && fireTimer >= fireInterval )
+        if (isShooting && fireTimer >= fireInterval && canShoot)
         {
             fireTimer = 0;
             Recoil();

@@ -10,7 +10,9 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField] float dayTime;
     [SerializeField] int dayTimeDurationMin = 1;
     [SerializeField] Transform sunTransform;
-    [SerializeField] HDAdditionalLightData sunLight;
+    [SerializeField] HDAdditionalLightData[] sunLight;
+    [SerializeField] float[] maxLight;
+    [SerializeField] float[] minLight;
     [SerializeField] float dayLigthPow;
     [SerializeField] List<Material> shaderMaterials;
     // Start is called before the first frame update
@@ -24,7 +26,10 @@ public class DayNightCycle : MonoBehaviour
         float _sunAngle = Mathf.Lerp(-90,270,_dayTime/24);
         sunTransform.rotation = Quaternion.Euler(_sunAngle,-30f,0f);
         float _sunIntensity = Mathf.Pow((0.5f - Mathf.Abs((0.5f - (_dayTime/24f)))) / 0.5f, dayLigthPow);
-        sunLight.intensity = Mathf.Lerp(3, 15,_sunIntensity);
+        for (int i = 0; i < sunLight.Length; i++)
+        {
+            sunLight[i].intensity = Mathf.Lerp(minLight[i], maxLight[i], _sunIntensity);
+        }
 
         foreach (Material _mat in shaderMaterials)
         {
