@@ -251,7 +251,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5759226
 MonoBehaviour:
@@ -893,7 +893,7 @@ Transform:
   - {fileID: 717042282}
   - {fileID: 844018280}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &102208761
 GameObject:
@@ -1123,6 +1123,7 @@ GameObject:
   - component: {fileID: 119621330}
   - component: {fileID: 119621329}
   - component: {fileID: 119621328}
+  - component: {fileID: 119621331}
   m_Layer: 8
   m_Name: BoyutBozar1
   m_TagString: Untagged
@@ -1221,41 +1222,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da149199a56a224ca60da863f524857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 673691997}
-  shooting: {fileID: 557702751}
-  aimPlayer: {fileID: 673692002}
-  isShooting: 0
-  fireInterval: 0.5
-  fireTimer: 1.310565
-  fireRate: 1
-  damage: 5
-  shootRange: 100
-  noiseRange: 15.6
-  isAutomatic: 0
-  isPiercing: 0
-  shootPoint: {fileID: 1244239695}
-  isAccelerating: 1
-  accelerationDuration: 5
-  maxAcceleration: 10
-  accelerationTimer: 0
-  acceleration: 1
-  recoilTreshold: 0.1
-  isRecoilingUp: 0
-  isRecoilingDown: 0
-  maxRecoil: 0.3
-  recoilMagnitude: 1
-  recoilSpeed: 10
   generatingDuration: 0.5
   dissolvingDuration: 1
-  weaponType: 0
+  weaponType: 1
   weaponMaterial: {fileID: 2100000, guid: 590e2e81003a64d4e99197fc73e1fbef, type: 2}
   canShoot: 0
   Weapon1: {fileID: 11400000, guid: 8e49e17d00837d848b8e74579611434e, type: 2}
-  audioSource: {fileID: 557702750}
-  gunSounds:
-  - {fileID: 8300000, guid: 84579fc31f6b3e346b141782d4be15d8, type: 3}
-  minPitch: 0.8
-  maxPitch: 1.2
 --- !u!114 &119621329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1274,6 +1246,31 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   shootingPoint: {fileID: 0}
+  isShooting: 0
+  fireInterval: 0
+  fireTimer: 0
+  fireRate: 2
+  damage: 5
+  shootRange: 100
+  noiseRange: 15.6
+  isAutomatic: 0
+  isPiercing: 0
+  shootPoint: {fileID: 0}
+  isAccelerating: 0
+  accelerationDuration: 5
+  maxAcceleration: 10
+  accelerationTimer: 0
+  acceleration: 1
+  recoilTreshold: 0.1
+  isRecoilingUp: 0
+  isRecoilingDown: 0
+  maxRecoil: 0.3
+  recoilMagnitude: 1
+  recoilSpeed: 10
+  audioSource: {fileID: 0}
+  gunSounds: []
+  minPitch: 0.8
+  maxPitch: 1.2
 --- !u!114 &119621330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1293,6 +1290,102 @@ MonoBehaviour:
     m_Bits: 0
   gizmoTimer: 0
   gizmoDuration: 0.1
+--- !u!82 &119621331
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119621323}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &121476251
 GameObject:
   m_ObjectHideFlags: 0
@@ -3252,7 +3345,7 @@ Transform:
   - {fileID: 64389629}
   - {fileID: 1528637167}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &338814224
 GameObject:
@@ -3836,7 +3929,7 @@ Transform:
   - {fileID: 1923888337}
   - {fileID: 673691996}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &360970623
 GameObject:
@@ -3998,7 +4091,7 @@ Transform:
   m_Children:
   - {fileID: 1031286879}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &375322999
 GameObject:
@@ -4331,7 +4424,7 @@ RectTransform:
   - {fileID: 1639910683}
   - {fileID: 55266269}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5661,6 +5754,31 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1929
   shootingPoint: {fileID: 1618908151}
+  isShooting: 0
+  fireInterval: 0
+  fireTimer: 0
+  fireRate: 2
+  damage: 5
+  shootRange: 100
+  noiseRange: 15.6
+  isAutomatic: 0
+  isPiercing: 0
+  shootPoint: {fileID: 0}
+  isAccelerating: 0
+  accelerationDuration: 5
+  maxAcceleration: 10
+  accelerationTimer: 0
+  acceleration: 1
+  recoilTreshold: 0.1
+  isRecoilingUp: 0
+  isRecoilingDown: 0
+  maxRecoil: 0.3
+  recoilMagnitude: 1
+  recoilSpeed: 10
+  audioSource: {fileID: 0}
+  gunSounds: []
+  minPitch: 0.8
+  maxPitch: 1.2
 --- !u!114 &557702752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5692,41 +5810,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da149199a56a224ca60da863f524857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 673691997}
-  shooting: {fileID: 557702751}
-  aimPlayer: {fileID: 673692002}
-  isShooting: 0
-  fireInterval: 0.5
-  fireTimer: 1.310565
-  fireRate: 1
-  damage: 5
-  shootRange: 100
-  noiseRange: 15.6
-  isAutomatic: 0
-  isPiercing: 0
-  shootPoint: {fileID: 1240083976}
-  isAccelerating: 1
-  accelerationDuration: 5
-  maxAcceleration: 10
-  accelerationTimer: 0
-  acceleration: 1
-  recoilTreshold: 0.1
-  isRecoilingUp: 0
-  isRecoilingDown: 0
-  maxRecoil: 0.3
-  recoilMagnitude: 1
-  recoilSpeed: 10
   generatingDuration: 0.5
   dissolvingDuration: 1
   weaponType: 0
   weaponMaterial: {fileID: 0}
   canShoot: 0
   Weapon1: {fileID: 0}
-  audioSource: {fileID: 557702750}
-  gunSounds:
-  - {fileID: 8300000, guid: 84579fc31f6b3e346b141782d4be15d8, type: 3}
-  minPitch: 0.8
-  maxPitch: 1.2
 --- !u!1 &557702815
 GameObject:
   m_ObjectHideFlags: 0
@@ -5856,7 +5945,7 @@ Transform:
   m_Children:
   - {fileID: 922702406}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &598251609
 GameObject:
@@ -5953,7 +6042,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 28
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: -130.3, z: 0}
 --- !u!1 &598894686
 GameObject:
@@ -6114,7 +6203,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &652532538
 GameObject:
@@ -6242,7 +6331,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &655620050
 GameObject:
@@ -6578,8 +6667,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 2093696640}
-  aimPlayer: {fileID: 0}
-  characterMovement: {fileID: 0}
+  aimPlayer: {fileID: 673692002}
+  characterMovement: {fileID: 673692000}
   animator: {fileID: 1447001862}
   isAiming: 0
   isShooting: 0
@@ -6591,7 +6680,6 @@ MonoBehaviour:
   basicCamera: {fileID: 1742430544}
   currentState: 0
   lastMouseValue: {x: 0, y: 0}
-  aimRig: {fileID: 288942}
   aimLayerWeightSpeed: 3
   aimWeightLayerIndex: 1
   weaponMat: {fileID: 2100000, guid: 590e2e81003a64d4e99197fc73e1fbef, type: 2}
@@ -6681,6 +6769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8ca4014c0d57d4ba7323468a411417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponManager: {fileID: 1277628455}
   isAiming: 0
   oriantation: {fileID: 1009716565}
   verticalLimit: 45
@@ -6704,9 +6793,8 @@ MonoBehaviour:
   rotationX: 0
   rotationY: 0
   maxRaycastDistance: 100
-  currentWeapon: {fileID: 1880709173}
   animationDuration: 1
-  wepMaterial: {fileID: 0}
+  rigLayers: []
 --- !u!114 &673692003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7015,7 +7103,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: -130.3, z: 0}
 --- !u!1 &707162297
 GameObject:
@@ -12392,6 +12480,7 @@ GameObject:
   - component: {fileID: 752474214}
   - component: {fileID: 752474213}
   - component: {fileID: 752474212}
+  - component: {fileID: 752474215}
   m_Layer: 8
   m_Name: Wep2
   m_TagString: Untagged
@@ -12489,40 +12578,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da149199a56a224ca60da863f524857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 673691997}
-  shooting: {fileID: 0}
-  aimPlayer: {fileID: 673692002}
-  isShooting: 0
-  fireInterval: 0
-  fireTimer: 0
-  fireRate: 0
-  damage: 0
-  shootRange: 0
-  noiseRange: 0
-  isAutomatic: 0
-  isPiercing: 0
-  shootPoint: {fileID: 0}
-  isAccelerating: 0
-  accelerationDuration: 5
-  maxAcceleration: 2
-  accelerationTimer: 0
-  acceleration: 1
-  recoilTreshold: 0.1
-  isRecoilingUp: 0
-  isRecoilingDown: 0
-  maxRecoil: 0.3
-  recoilMagnitude: 1
-  recoilSpeed: 10
   generatingDuration: 0.5
   dissolvingDuration: 1
-  weaponType: 0
+  weaponType: 1
   weaponMaterial: {fileID: 2100000, guid: 6b6a5767a3a848643aed3563078030a2, type: 2}
   canShoot: 0
   Weapon1: {fileID: 11400000, guid: 0f3791f2d63fd0143b9b89a9e6f0b7de, type: 2}
-  audioSource: {fileID: 0}
-  gunSounds: []
-  minPitch: 0
-  maxPitch: 0
 --- !u!114 &752474213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12541,6 +12602,31 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   shootingPoint: {fileID: 0}
+  isShooting: 0
+  fireInterval: 0
+  fireTimer: 0
+  fireRate: 2
+  damage: 5
+  shootRange: 100
+  noiseRange: 15.6
+  isAutomatic: 0
+  isPiercing: 0
+  shootPoint: {fileID: 0}
+  isAccelerating: 0
+  accelerationDuration: 5
+  maxAcceleration: 10
+  accelerationTimer: 0
+  acceleration: 1
+  recoilTreshold: 0.1
+  isRecoilingUp: 0
+  isRecoilingDown: 0
+  maxRecoil: 0.3
+  recoilMagnitude: 1
+  recoilSpeed: 10
+  audioSource: {fileID: 0}
+  gunSounds: []
+  minPitch: 0.8
+  maxPitch: 1.2
 --- !u!114 &752474214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12560,6 +12646,102 @@ MonoBehaviour:
     m_Bits: 0
   gizmoTimer: 0
   gizmoDuration: 0.1
+--- !u!82 &752474215
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752474207}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &762585114
 GameObject:
   m_ObjectHideFlags: 0
@@ -12786,7 +12968,7 @@ Transform:
   - {fileID: 1843219714}
   - {fileID: 772805689}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &812011755
 GameObject:
@@ -14117,7 +14299,7 @@ Transform:
   - {fileID: 346575882}
   - {fileID: 268640964}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &936227133
 GameObject:
@@ -14463,7 +14645,7 @@ Transform:
   - {fileID: 190458057}
   - {fileID: 343304940}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1009716565
 GameObject:
@@ -15086,6 +15268,7 @@ GameObject:
   - component: {fileID: 1129386904}
   - component: {fileID: 1129386903}
   - component: {fileID: 1129386902}
+  - component: {fileID: 1129386905}
   m_Layer: 8
   m_Name: Wep4
   m_TagString: Untagged
@@ -15183,40 +15366,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da149199a56a224ca60da863f524857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 673691997}
-  shooting: {fileID: 0}
-  aimPlayer: {fileID: 673692002}
-  isShooting: 0
-  fireInterval: 0
-  fireTimer: 0
-  fireRate: 0
-  damage: 0
-  shootRange: 0
-  noiseRange: 0
-  isAutomatic: 0
-  isPiercing: 0
-  shootPoint: {fileID: 0}
-  isAccelerating: 0
-  accelerationDuration: 5
-  maxAcceleration: 2
-  accelerationTimer: 0
-  acceleration: 1
-  recoilTreshold: 0.1
-  isRecoilingUp: 0
-  isRecoilingDown: 0
-  maxRecoil: 0.3
-  recoilMagnitude: 1
-  recoilSpeed: 10
   generatingDuration: 0.5
   dissolvingDuration: 1
-  weaponType: 2
+  weaponType: 1
   weaponMaterial: {fileID: 2100000, guid: 998c22956f6b73943993340b5a208a91, type: 2}
   canShoot: 0
   Weapon1: {fileID: 11400000, guid: 3352e6d8499ae744e96f31b5ff616c33, type: 2}
-  audioSource: {fileID: 0}
-  gunSounds: []
-  minPitch: 0
-  maxPitch: 0
 --- !u!114 &1129386903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15235,6 +15390,31 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   shootingPoint: {fileID: 0}
+  isShooting: 0
+  fireInterval: 0
+  fireTimer: 0
+  fireRate: 2
+  damage: 5
+  shootRange: 100
+  noiseRange: 15.6
+  isAutomatic: 0
+  isPiercing: 0
+  shootPoint: {fileID: 0}
+  isAccelerating: 0
+  accelerationDuration: 5
+  maxAcceleration: 10
+  accelerationTimer: 0
+  acceleration: 1
+  recoilTreshold: 0.1
+  isRecoilingUp: 0
+  isRecoilingDown: 0
+  maxRecoil: 0.3
+  recoilMagnitude: 1
+  recoilSpeed: 10
+  audioSource: {fileID: 0}
+  gunSounds: []
+  minPitch: 0.8
+  maxPitch: 1.2
 --- !u!114 &1129386904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15254,6 +15434,102 @@ MonoBehaviour:
     m_Bits: 0
   gizmoTimer: 0
   gizmoDuration: 0.1
+--- !u!82 &1129386905
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129386897}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1129523274
 GameObject:
   m_ObjectHideFlags: 0
@@ -15543,7 +15819,7 @@ Transform:
   m_Children:
   - {fileID: 2003173417}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1169790039
 GameObject:
@@ -16631,6 +16907,7 @@ MonoBehaviour:
   shootDelayAfterChanging: 1
   weaponUIManager: {fileID: 1435410150}
   CurrentWeapon1: {fileID: 0}
+  CurrentWeaponController: {fileID: 0}
 --- !u!1 &1312554854
 GameObject:
   m_ObjectHideFlags: 0
@@ -17166,7 +17443,7 @@ Transform:
   - {fileID: 360970624}
   - {fileID: 343257656}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1345896200
 Rigidbody:
@@ -18080,41 +18357,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da149199a56a224ca60da863f524857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
-  shooting: {fileID: 1419088091}
-  aimPlayer: {fileID: 0}
-  isShooting: 0
-  fireInterval: 0.5
-  fireTimer: 1.310565
-  fireRate: 2
-  damage: 0
-  shootRange: 100
-  noiseRange: 10
-  isAutomatic: 0
-  isPiercing: 0
-  shootPoint: {fileID: 1474616675}
-  isAccelerating: 1
-  accelerationDuration: 5
-  maxAcceleration: 10
-  accelerationTimer: 0
-  acceleration: 1
-  recoilTreshold: 0.1
-  isRecoilingUp: 0
-  isRecoilingDown: 0
-  maxRecoil: 0.3
-  recoilMagnitude: 1
-  recoilSpeed: 0
   generatingDuration: 0.5
   dissolvingDuration: 1
   weaponType: 0
   weaponMaterial: {fileID: 0}
   canShoot: 0
   Weapon1: {fileID: 0}
-  audioSource: {fileID: 1419088092}
-  gunSounds:
-  - {fileID: 8300000, guid: 84579fc31f6b3e346b141782d4be15d8, type: 3}
-  minPitch: 0.8
-  maxPitch: 1.2
 --- !u!136 &1419088087
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -18216,6 +18464,31 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   shootingPoint: {fileID: 0}
+  isShooting: 0
+  fireInterval: 0
+  fireTimer: 0
+  fireRate: 2
+  damage: 5
+  shootRange: 100
+  noiseRange: 15.6
+  isAutomatic: 0
+  isPiercing: 0
+  shootPoint: {fileID: 0}
+  isAccelerating: 0
+  accelerationDuration: 5
+  maxAcceleration: 10
+  accelerationTimer: 0
+  acceleration: 1
+  recoilTreshold: 0.1
+  isRecoilingUp: 0
+  isRecoilingDown: 0
+  maxRecoil: 0.3
+  recoilMagnitude: 1
+  recoilSpeed: 10
+  audioSource: {fileID: 0}
+  gunSounds: []
+  minPitch: 0.8
+  maxPitch: 1.2
 --- !u!82 &1419088092
 AudioSource:
   m_ObjectHideFlags: 0
@@ -19436,7 +19709,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1518070486
 GameObject:
@@ -19655,7 +19928,6 @@ MonoBehaviour:
   basicCamera: {fileID: 0}
   currentState: 0
   lastMouseValue: {x: 0, y: 0}
-  aimRig: {fileID: 0}
   aimLayerWeightSpeed: 5
   aimWeightLayerIndex: 0
   weaponMat: {fileID: 0}
@@ -20172,7 +20444,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1618908150
 GameObject:
@@ -20574,7 +20846,10 @@ MonoBehaviour:
   dayTime: 5.2
   dayTimeDurationMin: 1
   sunTransform: {fileID: 2088740748}
-  sunLight: {fileID: 2088740746}
+  sunLight:
+  - {fileID: 0}
+  maxLight: []
+  minLight: []
   dayLigthPow: 10
   shaderMaterials:
   - {fileID: 2100000, guid: ef13d9faf99cdd746b396daef8eba136, type: 2}
@@ -20593,7 +20868,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1650086593
 GameObject:
@@ -20610,6 +20885,7 @@ GameObject:
   - component: {fileID: 1650086600}
   - component: {fileID: 1650086599}
   - component: {fileID: 1650086598}
+  - component: {fileID: 1650086601}
   m_Layer: 8
   m_Name: Wep3
   m_TagString: Untagged
@@ -20707,40 +20983,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da149199a56a224ca60da863f524857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 673691997}
-  shooting: {fileID: 0}
-  aimPlayer: {fileID: 673692002}
-  isShooting: 0
-  fireInterval: 0
-  fireTimer: 0
-  fireRate: 0
-  damage: 0
-  shootRange: 0
-  noiseRange: 0
-  isAutomatic: 0
-  isPiercing: 0
-  shootPoint: {fileID: 0}
-  isAccelerating: 0
-  accelerationDuration: 5
-  maxAcceleration: 2
-  accelerationTimer: 0
-  acceleration: 1
-  recoilTreshold: 0.1
-  isRecoilingUp: 0
-  isRecoilingDown: 0
-  maxRecoil: 0.3
-  recoilMagnitude: 1
-  recoilSpeed: 10
   generatingDuration: 0.5
   dissolvingDuration: 1
   weaponType: 1
   weaponMaterial: {fileID: 2100000, guid: 7040d17b205bec444b32a4abc43c81f7, type: 2}
   canShoot: 0
   Weapon1: {fileID: 11400000, guid: 63db2070fb6811c4da7cb8c347c5c12e, type: 2}
-  audioSource: {fileID: 0}
-  gunSounds: []
-  minPitch: 0
-  maxPitch: 0
 --- !u!114 &1650086599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20759,6 +21007,31 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   shootingPoint: {fileID: 0}
+  isShooting: 0
+  fireInterval: 0
+  fireTimer: 0
+  fireRate: 2
+  damage: 5
+  shootRange: 100
+  noiseRange: 15.6
+  isAutomatic: 0
+  isPiercing: 0
+  shootPoint: {fileID: 0}
+  isAccelerating: 0
+  accelerationDuration: 5
+  maxAcceleration: 10
+  accelerationTimer: 0
+  acceleration: 1
+  recoilTreshold: 0.1
+  isRecoilingUp: 0
+  isRecoilingDown: 0
+  maxRecoil: 0.3
+  recoilMagnitude: 1
+  recoilSpeed: 10
+  audioSource: {fileID: 0}
+  gunSounds: []
+  minPitch: 0.8
+  maxPitch: 1.2
 --- !u!114 &1650086600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20778,6 +21051,102 @@ MonoBehaviour:
     m_Bits: 0
   gizmoTimer: 0
   gizmoDuration: 0.1
+--- !u!82 &1650086601
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650086593}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1660520254
 GameObject:
   m_ObjectHideFlags: 0
@@ -21033,7 +21402,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f71f199277040c449aa4c6c614a8c7cc, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f71f199277040c449aa4c6c614a8c7cc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22484,7 +22853,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1791272101
 GameObject:
@@ -22815,11 +23184,6 @@ Transform:
   m_Father: {fileID: 803526281}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1880709173 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3471223226558246942, guid: a399352f222221243b71715ed33b341e, type: 3}
-  m_PrefabInstance: {fileID: 1528870631}
-  m_PrefabAsset: {fileID: 0}
 --- !u!115 &1882720819
 MonoScript:
   m_ObjectHideFlags: 0
@@ -22877,7 +23241,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1888687714
 GameObject:
@@ -24336,7 +24700,7 @@ Transform:
   - {fileID: 1752367141}
   - {fileID: 2078037635}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2088740745
 GameObject:
@@ -24553,7 +24917,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 89.38, y: -30, z: 0}
 --- !u!1 &2093696640
 GameObject:
@@ -25175,7 +25539,7 @@ Transform:
   m_Children:
   - {fileID: 655620051}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2137839339
 GameObject:
@@ -27192,7 +27556,7 @@ Transform:
   - {fileID: 2710788454386182069}
   - {fileID: 2710788455179692600}
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2710788455400668779
 GameObject:
@@ -38317,7 +38681,7 @@ Transform:
   - {fileID: 3254010069100320413}
   - {fileID: 3254010068419878491}
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8630832687166532465
 GameObject:
