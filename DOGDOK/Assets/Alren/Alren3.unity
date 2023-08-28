@@ -6929,8 +6929,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e4e3cdbbbbfeb14b8d39058dd4fe008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boyutbozar: {fileID: 119621323}
+  boyutBozar: {fileID: 119621323}
   InventoryManager: {fileID: 2710788455414286891}
+  WeaponController: {fileID: 119621328}
+  collectingDistance: 6
+  collectingTime: 1
 --- !u!1 &678887397
 GameObject:
   m_ObjectHideFlags: 0
@@ -38692,6 +38695,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8630832687166532464}
+  - component: {fileID: 8630832687166532466}
   m_Layer: 0
   m_Name: Collectibles
   m_TagString: Untagged
@@ -38699,6 +38703,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8630832687166532466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8630832687166532465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a583f120e74a8a74faaa9ee2ac736f39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &8630832687303467784
 BoxCollider:
   m_ObjectHideFlags: 0

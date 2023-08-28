@@ -10,6 +10,7 @@ public class ResourceCreation : MonoBehaviour
     [SerializeField] private bool isRandomized = false;
     void Start()
     {
+        print(gameObject.GetInstanceID());
         if (isRandomized)
         {
             int index = Random.Range(0, InventoryManager.resourceIndices.Count);
