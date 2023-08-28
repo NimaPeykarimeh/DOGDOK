@@ -38,6 +38,7 @@ public class AimPlayer : MonoBehaviour
 
     [Header("Aim")]
     [SerializeField] LayerMask aimLayer;
+    [SerializeField] GameObject aimObject;
     public float rotationX = 0f;
     public float rotationY = 0f;
 
@@ -78,6 +79,7 @@ public class AimPlayer : MonoBehaviour
 
         // Cast a ray from the camera's position and direction
         Ray ray = new Ray(playerController.mainCamera.transform.position, playerController.mainCamera.transform.forward);
+        aimObject.transform.position = ray.GetPoint(maxRaycastDistance);
         // Check if the ray hits anything within the specified distance
         if (Physics.Raycast(ray, out hitInfo, maxRaycastDistance, aimLayer))//sphereCast For Aim Assist
         {
