@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.Rendering;
 using static PlayerController;
 
@@ -10,11 +11,13 @@ public class AimPlayer : MonoBehaviour
 {
     [Header("Refrences")]
     PlayerController playerController;
+    [SerializeField] WeaponManager weaponManager;
 
     [Header("Other")]
     public bool isAiming;
     [SerializeField] GameObject oriantation;
     [SerializeField] int verticalLimit;
+
     [Header("Sensitivity")]
     [SerializeField] float currentYSensitivity;
     [SerializeField] float currentXSensitivity;
@@ -35,23 +38,24 @@ public class AimPlayer : MonoBehaviour
 
     [Header("Aim")]
     [SerializeField] LayerMask aimLayer;
-    [SerializeField] GameObject aimObject;
     public float rotationX = 0f;
     public float rotationY = 0f;
+
     [Header("Raycast")]
     public float maxRaycastDistance = 100f;
+
     [Header("WeaponAnimation")]
-    [SerializeField] GameObject currentWeapon;
     [SerializeField] float animationDuration;
     float currentAnimationValue = 0f;
-    [SerializeField] Material wepMaterial;
-    
+    [SerializeField] Rig[] rigLayers;
+    float currentWeight;
+    float newWeight;
+    int aimWeightLayerIndex = 1;//change Later
     void Start()
     {
         playerController = GetComponent<PlayerController>();
         currentXSensitivity = defaultXSensitivity;
         currentYSensitivity = defalutYSensitivity;
-        //mainCamera = playerController.mainCamera;
     }
 
     void RotateCamera()
@@ -74,7 +78,6 @@ public class AimPlayer : MonoBehaviour
 
         // Cast a ray from the camera's position and direction
         Ray ray = new Ray(playerController.mainCamera.transform.position, playerController.mainCamera.transform.forward);
-        aimObject.transform.position = ray.GetPoint(maxRaycastDistance);
         // Check if the ray hits anything within the specified distance
         if (Physics.Raycast(ray, out hitInfo, maxRaycastDistance, aimLayer))//sphereCast For Aim Assist
         {
@@ -111,6 +114,7 @@ public class AimPlayer : MonoBehaviour
         RotateCamera();
         GetAimHitInfo();
         CheckEnemyOnAim();
+
         if (playerController.currentState == PlayerStates.Combat)
         {
             if (isAimedOnEnemy)
@@ -144,6 +148,22 @@ public class AimPlayer : MonoBehaviour
 
         if (isAiming)
         {
+            newWeight = 1;
+            if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.Melee)
+            {
+                rigLayers[0].weight = Mathf.MoveTowards(rigLayers[0].weight, 1, (1 / animationDuration) * Time.deltaTime);
+            }
+            else if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.OneHanded)
+            {
+                rigLayers[1].weight = Mathf.MoveTowards(rigLayers[1].weight, 1, (1 / animationDuration) * Time.deltaTime);
+            }
+            else if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.TwoHanded)
+            {
+                currentWeight = Mathf.MoveTowards(currentWeight, newWeight, animationDuration * Time.deltaTime);
+                aimWeightLayerIndex = 1;
+                playerController.animator.SetLayerWeight(aimWeightLayerIndex, currentWeight);
+                rigLayers[2].weight = Mathf.MoveTowards(rigLayers[2].weight, 1, (1 / animationDuration) * Time.deltaTime);
+            }
             //currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, -0.05f, (1 / animationDuration) * Time.deltaTime);
             //wepMaterial = currentWeapon.GetComponent<Renderer>().material;
             //wepMaterial.SetFloat("_Dissolve", currentAnimationValue);
@@ -151,6 +171,22 @@ public class AimPlayer : MonoBehaviour
         }
         else
         {
+            newWeight = 0;
+            if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.Melee)
+            {
+                rigLayers[0].weight = Mathf.MoveTowards(rigLayers[0].weight, 0, (1 / animationDuration) * Time.deltaTime);
+            }
+            else if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.OneHanded)
+            {
+                rigLayers[1].weight = Mathf.MoveTowards(rigLayers[1].weight, 0, (1 / animationDuration) * Time.deltaTime);
+            }
+            else if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.TwoHanded)
+            {
+                aimWeightLayerIndex = 1;
+                currentWeight = Mathf.MoveTowards(currentWeight, newWeight, animationDuration * Time.deltaTime);
+                playerController.animator.SetLayerWeight(aimWeightLayerIndex, currentWeight);
+                rigLayers[2].weight = Mathf.MoveTowards(rigLayers[2].weight, 0, (1 / animationDuration) * Time.deltaTime);
+            }
             //currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, 1, (1 / animationDuration) * Time.deltaTime);
             //wepMaterial = currentWeapon.GetComponent<Renderer>().material;
             //wepMaterial.SetFloat("_Dissolve", currentAnimationValue);

@@ -12,7 +12,7 @@ public class WeaponManager : MonoBehaviour
 
     private GameObject CurrentWeaponObject;
     [HideInInspector] public Weapon1 CurrentWeapon1;
-    private WeaponController CurrentWeaponController;
+    [HideInInspector] public WeaponController CurrentWeaponController;
     private Renderer currentRenderer;
 
     private float currentAnimationValue = 1f;

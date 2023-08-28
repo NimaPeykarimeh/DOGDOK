@@ -10,36 +10,36 @@ using UnityEngine.Rendering.HighDefinition;
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
-        public GameObject mainCamera;
-        public AimPlayer aimPlayer;
-        public CharacterMovement characterMovement;
-        //public PlayerMouseLook playerMouseLook;
-        public Animator animator;
+    public GameObject mainCamera;
+    public AimPlayer aimPlayer;
+    public CharacterMovement characterMovement;
+    //public PlayerMouseLook playerMouseLook;
+    public Animator animator;
 
     [Header("States")]
-        public bool isAiming;
-        public bool isShooting;
-        public bool isMoving;
-        public bool isRunning;
-        public bool isWalking = true;
-        public bool canRun = true;
+    public bool isAiming;
+    public bool isShooting;
+    public bool isMoving;
+    public bool isRunning;
+    public bool isWalking = true;
+    public bool canRun= true;
 
     [Header("CameraObjects")]
-        [SerializeField] GameObject combatCamera;
-        [SerializeField] GameObject basicCamera;
-        public PlayerStates currentState = PlayerStates.Basic;
-        [SerializeField] Vector2 lastMouseValue;
+    [SerializeField] GameObject combatCamera;
+    [SerializeField] GameObject basicCamera;
+    public PlayerStates currentState = PlayerStates.Basic;
+    [SerializeField] Vector2 lastMouseValue;
 
     [Header("Animation Weights")]
-    [SerializeField] Rig aimRig;
-        public float aimLayerWeightSpeed = 3f;
-        [SerializeField] int aimWeightLayerIndex = 1;
+    Rig[] rigLayers;
+    public float aimLayerWeightSpeed = 3f;
+    [SerializeField] int aimWeightLayerIndex = 1;
     private float currentWeight;
     private float newWeight;
 
     [Header("Other")]
     [SerializeField] Material weaponMat;
-        [SerializeField] float aimDistance;
+    [SerializeField] float aimDistance;
         
     public enum PlayerStates
     {
@@ -113,14 +113,10 @@ public class PlayerController : MonoBehaviour
 
         if (newWeight != currentWeight)
         {
-            currentWeight = Mathf.MoveTowards(currentWeight,newWeight,aimLayerWeightSpeed * Time.deltaTime);
-            aimRig.weight = currentWeight;
-            animator.SetLayerWeight(aimWeightLayerIndex,currentWeight);
+            //currentWeight = Mathf.MoveTowards(currentWeight,newWeight,aimLayerWeightSpeed * Time.deltaTime);
+            //rigLayers[0].weight = currentWeight;
+            //animator.SetLayerWeight(aimWeightLayerIndex,currentWeight);
             //weaponMat.SetFloat("_Dissolve",1 - currentWeight);
-        }
-        else
-        {
-            Debug.Log("Layer Changed");
         }
     }
 }
