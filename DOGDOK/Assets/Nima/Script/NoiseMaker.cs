@@ -44,7 +44,7 @@ public class NoiseMaker : MonoBehaviour
         {
             // Do something with the detected enemy (e.g., damage, apply an effect, etc.)
             collider.gameObject.GetComponent<EnemyController>().AlertEnemy();
-            Debug.Log("Enemy detected: " + collider.gameObject.name);
+            //Debug.Log("Enemy detected: " + collider.gameObject.name);
         }
         
     }

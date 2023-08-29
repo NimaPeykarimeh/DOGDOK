@@ -8,9 +8,10 @@ public class ResourceCreation : MonoBehaviour
     public Resource1 resource;
     public int resourceCount = 1;
     [SerializeField] private bool isRandomized = false;
+    private Renderer Renderer;
     void Start()
     {
-        print(gameObject.GetInstanceID());
+        Renderer = gameObject.GetComponent<Renderer>();
         if (isRandomized)
         {
             int index = Random.Range(0, InventoryManager.resourceIndices.Count);
@@ -26,5 +27,19 @@ public class ResourceCreation : MonoBehaviour
             }
         }
         gameObject.GetComponent<MeshFilter>().mesh = resource.resourceMesh;
+    }
+
+    public float DissolveCollectible(float currentAnimationValue, float dissolvedValue, float dissolvingDuration)
+    {
+        currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, dissolvedValue, (1 / dissolvingDuration) * Time.deltaTime);
+        Renderer.material.SetFloat("_Dissolve", currentAnimationValue);
+        return currentAnimationValue;
+    }
+
+    public float GenerateCollectible(float currentAnimationValue, float unsolvedValue, float generatingDuration)
+    {
+        currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, unsolvedValue, (1 / generatingDuration) * Time.deltaTime);
+        Renderer.material.SetFloat("_Dissolve", currentAnimationValue);
+        return currentAnimationValue;
     }
 }

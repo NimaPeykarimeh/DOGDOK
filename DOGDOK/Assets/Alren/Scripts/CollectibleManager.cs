@@ -1,48 +1,168 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün yapýldýðý script. Collect yapýlýnca miktara ekleme yapýlýyor.
 {
-    private bool isCollectibleFound;
-    private float timer;
-    private int count;
-    private int objectID;
-    private Resource1 resource;
-    [SerializeField] private GameObject boyutBozar;
+    private bool isCollectibleFound; // Belli bir collectible'ýn seçildiðinin kontrolü
+    private int count; // Toplanan resource sayýsý
+    private int objectID; // Þu anda toplanan kaynaðýn ID'sini gösterir. Collectible'ýn deðiþtirilip deðiþtirilmediði kontrolü
+    private int currentlyDissolvedID; // Anlatmasý zor ben bile unuttum. Spaghetti code.
+    private Resource1 resource; // Toplanan resource türü
+    private ResourceCreation ResourceCreation; // Toplanan kaynaðýn içindeki bazý bilgileri almak için (resource ve count gibi)
+
+    private List<ResourceCreation> resCreationList = new(); // Cismin içindeki koddur. Method çaðýrýmý için kullanýlýr. Method ile birden fazla cismi generate/dissolve edebiliriz.
+    private List<float> animationValueList = new(); // Çözünmekte olan cismi topla/býrak yaptýðýmýz zaman daha akýcý gözükmesi için ve birden fazla cismi generate/dissolve edebilmek için
+    private List<int> objectIDList = new(); // Her cismin ID'si tutulur ve böylece daha önce kaydedilen bir cisim varsa ayný id ile baþvurulduðunda reddedilecektir. Listelerin hepsine tekrar ayný bir cisim eklenmez. Cisimler dissolve/generate olunca listeden kalkarlar.
+
+    private float currentAnimationValue = -0.1f; // Collectible'ýn bozulma/generate edilme durumunda hangi sayý deðerinde olduðu
+    private const float unsolvedValue = -0.1f; // Collectible'ýn generate olmasý için gerekli olan deðer
+    private const float dissolvedValue = 1f; // Collectible'ýn bozulmasý için gerekli olan deðer
+
+
+    private WeaponController WeaponController;
     [SerializeField] private InventoryManager InventoryManager;
-    [SerializeField] private WeaponController WeaponController;
 
     [Header("Attributes")]
-    [SerializeField] private float collectingDistance = 5f;
-    [SerializeField] private float collectingTime = 1f;
+    [SerializeField] private float collectingDistance = 5f; // Kaynak Toplama Raycast Uzunluðu
+    [SerializeField] private float generatingDuration = 1f; // Kaynak Toplamada bozulan cismin geri generatelenme uzunluðu
+    [SerializeField] private float dissolvingDuration = 1f; // Kaynak Toplama Süresi ve Cismin Bozulma Uzunluðu
+
     private Ray ray;
 
+    private void Start()
+    {
+        WeaponController = GetComponent<WeaponController>();
+        objectID = -1; //objectID için default deðeri -1,
+        currentlyDissolvedID = -2; // DissolvedID için ise -2'yi kullandým.
+    }
+
+    private void OnEnable()
+    {
+        isCollectibleFound = false;
+        currentAnimationValue = unsolvedValue;
+        objectID = -1;
+        currentlyDissolvedID = -2;
+    }
     private void Update()
     {
-        if (boyutBozar.activeInHierarchy && WeaponController.canShoot && Input.GetMouseButton(0))
+        if (WeaponController.canShoot && Input.GetMouseButton(0)) //Toplama iþlemi yapma
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (!isCollectibleFound)
+            if (!isCollectibleFound) // Ýlk defa cisimle etkileþim ve cismin bilgilerini alma
             {
                 FirstCollectibleHit();
             }
-            else Gathering();
+            else //Toplamaya devam
+            {
+                Gathering();
+            }
+        }
+        else if (isCollectibleFound) //gatheringdeyken ama toplamayý býrakýnca dissolve etmek için
+        {
+            AddForGenerating();
+        }
+        else currentlyDissolvedID = -2;
+
+
+        if (resCreationList.Count > 0)  
+        {
+            print(resCreationList.Count);
+            for (int i = 0; i < resCreationList.Count; i++) // Generation'ý veya dissolve'u bitmiþ cisimleri silme
+            {
+                if (animationValueList[i] == unsolvedValue || animationValueList[i] == dissolvedValue) 
+                {
+                    resCreationList.RemoveAt(i);
+                    animationValueList.RemoveAt(i);
+                    objectIDList.RemoveAt(i);
+                }
+            }
+            for (int i = 0; i < resCreationList.Count; i++) // Generate'i bitmemiþ cisimleri generate etme
+            {// NOT: Dissolve iþlemi Gathering()'tedir.
+                if (currentlyDissolvedID != objectIDList[i])
+                {
+                    animationValueList[i] = resCreationList[i].GenerateCollectible(animationValueList[i], unsolvedValue, generatingDuration);
+                }
+
+            }
         }
     }
 
-    private void FirstCollectibleHit()
+    private void AddForGenerating()
+    {
+        if (objectIDList.Count == 0) // Hiç bir cisim þuan generate edilmiyorsa
+        {
+            AddToList(); //Generate edilmesi için Listeye ekle
+        }
+        else if (objectIDList.Count > 0 && !objectIDList.Exists(x => x == objectID)) // Bazý cisimler generate ediliyorsa VE þu an toplamayý býraktýðýmýz cisim listede yoksa
+        {
+            AddToList(); //Generate edilmesi için Listeye ekle
+        }
+        else if (objectIDList.Count > 0 && objectIDList.Exists(x => x == objectID)) // Bazý cisimler generate ediliyorsa VE þu an toplamayý býraktýðýmýz cisim listede varsa
+        {
+            UpdateTheList(); // O cismi güncelle
+        }
+
+
+        void AddToList() // Listeye generate edilmesi için ekle
+        {
+            print("ekledim");
+            resCreationList.Add(ResourceCreation);
+            animationValueList.Add(currentAnimationValue);
+            objectIDList.Add(objectID);
+            objectID = -1;
+            currentlyDissolvedID = -2;
+            isCollectibleFound = false;
+        }
+        void UpdateTheList() // Listedeki cismin bilgilerini güncelle
+        {
+            int index = objectIDList.FindIndex(x => x == objectID);
+            resCreationList[index] = ResourceCreation;
+            animationValueList[index] = currentAnimationValue;
+            objectIDList[index] = objectID;
+            objectID = -1;
+            isCollectibleFound = false;
+        }
+    }
+
+    private void FirstCollectibleHit() // Ýlk defa cisimle etkileþim ve cismin bilgilerini alma
     {
         if (Physics.Raycast(ray, out RaycastHit hit, collectingDistance))
         {
             GameObject hitObject = hit.transform.gameObject;
-            if (hitObject.TryGetComponent<ResourceCreation>(out ResourceCreation resourceCreation))
+            if (hitObject.TryGetComponent<ResourceCreation>(out ResourceCreation)) //Cisim resource ise gir
             {
+                //  Cisimden bilgileri al
                 isCollectibleFound = true;
-                resource = resourceCreation.resource;
-                count = resourceCreation.resourceCount;
+
+                resource = ResourceCreation.resource;
+                count = ResourceCreation.resourceCount;
+
                 objectID = hitObject.GetInstanceID();
-                timer = 0;
+                currentlyDissolvedID = objectID;
+
+                // Cisim daha önceden listeye alýnmýþ mý kontrolleri
+                if (objectIDList.Count > 0) 
+                {
+                    int index = objectIDList.FindIndex(x => x == objectID);
+                    if (index != -1)
+                    {
+                        currentAnimationValue = animationValueList[index]; //Cisim daha önceden listeye alýnmýþsa animasyonda generate edilmenin ilerlemesini düzgün þekilde durdurup, dissolve edilmesi için cismin _Dissolve deðerini tutan deðiþken bilgisi alýnýr.
+                        currentlyDissolvedID = -2;
+                    }
+                    else //Bu ID'de bir cisim yoksa unsolvedValue(-0.1f) durumundadýr.
+                    {
+                        currentAnimationValue = unsolvedValue;
+                    }
+
+                }
+                else // Liste boþsa zaten hepsi unsolvedValue(-0.1f) durumundadýr.
+                {
+                    currentAnimationValue = unsolvedValue;
+                }
+
+
             }
         }
     }
@@ -54,56 +174,32 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
             GameObject hitObject = hit.transform.gameObject;
             if (hitObject.GetInstanceID() == objectID)
             {
-                timer += Time.deltaTime;
-                if (timer > collectingTime)
+                currentlyDissolvedID = objectID;
+                currentAnimationValue = ResourceCreation.DissolveCollectible(currentAnimationValue, dissolvedValue, dissolvingDuration);
+                if (currentAnimationValue == dissolvedValue)
                 {
+                    // Cisim tamamen saydamlaþýnca cismi yok et ve envanteri güncelle
                     Destroy(hitObject);
-                    isCollectibleFound = false;
-                    foreach (var element in InventoryManager.resourceIndices)
-                    {
-                        if (element.Key.id == resource.id)
-                        {
-                            InventoryManager.resourceIndices[element.Key] += count;
-                            break;
-                        }
-                    }
+                    UpdateInventory(); 
                 }
             }
-            else FirstCollectibleHit();
+            else
+            {
+                print("farklý cisim");
+                AddForGenerating(); // Vurulan obje deðiþtiyse, eski vurulan objeyi kaydedip geri generate et.
+            }
+        }
+
+        void UpdateInventory()
+        {
+            foreach (var element in InventoryManager.resourceIndices)
+            {
+                if (element.Key.id == resource.id)
+                {
+                    InventoryManager.resourceIndices[element.Key] += count;
+                    break;
+                }
+            }
         }
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    timer = 0;
-    //    if (other.CompareTag("Collectible"))
-    //    {
-    //        resource = other.gameObject.GetComponent<ResourceCreation>().resource;
-    //        count = other.gameObject.GetComponent<ResourceCreation>().resourceCount;
-    //    }
-
-    //}
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (boyutBozar.activeInHierarchy && other.CompareTag("Collectible") && Input.GetKey(KeyCode.Mouse0))
-    //    {
-    //        timer += 10 * Time.deltaTime;
-    //        if (timer > 5.03f)
-    //        {
-    //            Destroy(other.gameObject);
-    //            foreach (var element in InventoryManager.resourceIndices)
-    //            {
-    //                if (element.Key.id == resource.id)
-    //                {
-    //                    InventoryManager.resourceIndices[element.Key] += count;
-    //                    break;
-    //                }
-    //            }
-    //        }
-    //    }
-    //    else
-    //    {
-    //        timer = 0;
-    //    }
-    //}
 }

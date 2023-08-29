@@ -95,7 +95,7 @@ public class EnemySpawner : MonoBehaviour
                 }
             }
         }
-        Debug.Log("couldn't spawn");
+        //Debug.Log("couldn't spawn");
 
         return Vector3.zero;//if the height of the ground is different change it
     }
@@ -119,7 +119,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (transform.childCount <= 0)
         {
-            Debug.Log("Max Enemy");
+            //Debug.Log("Max Enemy");
         }
         else
         {
@@ -134,7 +134,7 @@ public class EnemySpawner : MonoBehaviour
             }
             else
             {
-                Debug.Log("Vector was Zero");
+                //Debug.Log("Vector was Zero");
             }
         }
     }
