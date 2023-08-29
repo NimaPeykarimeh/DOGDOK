@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     public EnemyFollow enemyFollow;
     public Transform player;
     public EnemySpawner enemySpawner;
+    public Collider enemyCollider;
     public bool isAlerted;
     public bool isGrounded = false;
     [SerializeField] float isGroundedLimit = 5f;
@@ -23,13 +24,18 @@ public class EnemyController : MonoBehaviour
     public bool isMoving;
     [SerializeField] float movingDuration = 10f;
     [SerializeField] float movingTimer;
+    [Header("Other")]
+    [SerializeField] SkinnedMeshRenderer mesh;
+    public Material material;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         enemyMovement = GetComponent<EnemyMovement>();
         enemyFollow = GetComponent<EnemyFollow>();
+        material = mesh.material;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        enemyCollider = GetComponent<Collider>();
     }
     private void OnEnable()//fix Later
     {

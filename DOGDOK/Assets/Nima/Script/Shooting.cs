@@ -148,18 +148,19 @@ public class Shooting : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * _shootingRange, Color.red, 0.1f);
 
         noiseMaker.MakeNoise(_noiseRange, _shootingPoint);
-
+        
         if (!_isPiercing)
         {
             if (Physics.Raycast(ray, out RaycastHit hit, _shootingRange,bulletHitLayer))
             {
-                if (hit.transform.tag != null)
+                if (hit.collider.tag != null)
                 {
-                        ammoPooling.SpawnAmmo(hit.distance);
-                    if (hit.transform.CompareTag("EnemyBodyPart"))
+                    ammoPooling.SpawnAmmo(hit.distance);
+                    Debug.Log(hit.transform.tag);
+                    if (hit.collider.CompareTag("EnemyBodyPart"))
                     {
                         Instantiate(enemyHitParticle,hit.point,hit.transform.rotation);
-                        hit.transform.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(_damage);
+                        hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(_damage);
                     }
                 }
                 

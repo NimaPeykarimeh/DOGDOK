@@ -32,6 +32,12 @@
         },
         {
             "m_Id": "77828364a49f40c59c803e6e9faaabaa"
+        },
+        {
+            "m_Id": "7611e9715a38406ea95da421a74e5fb2"
+        },
+        {
+            "m_Id": "f475db407eab4f1c9d12bbdcae082b6c"
         }
     ],
     "m_Keywords": [],
@@ -2067,6 +2073,35 @@
 }
 
 {
+    "m_SGVersion": 3,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
+    "m_ObjectId": "7611e9715a38406ea95da421a74e5fb2",
+    "m_Guid": {
+        "m_GuidSerialized": "dfa79d8f-5cef-489d-adc6-783c64124813"
+    },
+    "m_Name": "DeadColor",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "DeadColor",
+    "m_DefaultReferenceName": "_DeadColor",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "r": 64.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+    },
+    "isMainColor": false,
+    "m_ColorMode": 1
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "771feda62a694e0b9cf53135ac8a9686",
@@ -2916,6 +2951,12 @@
         },
         {
             "m_Id": "77828364a49f40c59c803e6e9faaabaa"
+        },
+        {
+            "m_Id": "7611e9715a38406ea95da421a74e5fb2"
+        },
+        {
+            "m_Id": "f475db407eab4f1c9d12bbdcae082b6c"
         }
     ]
 }
@@ -3875,6 +3916,35 @@
         "x": 0.0,
         "y": 1.0
     }
+}
+
+{
+    "m_SGVersion": 3,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
+    "m_ObjectId": "f475db407eab4f1c9d12bbdcae082b6c",
+    "m_Guid": {
+        "m_GuidSerialized": "98749b95-d0eb-4418-800e-5b2972234096"
+    },
+    "m_Name": "TeleportColor",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "TeleportColor",
+    "m_DefaultReferenceName": "_TeleportColor",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "r": 0.0,
+        "g": 44.92549133300781,
+        "b": 64.0,
+        "a": 1.0
+    },
+    "isMainColor": false,
+    "m_ColorMode": 1
 }
 
 {

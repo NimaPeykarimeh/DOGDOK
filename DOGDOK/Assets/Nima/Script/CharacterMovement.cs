@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CharacterMovement : MonoBehaviour
 {
     PlayerController playerController;
-
+    Rigidbody rb;
     [SerializeField] GameObject playerObject;
 
     [Header("Movement")]
@@ -61,6 +61,7 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
         currentStamina = maxStamina;
+        rb = GetComponent<Rigidbody>();
         playerController = GetComponent<PlayerController>();
         characterController = GetComponent<CharacterController>();
         noiseMaker = GetComponent<NoiseMaker>();
@@ -70,7 +71,8 @@ public class CharacterMovement : MonoBehaviour
     {
         if (playerController.currentState == PlayerController.PlayerStates.Basic)
         {
-            characterController.Move(move * currentVelocity * Time.deltaTime);
+            //characterController.Move(move * currentVelocity * Time.deltaTime);
+            rb.velocity = new Vector3((move * currentVelocity).x,rb.velocity.y ,(move * currentVelocity).z);
             if (!playerController.isAiming && move.magnitude > 0)
             {
                 RotateTowards(move);
@@ -78,11 +80,10 @@ public class CharacterMovement : MonoBehaviour
         }
         else
         {
-            characterController.Move(move * currentVelocity * Time.deltaTime);
-
+            //characterController.Move(move * currentVelocity * Time.deltaTime);
+            rb.velocity = new Vector3((move * currentVelocity).x, rb.velocity.y, (move * currentVelocity).z);
             RotateTowards(playerController.mainCamera.transform.forward);
         }
-        
     }
     //
     private void RotateTowards(Vector3 targetDirection)
@@ -90,7 +91,7 @@ public class CharacterMovement : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
         targetRotation.x = 0;
         targetRotation.z = 0;
-        playerObject.transform.rotation = Quaternion.Slerp(playerObject.transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+        playerObject.transform.rotation = Quaternion.Slerp(playerObject.transform.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime);
     }
 
     public void ToggleRunState(MoveStates _state)
@@ -169,7 +170,10 @@ public class CharacterMovement : MonoBehaviour
             staminaImage.fillAmount = currentStamina / maxStamina;
         }
     }
-
+    private void FixedUpdate()
+    {
+        MovePlayer();
+    }
     void Update()
     {
         
@@ -187,8 +191,6 @@ public class CharacterMovement : MonoBehaviour
             noiseMaker.MakeNoise(noiseMult * currentVelocity, noiseCenter);
         }
         speedToMove = inputMagnitude * currentMovementSpeed;
-        
-        MovePlayer();
         UpdateStamina();
         
 

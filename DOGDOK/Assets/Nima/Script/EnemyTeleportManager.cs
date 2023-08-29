@@ -7,8 +7,7 @@ public class EnemyTeleportManager : MonoBehaviour
 {
     EnemyController enemyController;
     EnemyMovement enemyMovement;
-    [SerializeField] SkinnedMeshRenderer mesh;
-    [SerializeField] Material material;
+    
 
     public bool isTeleporting;
     bool isDissolving;
@@ -25,7 +24,6 @@ public class EnemyTeleportManager : MonoBehaviour
     {
         enemyMovement = GetComponent<EnemyMovement>();
         enemyController = GetComponent<EnemyController>();
-        material = mesh.material;
         
     }
     public void Teleport(Vector3 _positon)
@@ -36,6 +34,7 @@ public class EnemyTeleportManager : MonoBehaviour
         isTeleporting = true;
         isGenerating = false;
         positionToTeleport= new Vector3(_positon.x,transform.position.y,_positon.z);
+        enemyController.material.SetColor("_EdgeColor", enemyController.material.GetColor("_TeleportColor")) ;
     }
     private void Update()
     {
@@ -50,7 +49,7 @@ public class EnemyTeleportManager : MonoBehaviour
                 isGenerating = true;
                 _dissolveRatio = dissolveEnd;
             }
-            material.SetFloat("_Dissolve", _dissolveRatio);
+            enemyController.material.SetFloat("_Dissolve", _dissolveRatio);
         }
 
         if (isGenerating)
@@ -66,7 +65,7 @@ public class EnemyTeleportManager : MonoBehaviour
                 _dissolveRatio = dissolveStart;
                 
             }
-            material.SetFloat("_Dissolve", _dissolveRatio);
+            enemyController.material.SetFloat("_Dissolve", _dissolveRatio);
         }
     }
 }

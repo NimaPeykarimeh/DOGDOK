@@ -161,7 +161,7 @@ public class AimPlayer : MonoBehaviour
             }
             else if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.TwoHanded)
             {
-                currentWeight = Mathf.MoveTowards(currentWeight, newWeight, animationDuration * Time.deltaTime);
+                currentWeight = Mathf.MoveTowards(currentWeight, newWeight, (1 / animationDuration) * Time.deltaTime);
                 aimWeightLayerIndex = 1;
                 playerController.animator.SetLayerWeight(aimWeightLayerIndex, currentWeight);
                 rigLayers[2].weight = Mathf.MoveTowards(rigLayers[2].weight, 1, (1 / animationDuration) * Time.deltaTime);
@@ -185,7 +185,7 @@ public class AimPlayer : MonoBehaviour
             else if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.TwoHanded)
             {
                 aimWeightLayerIndex = 1;
-                currentWeight = Mathf.MoveTowards(currentWeight, newWeight, animationDuration * Time.deltaTime);
+                currentWeight = Mathf.MoveTowards(currentWeight, newWeight, (1 / animationDuration) * Time.deltaTime);
                 playerController.animator.SetLayerWeight(aimWeightLayerIndex, currentWeight);
                 rigLayers[2].weight = Mathf.MoveTowards(rigLayers[2].weight, 0, (1 / animationDuration) * Time.deltaTime);
             }
