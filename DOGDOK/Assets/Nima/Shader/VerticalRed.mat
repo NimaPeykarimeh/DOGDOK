@@ -189,12 +189,12 @@ Material:
     - _DisplacementLockObjectScale: 1
     - _DisplacementLockTilingScale: 1
     - _DisplacementMode: 0
-    - _Dissolve: -1
+    - _Dissolve: 0
     - _DoubleSidedEnable: 1
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 1
     - _DstBlend: 0
-    - _EdgeWidth: 0.052
+    - _EdgeWidth: 0.025
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
     - _EmissiveIntensity: 1
@@ -225,7 +225,7 @@ Material:
     - _NoiseAmount: 104.31
     - _NormalMapSpace: 0
     - _NormalScale: 1
-    - _ObjectHeight: 0.94
+    - _ObjectHeight: 1.41
     - _OpaqueCullMode: 2
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15

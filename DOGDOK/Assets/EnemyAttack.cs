@@ -13,6 +13,10 @@ public class EnemyAttack : MonoBehaviour
 
     [SerializeField] float stopDelay = 0.3f;
     bool readyToAttack;
+    [Header("AnimationDelay")]
+    [SerializeField] float animationTimer = 0f;
+    [SerializeField] float animationDelay = 0.3f;
+    [SerializeField] bool isDelaying = false;
     void Start()
     {
         enemyController = GetComponent<EnemyController>();
@@ -21,8 +25,9 @@ public class EnemyAttack : MonoBehaviour
     void Attack()
     {
         enemyController.player.GetComponent<PlayerHealth>().ChangeHealth(-damage);
-        enemyMovement.canMove = true;
-        
+        //enemyMovement.canMove = true;
+        isDelaying = true;
+        animationTimer = 0;
     }
     // Update is called once per frame
     void Update()
@@ -41,5 +46,15 @@ public class EnemyAttack : MonoBehaviour
             enemyController.animator.SetTrigger("Attack");
             //Attack();
         }
+        if (isDelaying)
+        {
+            animationTimer += Time.deltaTime;
+            if (animationTimer >= animationDelay)
+            {
+                enemyMovement.canMove = true;
+                isDelaying = false;
+            }
+        }
+        
     }
 }

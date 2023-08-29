@@ -47,5 +47,9 @@ public class EnemyMovement : MonoBehaviour
             //velocity.y += gravity * Time.deltaTime;
             //characterController.Move(velocity * Time.deltaTime);
         }
+        else
+        {
+            enemyRb.velocity = Vector3.zero;//optimize et
+        }
     }
 }

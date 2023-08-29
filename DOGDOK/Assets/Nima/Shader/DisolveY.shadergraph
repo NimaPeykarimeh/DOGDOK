@@ -2811,11 +2811,11 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 1.1399999856948853,
+    "m_Value": 1.0,
     "m_FloatType": 1,
     "m_RangeValues": {
-        "x": -1.0,
-        "y": 2.0
+        "x": -0.10000000149011612,
+        "y": 1.100000023841858
     }
 }
 
