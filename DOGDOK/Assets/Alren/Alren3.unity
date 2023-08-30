@@ -1120,8 +1120,6 @@ GameObject:
   - component: {fileID: 119621327}
   - component: {fileID: 119621326}
   - component: {fileID: 119621325}
-  - component: {fileID: 119621330}
-  - component: {fileID: 119621329}
   - component: {fileID: 119621328}
   - component: {fileID: 119621331}
   - component: {fileID: 119621332}
@@ -1229,68 +1227,6 @@ MonoBehaviour:
   weaponMaterial: {fileID: 2100000, guid: 590e2e81003a64d4e99197fc73e1fbef, type: 2}
   canShoot: 0
   Weapon1: {fileID: 11400000, guid: 8e49e17d00837d848b8e74579611434e, type: 2}
---- !u!114 &119621329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119621323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44ac03f5acfed88468f846772a286681, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ammoPooling: {fileID: 0}
-  enemyHitParticle: {fileID: 0}
-  bulletHitLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  shootingPoint: {fileID: 0}
-  isShooting: 0
-  fireInterval: 0
-  fireTimer: 0
-  fireRate: 2
-  damage: 5
-  shootRange: 100
-  noiseRange: 15.6
-  isAutomatic: 0
-  isPiercing: 0
-  shootPoint: {fileID: 0}
-  isAccelerating: 0
-  accelerationDuration: 5
-  maxAcceleration: 10
-  accelerationTimer: 0
-  acceleration: 1
-  recoilTreshold: 0.1
-  isRecoilingUp: 0
-  isRecoilingDown: 0
-  maxRecoil: 0.3
-  recoilMagnitude: 1
-  recoilSpeed: 10
-  audioSource: {fileID: 0}
-  gunSounds: []
-  minPitch: 0.8
-  maxPitch: 1.2
---- !u!114 &119621330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119621323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12487bda2ff10d74c8b15d6567095183, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  noiseRange: 0
-  center: {fileID: 0}
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  gizmoTimer: 0
-  gizmoDuration: 0.1
 --- !u!82 &119621331
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14270,37 +14206,6 @@ Transform:
   m_Father: {fileID: 88324441}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &947673552 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8961350585211728618, guid: 3e64fcaba639307448cf003b7cdd8ada, type: 3}
-  m_PrefabInstance: {fileID: 1758266828}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &947673553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 947673552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20dae636908d81047bc962c9c7c823e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Renderer: {fileID: 0}
---- !u!65 &947673554
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 947673552}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.4, y: 1.5, z: 2.4}
-  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!1 &962766166
 GameObject:
   m_ObjectHideFlags: 0
