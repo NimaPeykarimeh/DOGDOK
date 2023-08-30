@@ -9,6 +9,7 @@ TagManager:
   - Collectible
   - Turret
   - EnemyBodyPart
+  - CrafatbleArea
   layers:
   - Default
   - TransparentFX

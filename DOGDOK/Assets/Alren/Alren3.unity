@@ -5716,6 +5716,7 @@ MonoBehaviour:
   gunSounds: []
   minPitch: 0.8
   maxPitch: 1.2
+  effect: {fileID: 0}
 --- !u!114 &557702752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12581,6 +12582,7 @@ MonoBehaviour:
   gunSounds: []
   minPitch: 0.8
   maxPitch: 1.2
+  effect: {fileID: 0}
 --- !u!114 &752474214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15288,6 +15290,7 @@ MonoBehaviour:
   gunSounds: []
   minPitch: 0.8
   maxPitch: 1.2
+  effect: {fileID: 0}
 --- !u!114 &1129386904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18362,6 +18365,7 @@ MonoBehaviour:
   gunSounds: []
   minPitch: 0.8
   maxPitch: 1.2
+  effect: {fileID: 0}
 --- !u!82 &1419088092
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20905,6 +20909,7 @@ MonoBehaviour:
   gunSounds: []
   minPitch: 0.8
   maxPitch: 1.2
+  effect: {fileID: 0}
 --- !u!114 &1650086600
 MonoBehaviour:
   m_ObjectHideFlags: 0

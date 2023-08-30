@@ -56,7 +56,7 @@ public class Shooting : MonoBehaviour
     [SerializeField] List<AudioClip> gunSounds;
     [SerializeField] float minPitch = 0.8f;
     [SerializeField] float maxPitch = 1.2f;
-
+    [SerializeField] GameObject effect;
     // Start is called before the first frame update
     private void Start()
     {
@@ -155,11 +155,14 @@ public class Shooting : MonoBehaviour
             {
                 if (hit.collider.tag != null)
                 {
+                    GameObject _effect = Instantiate(effect, hit.point, hit.transform.rotation);
+                    _effect.transform.parent = hit.transform;
                     ammoPooling.SpawnAmmo(hit.distance);
                     Debug.Log(hit.transform.tag);
                     if (hit.collider.CompareTag("EnemyBodyPart"))
                     {
                         Instantiate(enemyHitParticle,hit.point,hit.transform.rotation);
+                        
                         hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(_damage);
                     }
                 }

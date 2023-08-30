@@ -13,7 +13,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] float dieForce = 1;
     [Header("Dead Animation")]
     float dissolveValue = 0;
-    bool isDying = false;
+    public bool isDying = false;
     [SerializeField] float animationDuration = 1f;
     Vector3[] bodyPartPositions;
     Quaternion[] bodyPartRotation;
