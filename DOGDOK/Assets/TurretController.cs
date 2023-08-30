@@ -12,6 +12,7 @@ public class TurretController : MonoBehaviour
     [SerializeField] float dissolveValue;
     [SerializeField] float nonGeneratedValue;
     [SerializeField] bool isGenerating = false;
+    public bool readyToUse = false;
     public LayerMask _layer;
 
     void Start()
@@ -46,9 +47,10 @@ public class TurretController : MonoBehaviour
                 _child.GetComponent<Renderer>().material.SetFloat("_Dissolve", dissolveValue);
             }
             //mainMaterial.SetFloat("_Dissolve", dissolveValue);
-            if (dissolveValue <= generatedValue)
+            if (dissolveValue == generatedValue)
             {
                 isGenerating = false;
+                readyToUse = true;
             }
         }
     }
