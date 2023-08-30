@@ -75,6 +75,7 @@ public class InventoryManager : MonoBehaviour
 
             if (hit.collider.gameObject.CompareTag("Ground"))
             {
+                
                 positionToPlace = PlaceObjectOnGrid(positionToPlace, currentBuild.buildingSize);
                 //turretPrefab.transform.localScale = GridDisplay.cellSize * currentBuild.buildingSize; //scale'i !!!!!!
                 positionToPlace.y += turretPrefab.transform.localScale.y / 2; //küp yüksekliði
@@ -174,10 +175,12 @@ public class InventoryManager : MonoBehaviour
         if (!isAired && !Physics.CheckBox(cubeTransform.position + turretCollider.center, turretCollider.size / 2, turretCollider.transform.rotation))
         {
             cubeTransform.gameObject.GetComponent<TurretNullControl>().TurretColorSelector(true);
+            Debug.Log("GREEN");
             //turretRenderer.material.SetColor("_Main_Color", Color.green);
             if (Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetKeyDown(KeyCode.E) && !Input.GetKeyDown(KeyCode.Escape))
             {
                 UseResources(currentNeeds);
+                cubeTransform.gameObject.GetComponent<TurretController>().StartGenerating();
                 cubeTransform.gameObject.GetComponent<BoxCollider>().isTrigger = false;
                 cubeTransform.gameObject.GetComponent<TurretNullControl>().enabled = false;
                 isBuilding = false;
@@ -187,6 +190,7 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("RED");
             cubeTransform.gameObject.GetComponent<TurretNullControl>().TurretColorSelector(false);
             //turretRenderer.material.SetColor("_Main_Color", Color.red);
         }

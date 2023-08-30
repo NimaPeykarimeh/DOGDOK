@@ -7,9 +7,9 @@ public class TurretFireController : MonoBehaviour
     [SerializeField] List<Transform> EnemyList;
 
     [SerializeField] private Transform _bodyTransform;
-    [SerializeField] private Transform _headTransform;
+    //[SerializeField] private Transform _headTransform;
     [SerializeField] private Transform _firePoint;
-    [SerializeField] float offsetY;
+    //[SerializeField] float offsetY;
     [SerializeField] float RotateSpeed;
 
     [Header("BulletProps")]
@@ -80,7 +80,7 @@ public class TurretFireController : MonoBehaviour
     public void ShootTheEnemy(Transform Target)
     {
         RotateBodyToEnemy(Target);
-        RotateHeadToEnemy(Target);
+        //RotateHeadToEnemy(Target);
 
         if (_fireTimer > FireCooldownTime)
         {
@@ -98,19 +98,19 @@ public class TurretFireController : MonoBehaviour
         _bodyTransform.rotation = Quaternion.Slerp(_bodyTransform.rotation, Quaternion.Euler(0f, angleY, 0f), RotateSpeed * Time.deltaTime);
     }
 
-    public void RotateHeadToEnemy(Transform Target)
-    {
-        Vector2 targetPosXZ = new Vector2(Target.position.x, Target.position.z);
-        Vector2 headPosXZ = new Vector2(_headTransform.position.x, _headTransform.position.z);
-        float distanceXZ = Vector2.Distance(targetPosXZ, headPosXZ);
+    //public void RotateHeadToEnemy(Transform Target)
+    //{
+    //    Vector2 targetPosXZ = new Vector2(Target.position.x, Target.position.z);
+    //    Vector2 headPosXZ = new Vector2(_headTransform.position.x, _headTransform.position.z);
+    //    float distanceXZ = Vector2.Distance(targetPosXZ, headPosXZ);
 
-        float directionY = Target.position.y - _headTransform.position.y + offsetY;
+    //    float directionY = Target.position.y - _headTransform.position.y + offsetY;
         
-        float angleZ = Mathf.Atan2(distanceXZ, directionY) * Mathf.Rad2Deg - 90f;
-        angleZ *= -1f;
+    //    float angleZ = Mathf.Atan2(distanceXZ, directionY) * Mathf.Rad2Deg - 90f;
+    //    angleZ *= -1f;
 
-        _headTransform.localRotation = Quaternion.Slerp(_headTransform.localRotation, Quaternion.Euler(0f, 0f, angleZ), RotateSpeed * Time.deltaTime);
-    }
+    //    _headTransform.localRotation = Quaternion.Slerp(_headTransform.localRotation, Quaternion.Euler(0f, 0f, angleZ), RotateSpeed * Time.deltaTime);
+    //}
 
     public void FireToEnemy(Transform Target)
     {

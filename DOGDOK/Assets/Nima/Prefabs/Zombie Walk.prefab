@@ -1607,18 +1607,18 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -177
+    limit: -20
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 10
+    limit: 70
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 177
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
@@ -1784,7 +1784,7 @@ MonoBehaviour:
   isPlayerPositionKnown: 0
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 2176
   pivotRotation: {x: 0, y: 0, z: 0, w: 0}
   currentAngle: 0
   targetRotation: 0
@@ -2325,18 +2325,18 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -177
+    limit: -20
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 177
+    limit: 70
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 177
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:

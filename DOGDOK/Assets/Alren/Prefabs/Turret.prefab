@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: -2793296584808571110}
   - component: {fileID: 5086550949219399284}
   - component: {fileID: 1315132454127629366}
+  - component: {fileID: 6207080231689160592}
   m_Layer: 2
   m_Name: Turret
   m_TagString: Turret
@@ -415,6 +416,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6207080231689160592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494170418624871423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b4c03e91a0b9b4187ddab560def7fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  build: {fileID: 11400000, guid: 63e81a2499c82d948abd2e435b1c9bd3, type: 2}
+  mainMaterial: {fileID: 2100000, guid: 6dc468d78b1b2b642b48e5d21eebfcc4, type: 2}
+  holoMat: {fileID: 2100000, guid: 912584ffaec87904b863a96259c4d7dc, type: 2}
+  generatedValue: 0
+  dissolveValue: 0
+  nonGeneratedValue: 0
+  isGenerating: 0
 --- !u!1 &494170418636192079
 GameObject:
   m_ObjectHideFlags: 0
