@@ -147,7 +147,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        Vector3 snappedPosition = new Vector3(xPosition, position.y * GridDisplay.cellSize + GridDisplay.cellSize / 2, zPosition);
+        Vector3 snappedPosition = new Vector3(xPosition, 0, zPosition);//sonra zemin konumu alýrýz
         return snappedPosition;
     }
     private void TrackMouseForBuilding()

@@ -11,4 +11,5 @@ public class Build1 : ScriptableObject
     public Vector3 buildingSize;
     public List<Resource1> requiredResource;
     public List<int> requiredAmount;
+    public GameObject turretPrefab;
 }
