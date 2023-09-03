@@ -28,7 +28,8 @@ public class TurretController : MonoBehaviour
         dissolveValue = nonGeneratedValue;
         foreach (Transform _child in transform)
         {
-            _child.GetComponent<MeshRenderer>().material = mainMaterial;
+            if(_child.TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer))
+                meshRenderer.material = mainMaterial;
         }
     }
 
@@ -44,7 +45,10 @@ public class TurretController : MonoBehaviour
             dissolveValue = Mathf.MoveTowards(dissolveValue, generatedValue, (1 / build.buildingDuration) * Time.deltaTime);
             foreach (Transform _child in transform)
             {
-                _child.GetComponent<Renderer>().material.SetFloat("_Dissolve", dissolveValue);
+                if(_child.TryGetComponent<Renderer>(out Renderer renderer))
+                {
+                    renderer.material.SetFloat("_Dissolve", dissolveValue);
+                }
             }
             //mainMaterial.SetFloat("_Dissolve", dissolveValue);
             if (dissolveValue == generatedValue)
