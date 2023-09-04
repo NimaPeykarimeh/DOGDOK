@@ -33,7 +33,6 @@ public class AimPlayer : MonoBehaviour
     [Header("AimAssist")]
     [SerializeField] float aimAssistSpeed;
     [SerializeField] bool isAimedOnEnemy;
-    [SerializeField] LayerMask aimAssistLayer;
     [SerializeField] float aimAssistSize = 1f;
 
     [Header("Aim")]
@@ -52,6 +51,12 @@ public class AimPlayer : MonoBehaviour
     float currentWeight;
     float newWeight;
     int aimWeightLayerIndex = 1;//change Later
+    [Header("AimDelay")]
+    [SerializeField] bool waitForAim;
+    [SerializeField] float aimDelayDuration = 0.2f;
+    [SerializeField] float aimDelayTimer;
+    [SerializeField] bool canAim;
+    
     void Start()
     {
         playerController = GetComponent<PlayerController>();
@@ -100,8 +105,10 @@ public class AimPlayer : MonoBehaviour
         RaycastHit hitInfo;
 
         Ray ray = new Ray(playerController.mainCamera.transform.position, playerController.mainCamera.transform.forward);
-
-        isAimedOnEnemy = Physics.SphereCast(ray, aimAssistSize, out hitInfo, maxRaycastDistance, aimAssistLayer);
+        if (Physics.SphereCast(ray, aimAssistSize, out hitInfo, maxRaycastDistance, aimLayer))
+        {
+            isAimedOnEnemy = hitInfo.collider.CompareTag("EnemyBodyPart");
+        }
         //if (Physics.SphereCast(ray, aimAssistSize, out hitInfo, maxRaycastDistance, aimAssistLayer))
         //{
         //oriantation.transform.forward = -(transform.position - hitInfo.point);
@@ -109,6 +116,8 @@ public class AimPlayer : MonoBehaviour
         //rotationY = oriantation.transform.localEulerAngles.y;
         //}
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -139,17 +148,38 @@ public class AimPlayer : MonoBehaviour
             //currentXSensitivity = xSensitivity;
             //currentYSensitivity = ySensitivity;
         }
+
         if (Input.GetMouseButtonDown(1))
         {
-            playerController.ChangePlayerState(PlayerStates.Combat);
+            waitForAim = true;
+            
         }
-        if (Input.GetMouseButtonUp(1))
+        else if (Input.GetMouseButtonUp(1) && isAiming)
         {
             playerController.ChangePlayerState(PlayerStates.Basic);
+            canAim = false;
+            waitForAim = false;
+            aimDelayTimer = 0;
         }
+
+        if (canAim && waitForAim)
+        {
+            playerController.ChangePlayerState(PlayerStates.Combat);
+            waitForAim = false;
+        }
+        else if(!canAim)
+        {
+            aimDelayTimer += Time.deltaTime;
+            if (aimDelayTimer >= aimDelayDuration)
+            {
+                canAim = true;
+            }
+        }
+
 
         if (isAiming)
         {
+            
             newWeight = 1;
             if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.Melee)
             {

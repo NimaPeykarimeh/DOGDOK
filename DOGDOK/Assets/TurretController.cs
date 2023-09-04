@@ -21,6 +21,7 @@ public class TurretController : MonoBehaviour
         
     }
 
+
     public void StartGenerating()
     {
         transform.gameObject.layer = 7;

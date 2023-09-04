@@ -155,13 +155,13 @@ public class Shooting : MonoBehaviour
             {
                 if (hit.collider.tag != null)
                 {
-                    GameObject _effect = Instantiate(effect, hit.point, hit.transform.rotation);
+                    GameObject _effect = Instantiate(effect, hit.point, Quaternion.LookRotation(hit.normal));
                     _effect.transform.parent = hit.transform;
                     ammoPooling.SpawnAmmo(hit.distance);
                     Debug.Log(hit.transform.tag);
                     if (hit.collider.CompareTag("EnemyBodyPart"))
                     {
-                        Instantiate(enemyHitParticle,hit.point,hit.transform.rotation);
+                        //Instantiate(enemyHitParticle,hit.point,hit.transform.rotation);
                         
                         hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(_damage);
                     }

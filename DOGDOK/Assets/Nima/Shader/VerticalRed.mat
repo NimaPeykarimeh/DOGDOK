@@ -172,6 +172,7 @@ Material:
     - _AlphaSrcBlend: 1
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
+    - _AlphaTres: 0.5
     - _Anisotropy: 0
     - _BlendMode: 0
     - _CoatMask: 0
@@ -190,12 +191,12 @@ Material:
     - _DisplacementLockObjectScale: 1
     - _DisplacementLockTilingScale: 1
     - _DisplacementMode: 0
-    - _Dissolve: -0.047
+    - _Dissolve: 0.526
     - _DoubleSidedEnable: 1
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 1
     - _DstBlend: 0
-    - _EdgeWidth: 0.025
+    - _EdgeWidth: 0.03
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
     - _EmissiveIntensity: 1
@@ -224,6 +225,7 @@ Material:
     - _MetallicRemapMin: 0
     - _Noise: 1.11
     - _NoiseAmount: 104.31
+    - _NoiseScale: 50
     - _NormalMapSpace: 0
     - _NormalScale: 1
     - _ObjectHeight: 1.41
@@ -247,7 +249,7 @@ Material:
     - _SpecularAAScreenSpaceVariance: 0.1
     - _SpecularAAThreshold: 0.2
     - _SpecularOcclusionMode: 1
-    - _Speed: 0
+    - _Speed: 0.1
     - _SrcBlend: 1
     - _StencilRef: 0
     - _StencilRefDepth: 8
@@ -292,8 +294,8 @@ Material:
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _Diffusion_Profile_Asset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
-    - _EdgeColor: {r: 0, g: 63.999992, b: 33.364986, a: 1}
-    - _EdgeColor_2: {r: 64, g: 0, b: 0, a: 1}
+    - _EdgeColor: {r: 0, g: 28.531706, b: 31.999996, a: 1}
+    - _EdgeColor_2: {r: 76.15007, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
