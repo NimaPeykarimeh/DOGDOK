@@ -17,6 +17,14 @@ public class TurretFireController : MonoBehaviour
     [SerializeField] Transform BulletParent;
     [SerializeField] GameObject Bullet;
     [SerializeField] int BulletCount;
+
+    [Header("EnergySettings")]
+    [SerializeField] private float energyConsumePerShot = 4f;
+    [SerializeField] private float energyCapacity = 100f;
+    [SerializeField] private float startingEnergy = 20f;
+    [SerializeField] private float currentEnergy;
+    [SerializeField] private bool canShoot = true;
+
     private int _bulletIndex;
 
     public float FireCooldownTime;
@@ -29,6 +37,12 @@ public class TurretFireController : MonoBehaviour
     void Start()
     {
         _bulletIndex = 0;
+        currentEnergy = startingEnergy;
+        _fireTimer = 0;
+        if(startingEnergy <= 0)
+        {
+            canShoot = false;
+        }
 
         pooledBullets = new List<GameObject>();
         GameObject tmp;
@@ -39,21 +53,27 @@ public class TurretFireController : MonoBehaviour
             tmp.transform.SetParent(BulletParent);
             pooledBullets.Add(tmp);
         }
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (EnemyList.Count != 0)
+        if (canShoot)
         {
-            if (EnemyList[0].gameObject.activeSelf)
-                ShootTheEnemy(EnemyList[0]);
-            else
-                EnemyList.RemoveAt(0);
+            if (EnemyList.Count != 0)
+            {
+                if (EnemyList[0].gameObject.activeSelf)
+                    ShootTheEnemy(EnemyList[0]);
+                else
+                    EnemyList.RemoveAt(0);
+            }
+
+            if (_fireTimer < FireCooldownTime + 1f)
+                _fireTimer += Time.deltaTime;
         }
 
-        if (_fireTimer < FireCooldownTime + 1f)
-            _fireTimer += Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -105,7 +125,7 @@ public class TurretFireController : MonoBehaviour
     //    float distanceXZ = Vector2.Distance(targetPosXZ, headPosXZ);
 
     //    float directionY = Target.position.y - _headTransform.position.y + offsetY;
-        
+
     //    float angleZ = Mathf.Atan2(distanceXZ, directionY) * Mathf.Rad2Deg - 90f;
     //    angleZ *= -1f;
 
@@ -119,9 +139,18 @@ public class TurretFireController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, ShootingRange))
         {
-            //if (hit.transform.CompareTag("Enemy"))
-                //Damage(Damage);
-                
+            if (hit.transform.CompareTag("Enemy"))
+            {
+                print("BulletRayHit");
+                currentEnergy -= energyConsumePerShot;
+                if (currentEnergy <= 0)
+                {
+                    canShoot = false;
+                    _fireTimer = 0;
+                }
+            }
+
+
         }
 
         /*
