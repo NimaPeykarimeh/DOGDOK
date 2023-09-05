@@ -58,15 +58,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float nearDef = 2f;
 
     [Header("Switch Camera Side")]
-    [SerializeField] float currentSideValue = 1;
-    [SerializeField] float targetSideValue = 1;
+    [SerializeField] float currentShoulderSideValue = 1;
+    [SerializeField] float targetShoulderSideValue = 1;
     [SerializeField] float shoulderSwitchDuration = 0.3f;
-    [SerializeField] bool isSwitching = false;
+    [SerializeField] bool isSwitchingShoulder = false;
 
     public enum PlayerStates
     {
         Basic,
-        Combat
+        Combat,
+        Building
     }
 
     void Start()
@@ -95,13 +96,10 @@ public class PlayerController : MonoBehaviour
         if (_state == PlayerStates.Basic)
         {
             dofEffect.active = false;
-            //lastMouseValue = new Vector2(combatCamera.m_XAxis.Value,combatCamera.m_YAxis.Value);
             combatCamera.SetActive(false);
             basicCamera.SetActive(true);
             activeCinemachine = basicCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<Cinemachine3rdPersonFollow>();
-            activeCinemachine.CameraSide = currentSideValue;
-            //basicCamera.m_XAxis.Value = lastMouseValue.x;
-            //basicCamera.m_YAxis.Value = lastMouseValue.y;
+            activeCinemachine.CameraSide = currentShoulderSideValue;
 
             canRun = true;
             aimPlayer.isAiming = false;
@@ -115,13 +113,10 @@ public class PlayerController : MonoBehaviour
         if (_state == PlayerStates.Combat)
         {
             dofEffect.active = true;
-            //lastMouseValue = new Vector2(basicCamera.m_XAxis.Value, basicCamera.m_YAxis.Value);
             basicCamera.SetActive(false);
             combatCamera.SetActive(true);
             activeCinemachine = combatCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<Cinemachine3rdPersonFollow>();//Optimize Edilebilir
-            activeCinemachine.CameraSide = currentSideValue;
-            //combatCamera.m_XAxis.Value = lastMouseValue.x;
-            //combatCamera.m_YAxis.Value = lastMouseValue.y;
+            activeCinemachine.CameraSide = currentShoulderSideValue;
             characterMovement.ToggleRunState(CharacterMovement.MoveStates.Walk);
             //chande animaton weight
             currentWeight = animator.GetLayerWeight(aimWeightLayerIndex);
@@ -129,24 +124,40 @@ public class PlayerController : MonoBehaviour
             aimPlayer.isAiming = true;
             canRun = false;
         }
+        if (_state == PlayerStates.Building)
+        {
+            dofEffect.active = false;
+            basicCamera.SetActive(true);
+            combatCamera.SetActive(false);
+            activeCinemachine = basicCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<Cinemachine3rdPersonFollow>();//Optimize Edilebilir
+            activeCinemachine.CameraSide = currentShoulderSideValue;
+            characterMovement.ToggleRunState(CharacterMovement.MoveStates.Walk);
+
+            aimPlayer.isAiming = false;
+            canRun = false;
+
+            currentWeight = animator.GetLayerWeight(aimWeightLayerIndex);
+            //newWeight = 1f;//Start Aim Animation
+
+        }
         currentState = _state;
         
     }
 
     void SwitchAimShoulder()
     {
-        if (!isSwitching)
+        if (!isSwitchingShoulder)
         {
-            currentSideValue = activeCinemachine.CameraSide;
-            if (targetSideValue == 1)
+            currentShoulderSideValue = activeCinemachine.CameraSide;
+            if (targetShoulderSideValue == 1)
             {
-                targetSideValue = 0;
+                targetShoulderSideValue = 0;
             }
             else
             {
-                targetSideValue = 1;
+                targetShoulderSideValue = 1;
             }
-            isSwitching = true;
+            isSwitchingShoulder = true;
         }
     }
 
@@ -157,13 +168,13 @@ public class PlayerController : MonoBehaviour
         {
             SwitchAimShoulder();
         }
-        if (isSwitching)
+        if (isSwitchingShoulder)
         {
-            currentSideValue = Mathf.MoveTowards(currentSideValue, targetSideValue,(1/shoulderSwitchDuration) * Time.deltaTime);
-            activeCinemachine.CameraSide = currentSideValue;
-            if (currentSideValue == targetSideValue)
+            currentShoulderSideValue = Mathf.MoveTowards(currentShoulderSideValue, targetShoulderSideValue,(1/shoulderSwitchDuration) * Time.deltaTime);
+            activeCinemachine.CameraSide = currentShoulderSideValue;
+            if (currentShoulderSideValue == targetShoulderSideValue)
             {
-                isSwitching = false;
+                isSwitchingShoulder = false;
             }
         }
 
