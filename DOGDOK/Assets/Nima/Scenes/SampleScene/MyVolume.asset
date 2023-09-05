@@ -206,13 +206,13 @@ MonoBehaviour:
     m_Value: 1
   colorMode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   color:
-    m_OverrideState: 0
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  tint:
     m_OverrideState: 1
-    m_Value: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
+    m_Value: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 1}
+  tint:
+    m_OverrideState: 0
+    m_Value: {r: 256, g: 0, b: 0, a: 1}
   maxFogDistance:
     m_OverrideState: 0
     m_Value: 5000
@@ -233,7 +233,7 @@ MonoBehaviour:
     m_Value: 50
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 10.3
   enableVolumetricFog:
     m_OverrideState: 0
     m_Value: 0
@@ -570,22 +570,22 @@ MonoBehaviour:
     m_Value: 2
   focusDistance:
     m_OverrideState: 1
-    m_Value: 5.8412156
+    m_Value: 5.26
   focusDistanceMode:
     m_OverrideState: 1
     m_Value: 0
   nearFocusStart:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.58456075
   nearFocusEnd:
     m_OverrideState: 1
-    m_Value: 2.0562954
+    m_Value: 0
   farFocusStart:
     m_OverrideState: 1
-    m_Value: 4.112591
+    m_Value: 7.922804
   farFocusEnd:
     m_OverrideState: 1
-    m_Value: 61.68886
+    m_Value: 29.228037
   m_NearSampleCount:
     m_OverrideState: 1
     m_Value: 5

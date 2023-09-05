@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float dofEffectSpeed;
     [SerializeField] float currentFocusValue;
     [SerializeField] float focusDistanceToleranse;
+    [SerializeField] float focuseDistanceRange = 3f;
     [SerializeField] float focusCastSphereRadius;
     [SerializeField] float maxFocusRange;
     [SerializeField] float farDof = 2f;
@@ -183,9 +184,10 @@ public class PlayerController : MonoBehaviour
             {
 
                 currentFocusValue = Mathf.Lerp(currentFocusValue, GetFocusDistance(), dofEffectSpeed * Time.deltaTime);
-                dofEffect.farFocusStart.value = currentFocusValue;
+                dofEffect.farFocusStart.value = currentFocusValue + focuseDistanceRange;
+                dofEffect.nearFocusEnd.value = currentFocusValue - focuseDistanceRange;
+                //dofEffect.nearFocusStart.value = currentFocusValue / nearDef;
                 dofEffect.farFocusEnd.value = currentFocusValue * farDof;
-                dofEffect.nearFocusEnd.value = currentFocusValue / nearDef;
             }
             
         }
