@@ -135,11 +135,12 @@ public class TurretFireController : MonoBehaviour
     public void FireToEnemy(Transform Target)
     {
         Vector3 _direction = (Target.position - _firePoint.position).normalized;
-        Ray ray = new Ray(_firePoint.position, _direction);
+        Ray ray = new Ray(_firePoint.position, _direction);//_firepoint forward olsun, target position olmasýn
 
-        if (Physics.Raycast(ray, out RaycastHit hit, ShootingRange))
+        if (Physics.Raycast(ray, out RaycastHit hit, ShootingRange))//layer sorgusu, enemy görmesin, enemyBodyPart Görsün
         {
-            if (hit.transform.CompareTag("Enemy"))
+            //ammoPooling.SpawnAmmo(hit.distance); mermi oluþturma ve yok olma süresi
+            if (hit.transform.CompareTag("Enemy"))//tag olarak EnemyBodyPart, hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(_damage);
             {
                 print("BulletRayHit");
                 currentEnergy -= energyConsumePerShot;
@@ -152,6 +153,14 @@ public class TurretFireController : MonoBehaviour
 
 
         }
+
+        //ne olur ne olmaz
+        //else
+        //{
+        //    ammoPooling.SpawnAmmo(50);
+        //}
+
+
 
         /*
         pooledBullets[_bulletIndex].transform.position = _firePoint.position;

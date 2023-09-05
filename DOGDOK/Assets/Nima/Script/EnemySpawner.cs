@@ -95,8 +95,6 @@ public class EnemySpawner : MonoBehaviour
                 }
             }
         }
-        //Debug.Log("couldn't spawn");
-
         return Vector3.zero;//if the height of the ground is different change it
     }
 
@@ -117,11 +115,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        if (transform.childCount <= 0)
-        {
-            //Debug.Log("Max Enemy");
-        }
-        else
+        if (transform.childCount > 0)
         {
             GameObject _spawnedEnemy = transform.GetChild(0).gameObject;
             Vector3 _randomPositon = GetRandomPositionInSpawner();
@@ -131,10 +125,6 @@ public class EnemySpawner : MonoBehaviour
                 _spawnedEnemy.SetActive(true);
                 _spawnedEnemy.transform.parent = null;
                 spawnTimer = 0;
-            }
-            else
-            {
-                //Debug.Log("Vector was Zero");
             }
         }
     }

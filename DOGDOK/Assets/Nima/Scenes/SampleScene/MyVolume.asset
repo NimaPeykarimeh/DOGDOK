@@ -233,7 +233,7 @@ MonoBehaviour:
     m_Value: 50
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 10.3
+    m_Value: 37
   enableVolumetricFog:
     m_OverrideState: 0
     m_Value: 0
@@ -579,13 +579,13 @@ MonoBehaviour:
     m_Value: 0.58456075
   nearFocusEnd:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 45.912193
   farFocusStart:
     m_OverrideState: 1
-    m_Value: 7.922804
+    m_Value: 53.912193
   farFocusEnd:
     m_OverrideState: 1
-    m_Value: 29.228037
+    m_Value: 499.12195
   m_NearSampleCount:
     m_OverrideState: 1
     m_Value: 5

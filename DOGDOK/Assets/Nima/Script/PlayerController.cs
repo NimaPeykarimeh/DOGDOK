@@ -66,8 +66,7 @@ public class PlayerController : MonoBehaviour
     public enum PlayerStates
     {
         Basic,
-        Combat,
-        Run
+        Combat
     }
 
     void Start()
@@ -93,7 +92,6 @@ public class PlayerController : MonoBehaviour
 
     public void ChangePlayerState(PlayerStates _state)
     {
-        Debug.Log(aimPlayer.isAiming);
         if (_state == PlayerStates.Basic)
         {
             dofEffect.active = false;
@@ -105,6 +103,14 @@ public class PlayerController : MonoBehaviour
             //basicCamera.m_XAxis.Value = lastMouseValue.x;
             //basicCamera.m_YAxis.Value = lastMouseValue.y;
 
+            canRun = true;
+            aimPlayer.isAiming = false;
+            currentWeight = animator.GetLayerWeight(aimWeightLayerIndex);
+            newWeight = 0f;//end Aim Animation
+            if (characterMovement.isRunning)
+            {
+                characterMovement.ToggleRunState(CharacterMovement.MoveStates.Run);
+            }
         }
         if (_state == PlayerStates.Combat)
         {
@@ -122,22 +128,6 @@ public class PlayerController : MonoBehaviour
             newWeight = 1f;//Start Aim Animation
             aimPlayer.isAiming = true;
             canRun = false;
-        }
-        if (currentState == PlayerStates.Combat)
-        {
-            canRun = true;
-            aimPlayer.isAiming = false;
-            currentWeight = animator.GetLayerWeight(aimWeightLayerIndex);
-            newWeight = 0f;//end Aim Animation
-            if (characterMovement.isRunning)
-            {
-                
-                characterMovement.ToggleRunState(CharacterMovement.MoveStates.Run);
-            }
-        }
-        if (_state == PlayerStates.Run)
-        {
-            //characterMovement.currentMovementSpeed
         }
         currentState = _state;
         

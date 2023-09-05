@@ -14,7 +14,6 @@ public class Ammo : MonoBehaviour
     public TrailRenderer trail;
 
     public float speed;
-    public Transform direction;
     private void Awake()
     {
         trail = GetComponent<TrailRenderer>();
