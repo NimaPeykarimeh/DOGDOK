@@ -101,12 +101,8 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    public void GetDamage(int _damage,EnemyBodyPartDamageDetection.BodyParts _bodyPart)
+    public void GetDamage(int _damage)
     {
-        if (_bodyPart == EnemyBodyPartDamageDetection.BodyParts.Head)
-        {
-            _damage *= headShotMult;
-        }
         enemyController.AlertEnemy();
         currentHealth -= _damage;
         if (currentHealth <= 0)

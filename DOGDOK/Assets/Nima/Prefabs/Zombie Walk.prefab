@@ -239,6 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
+  headShotMult: 1
   bodyPart: 1
 --- !u!136 &7978411252228678474
 CapsuleCollider:
@@ -786,6 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
+  headShotMult: 1
   bodyPart: 2
 --- !u!136 &4658437629932108617
 CapsuleCollider:
@@ -976,6 +978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
+  headShotMult: 1
   bodyPart: 2
 --- !u!136 &1833125165179593516
 CapsuleCollider:
@@ -1557,6 +1560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
+  headShotMult: 1
   bodyPart: 1
 --- !u!136 &2329287819183550893
 CapsuleCollider:
@@ -1875,6 +1879,7 @@ MonoBehaviour:
   - {fileID: 4592162016229585282}
   - {fileID: 764025917632620560}
   dieForce: 15
+  isDying: 0
   animationDuration: 2
 --- !u!114 &5725410851165250381
 MonoBehaviour:
@@ -1975,6 +1980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
+  headShotMult: 1
   bodyPart: 3
 --- !u!65 &6144573087307084721
 BoxCollider:
@@ -2149,6 +2155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
+  headShotMult: 1
   bodyPart: 1
 --- !u!136 &4726928421971394058
 CapsuleCollider:
@@ -2275,6 +2282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
+  headShotMult: 1
   bodyPart: 1
 --- !u!136 &4598169100958068356
 CapsuleCollider:
@@ -2476,6 +2484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
+  headShotMult: 1
   bodyPart: 3
 --- !u!1 &5504712222141053544
 GameObject:
@@ -2655,6 +2664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
+  headShotMult: 2
   bodyPart: 0
 --- !u!54 &7747892044017722035
 Rigidbody:
@@ -3097,6 +3107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
+  headShotMult: 1
   bodyPart: 2
 --- !u!136 &8371269257216680161
 CapsuleCollider:
@@ -3317,6 +3328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
+  headShotMult: 1
   bodyPart: 2
 --- !u!136 &3970940373656192699
 CapsuleCollider:

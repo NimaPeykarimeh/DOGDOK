@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyBodyPartDamageDetection : MonoBehaviour
 {
     [SerializeField] EnemyHealth enemyHealth;
-    int headShotMult;
+    [SerializeField] byte headShotMult = 1;
     [SerializeField] BodyParts bodyPart;
     public enum BodyParts
     {
@@ -16,6 +16,6 @@ public class EnemyBodyPartDamageDetection : MonoBehaviour
     }
     public void GetPartDamage(int _damage)//move headshot to enemyhealth
     {
-        enemyHealth.GetDamage(_damage,bodyPart);
+        enemyHealth.GetDamage(_damage * headShotMult);
     }
 }
