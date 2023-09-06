@@ -176,6 +176,7 @@ Material:
     - _Anisotropy: 0
     - _BlendMode: 0
     - _CoatMask: 0
+    - _ColorSpeed: 7.55
     - _Color_Brightness: 1
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 0
@@ -191,12 +192,12 @@ Material:
     - _DisplacementLockObjectScale: 1
     - _DisplacementLockTilingScale: 1
     - _DisplacementMode: 0
-    - _Dissolve: -0.1
+    - _Dissolve: 0.359
     - _DoubleSidedEnable: 1
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 1
     - _DstBlend: 0
-    - _EdgeWidth: 0.03
+    - _EdgeWidth: 0.055
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
     - _EmissiveIntensity: 1
@@ -225,7 +226,7 @@ Material:
     - _MetallicRemapMin: 0
     - _Noise: 1.11
     - _NoiseAmount: 104.31
-    - _NoiseScale: 50
+    - _NoiseScale: 39.27
     - _NormalMapSpace: 0
     - _NormalScale: 1
     - _ObjectHeight: 1.41
@@ -301,6 +302,7 @@ Material:
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
+    - _NoiseSpeed: {r: 0, g: 0.1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
