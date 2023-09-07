@@ -20,3 +20,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   - {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   requiredAmount: 0f00000005000000
+  turretPrefab: {fileID: 494170418624871423, guid: d484ba6c47b07f84f8c222028a8760b6, type: 3}

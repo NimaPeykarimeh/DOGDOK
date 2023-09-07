@@ -14,13 +14,14 @@ public class InventoryManager : MonoBehaviour
     private Build1 currentBuild;
     private Transform cubeTransform;
     private Dictionary<Resource1, int> currentNeeds;
-    private Renderer turretRenderer;
+    //private Renderer turretRenderer;
     private BoxCollider turretCollider;
     private bool isAired;
 
     [SerializeField] private LayerMask GroundLayer;
     [SerializeField] private GridDisplay GridDisplay;
-    [SerializeField] private GameObject turretPrefab;
+    [SerializeField] private BuildableArea BuildableArea;
+    private GameObject turretPrefab;
     [SerializeField] private GameObject InventoryPanel;
     [SerializeField] private GameObject resBlockPrefab;
     [SerializeField] private List<Resource1> resources = new();
@@ -64,6 +65,7 @@ public class InventoryManager : MonoBehaviour
     {
         buildingSelected = true; 
         currentBuild = build;
+        turretPrefab = build.turretPrefab;
     }
     private Transform CreateTurret()
     {
@@ -80,7 +82,7 @@ public class InventoryManager : MonoBehaviour
                 //turretPrefab.transform.localScale = GridDisplay.cellSize * currentBuild.buildingSize; //scale'i !!!!!!
                 positionToPlace.y += turretPrefab.transform.localScale.y / 2; //küp yüksekliði
                 Transform turretTransform = Instantiate(turretPrefab, positionToPlace, transform.rotation).GetComponent<Transform>();
-                turretRenderer = turretTransform.GetComponent<TurretNullControl>().Renderer;
+                //turretRenderer = turretTransform.GetComponent<TurretNullControl>().Renderer;
                 turretCollider = turretTransform.GetComponent<BoxCollider>();
                 buildingSelected = false;
                 return turretTransform;
@@ -172,11 +174,9 @@ public class InventoryManager : MonoBehaviour
         }
         //positionToPlace.y = 0;
         cubeTransform.position = PlaceObjectOnGrid(positionToPlace, currentBuild.buildingSize);
-        if (!isAired && !Physics.CheckBox(cubeTransform.position + turretCollider.center, turretCollider.size / 2, turretCollider.transform.rotation))
+        if (!isAired && BuildableArea.CheckBuildableArea(cubeTransform.position) && !Physics.CheckBox(cubeTransform.position + turretCollider.center, turretCollider.size / 2, turretCollider.transform.rotation))
         {
             cubeTransform.gameObject.GetComponent<TurretNullControl>().TurretColorSelector(true);
-            Debug.Log("GREEN");
-            //turretRenderer.material.SetColor("_Main_Color", Color.green);
             if (Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetKeyDown(KeyCode.E) && !Input.GetKeyDown(KeyCode.Escape))
             {
                 UseResources(currentNeeds);
@@ -190,9 +190,7 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("RED");
             cubeTransform.gameObject.GetComponent<TurretNullControl>().TurretColorSelector(false);
-            //turretRenderer.material.SetColor("_Main_Color", Color.red);
         }
     }
 
@@ -277,6 +275,21 @@ public class InventoryManager : MonoBehaviour
             }
         }
         currentNeeds.Clear();
+    }
+    public void AddResources(Dictionary<Resource1, int> addingResources) //Kaynak harcanýmý
+    {
+        Dictionary<Resource1, int> tempHave = resourceIndices.ToDictionary(entry => entry.Key, entry => entry.Value);
+        //Deðeri Güncelle
+        foreach (var add in addingResources)
+        {
+            foreach (var have in tempHave)
+            {
+                if (have.Key == add.Key)
+                {
+                    resourceIndices[have.Key] += add.Value;
+                }
+            }
+        }
     }
     #endregion
 }

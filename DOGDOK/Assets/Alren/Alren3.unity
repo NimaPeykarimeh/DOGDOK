@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.6461314, g: 0.44310176, b: 0.4152997, a: 1}
+  m_IndirectSpecularColor: {r: 0.64497113, g: 0.44230366, b: 0.41498268, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6143,6 +6143,116 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &640218676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 640218677}
+  - component: {fileID: 640218680}
+  - component: {fileID: 640218679}
+  - component: {fileID: 640218678}
+  - component: {fileID: 640218681}
+  m_Layer: 0
+  m_Name: BuildableArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &640218677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640218676}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 20, y: 5, z: 20}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2710788455400668778}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &640218678
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640218676}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &640218679
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640218676}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 257
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 20543bbb04fe79045beb1c7840cef68d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &640218680
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640218676}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &640218681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640218676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4a4646005d1fb4da2448de8ba953f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &652532538
 GameObject:
   m_ObjectHideFlags: 0
@@ -6617,12 +6727,32 @@ MonoBehaviour:
   canRun: 0
   combatCamera: {fileID: 898176879}
   basicCamera: {fileID: 1742430544}
+  activeCinemachine: {fileID: 0}
   currentState: 0
   lastMouseValue: {x: 0, y: 0}
   aimLayerWeightSpeed: 3
   aimWeightLayerIndex: 1
   weaponMat: {fileID: 2100000, guid: 590e2e81003a64d4e99197fc73e1fbef, type: 2}
   aimDistance: 0
+  volume: {fileID: 190458058}
+  volProf: {fileID: 11400000, guid: 9150c168b3c33044089d9b55d70e6c42, type: 2}
+  dofEffect: {fileID: 0}
+  isDepthing: 0
+  focusLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  dofEffectSpeed: 0
+  currentFocusValue: 0
+  focusDistanceToleranse: 0
+  focuseDistanceRange: 3
+  focusCastSphereRadius: 0
+  maxFocusRange: 0
+  farDof: 2
+  nearDef: 2
+  currentShoulderSideValue: 1
+  targetShoulderSideValue: 1
+  shoulderSwitchDuration: 0.3
+  isSwitchingShoulder: 0
 --- !u!114 &673691998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6721,9 +6851,6 @@ MonoBehaviour:
   assistSensitivity: 25
   aimAssistSpeed: 300
   isAimedOnEnemy: 0
-  aimAssistLayer:
-    serializedVersion: 2
-    m_Bits: 1024
   aimAssistSize: 0.5
   aimLayer:
     serializedVersion: 2
@@ -6734,6 +6861,10 @@ MonoBehaviour:
   maxRaycastDistance: 100
   animationDuration: 1
   rigLayers: []
+  waitForAim: 0
+  aimDelayDuration: 0.2
+  aimDelayTimer: 0
+  canAim: 0
 --- !u!114 &673692003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19803,12 +19934,32 @@ MonoBehaviour:
   canRun: 0
   combatCamera: {fileID: 0}
   basicCamera: {fileID: 0}
+  activeCinemachine: {fileID: 0}
   currentState: 0
   lastMouseValue: {x: 0, y: 0}
   aimLayerWeightSpeed: 5
   aimWeightLayerIndex: 0
   weaponMat: {fileID: 0}
   aimDistance: 0
+  volume: {fileID: 0}
+  volProf: {fileID: 0}
+  dofEffect: {fileID: 0}
+  isDepthing: 0
+  focusLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  dofEffectSpeed: 0
+  currentFocusValue: 0
+  focusDistanceToleranse: 0
+  focuseDistanceRange: 3
+  focusCastSphereRadius: 0
+  maxFocusRange: 0
+  farDof: 2
+  nearDef: 2
+  currentShoulderSideValue: 1
+  targetShoulderSideValue: 1
+  shoulderSwitchDuration: 0.3
+  isSwitchingShoulder: 0
 --- !u!1001 &1528870631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27495,6 +27646,7 @@ Transform:
   - {fileID: 1435410149}
   - {fileID: 2710788454386182069}
   - {fileID: 2710788455179692600}
+  - {fileID: 640218677}
   m_Father: {fileID: 0}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -27568,7 +27720,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   GridDisplay: {fileID: 5759224}
-  turretPrefab: {fileID: 8961350585211728618, guid: 3e64fcaba639307448cf003b7cdd8ada, type: 3}
+  BuildableArea: {fileID: 640218681}
   InventoryPanel: {fileID: 2710788455573219896}
   resBlockPrefab: {fileID: 353063840803126888, guid: 73122d84a3983bf4a94089bc99374e28, type: 3}
   resources:
