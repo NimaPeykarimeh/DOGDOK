@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TurretFireController : MonoBehaviour
 {
-    [SerializeField] List<Transform> EnemyList;
+    public List<Transform> EnemyList;
 
     [SerializeField] private Transform _bodyTransform;
     //[SerializeField] private Transform _headTransform;
@@ -17,33 +17,22 @@ public class TurretFireController : MonoBehaviour
     [SerializeField] Transform BulletParent;
     [SerializeField] GameObject Bullet;
     [SerializeField] int BulletCount;
-
-    [Header("EnergySettings")]
-    [SerializeField] private float energyConsumePerShot = 4f;
-    [SerializeField] private float energyCapacity = 100f;
-    [SerializeField] private float startingEnergy = 20f;
-    [SerializeField] private float currentEnergy;
-    [SerializeField] private bool canShoot = true;
-
-    private int _bulletIndex;
+    
 
     public float FireCooldownTime;
     public float Damage;
     public float ShootingRange;
 
     private float _fireTimer;
+    private int _bulletIndex;
 
-    // Start is called before the first frame update
+    [Header("EnergySettings")]
+    public bool canShoot = false;
+
     void Start()
     {
         _bulletIndex = 0;
-        currentEnergy = startingEnergy;
-        _fireTimer = 0;
-        if (startingEnergy <= 0)
-        {
-            canShoot = false;
-        }
-
+        canShoot = false;
         pooledBullets = new List<GameObject>();
         GameObject tmp;
         for (int i = 0; i < BulletCount; ++i)
@@ -76,21 +65,21 @@ public class TurretFireController : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            EnemyList.Add(other.transform);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Enemy"))
+    //    {
+    //        EnemyList.Add(other.transform);
+    //    }
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            EnemyList.Remove(other.transform);
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("Enemy"))
+    //    {
+    //        EnemyList.Remove(other.transform);
+    //    }
+    //}
 
     public void RemoveEnemyFromList(Transform Enemy)
     {
@@ -143,12 +132,6 @@ public class TurretFireController : MonoBehaviour
             if (hit.transform.CompareTag("Enemy"))//tag olarak EnemyBodyPart, hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(_damage);
             {
                 print("BulletRayHit");
-                currentEnergy -= energyConsumePerShot;
-                if (currentEnergy <= 0)
-                {
-                    canShoot = false;
-                    _fireTimer = 0;
-                }
             }
 
 

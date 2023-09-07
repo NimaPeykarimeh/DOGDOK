@@ -85,6 +85,65 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2009678019421492403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4981402858965206193}
+  - component: {fileID: 8321131137233702858}
+  - component: {fileID: 8177397541728476806}
+  m_Layer: 2
+  m_Name: Radius
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4981402858965206193
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009678019421492403}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8581270768300124240}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &8321131137233702858
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009678019421492403}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8177397541728476806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009678019421492403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed9fc9536ccc16446abc11e92a19f4e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TurretFireController: {fileID: 2045860478247589931}
 --- !u!1 &3069361477419724085
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +305,7 @@ GameObject:
   - component: {fileID: 1995693102376551491}
   m_Layer: 2
   m_Name: RegularTurret
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -265,6 +324,7 @@ Transform:
   m_Children:
   - {fileID: 4856968226300883765}
   - {fileID: 4488180058378178434}
+  - {fileID: 4981402858965206193}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -288,7 +348,7 @@ MonoBehaviour:
   readyToUse: 0
   _layer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 512
 --- !u!65 &1455171154482841802
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -335,14 +395,10 @@ MonoBehaviour:
   BulletParent: {fileID: 7316791991514505912}
   Bullet: {fileID: 6661396178395260907, guid: ad69e222b6cdffa459480f3ce56cb5f4, type: 3}
   BulletCount: 10
-  energyConsumePerShot: 4
-  energyCapacity: 100
-  startingEnergy: 20
-  currentEnergy: 0
-  canShoot: 1
   FireCooldownTime: 1
   Damage: 1
   ShootingRange: 10
+  canShoot: 1
 --- !u!135 &1995693102376551491
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -352,7 +408,7 @@ SphereCollider:
   m_GameObject: {fileID: 8961350585211728618}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}

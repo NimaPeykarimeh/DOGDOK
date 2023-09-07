@@ -10,6 +10,7 @@ TagManager:
   - Turret
   - EnemyBodyPart
   - CrafatbleArea
+  - EnergySource
   layers:
   - Default
   - TransparentFX

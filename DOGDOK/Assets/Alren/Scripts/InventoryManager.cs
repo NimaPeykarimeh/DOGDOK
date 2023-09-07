@@ -190,6 +190,7 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
+            print(!isAired + " " + BuildableArea.CheckBuildableArea(cubeTransform.position) + " " + !Physics.CheckBox(cubeTransform.position + turretCollider.center, turretCollider.size / 2, turretCollider.transform.rotation));
             cubeTransform.gameObject.GetComponent<TurretNullControl>().TurretColorSelector(false);
         }
     }
