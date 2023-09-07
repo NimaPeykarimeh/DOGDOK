@@ -63,21 +63,21 @@ public class InventoryManager : MonoBehaviour
     #region Turret Building
     public void SetCurrentBuild(Build1 build)
     {
-        buildingSelected = true; 
+        buildingSelected = true;
         currentBuild = build;
         turretPrefab = build.turretPrefab;
     }
     private Transform CreateTurret()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //kamerayý cachle daha optimize.
-        isBuilding = true; 
+        isBuilding = true;
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             Vector3 positionToPlace = hit.point;
 
             if (hit.collider.gameObject.CompareTag("Ground"))
             {
-                
+
                 positionToPlace = PlaceObjectOnGrid(positionToPlace, currentBuild.buildingSize);
                 //turretPrefab.transform.localScale = GridDisplay.cellSize * currentBuild.buildingSize; //scale'i !!!!!!
                 positionToPlace.y += turretPrefab.transform.localScale.y / 2; //küp yüksekliði

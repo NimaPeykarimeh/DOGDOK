@@ -10,7 +10,7 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
     private List<Resource1> resourceTypeList; // Toplanan resource türü
     private int objectID; // Þu anda toplanan kaynaðýn ID'sini gösterir. Collectible'ýn deðiþtirilip deðiþtirilmediði kontrolü
     private int currentlyDissolvedID; // Anlatmasý zor ben bile unuttum. Spaghetti code.
-    
+
     private ResourceCreation ResourceCreation; // Toplanan kaynaðýn içindeki bazý bilgileri almak için (resource ve count gibi)
 
     private List<ResourceCreation> resCreationList = new(); // Cismin içindeki koddur. Method çaðýrýmý için kullanýlýr. Method ile birden fazla cismi generate/dissolve edebiliriz.
@@ -24,6 +24,7 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
 
     private WeaponController WeaponController;
     [SerializeField] private InventoryManager InventoryManager;
+    [SerializeField] private CollectibleFeedback CollectibleFeedback;
 
     [Header("Attributes")]
     [SerializeField] private float collectingDistance = 5f; // Kaynak Toplama Raycast Uzunluðu
@@ -69,12 +70,12 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
         else currentlyDissolvedID = -2;
 
 
-        if (resCreationList.Count > 0)  
+        if (resCreationList.Count > 0)
         {
             print(resCreationList.Count);
             for (int i = 0; i < resCreationList.Count; i++) // Generation'ý veya dissolve'u bitmiþ cisimleri silme
             {
-                if (animationValueList[i] == unsolvedValue || animationValueList[i] == dissolvedValue) 
+                if (animationValueList[i] == unsolvedValue || animationValueList[i] == dissolvedValue)
                 {
                     resCreationList.RemoveAt(i);
                     animationValueList.RemoveAt(i);
@@ -146,7 +147,7 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
                 currentlyDissolvedID = objectID;
 
                 // Cisim daha önceden listeye alýnmýþ mý kontrolleri
-                if (objectIDList.Count > 0) 
+                if (objectIDList.Count > 0)
                 {
                     int index = objectIDList.FindIndex(x => x == objectID);
                     if (index != -1)
@@ -184,11 +185,13 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
                     // Cisim tamamen saydamlaþýnca cismi yok et ve envanteri güncelle
                     Destroy(hitObject);
                     Dictionary<Resource1, int> addingResources = new();
-                    for(int i = 0; i < resourceCountList.Count && i < resourceTypeList.Count; i++)
+                    for (int i = 0; i < resourceCountList.Count && i < resourceTypeList.Count; i++)
                     {
                         addingResources.Add(resourceTypeList[i], resourceCountList[i]);
                     }
+
                     InventoryManager.AddResources(addingResources);
+                    CollectibleFeedback.GiveFeedback(addingResources);
                 }
             }
             else

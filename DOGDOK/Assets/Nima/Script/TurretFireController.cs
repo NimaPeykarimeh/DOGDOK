@@ -39,7 +39,7 @@ public class TurretFireController : MonoBehaviour
         _bulletIndex = 0;
         currentEnergy = startingEnergy;
         _fireTimer = 0;
-        if(startingEnergy <= 0)
+        if (startingEnergy <= 0)
         {
             canShoot = false;
         }
