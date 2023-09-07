@@ -6,10 +6,11 @@ using UnityEngine;
 public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün yapýldýðý script. Collect yapýlýnca miktara ekleme yapýlýyor.
 {
     private bool isCollectibleFound; // Belli bir collectible'ýn seçildiðinin kontrolü
-    private int count; // Toplanan resource sayýsý
+    private List<int> resourceCountList; // Toplanan resource sayýsý
+    private List<Resource1> resourceTypeList; // Toplanan resource türü
     private int objectID; // Þu anda toplanan kaynaðýn ID'sini gösterir. Collectible'ýn deðiþtirilip deðiþtirilmediði kontrolü
     private int currentlyDissolvedID; // Anlatmasý zor ben bile unuttum. Spaghetti code.
-    private Resource1 resource; // Toplanan resource türü
+    
     private ResourceCreation ResourceCreation; // Toplanan kaynaðýn içindeki bazý bilgileri almak için (resource ve count gibi)
 
     private List<ResourceCreation> resCreationList = new(); // Cismin içindeki koddur. Method çaðýrýmý için kullanýlýr. Method ile birden fazla cismi generate/dissolve edebiliriz.
@@ -33,6 +34,8 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
 
     private void Start()
     {
+        resourceCountList = new();
+        resourceTypeList = new();
         WeaponController = GetComponent<WeaponController>();
         objectID = -1; //objectID için default deðeri -1,
         currentlyDissolvedID = -2; // DissolvedID için ise -2'yi kullandým.
@@ -136,8 +139,8 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
                 //  Cisimden bilgileri al
                 isCollectibleFound = true;
 
-                resource = ResourceCreation.resource;
-                count = ResourceCreation.resourceCount;
+                resourceTypeList = ResourceCreation.resourceTypeList;
+                resourceCountList = ResourceCreation.resourceCountList;
 
                 objectID = hitObject.GetInstanceID();
                 currentlyDissolvedID = objectID;
@@ -180,25 +183,18 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
                 {
                     // Cisim tamamen saydamlaþýnca cismi yok et ve envanteri güncelle
                     Destroy(hitObject);
-                    UpdateInventory(); 
+                    Dictionary<Resource1, int> addingResources = new();
+                    for(int i = 0; i < resourceCountList.Count && i < resourceTypeList.Count; i++)
+                    {
+                        addingResources.Add(resourceTypeList[i], resourceCountList[i]);
+                    }
+                    InventoryManager.AddResources(addingResources);
                 }
             }
             else
             {
                 print("farklý cisim");
                 AddForGenerating(); // Vurulan obje deðiþtiyse, eski vurulan objeyi kaydedip geri generate et.
-            }
-        }
-
-        void UpdateInventory()
-        {
-            foreach (var element in InventoryManager.resourceIndices)
-            {
-                if (element.Key.id == resource.id)
-                {
-                    InventoryManager.resourceIndices[element.Key] += count;
-                    break;
-                }
             }
         }
     }

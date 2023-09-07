@@ -5,28 +5,12 @@ using UnityEngine;
 public class ResourceCreation : MonoBehaviour
 {
     [SerializeField] InventoryManager InventoryManager;
-    public Resource1 resource;
-    public int resourceCount = 1;
-    [SerializeField] private bool isRandomized = false;
+    public List<Resource1> resourceTypeList = new();
+    public List<int> resourceCountList = new();
     private Renderer Renderer;
     void Start()
     {
         Renderer = gameObject.GetComponent<Renderer>();
-        if (isRandomized)
-        {
-            int index = Random.Range(0, InventoryManager.resourceIndices.Count);
-            resourceCount = Random.Range(1, 10);
-            foreach (var element in InventoryManager.resourceIndices.Keys)
-            {
-                if (element.id == index)
-                {
-                    resource = element;
-                    gameObject.GetComponent<MeshFilter>().mesh = element.resourceMesh;
-                    return;
-                }
-            }
-        }
-        gameObject.GetComponent<MeshFilter>().mesh = resource.resourceMesh;
     }
 
     public float DissolveCollectible(float currentAnimationValue, float dissolvedValue, float dissolvingDuration)
