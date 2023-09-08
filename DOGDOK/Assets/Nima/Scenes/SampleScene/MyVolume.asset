@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d08ce26990eb1a4a9177b860541e702, type: 3}
   m_Name: Exposure
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   mode:
     m_OverrideState: 1
     m_Value: 1
@@ -400,11 +400,11 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: -0.91
   limitMin:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: -5
   limitMax:
-    m_OverrideState: 1
-    m_Value: 0
+    m_OverrideState: 0
+    m_Value: 15
   curveMap:
     m_OverrideState: 0
     m_Value:
@@ -484,7 +484,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   adaptationMode:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
   adaptationSpeedDarkToLight:
     m_OverrideState: 0
