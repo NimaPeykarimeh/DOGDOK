@@ -37,7 +37,7 @@ public class AmmoPooling : MonoBehaviour
         _ammo.transform.localRotation= Quaternion.identity;
         _ammo.SetActive(true);
         _ammo.transform.parent = null;
-        
+        Debug.Log(_ammo.name);
     }
 
     public void BackToThePool(GameObject _ammo)

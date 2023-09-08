@@ -5,6 +5,7 @@ using UnityEngine;
 public class TurretFireController : MonoBehaviour
 {
     public List<Transform> EnemyList;
+    TurretController turretController;
 
     [SerializeField] private Transform _bodyTransform;
     //[SerializeField] private Transform _headTransform;
@@ -18,8 +19,8 @@ public class TurretFireController : MonoBehaviour
     [SerializeField] Transform BulletParent;
     [SerializeField] GameObject Bullet;
     [SerializeField] int BulletCount;
-    
 
+    [SerializeField] LayerMask shootingLayer;
     public float FireCooldownTime;
     public int Damage;
     public float ShootingRange;
@@ -32,6 +33,7 @@ public class TurretFireController : MonoBehaviour
 
     void Start()
     {
+        turretController = GetComponent<TurretController>();
         _bulletIndex = 0;
         canShoot = false;
         pooledBullets = new List<GameObject>();
@@ -41,6 +43,8 @@ public class TurretFireController : MonoBehaviour
             tmp = Instantiate(Bullet);
             tmp.SetActive(false);
             tmp.transform.SetParent(BulletParent);
+            tmp.transform.localPosition = Vector3.zero;
+            tmp.GetComponent<Ammo>().ammoPooling = ammoPooling;
             pooledBullets.Add(tmp);
         }
 
@@ -50,7 +54,7 @@ public class TurretFireController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canShoot)
+        if (canShoot && turretController.readyToUse)
         {
             if (EnemyList.Count != 0)
             {
@@ -127,7 +131,7 @@ public class TurretFireController : MonoBehaviour
         //Vector3 _direction = (Target.position - _firePoint.position).normalized;
         //Ray ray = new Ray(_firePoint.position, _direction);//_firepoint forward olsun, target position olmasýn
         Ray ray = new Ray(_firePoint.position, _firePoint.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, ShootingRange))//layer sorgusu, enemy görmesin, enemyBodyPart Görsün
+        if (Physics.Raycast(ray, out RaycastHit hit, ShootingRange, shootingLayer))//layer sorgusu, enemy görmesin, enemyBodyPart Görsün
         {
             //ammoPooling.SpawnAmmo(hit.distance); mermi oluþturma ve yok olma süresi
             if (hit.transform.CompareTag("EnemyBodyPart"))//tag olarak EnemyBodyPart, hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(_damage);

@@ -8,7 +8,7 @@ public class TurretController : MonoBehaviour
     [Header("Generating")]
     [SerializeField] Material mainMaterial;
     public Material holoMat;
-    [SerializeField] const float generatedValue = 0;
+    [SerializeField] const float generatedValue = -0.1f;
     [SerializeField] float dissolveValue;
     [SerializeField] const float nonGeneratedValue = 1;
     [SerializeField] bool isGenerating = false;
