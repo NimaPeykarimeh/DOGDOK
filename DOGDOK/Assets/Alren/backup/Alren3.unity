@@ -265,6 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6971e1a79df02847ba165126f8caddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridSize: 0
+  cellSize: 0
 --- !u!1 &14091338
 GameObject:
   m_ObjectHideFlags: 0
@@ -6781,6 +6783,7 @@ MonoBehaviour:
   isMoving: 0
   isRunning: 0
   isWalking: 1
+  isCrouching: 0
   canRun: 0
   combatCamera: {fileID: 898176879}
   basicCamera: {fileID: 1742430544}
@@ -6849,6 +6852,7 @@ MonoBehaviour:
   currentMovementSpeed: 4
   walkingSpeed: 1
   runningSpeed: 10
+  crouchingSpeed: 0
   turnSpeed: 10
   isRunning: 0
   maxStamina: 100
@@ -19961,6 +19965,7 @@ MonoBehaviour:
   currentMovementSpeed: 2
   walkingSpeed: 2
   runningSpeed: 5
+  crouchingSpeed: 0
   turnSpeed: 10
   isRunning: 0
   maxStamina: 0
@@ -20034,6 +20039,7 @@ MonoBehaviour:
   isMoving: 0
   isRunning: 0
   isWalking: 0
+  isCrouching: 0
   canRun: 0
   combatCamera: {fileID: 0}
   basicCamera: {fileID: 0}
@@ -20495,37 +20501,6 @@ Transform:
   - {fileID: 88324441}
   m_Father: {fileID: 1551128770}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1592278770
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1592278771}
-  m_Layer: 0
-  m_Name: BulletParent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1592278771
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1592278770}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1594411915
 GameObject:
@@ -22775,6 +22750,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2045860478247589931, guid: 3e64fcaba639307448cf003b7cdd8ada, type: 3}
+      propertyPath: ammoPooling
+      value: 
+      objectReference: {fileID: 1920507521}
+    - target: {fileID: 2045860478247589931, guid: 3e64fcaba639307448cf003b7cdd8ada, type: 3}
       propertyPath: ShootingRange
       value: 20
       objectReference: {fileID: 0}
@@ -23174,7 +23153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1793464225
 Transform:
   m_ObjectHideFlags: 0
@@ -32077,7 +32056,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 2710788455414286891}
   resourceTypeList:
   - {fileID: 11400000, guid: 85c9facaf3e40ed469804a6de893d382, type: 2}
   resourceCountList: 02000000
@@ -32116,7 +32094,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 2710788455414286891}
   resourceTypeList:
   - {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
   resourceCountList: 03000000
@@ -32333,7 +32310,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 2710788455414286891}
   resourceTypeList:
   - {fileID: 11400000, guid: 4f8fa77bfd5566d46a801ef7a39f83c7, type: 2}
   resourceCountList: 06000000
@@ -32372,7 +32348,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 2710788455414286891}
   resourceTypeList:
   - {fileID: 11400000, guid: 4a86babbc9e7f964cb25ab3fac7d7f3a, type: 2}
   resourceCountList: 09000000
@@ -32579,7 +32554,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 2710788455414286891}
   resourceTypeList:
   - {fileID: 11400000, guid: 3b434eabe3fed3240927f2064d6bb4fd, type: 2}
   - {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
@@ -32643,7 +32617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c65a92d5586b2488d43231dd42a562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 2710788455414286891}
   resourceTypeList:
   - {fileID: 11400000, guid: a94dac6c3ffb85942badd54a09312df1, type: 2}
   resourceCountList: 0b000000

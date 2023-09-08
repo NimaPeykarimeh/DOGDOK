@@ -9,17 +9,6 @@ public class CollectibleFeedback : MonoBehaviour
 {
     [SerializeField] private GameObject CollectiblePanel;
     [SerializeField] private GameObject FeedbackText;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void GiveFeedback(Dictionary<Resource1, int> addedResources)
     {
@@ -33,7 +22,6 @@ public class CollectibleFeedback : MonoBehaviour
             str.Append(obj.Key.resourceName);
             str.Append(" Added");
             text.GetComponent<TextMeshProUGUI>().SetText(str);
-            print("Created");
             Destroy(text, 3);
         }
     }

@@ -72,7 +72,6 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
 
         if (resCreationList.Count > 0)
         {
-            print(resCreationList.Count);
             for (int i = 0; i < resCreationList.Count; i++) // Generation'ý veya dissolve'u bitmiþ cisimleri silme
             {
                 if (animationValueList[i] == unsolvedValue || animationValueList[i] == dissolvedValue)
@@ -111,7 +110,6 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
 
         void AddToList() // Listeye generate edilmesi için ekle
         {
-            print("ekledim");
             resCreationList.Add(ResourceCreation);
             animationValueList.Add(currentAnimationValue);
             objectIDList.Add(objectID);
@@ -196,7 +194,6 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
             }
             else
             {
-                print("farklý cisim");
                 AddForGenerating(); // Vurulan obje deðiþtiyse, eski vurulan objeyi kaydedip geri generate et.
             }
         }

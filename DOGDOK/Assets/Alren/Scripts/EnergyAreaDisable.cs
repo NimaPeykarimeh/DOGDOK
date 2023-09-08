@@ -8,11 +8,13 @@ public class EnergyAreaDisable : MonoBehaviour
 
     private void Start()
     {
-        //Destroy(gameObject, 10);
+        AreaManager.areasMesh.Add(gameObject.GetComponent<MeshRenderer>());
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
     private void OnDestroy()
     {
-        for(int i = 0; i < turrets.Count; i++)
+        AreaManager.areasMesh.Remove(gameObject.GetComponent<MeshRenderer>());
+        for (int i = 0; i < turrets.Count; i++)
         {
             if (turrets[i] == null)
             {
@@ -23,7 +25,8 @@ public class EnergyAreaDisable : MonoBehaviour
         }
         for (int i = 0; i < turrets.Count; i++)
         {
-            turrets[i].GetComponent<TurretFireController>().canShoot = false;
+            if (turrets[i] != null)
+                turrets[i].GetComponent<TurretFireController>().canShoot = false;
         }
     }
 

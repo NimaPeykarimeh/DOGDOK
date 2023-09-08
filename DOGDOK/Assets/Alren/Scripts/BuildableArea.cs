@@ -9,6 +9,8 @@ public class BuildableArea : MonoBehaviour
 
     void Start()
     {
+        AreaManager.areasMesh.Add(gameObject.GetComponent<MeshRenderer>());
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
         positionArea1 = new Vector2(gameObject.transform.position.x + gameObject.transform.localScale.x / 2, gameObject.transform.position.z + gameObject.transform.localScale.z / 2);
         positionArea2 = new Vector2(gameObject.transform.position.x - gameObject.transform.localScale.x / 2, gameObject.transform.position.z - gameObject.transform.localScale.z / 2);
     }

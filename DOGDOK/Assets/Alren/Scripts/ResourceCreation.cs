@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ResourceCreation : MonoBehaviour
 {
-    [SerializeField] InventoryManager InventoryManager;
     public List<Resource1> resourceTypeList = new();
     public List<int> resourceCountList = new();
     private Renderer Renderer;

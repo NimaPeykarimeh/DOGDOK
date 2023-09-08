@@ -71,6 +71,19 @@ public class InventoryManager : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //kamerayý cachle daha optimize.
         isBuilding = true;
+
+        if(AreaManager.areasMesh.Count > 0)
+        {
+            foreach (var area in AreaManager.areasMesh)
+            {
+                if(area != null)
+                {
+                    area.GetComponent<MeshRenderer>().enabled = true;
+                }
+
+            }
+        }
+
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             Vector3 positionToPlace = hit.point;
@@ -92,25 +105,6 @@ public class InventoryManager : MonoBehaviour
     }
     private Vector3 PlaceObjectOnGrid(Vector3 position, Vector3 size)
     {
-        //float x = Mathf.RoundToInt(position.x / GridDisplay.cellSize);
-        //x = x * GridDisplay.cellSize - GridDisplay.cellSize / 2;
-        //if (size.x % 2 == 0)
-        //{
-        //    x += GridDisplay.cellSize / 2;
-        //}
-
-        //float y = //Mathf.RoundToInt(position.y / GridDisplay.cellSize);
-        //y = 0.05f; //yere tam bitiþik olursa sýkýntý çýkýyor.
-        //float z = Mathf.RoundToInt(position.z / GridDisplay.cellSize);
-        //z = z * GridDisplay.cellSize - GridDisplay.cellSize / 2;
-        //if (size.z % 2 == 0)
-        //{
-        //    z += GridDisplay.cellSize / 2;
-        //}
-
-        //Vector3 snappedPosition = new Vector3(x, y * GridDisplay.cellSize + GridDisplay.cellSize / 2, z);
-
-        //return snappedPosition;
         float gridSize = GridDisplay.cellSize;
 
         float xPosition = Mathf.Round(position.x / gridSize) * gridSize;
@@ -184,13 +178,22 @@ public class InventoryManager : MonoBehaviour
                 cubeTransform.gameObject.GetComponent<BoxCollider>().isTrigger = false;
                 cubeTransform.gameObject.GetComponent<TurretNullControl>().enabled = false;
                 isBuilding = false;
+
+                if (AreaManager.areasMesh.Count > 0)
+                {
+                    foreach (var area in AreaManager.areasMesh)
+                    {
+                        if (area != null)
+                            area.GetComponent<MeshRenderer>().enabled = false;
+                    }
+                }
+
                 cubeTransform = null;
                 return;
             }
         }
         else
         {
-            print(!isAired + " " + BuildableArea.CheckBuildableArea(cubeTransform.position) + " " + !Physics.CheckBox(cubeTransform.position + turretCollider.center, turretCollider.size / 2, turretCollider.transform.rotation));
             cubeTransform.gameObject.GetComponent<TurretNullControl>().TurretColorSelector(false);
         }
     }
@@ -198,6 +201,16 @@ public class InventoryManager : MonoBehaviour
     public void CancelBuilding()
     {
         isBuilding = false;
+
+        if (AreaManager.areasMesh.Count > 0)
+        {
+            foreach (var area in AreaManager.areasMesh)
+            {
+                if (area != null)
+                    area.GetComponent<MeshRenderer>().enabled = false;
+            }
+        }
+
         currentNeeds = null;
         Destroy(cubeTransform.gameObject);
         cubeTransform = null;

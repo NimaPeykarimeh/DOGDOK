@@ -13,6 +13,7 @@ public class TurretFireController : MonoBehaviour
     [SerializeField] float RotateSpeed;
 
     [Header("BulletProps")]
+    [SerializeField] private AmmoPooling ammoPooling;
     [SerializeField] List<GameObject> pooledBullets;
     [SerializeField] Transform BulletParent;
     [SerializeField] GameObject Bullet;
@@ -20,7 +21,7 @@ public class TurretFireController : MonoBehaviour
     
 
     public float FireCooldownTime;
-    public float Damage;
+    public int Damage;
     public float ShootingRange;
 
     private float _fireTimer;
@@ -123,25 +124,25 @@ public class TurretFireController : MonoBehaviour
 
     public void FireToEnemy(Transform Target)
     {
-        Vector3 _direction = (Target.position - _firePoint.position).normalized;
-        Ray ray = new Ray(_firePoint.position, _direction);//_firepoint forward olsun, target position olmasýn
-
+        //Vector3 _direction = (Target.position - _firePoint.position).normalized;
+        //Ray ray = new Ray(_firePoint.position, _direction);//_firepoint forward olsun, target position olmasýn
+        Ray ray = new Ray(_firePoint.position, _firePoint.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, ShootingRange))//layer sorgusu, enemy görmesin, enemyBodyPart Görsün
         {
             //ammoPooling.SpawnAmmo(hit.distance); mermi oluþturma ve yok olma süresi
-            if (hit.transform.CompareTag("Enemy"))//tag olarak EnemyBodyPart, hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(_damage);
+            if (hit.transform.CompareTag("EnemyBodyPart"))//tag olarak EnemyBodyPart, hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(_damage);
             {
                 print("BulletRayHit");
+                ammoPooling.SpawnAmmo(hit.distance);
+                hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(Damage);
             }
 
 
         }
-
-        //ne olur ne olmaz
-        //else
-        //{
-        //    ammoPooling.SpawnAmmo(50);
-        //}
+        else //ne olur ne olmaz
+        {
+            ammoPooling.SpawnAmmo(50);
+        }
 
 
 
