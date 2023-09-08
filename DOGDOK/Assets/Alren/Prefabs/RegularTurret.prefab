@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ef13d9faf99cdd746b396daef8eba136, type: 2}
+  - {fileID: 2100000, guid: 912584ffaec87904b863a96259c4d7dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 377d6870aefba8941813139a0e4eba36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoPrefab: {fileID: 6661396178395260907, guid: ad69e222b6cdffa459480f3ce56cb5f4, type: 3}
+  ammoPrefab: {fileID: 6661396178395260907, guid: 9fbb239f15de25f4b85fe4b39c15fdeb, type: 3}
   creatAmount: 30
 --- !u!1 &8867612667880652255
 GameObject:
@@ -282,7 +282,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ef13d9faf99cdd746b396daef8eba136, type: 2}
+  - {fileID: 2100000, guid: 912584ffaec87904b863a96259c4d7dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -408,12 +408,13 @@ MonoBehaviour:
   ammoPooling: {fileID: 8114489482186630871}
   pooledBullets: []
   BulletParent: {fileID: 7316791991514505912}
-  Bullet: {fileID: 6661396178395260907, guid: ad69e222b6cdffa459480f3ce56cb5f4, type: 3}
+  Bullet: {fileID: 6661396178395260907, guid: 9fbb239f15de25f4b85fe4b39c15fdeb, type: 3}
   BulletCount: 10
   shootingLayer:
     serializedVersion: 2
     m_Bits: 9865
-  FireCooldownTime: 1
-  Damage: 1
+  bulletHitEffect: {fileID: 2028381367447283776, guid: 233e56b1ab75b084db02dd9082bd1b83, type: 3}
+  FireCooldownTime: 0.2
+  Damage: 5
   ShootingRange: 10
   canShoot: 1

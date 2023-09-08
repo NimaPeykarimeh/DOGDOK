@@ -14,8 +14,8 @@ public class EnemyBodyPartDamageDetection : MonoBehaviour
         leg,
         torso
     }
-    public void GetPartDamage(int _damage)//move headshot to enemyhealth
+    public void GetPartDamage(int _damage, EnemyHealth.HitSource _hitSource)//move headshot to enemyhealth
     {
-        enemyHealth.GetDamage(_damage * headShotMult);
+        enemyHealth.GetDamage(_damage * headShotMult, _hitSource);
     }
 }

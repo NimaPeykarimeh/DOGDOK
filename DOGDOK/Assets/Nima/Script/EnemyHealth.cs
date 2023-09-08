@@ -17,6 +17,16 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] float animationDuration = 1f;
     Vector3[] bodyPartPositions;
     Quaternion[] bodyPartRotation;
+    [ColorUsage(true, true)]
+    [SerializeField] Color deadByPlayerColor;
+    [ColorUsage(true, true)]
+    [SerializeField] Color deadByRegularTurret;
+
+    public enum HitSource
+    {
+        Player,
+        RegularTurret
+    }
 
     void Start()
     {
@@ -62,7 +72,7 @@ public class EnemyHealth : MonoBehaviour
         //enemyController.enemyMovement.enemyRb.isKinematic = true;
     }
 
-    private void Dead()
+    private void Dead(HitSource _deathSource)
     {
         //enemyController.enemySpawner.BackToPooler(transform);
         //enemyController.animator.SetFloat("DeathRandomizer", Random.Range(0f,1f));
@@ -70,7 +80,15 @@ public class EnemyHealth : MonoBehaviour
         //enemyController.enemyMovement.enemyRb.AddForce(transform.forward * (-dieForce),ForceMode.Impulse);
         isDying = true;
         enemyController.enemyCollider.enabled = false;
-        enemyController.material.SetColor("_EdgeColor", enemyController.material.GetColor("_DeadColor"));
+
+        if (_deathSource == HitSource.Player)
+        {
+            enemyController.material.SetColor("_EdgeColor", deadByPlayerColor);
+        }
+        else if (_deathSource == HitSource.RegularTurret)
+        {
+            enemyController.material.SetColor("_EdgeColor", deadByRegularTurret);
+        }
         foreach (Rigidbody _rb in bodyPartRb )
         {
             
@@ -101,13 +119,13 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    public void GetDamage(int _damage)
+    public void GetDamage(int _damage, HitSource _damageSource)
     {
         enemyController.AlertEnemy();
         currentHealth -= _damage;
         if (currentHealth <= 0)
         {
-            Dead();
+            Dead(_damageSource);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EnemyHealth;
 
 public class TurretFireController : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class TurretFireController : MonoBehaviour
     [SerializeField] int BulletCount;
 
     [SerializeField] LayerMask shootingLayer;
+    [SerializeField] GameObject bulletHitEffect;
     public float FireCooldownTime;
     public int Damage;
     public float ShootingRange;
@@ -134,11 +136,13 @@ public class TurretFireController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, ShootingRange, shootingLayer))//layer sorgusu, enemy görmesin, enemyBodyPart Görsün
         {
             //ammoPooling.SpawnAmmo(hit.distance); mermi oluþturma ve yok olma süresi
-            if (hit.transform.CompareTag("EnemyBodyPart"))//tag olarak EnemyBodyPart, hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(_damage);
+            if (hit.collider.CompareTag("EnemyBodyPart"))//tag olarak EnemyBodyPart, hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(_damage);
             {
                 print("BulletRayHit");
                 ammoPooling.SpawnAmmo(hit.distance);
-                hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(Damage);
+                GameObject _effect = Instantiate(bulletHitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                _effect.transform.parent = hit.transform;
+                hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(Damage, EnemyHealth.HitSource.RegularTurret);
             }
 
 

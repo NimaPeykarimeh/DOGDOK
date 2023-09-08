@@ -1881,6 +1881,8 @@ MonoBehaviour:
   dieForce: 15
   isDying: 0
   animationDuration: 2
+  deadByPlayerColor: {r: 64, g: 0, b: 0, a: 1}
+  deadByRegularTurret: {r: 0, g: 0, b: 85.445015, a: 1}
 --- !u!114 &5725410851165250381
 MonoBehaviour:
   m_ObjectHideFlags: 0
