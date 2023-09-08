@@ -31,7 +31,6 @@ public class Ammo : MonoBehaviour
         ammoTimer += Time.deltaTime;
         if (ammoTimer >= ammoLifeTime)
         {
-
             ammoPooling.BackToThePool(this.gameObject);
         }
         transform.position += (transform.forward * speed * Time.deltaTime);
