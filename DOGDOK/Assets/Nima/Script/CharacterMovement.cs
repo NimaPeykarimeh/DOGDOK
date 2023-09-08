@@ -1,4 +1,3 @@
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +21,7 @@ public class CharacterMovement : MonoBehaviour
     public float currentMovementSpeed;
     public float walkingSpeed;
     public float runningSpeed;
+    public float crouchingSpeed;
     public float turnSpeed = 10f;
     public bool isRunning;
 
@@ -54,7 +54,8 @@ public class CharacterMovement : MonoBehaviour
     public enum MoveStates
     {
         Run,
-        Walk
+        Walk,
+        Crouched
     }
 
     // Start is called before the first frame update
@@ -101,6 +102,7 @@ public class CharacterMovement : MonoBehaviour
         {
             playerController.isWalking = true;
             playerController.isRunning = false;
+            playerController.isCrouching = false;
             //movementSpeed = walkSpeed;
             //isAccelerating = true;
 
@@ -110,11 +112,20 @@ public class CharacterMovement : MonoBehaviour
         {
             playerController.isWalking = false;
             playerController.isRunning = true;
-
+            playerController.isCrouching = false;
             //isAccelerating = true;
 
             currentMovementSpeed = runningSpeed;
-        }   
+        }
+        else if (_state == MoveStates.Crouched)
+        {
+            playerController.isWalking = false;
+            playerController.isRunning = false;
+            playerController.isCrouching = true;
+
+            currentMovementSpeed = crouchingSpeed;
+        }
+        playerController.animator.SetBool("IsCrouching", _state == MoveStates.Crouched);
     }
 
     void Accelarate()
@@ -202,8 +213,32 @@ public class CharacterMovement : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             isRunning = false;
-            ToggleRunState(MoveStates.Walk);
+            if (playerController.isCrouching)
+            {
+                ToggleRunState(MoveStates.Crouched);
+            }
+            else
+            {
+                ToggleRunState(MoveStates.Walk);
+            }
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            ToggleRunState(MoveStates.Crouched);
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            if (playerController.aimPlayer.isAiming)
+            {
+                ToggleRunState(MoveStates.Crouched);
+            }
+            else
+            {
+                ToggleRunState(MoveStates.Walk);
+            }
+        }
+
         Accelarate();
         if (isAccelerating)
         {

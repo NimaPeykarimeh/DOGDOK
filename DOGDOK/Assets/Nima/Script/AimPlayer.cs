@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using UnityEngine.Rendering;
 using static PlayerController;
 
 public class AimPlayer : MonoBehaviour

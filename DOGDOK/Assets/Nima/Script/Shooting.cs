@@ -78,7 +78,7 @@ public class Shooting : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButton("Fire1") && playerController.currentState == PlayerController.PlayerStates.Combat)
+        if (Input.GetMouseButton(0) && playerController.currentState == PlayerController.PlayerStates.Combat)
         {
             isShooting = true;
         }

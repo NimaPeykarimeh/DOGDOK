@@ -1,7 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Rendering;
@@ -22,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public bool isMoving;
     public bool isRunning;
     public bool isWalking = true;
+    public bool isCrouching;
     public bool canRun= true;
 
     [Header("CameraObjects")]
@@ -109,6 +107,10 @@ public class PlayerController : MonoBehaviour
             {
                 characterMovement.ToggleRunState(CharacterMovement.MoveStates.Run);
             }
+            else
+            {
+                characterMovement.ToggleRunState(CharacterMovement.MoveStates.Walk);
+            }
         }
         if (_state == PlayerStates.Combat)
         {
@@ -117,7 +119,7 @@ public class PlayerController : MonoBehaviour
             combatCamera.SetActive(true);
             activeCinemachine = combatCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<Cinemachine3rdPersonFollow>();//Optimize Edilebilir
             activeCinemachine.CameraSide = currentShoulderSideValue;
-            characterMovement.ToggleRunState(CharacterMovement.MoveStates.Walk);
+            characterMovement.ToggleRunState(CharacterMovement.MoveStates.Crouched);
             //chande animaton weight
             currentWeight = animator.GetLayerWeight(aimWeightLayerIndex);
             newWeight = 1f;//Start Aim Animation
