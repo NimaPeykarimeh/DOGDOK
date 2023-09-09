@@ -24,7 +24,10 @@ public class EnemyAttack : MonoBehaviour
     }
     void Attack()
     {
-        enemyController.player.GetComponent<PlayerHealth>().ChangeHealth(-damage);
+        if (readyToAttack)
+        {
+            enemyController.player.GetComponent<PlayerHealth>().ChangeHealth(-damage);
+        }
         //enemyMovement.canMove = true;
         isDelaying = true;
         animationTimer = 0;

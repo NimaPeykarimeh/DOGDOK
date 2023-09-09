@@ -36,6 +36,8 @@ public class EnemyController : MonoBehaviour
         material = mesh.material;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         enemyCollider = GetComponent<Collider>();
+
+        
     }
     private void OnEnable()//fix Later
     {
@@ -81,10 +83,35 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    public void AlertEnemy()//add a distance for zombie to be alerted if were too far
+    public void StartRunning()
     {
-        isAlerted = true;
-        enemyFollow.positionToGo = player.position;
+        enemyMovement.canMove = true;
+        
+    }
+
+    public void AlertEnemy(bool _isAlerted)//add a distance for zombie to be alerted if were too far
+    {
+
+        if (!isAlerted && _isAlerted)
+        {
+            enemyMovement.canMove = false;
+            animator.SetTrigger("Alerted");
+        }
+        animator.SetBool("IsAlerted", _isAlerted);
+        isAlerted = _isAlerted;
+        if (_isAlerted)
+        {
+            enemyMovement.movementSpeed = enemyMovement.runSpeed;
+            enemyFollow.positionToGo = player.position;
+            float _speedRatio = (enemyMovement.runSpeed - enemyMovement.minRunSpeed)/ (enemyMovement.maxRunSpeed - enemyMovement.minRunSpeed);
+            animator.SetFloat("MovementSpeed", _speedRatio);
+        }
+        else
+        {
+            enemyMovement.movementSpeed = enemyMovement.walkSpeed;
+            float _speedRatio = (enemyMovement.walkSpeed - enemyMovement.minWalkSpeed) / (enemyMovement.maxWalkSpeed- enemyMovement.minWalkSpeed);
+            animator.SetFloat("MovementSpeed", _speedRatio);
+        }
     }
     public bool IsGrounded(Transform center, float radius, LayerMask groundLayer)
     {

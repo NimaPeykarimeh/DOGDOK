@@ -13,6 +13,7 @@ public class TurretController : MonoBehaviour
     [SerializeField] const float nonGeneratedValue = 1;
     [SerializeField] bool isGenerating = false;
     public bool readyToUse = false;
+    public bool itHasEnergy;
     public LayerMask _layer;
 
     void Start()

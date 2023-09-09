@@ -18,6 +18,8 @@ public class EnemyFollow : MonoBehaviour
     [SerializeField] int defaultSeeDistance = 10;
     [SerializeField] int seeDistance = 10;
     [SerializeField] bool isInDistance;
+    [SerializeField] float outOfEyeDelay = 0.5f;
+    [SerializeField] float outOfEyeTimer;
 
     public Vector3 playerLastKnowPosition;
 
@@ -97,7 +99,8 @@ public class EnemyFollow : MonoBehaviour
                 {
                     if (!enemyController.isAlerted)
                     {
-                        enemyController.isAlerted = true;
+                        enemyController.AlertEnemy(true);
+                        outOfEyeTimer = outOfEyeDelay;
                     }
                     isPlayerPositionKnown = true;
                     playerLastKnowPosition = hit.transform.position;
@@ -119,17 +122,28 @@ public class EnemyFollow : MonoBehaviour
         GetPlayerDistance();
         DetectThePlayer();
 
-
-
-        if (enemyController.isAlerted && !isPlayerPositionKnown)
+        if (!isPlayerPositionKnown && enemyController.isAlerted)
         {
-            _dis = Vector3.Distance(transform.position, positionToGo);
-            if (_dis <= reachTolerance)
+            outOfEyeTimer -= Time.deltaTime;
+
+            if (outOfEyeTimer > 0)
             {
-                enemyController.isAlerted = false;
+                playerLastKnowPosition = enemyController.player.transform.position;
+                positionToGo = playerLastKnowPosition;
             }
 
+            if (enemyController.isAlerted)
+            {
+                _dis = Vector3.Distance(transform.position, positionToGo);
+                if (_dis <= reachTolerance)
+                {
+                    enemyController.AlertEnemy(false);
+                }
+            }
         }
+
+        
+
         else if (enemyController.isMoving && !enemyController.isAlerted)
         {
             positionToGo = enemyController.positionToGo;

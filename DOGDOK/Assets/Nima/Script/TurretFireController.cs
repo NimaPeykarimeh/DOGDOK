@@ -7,6 +7,8 @@ public class TurretFireController : MonoBehaviour
 {
     public List<Transform> EnemyList;
     TurretController turretController;
+    AudioSource audioSource;
+    [SerializeField] AudioClip shootingSound;
 
     [SerializeField] private Transform _bodyTransform;
     //[SerializeField] private Transform _headTransform;
@@ -30,14 +32,15 @@ public class TurretFireController : MonoBehaviour
     private float _fireTimer;
     private int _bulletIndex;
 
-    [Header("EnergySettings")]
-    public bool canShoot = false;
+    
+    
 
     void Start()
     {
         turretController = GetComponent<TurretController>();
         _bulletIndex = 0;
-        canShoot = false;
+        audioSource = GetComponent<AudioSource>();
+
         pooledBullets = new List<GameObject>();
         GameObject tmp;
         for (int i = 0; i < BulletCount; ++i)
@@ -56,11 +59,11 @@ public class TurretFireController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canShoot && turretController.readyToUse)
+        if ( turretController.readyToUse && turretController.itHasEnergy)
         {
             if (EnemyList.Count != 0)
             {
-                if (EnemyList[0].gameObject.activeSelf)
+                if (EnemyList[0].gameObject.activeSelf && Vector3.Distance(transform.position, EnemyList[0].position) <= ShootingRange)
                     ShootTheEnemy(EnemyList[0]);
                 else
                     EnemyList.RemoveAt(0);
@@ -140,6 +143,7 @@ public class TurretFireController : MonoBehaviour
             {
                 print("BulletRayHit");
                 ammoPooling.SpawnAmmo(hit.distance);
+                audioSource.PlayOneShot(shootingSound);
                 GameObject _effect = Instantiate(bulletHitEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 _effect.transform.parent = hit.transform;
                 hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(Damage, EnemyHealth.HitSource.RegularTurret);

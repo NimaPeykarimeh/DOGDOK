@@ -8,9 +8,17 @@ public class EnemyMovement : MonoBehaviour
     CharacterController characterController;
     public Rigidbody enemyRb;
     EnemyTeleportManager teleportManager;
-    [SerializeField] float maxMovementSpeed;
-    [SerializeField] float minMovementSpeed;
-    [SerializeField] float movementSpeed;
+    [Header("Walking")]
+    public float walkSpeed;
+    public float maxWalkSpeed;
+    public float minWalkSpeed;
+
+    [Header("Runnning")]
+    public float runSpeed;
+    public float minRunSpeed = 2.4f;
+    public float maxRunSpeed = 3;
+
+    public float movementSpeed;
     [SerializeField] float testVal;
     public bool canMove;
     public float gravity = -9.8f;
@@ -21,9 +29,13 @@ public class EnemyMovement : MonoBehaviour
         enemyRb = GetComponent<Rigidbody>();
         enemyController = GetComponent<EnemyController>();
         teleportManager = GetComponent<EnemyTeleportManager>();
-        movementSpeed = Random.Range(minMovementSpeed, maxMovementSpeed);
-        testVal = Random.Range(0f,1f);
-        enemyController.animator.SetFloat("MovementSpeed",testVal);
+        walkSpeed = Random.Range(minWalkSpeed, maxWalkSpeed);
+        runSpeed = Random.Range(minRunSpeed, maxRunSpeed);
+        movementSpeed = walkSpeed;
+
+        float _speedRatio = (walkSpeed - minWalkSpeed) / (maxWalkSpeed - minWalkSpeed);
+        enemyController.animator.SetFloat("MovementSpeed", _speedRatio);
+        //enemyController.animator.SetFloat("MovementSpeed",s);
     }
     private void OnEnable()//fix later for organizing
     {

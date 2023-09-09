@@ -14,11 +14,11 @@ public class TurretRadius : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            TurretFireController.EnemyList.Remove(other.transform);
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("Enemy"))
+    //    {
+    //        TurretFireController.EnemyList.Remove(other.transform);
+    //    }
+    //}
 }

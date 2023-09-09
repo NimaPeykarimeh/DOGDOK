@@ -121,7 +121,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void GetDamage(int _damage, HitSource _damageSource)
     {
-        enemyController.AlertEnemy();
+        enemyController.AlertEnemy(true);
         currentHealth -= _damage;
         if (currentHealth <= 0)
         {

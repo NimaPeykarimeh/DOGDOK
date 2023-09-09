@@ -26,7 +26,7 @@ public class EnergyAreaDisable : MonoBehaviour
         for (int i = 0; i < turrets.Count; i++)
         {
             if (turrets[i] != null)
-                turrets[i].GetComponent<TurretFireController>().canShoot = false;
+                turrets[i].GetComponent<TurretController>().itHasEnergy = false;
         }
     }
 
@@ -34,7 +34,7 @@ public class EnergyAreaDisable : MonoBehaviour
     {
         if (other.CompareTag("Turret"))
         {
-            other.gameObject.GetComponent<TurretFireController>().canShoot = true;//change it to turretController
+            other.gameObject.GetComponent<TurretController>().itHasEnergy = true;//change it to turretController
             turrets.Add(other.gameObject);
         }
     }
@@ -42,7 +42,7 @@ public class EnergyAreaDisable : MonoBehaviour
     {
         if (other.CompareTag("Turret"))
         {
-            other.gameObject.GetComponent<TurretFireController>().canShoot = true;
+            other.gameObject.GetComponent<TurretController>().itHasEnergy = true;
             //turrets.Add(other.gameObject);
         }
     }
