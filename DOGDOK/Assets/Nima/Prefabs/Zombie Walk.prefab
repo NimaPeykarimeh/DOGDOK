@@ -1774,8 +1774,8 @@ MonoBehaviour:
   cosValue: 0
   isInAngle: 0
   alertedSeeDisntance: 25
-  defaultSeeDistance: 1
-  seeDistance: 1
+  defaultSeeDistance: 15
+  seeDistance: 15
   isInDistance: 0
   outOfEyeDelay: 1
   outOfEyeTimer: 0
@@ -1935,10 +1935,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: ded9e734c88542542a3eedec067eef2b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.35
+  m_Radius: 0.2
   m_Height: 1.69
   m_Direction: 1
-  m_Center: {x: 0, y: 0.86, z: 0.15}
+  m_Center: {x: 0, y: 0.86, z: 0.06}
 --- !u!82 &1859511142979769406
 AudioSource:
   m_ObjectHideFlags: 0

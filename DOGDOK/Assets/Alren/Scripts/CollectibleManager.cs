@@ -6,8 +6,9 @@ using UnityEngine;
 public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün yapýldýðý script. Collect yapýlýnca miktara ekleme yapýlýyor.
 {
     private bool isCollectibleFound; // Belli bir collectible'ýn seçildiðinin kontrolü
-    private List<int> resourceCountList; // Toplanan resource sayýsý
-    private List<Resource1> resourceTypeList; // Toplanan resource türü
+    //private List<int> resourceCountList; // Toplanan resource sayýsý
+    //private List<Resource1> resourceTypeList; // Toplanan resource türü
+    private List<ResourceCreation.ResourceClass> resourceList;
     private int objectID; // Þu anda toplanan kaynaðýn ID'sini gösterir. Collectible'ýn deðiþtirilip deðiþtirilmediði kontrolü
     private int currentlyDissolvedID; // Anlatmasý zor ben bile unuttum. Spaghetti code.
 
@@ -35,8 +36,9 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
 
     private void Start()
     {
-        resourceCountList = new();
-        resourceTypeList = new();
+        //resourceCountList = new();
+        //resourceTypeList = new();
+        resourceList = new();
         WeaponController = GetComponent<WeaponController>();
         objectID = -1; //objectID için default deðeri -1,
         currentlyDissolvedID = -2; // DissolvedID için ise -2'yi kullandým.
@@ -85,7 +87,7 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
             {// NOT: Dissolve iþlemi Gathering()'tedir.
                 if (currentlyDissolvedID != objectIDList[i])
                 {
-                    animationValueList[i] = resCreationList[i].GenerateCollectible(animationValueList[i], unsolvedValue, generatingDuration);
+                    animationValueList[i] = resCreationList[i].GenerateCollectible(animationValueList[i], unsolvedValue);
                 }
 
             }
@@ -138,8 +140,9 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
                 //  Cisimden bilgileri al
                 isCollectibleFound = true;
 
-                resourceTypeList = ResourceCreation.resourceTypeList;
-                resourceCountList = ResourceCreation.resourceCountList;
+                //resourceTypeList = ResourceCreation.resourceTypeList;
+                //resourceCountList = ResourceCreation.resourceCountList;
+                resourceList = ResourceCreation.resource;
 
                 objectID = hitObject.GetInstanceID();
                 currentlyDissolvedID = objectID;
@@ -177,15 +180,15 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
             if (hitObject.GetInstanceID() == objectID)
             {
                 currentlyDissolvedID = objectID;
-                currentAnimationValue = ResourceCreation.DissolveCollectible(currentAnimationValue, dissolvedValue, dissolvingDuration);
+                currentAnimationValue = ResourceCreation.DissolveCollectible(currentAnimationValue, dissolvedValue);
                 if (currentAnimationValue == dissolvedValue)
                 {
                     // Cisim tamamen saydamlaþýnca cismi yok et ve envanteri güncelle
                     Destroy(hitObject);
                     Dictionary<Resource1, int> addingResources = new();
-                    for (int i = 0; i < resourceCountList.Count && i < resourceTypeList.Count; i++)
+                    for (int i = 0; i < resourceList.Count; i++)
                     {
-                        addingResources.Add(resourceTypeList[i], resourceCountList[i]);
+                        addingResources.Add(resourceList[i].resourceType, resourceList[i].resourceCount);
                     }
 
                     InventoryManager.AddResources(addingResources);

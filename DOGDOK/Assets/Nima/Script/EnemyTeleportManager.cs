@@ -7,8 +7,8 @@ public class EnemyTeleportManager : MonoBehaviour
 {
     EnemyController enemyController;
     EnemyMovement enemyMovement;
-    
 
+    bool wasItAlerted = false;
     public bool isTeleporting;
     bool isDissolving;
     bool isGenerating;
@@ -28,7 +28,8 @@ public class EnemyTeleportManager : MonoBehaviour
     }
     public void Teleport(Vector3 _positon)
     {
-        enemyController.isAlerted = false;
+        wasItAlerted = enemyController.isAlerted;
+        enemyController.AlertEnemy(false);
         enemyMovement.canMove = false;
         isDissolving = true;
         isTeleporting = true;
@@ -61,7 +62,10 @@ public class EnemyTeleportManager : MonoBehaviour
                 isGenerating = false;
                 isTeleporting = false;
                 enemyMovement.canMove = true;
-                enemyController.isAlerted = true;
+                if (wasItAlerted)
+                {
+                    enemyController.AlertEnemy(true);
+                }
                 _dissolveRatio = dissolveStart;
                 
             }
