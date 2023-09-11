@@ -42,6 +42,8 @@ public class EnemyController : MonoBehaviour
     private void OnEnable()//fix Later
     {
         isGroundedTimer = isGroundedLimit;
+        //enemyMovement.canMove = true;
+        AlertEnemy(false);
     }
     private void Update()
     {
@@ -60,7 +62,7 @@ public class EnemyController : MonoBehaviour
             else
             {
                 movingTimer -= Time.deltaTime;
-                if (movingTimer <= 0)
+                if (movingTimer <= 0 && enemyMovement.canMove)
                 {
                     isMoving = false;
                 }
@@ -86,7 +88,7 @@ public class EnemyController : MonoBehaviour
     public void StartRunning()
     {
         enemyMovement.canMove = true;
-        
+        animator.SetBool("IsMoving", true);
     }
 
     public void AlertEnemy(bool _isAlerted)//add a distance for zombie to be alerted if were too far
@@ -96,6 +98,8 @@ public class EnemyController : MonoBehaviour
         {
             enemyMovement.canMove = false;
             animator.SetTrigger("Alerted");
+            animator.SetBool("IsMoving", false);
+
         }
         animator.SetBool("IsAlerted", _isAlerted);
         isAlerted = _isAlerted;
@@ -104,13 +108,13 @@ public class EnemyController : MonoBehaviour
             enemyMovement.movementSpeed = enemyMovement.runSpeed;
             enemyFollow.positionToGo = player.position;
             float _speedRatio = (enemyMovement.runSpeed - enemyMovement.minRunSpeed)/ (enemyMovement.maxRunSpeed - enemyMovement.minRunSpeed);
-            animator.SetFloat("MovementSpeed", _speedRatio);
+            animator.SetFloat("SpeedRatio", _speedRatio);
         }
         else
         {
             enemyMovement.movementSpeed = enemyMovement.walkSpeed;
             float _speedRatio = (enemyMovement.walkSpeed - enemyMovement.minWalkSpeed) / (enemyMovement.maxWalkSpeed- enemyMovement.minWalkSpeed);
-            animator.SetFloat("MovementSpeed", _speedRatio);
+            animator.SetFloat("SpeedRatio", _speedRatio);
         }
     }
     public bool IsGrounded(Transform center, float radius, LayerMask groundLayer)

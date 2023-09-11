@@ -23,6 +23,9 @@ public class EnemyMovement : MonoBehaviour
     public bool canMove;
     public float gravity = -9.8f;
     public Vector3 velocity;
+
+    [SerializeField]
+    float _moveRandomizer;
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -32,9 +35,12 @@ public class EnemyMovement : MonoBehaviour
         walkSpeed = Random.Range(minWalkSpeed, maxWalkSpeed);
         runSpeed = Random.Range(minRunSpeed, maxRunSpeed);
         movementSpeed = walkSpeed;
-
         float _speedRatio = (walkSpeed - minWalkSpeed) / (maxWalkSpeed - minWalkSpeed);
-        enemyController.animator.SetFloat("MovementSpeed", _speedRatio);
+
+        _moveRandomizer = Random.Range(0f,1f);
+        canMove = _moveRandomizer < 0.6f;
+        
+        enemyController.animator.SetFloat("SpeedRatio", _speedRatio);
         //enemyController.animator.SetFloat("MovementSpeed",s);
     }
     private void OnEnable()//fix later for organizing
@@ -63,5 +69,6 @@ public class EnemyMovement : MonoBehaviour
         {
             enemyRb.velocity = Vector3.zero;//optimize et
         }
+        enemyController.animator.SetBool("IsMoving", canMove);
     }
 }

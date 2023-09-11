@@ -89,8 +89,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 3
   groundTint:
-    m_OverrideState: 0
-    m_Value: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 0.9471342, b: 0.8726415, a: 1}
   groundColorTexture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
