@@ -88,17 +88,26 @@ public class EnemyController : MonoBehaviour
     public void StartRunning()
     {
         enemyMovement.canMove = true;
-        animator.SetBool("IsMoving", true);
+        //animator.SetBool("IsMoving", true);
     }
 
-    public void AlertEnemy(bool _isAlerted)//add a distance for zombie to be alerted if were too far
+    public void AlertEnemy(bool _isAlerted,bool _voiceAlerted = false)//add a distance for zombie to be alerted if were too far
     {
 
         if (!isAlerted && _isAlerted)
         {
+            
             enemyMovement.canMove = false;
-            animator.SetTrigger("Alerted");
-            animator.SetBool("IsMoving", false);
+            if (_voiceAlerted)
+            {
+                Debug.Log("voiceAlert");
+                animator.SetTrigger("VoiceAlerted");
+            }
+            else
+            {
+                animator.SetTrigger("Alerted");
+            }
+            //animator.SetBool("IsMoving", false);
 
         }
         animator.SetBool("IsAlerted", _isAlerted);

@@ -1774,8 +1774,8 @@ MonoBehaviour:
   cosValue: 0
   isInAngle: 0
   alertedSeeDisntance: 25
-  defaultSeeDistance: 15
-  seeDistance: 15
+  defaultSeeDistance: 1
+  seeDistance: 1
   isInDistance: 0
   outOfEyeDelay: 1
   outOfEyeTimer: 0
@@ -1858,6 +1858,7 @@ MonoBehaviour:
   canMove: 1
   gravity: -9.8
   velocity: {x: 0, y: 0, z: 0}
+  _moveRandomizer: 0
 --- !u!114 &-4859333179514968786
 MonoBehaviour:
   m_ObjectHideFlags: 0
