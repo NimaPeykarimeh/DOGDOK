@@ -42,6 +42,8 @@ public class EnemyController : MonoBehaviour
     private void OnEnable()//fix Later
     {
         isGroundedTimer = isGroundedLimit;
+        //enemyMovement.canMove = true;
+        AlertEnemy(false);
     }
     private void Update()
     {
@@ -60,7 +62,7 @@ public class EnemyController : MonoBehaviour
             else
             {
                 movingTimer -= Time.deltaTime;
-                if (movingTimer <= 0)
+                if (movingTimer <= 0 && enemyMovement.canMove)
                 {
                     isMoving = false;
                 }
@@ -86,31 +88,62 @@ public class EnemyController : MonoBehaviour
     public void StartRunning()
     {
         enemyMovement.canMove = true;
-        
+        animator.SetBool("IsAlerted", true);
+        animator.SetBool("IsMoving", true);
     }
 
-    public void AlertEnemy(bool _isAlerted)//add a distance for zombie to be alerted if were too far
+    public void AlertEnemy(bool _isAlerted,bool _voiceAlerted = false)//add a distance for zombie to be alerted if were too far
     {
 
         if (!isAlerted && _isAlerted)
         {
+            
             enemyMovement.canMove = false;
-            animator.SetTrigger("Alerted");
+            if (_voiceAlerted)
+            {
+                float _randomizer = Random.Range(0f,1f);
+                if (_randomizer < 0.4f)
+                {
+                    animator.SetTrigger("VoiceAlerted");
+                }
+                else
+                {
+                    animator.SetTrigger("Alerted");
+                }
+            }
+            else
+            {
+                float _randomizer = Random.Range(0f, 1f);
+                if (_randomizer < 0.4f)
+                {
+                    animator.SetTrigger("Alerted");
+                }
+                else
+                {
+                    enemyMovement.canMove = true;
+                    animator.SetBool("IsMoving", true);
+                    animator.SetBool("IsAlerted", _isAlerted);
+                }
+            }
+            //animator.SetBool("IsMoving", false);
+
         }
-        animator.SetBool("IsAlerted", _isAlerted);
+
+        
         isAlerted = _isAlerted;
         if (_isAlerted)
         {
             enemyMovement.movementSpeed = enemyMovement.runSpeed;
             enemyFollow.positionToGo = player.position;
             float _speedRatio = (enemyMovement.runSpeed - enemyMovement.minRunSpeed)/ (enemyMovement.maxRunSpeed - enemyMovement.minRunSpeed);
-            animator.SetFloat("MovementSpeed", _speedRatio);
+            animator.SetFloat("SpeedRatio", _speedRatio);
         }
         else
         {
+            animator.SetBool("IsAlerted", _isAlerted);
             enemyMovement.movementSpeed = enemyMovement.walkSpeed;
             float _speedRatio = (enemyMovement.walkSpeed - enemyMovement.minWalkSpeed) / (enemyMovement.maxWalkSpeed- enemyMovement.minWalkSpeed);
-            animator.SetFloat("MovementSpeed", _speedRatio);
+            animator.SetFloat("SpeedRatio", _speedRatio);
         }
     }
     public bool IsGrounded(Transform center, float radius, LayerMask groundLayer)

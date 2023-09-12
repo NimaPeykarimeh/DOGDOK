@@ -147,7 +147,7 @@ public class Shooting : MonoBehaviour
         shootingPoint.forward = ray.direction;
         Debug.DrawRay(ray.origin, ray.direction * _shootingRange, Color.red, 0.1f);
 
-        noiseMaker.MakeNoise(_noiseRange, _shootingPoint);
+        noiseMaker.MakeNoise(_noiseRange, _shootingPoint,this);
         
         if (!_isPiercing)
         {
