@@ -199,7 +199,7 @@ public class CharacterMovement : MonoBehaviour
         }
         if (currentVelocity > 0 )
         {
-            noiseMaker.MakeNoise(noiseMult * currentVelocity, noiseCenter);
+            noiseMaker.MakeNoise(noiseMult * currentVelocity, noiseCenter,this);
         }
         speedToMove = inputMagnitude * currentMovementSpeed;
         UpdateStamina();

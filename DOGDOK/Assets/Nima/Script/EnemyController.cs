@@ -88,7 +88,8 @@ public class EnemyController : MonoBehaviour
     public void StartRunning()
     {
         enemyMovement.canMove = true;
-        //animator.SetBool("IsMoving", true);
+        animator.SetBool("IsAlerted", true);
+        animator.SetBool("IsMoving", true);
     }
 
     public void AlertEnemy(bool _isAlerted,bool _voiceAlerted = false)//add a distance for zombie to be alerted if were too far
@@ -100,17 +101,35 @@ public class EnemyController : MonoBehaviour
             enemyMovement.canMove = false;
             if (_voiceAlerted)
             {
-                Debug.Log("voiceAlert");
-                animator.SetTrigger("VoiceAlerted");
+                float _randomizer = Random.Range(0f,1f);
+                if (_randomizer < 0.4f)
+                {
+                    animator.SetTrigger("VoiceAlerted");
+                }
+                else
+                {
+                    animator.SetTrigger("Alerted");
+                }
             }
             else
             {
-                animator.SetTrigger("Alerted");
+                float _randomizer = Random.Range(0f, 1f);
+                if (_randomizer < 0.4f)
+                {
+                    animator.SetTrigger("Alerted");
+                }
+                else
+                {
+                    enemyMovement.canMove = true;
+                    animator.SetBool("IsMoving", true);
+                    animator.SetBool("IsAlerted", _isAlerted);
+                }
             }
             //animator.SetBool("IsMoving", false);
 
         }
-        animator.SetBool("IsAlerted", _isAlerted);
+
+        
         isAlerted = _isAlerted;
         if (_isAlerted)
         {
@@ -121,6 +140,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
+            animator.SetBool("IsAlerted", _isAlerted);
             enemyMovement.movementSpeed = enemyMovement.walkSpeed;
             float _speedRatio = (enemyMovement.walkSpeed - enemyMovement.minWalkSpeed) / (enemyMovement.maxWalkSpeed- enemyMovement.minWalkSpeed);
             animator.SetFloat("SpeedRatio", _speedRatio);
