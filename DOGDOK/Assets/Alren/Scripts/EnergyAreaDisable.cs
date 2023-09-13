@@ -38,6 +38,13 @@ public class EnergyAreaDisable : MonoBehaviour
             turrets.Add(other.gameObject);
         }
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Turret"))
+        {
+            other.gameObject.GetComponent<TurretController>().itHasEnergy = false;
+        }
+    }
     private void OnTriggerStay(Collider other)//turret controller içine int connectedEnergy ekle
     {
         if (other.CompareTag("Turret"))

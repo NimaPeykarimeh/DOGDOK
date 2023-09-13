@@ -117,7 +117,7 @@ public class TurretFireController : MonoBehaviour
     {
         Vector3 targetDirectionXZ = Target.position - _bodyTransform.position;
         targetDirectionXZ.y = _bodyTransform.position.y;
-        float angleY = (Mathf.Atan2(targetDirectionXZ.x, targetDirectionXZ.z) * Mathf.Rad2Deg) + 90;
+        float angleY = (Mathf.Atan2(targetDirectionXZ.x, targetDirectionXZ.z) * Mathf.Rad2Deg);
 
         _bodyTransform.rotation = Quaternion.Slerp(_bodyTransform.rotation, Quaternion.Euler(0f, angleY, 0f), RotateSpeed * Time.deltaTime);
     }
