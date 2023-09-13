@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
+
 public class EnemyController : MonoBehaviour
 {
     public EnemyMovement enemyMovement;
@@ -8,6 +9,7 @@ public class EnemyController : MonoBehaviour
     public EnemyFollow enemyFollow;
     public Transform player;
     public EnemySpawner enemySpawner;
+    public AudioSource audioSource;
     public Collider enemyCollider;
     public bool isAlerted;
     public bool isGrounded = false;
@@ -24,20 +26,27 @@ public class EnemyController : MonoBehaviour
     public bool isMoving;
     [SerializeField] float movingDuration = 10f;
     [SerializeField] float movingTimer;
+    [Header("Audios")]
+    [SerializeField] AudioClip alertedScream;
+    [SerializeField] AudioClip voiceAlertedScream;
     [Header("Other")]
     [SerializeField] SkinnedMeshRenderer mesh;
     public Material material;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         animator = GetComponent<Animator>();
         enemyMovement = GetComponent<EnemyMovement>();
         enemyFollow = GetComponent<EnemyFollow>();
-        material = mesh.material;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         enemyCollider = GetComponent<Collider>();
-
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        audioSource = GetComponent<AudioSource>();
         
+    }
+
+    void Start()
+    {
+        material = mesh.material;
     }
     private void OnEnable()//fix Later
     {
@@ -45,6 +54,9 @@ public class EnemyController : MonoBehaviour
         //enemyMovement.canMove = true;
         AlertEnemy(false);
     }
+
+
+
     private void Update()
     {
         if (!isAlerted)
@@ -92,6 +104,21 @@ public class EnemyController : MonoBehaviour
         animator.SetBool("IsMoving", true);
     }
 
+    void AlertScream(bool _isVoiceAlert)
+    {
+        float _randomPitch = Random.Range(0.85f,1.15f);
+
+        audioSource.pitch = _randomPitch;
+        if (_isVoiceAlert)
+        {
+            audioSource.PlayOneShot(voiceAlertedScream);
+        }
+        else
+        {
+            audioSource.PlayOneShot(alertedScream);
+        }
+    }
+
     public void AlertEnemy(bool _isAlerted,bool _voiceAlerted = false)//add a distance for zombie to be alerted if were too far
     {
 
@@ -99,16 +126,19 @@ public class EnemyController : MonoBehaviour
         {
             
             enemyMovement.canMove = false;
+            animator.SetLayerWeight(2,0f);
             if (_voiceAlerted)
             {
                 float _randomizer = Random.Range(0f,1f);
                 if (_randomizer < 0.4f)
                 {
+                    AlertScream(true);
                     animator.SetTrigger("VoiceAlerted");
                 }
                 else
                 {
                     animator.SetTrigger("Alerted");
+                    AlertScream(false);
                 }
             }
             else
@@ -117,6 +147,7 @@ public class EnemyController : MonoBehaviour
                 if (_randomizer < 0.4f)
                 {
                     animator.SetTrigger("Alerted");
+                    AlertScream(false);
                 }
                 else
                 {
@@ -141,6 +172,7 @@ public class EnemyController : MonoBehaviour
         else
         {
             animator.SetBool("IsAlerted", _isAlerted);
+            animator.SetLayerWeight(2, 1f);
             enemyMovement.movementSpeed = enemyMovement.walkSpeed;
             float _speedRatio = (enemyMovement.walkSpeed - enemyMovement.minWalkSpeed) / (enemyMovement.maxWalkSpeed- enemyMovement.minWalkSpeed);
             animator.SetFloat("SpeedRatio", _speedRatio);

@@ -48,18 +48,13 @@ public class EnemyFollow : MonoBehaviour
     public int rayCount = 8; // Number of rays to cast
     public float rayRange = 10f; // Length of the 
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         enemyController = GetComponent<EnemyController>();
-        
     }
 
     void GetPlayerDirection()
     {
-        //if (!enemyController.isAlerted)
-        //{
-        //}
         Vector3 dirToTarget = Vector3.Normalize(enemyController.player.position - transform.position);
         float dot = Vector3.Dot(transform.forward, dirToTarget);
         cosValue = Mathf.Cos((visualAngleLimit / 2) * Mathf.Deg2Rad);

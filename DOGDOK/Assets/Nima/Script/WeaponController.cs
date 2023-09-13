@@ -7,6 +7,7 @@ public class WeaponController : MonoBehaviour
 {
 
     [Header("Weapon Info")]
+    public PlayerController playerController;
     public float generatingDuration = 0.5f;
     public float dissolvingDuration = 1f;
     public WeaponType weaponType;
@@ -21,8 +22,9 @@ public class WeaponController : MonoBehaviour
         Melee
     }
 
-    private void Start()
+    private void Awake()
     {
+        playerController = FindAnyObjectByType<PlayerController>();
         weaponMaterial = GetComponent<MeshRenderer>().material;
     }
 

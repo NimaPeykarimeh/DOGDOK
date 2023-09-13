@@ -28,11 +28,15 @@ public class EnemyHealth : MonoBehaviour
         RegularTurret
     }
 
+    private void Awake()
+    {
+        enemyController = GetComponent<EnemyController>();
+    }
+
     void Start()
     {
         bodyPartPositions = new Vector3[bodyPartRb.Length];
         bodyPartRotation = new Quaternion[bodyPartRb.Length];
-        enemyController = GetComponent<EnemyController>();
         currentHealth = maxHealth;
         for (int i = 0; i < bodyPartRb.Length; i++)
         {

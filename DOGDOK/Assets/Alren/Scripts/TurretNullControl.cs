@@ -12,10 +12,10 @@ public class TurretNullControl : MonoBehaviour
     private void Awake()
     {
         Renderer = gameObject.GetComponent<Renderer>();
+        turretController = GetComponent<TurretController>();
     }
     private void Start()
     {
-        turretController = GetComponent<TurretController>();
         turretController.holoMat.SetColor("_Main_Color", Color.yellow);
     }
 

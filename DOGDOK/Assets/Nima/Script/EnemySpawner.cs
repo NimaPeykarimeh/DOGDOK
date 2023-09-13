@@ -27,10 +27,14 @@ public class EnemySpawner : MonoBehaviour
     [Header("SphereCast")]
     [SerializeField] float sphereRadius;
     [SerializeField] LayerMask spawnCheckLayer;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         enemySpawnArea = GetComponent<EnemySpawnArea>();
+    }
+
+    void Start()
+    {
         //player = GameObject.FindGameObjectWithTag("Player");
         CreatePooler(maxEnemyCount);
     }

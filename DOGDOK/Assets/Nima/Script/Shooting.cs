@@ -57,8 +57,8 @@ public class Shooting : MonoBehaviour
     [SerializeField] float minPitch = 0.8f;
     [SerializeField] float maxPitch = 1.2f;
     [SerializeField] GameObject effect;
-    // Start is called before the first frame update
-    private void Start()
+
+    private void Awake()
     {
         noiseMaker = GetComponent<NoiseMaker>();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -66,6 +66,9 @@ public class Shooting : MonoBehaviour
         aimPlayer = player.GetComponent<AimPlayer>();
         audioSource = GetComponent<AudioSource>();
         weaponController = GetComponent<WeaponController>();
+    }
+    private void Start()
+    {
         fireInterval = (1 / (float)fireRate);
         fireTimer = fireInterval;
     }

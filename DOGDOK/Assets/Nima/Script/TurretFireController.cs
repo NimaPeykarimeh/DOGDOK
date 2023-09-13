@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static EnemyHealth;
 
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(TurretController))]
 public class TurretFireController : MonoBehaviour
 {
     public List<Transform> EnemyList;
@@ -32,14 +34,17 @@ public class TurretFireController : MonoBehaviour
     private float _fireTimer;
     private int _bulletIndex;
 
-    
-    
 
-    void Start()
+
+    private void Awake()
     {
         turretController = GetComponent<TurretController>();
-        _bulletIndex = 0;
         audioSource = GetComponent<AudioSource>();
+        
+    }
+    void Start()
+    {
+        _bulletIndex = 0;
 
         pooledBullets = new List<GameObject>();
         GameObject tmp;
@@ -112,7 +117,7 @@ public class TurretFireController : MonoBehaviour
     {
         Vector3 targetDirectionXZ = Target.position - _bodyTransform.position;
         targetDirectionXZ.y = _bodyTransform.position.y;
-        float angleY = Mathf.Atan2(targetDirectionXZ.x, targetDirectionXZ.z) * Mathf.Rad2Deg;
+        float angleY = (Mathf.Atan2(targetDirectionXZ.x, targetDirectionXZ.z) * Mathf.Rad2Deg) + 90;
 
         _bodyTransform.rotation = Quaternion.Slerp(_bodyTransform.rotation, Quaternion.Euler(0f, angleY, 0f), RotateSpeed * Time.deltaTime);
     }

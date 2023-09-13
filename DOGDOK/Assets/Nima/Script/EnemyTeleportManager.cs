@@ -20,12 +20,12 @@ public class EnemyTeleportManager : MonoBehaviour
     [SerializeField] float dissolveDuration;
     [SerializeField] float dissolveTimer;
 
-    private void Start()
+    private void Awake()
     {
         enemyMovement = GetComponent<EnemyMovement>();
         enemyController = GetComponent<EnemyController>();
-        
     }
+
     public void Teleport(Vector3 _positon)
     {
         wasItAlerted = enemyController.isAlerted;

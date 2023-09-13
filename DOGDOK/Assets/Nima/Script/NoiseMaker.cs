@@ -10,12 +10,7 @@ public class NoiseMaker : MonoBehaviour
     private bool showGizmos = false;
     [SerializeField] float gizmoTimer;
     [SerializeField] float gizmoDuration = 0.1f;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
         

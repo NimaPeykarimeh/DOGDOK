@@ -84,6 +84,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Metalic:
+        m_Texture: {fileID: 2800000, guid: 525444ecf545c414fbf4f7f2dd557906, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Normal:
         m_Texture: {fileID: 2800000, guid: 16a641e3d0083cf4ea2f0b43aae79d9c, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -216,6 +220,7 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
+    - _SmoothMult: 1
     - _Smoothness: 0
     - _SmoothnessRemapMax: 0.744964
     - _SmoothnessRemapMin: 0
@@ -258,6 +263,7 @@ Material:
     - _ZWrite: 1
     - _edgeOffset: 0
     - _emmisionnStrenght: 500
+    - _metalicMult: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}

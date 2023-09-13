@@ -10,8 +10,8 @@ public class EnemyMovement : MonoBehaviour
     EnemyTeleportManager teleportManager;
     [Header("Walking")]
     public float walkSpeed;
-    public float maxWalkSpeed;
     public float minWalkSpeed;
+    public float maxWalkSpeed;
 
     [Header("Runnning")]
     public float runSpeed;
@@ -26,12 +26,16 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField]
     float _moveRandomizer;
-    void Start()
+    private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         enemyRb = GetComponent<Rigidbody>();
         enemyController = GetComponent<EnemyController>();
         teleportManager = GetComponent<EnemyTeleportManager>();
+        
+    }
+    void Start()
+    {
         walkSpeed = Random.Range(minWalkSpeed, maxWalkSpeed);
         runSpeed = Random.Range(minRunSpeed, maxRunSpeed);
         movementSpeed = walkSpeed;

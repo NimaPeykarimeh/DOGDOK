@@ -58,14 +58,16 @@ public class CharacterMovement : MonoBehaviour
         Crouched
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        currentStamina = maxStamina;
         rb = GetComponent<Rigidbody>();
         playerController = GetComponent<PlayerController>();
         characterController = GetComponent<CharacterController>();
         noiseMaker = GetComponent<NoiseMaker>();
+    }
+    void Start()
+    {
+        currentStamina = maxStamina;
     }
 
     void MovePlayer()
