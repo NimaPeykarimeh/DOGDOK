@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 public class EnemyController : MonoBehaviour
 {
     public EnemyMovement enemyMovement;
+    public EnemyHealth enemyHealth;
     public Animator animator;
     public EnemyFollow enemyFollow;
     public Transform player;
@@ -41,7 +42,7 @@ public class EnemyController : MonoBehaviour
         enemyCollider = GetComponent<Collider>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         audioSource = GetComponent<AudioSource>();
-        
+        enemyHealth = GetComponent<EnemyHealth>();
     }
 
     void Start()
@@ -55,7 +56,19 @@ public class EnemyController : MonoBehaviour
         AlertEnemy(false);
     }
 
+    public void ActivateRagdoll(bool isActive)
+    {
+        foreach (Rigidbody _rb in enemyHealth.bodyPartRb)
+        {
 
+            _rb.isKinematic = false;
+            //_rb.GetComponent<Collider>().isTrigger = false;
+            
+        }
+        enemyFollow.enabled = false;
+        enemyMovement.enabled = false;
+        animator.enabled = false;
+    }
 
     private void Update()
     {
@@ -99,9 +112,9 @@ public class EnemyController : MonoBehaviour
 
     public void StartRunning()
     {
-        enemyMovement.canMove = true;
+        enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Runnning);
+        //enemyMovement.canMove = true;
         animator.SetBool("IsAlerted", true);
-        animator.SetBool("IsMoving", true);
     }
 
     void AlertScream(bool _isVoiceAlert)
@@ -125,7 +138,8 @@ public class EnemyController : MonoBehaviour
         if (!isAlerted && _isAlerted)
         {
             
-            enemyMovement.canMove = false;
+            //enemyMovement.canMove = false;
+            enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Idle);
             animator.SetLayerWeight(2,0f);
             if (_voiceAlerted)
             {
@@ -151,8 +165,9 @@ public class EnemyController : MonoBehaviour
                 }
                 else
                 {
-                    enemyMovement.canMove = true;
-                    animator.SetBool("IsMoving", true);
+                    enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Runnning);
+                    //enemyMovement.canMove = true;
+                    //animator.SetBool("IsMoving", true);
                     animator.SetBool("IsAlerted", _isAlerted);
                 }
             }
@@ -164,7 +179,8 @@ public class EnemyController : MonoBehaviour
         isAlerted = _isAlerted;
         if (_isAlerted)
         {
-            enemyMovement.movementSpeed = enemyMovement.runSpeed;
+            //enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Runnning);
+            //enemyMovement.movementSpeed = enemyMovement.runSpeed;
             enemyFollow.positionToGo = player.position;
             float _speedRatio = (enemyMovement.runSpeed - enemyMovement.minRunSpeed)/ (enemyMovement.maxRunSpeed - enemyMovement.minRunSpeed);
             animator.SetFloat("SpeedRatio", _speedRatio);
@@ -173,7 +189,8 @@ public class EnemyController : MonoBehaviour
         {
             animator.SetBool("IsAlerted", _isAlerted);
             animator.SetLayerWeight(2, 1f);
-            enemyMovement.movementSpeed = enemyMovement.walkSpeed;
+            enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Walking);
+            //enemyMovement.movementSpeed = enemyMovement.walkSpeed;
             float _speedRatio = (enemyMovement.walkSpeed - enemyMovement.minWalkSpeed) / (enemyMovement.maxWalkSpeed- enemyMovement.minWalkSpeed);
             animator.SetFloat("SpeedRatio", _speedRatio);
         }

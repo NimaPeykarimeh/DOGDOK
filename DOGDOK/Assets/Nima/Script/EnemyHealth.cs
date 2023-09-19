@@ -5,11 +5,11 @@ using UnityEngine.InputSystem.Processors;
 
 public class EnemyHealth : MonoBehaviour
 {
-    EnemyController enemyController;
+    public EnemyController enemyController;
     [SerializeField] int headShotMult;
     [SerializeField] int maxHealth = 100;
     public int currentHealth;
-    [SerializeField] Rigidbody[] bodyPartRb;
+    public Rigidbody[] bodyPartRb;
     [SerializeField] float dieForce = 1;
     [Header("Dead Animation")]
     float dissolveValue = 0;
@@ -58,6 +58,7 @@ public class EnemyHealth : MonoBehaviour
             bodyPartRb[i].isKinematic = false;
             bodyPartRb[i].transform.localPosition = bodyPartPositions[i];
             bodyPartRb[i].transform.localRotation = bodyPartRotation[i];
+            bodyPartRb[i].gameObject.GetComponent<EnemyBodyPartDamageDetection>().ResetPartValues();
         }
 
         foreach (Rigidbody _rb in bodyPartRb)
@@ -66,6 +67,7 @@ public class EnemyHealth : MonoBehaviour
             _rb.isKinematic = true;
         }
         currentHealth = maxHealth;// change later
+        enemyController.enemyMovement.ResetMovementState();
         enemyController.enemyFollow.enabled = true;
         enemyController.enemyMovement.enabled = true;
         enemyController.animator.enabled = true;

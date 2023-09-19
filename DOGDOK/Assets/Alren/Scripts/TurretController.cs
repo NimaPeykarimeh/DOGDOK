@@ -20,7 +20,7 @@ public class TurretController : MonoBehaviour
 
     public void StartGenerating()
     {
-        transform.gameObject.layer = 7;
+        transform.gameObject.layer = 9;
         isGenerating = true;
         dissolveValue = nonGeneratedValue;
 

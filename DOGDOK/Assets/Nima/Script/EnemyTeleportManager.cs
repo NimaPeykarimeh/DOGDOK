@@ -30,7 +30,8 @@ public class EnemyTeleportManager : MonoBehaviour
     {
         wasItAlerted = enemyController.isAlerted;
         enemyController.AlertEnemy(false);
-        enemyMovement.canMove = false;
+        enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Idle);
+        //enemyMovement.canMove = false;
         isDissolving = true;
         isTeleporting = true;
         isGenerating = false;
@@ -61,7 +62,8 @@ public class EnemyTeleportManager : MonoBehaviour
             {
                 isGenerating = false;
                 isTeleporting = false;
-                enemyMovement.canMove = true;
+                enemyMovement.SwitchMovmentState(enemyMovement.previousState);
+                //enemyMovement.canMove = true;
                 if (wasItAlerted)
                 {
                     enemyController.AlertEnemy(true);

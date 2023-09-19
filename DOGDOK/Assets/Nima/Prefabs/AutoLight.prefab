@@ -45,12 +45,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35ad329dc9435bb4aa94c1720bdb0de1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lightObject: {fileID: 0}
   _light: {fileID: 0}
+  maxLightIntensity: 0
   player: {fileID: 0}
+  theLightIsOn: 0
   playerSpeed: 15
   checkTimer: 0
   nextTimeToCheck: 0
-  activationDistance: 10
+  activationDistance: 15
+  fullLightDistance: 10
   distance: 0
 --- !u!1 &479419811937548465
 GameObject:
