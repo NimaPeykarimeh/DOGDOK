@@ -8,7 +8,6 @@ using System.Linq;
 
 public class InventoryManager : MonoBehaviour
 {
-    private Animator animator;
     private List<TextMeshProUGUI> UIAmount = new();
     private bool buildingSelected;
     private Build1 currentBuild;
@@ -23,6 +22,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private BuildableArea BuildableArea;
     private GameObject turretPrefab;
     [SerializeField] private GameObject InventoryPanel;
+    public GameObject Tablet;
     [SerializeField] private GameObject resBlockPrefab;
     [SerializeField] private List<Resource1> resources = new();
     [SerializeField] private byte buildDistance;
@@ -44,8 +44,7 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         CreateInventoryMenu();
-        animator = InventoryPanel.GetComponent<Animator>();
-        isOpen = false;
+        Tablet.SetActive(false);
     }
 
     void Update()
@@ -230,6 +229,8 @@ public class InventoryManager : MonoBehaviour
             UIAmount[i].text = "0";
             i++;
         }
+        InventoryPanel.SetActive(false);
+        isOpen = false;
     }
     public void UpdateInventoryMenu() //Envanter ürün bilgilerini güncelleme
     {
@@ -242,15 +243,15 @@ public class InventoryManager : MonoBehaviour
     }
     public void OpenInventoryMenu()
     {
-        animator.SetBool("isShowing", true);
         isOpen = true;
         UpdateInventoryMenu();
+        InventoryPanel.SetActive(true);
     }
 
     public void CloseInventoryMenu()
     {
-        animator.SetBool("isShowing", false);
         isOpen = false;
+        InventoryPanel.SetActive(false);
     }
     #endregion
 

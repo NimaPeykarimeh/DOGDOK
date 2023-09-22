@@ -16,10 +16,12 @@ public class InputManager : MonoBehaviour
             if (TurretManager.isOpen)
             {
                 TurretManager.CloseCraftScreen();
+                InventoryManager.Tablet.SetActive(false);
             }
             if (InventoryManager.isOpen)
             {
                 InventoryManager.CloseInventoryMenu();
+                InventoryManager.Tablet.SetActive(false);
             }
             if (InventoryManager.isBuilding)
             {
@@ -32,19 +34,24 @@ public class InputManager : MonoBehaviour
 
         #region InventoryUI
 
-        if (!TurretManager.isOpen && !InventoryManager.isBuilding)
+        if (!InventoryManager.isBuilding)
         {
-            if (InventoryManager.isOpen && Input.GetKeyDown(KeyCode.I)) // Kapama
+            if (InventoryManager.isOpen && Input.GetKeyDown(KeyCode.E)) // Kapama
             {
                 InventoryManager.CloseInventoryMenu();
+                TurretManager.CloseCraftScreen();
+                InventoryManager.Tablet.SetActive(false);
             }
-            else if (Input.GetKeyDown(KeyCode.I)) // Açma
+            else if (Input.GetKeyDown(KeyCode.E)) // Açma
             {
                 InventoryManager.OpenInventoryMenu();
+                TurretManager.OpenCraftScreen();
+                InventoryManager.Tablet.SetActive(true);
             }
             else if (InventoryManager.isOpen) // Açýkkene
             {
                 InventoryManager.UpdateInventoryMenu();
+                TurretManager.TurretPanel.GetComponent<TurretPanelCreator>().UpdateRequiredResource();
             }
         }
 
@@ -52,21 +59,21 @@ public class InputManager : MonoBehaviour
 
         #region TurretSelectionUI
 
-        if (!InventoryManager.isOpen && !InventoryManager.isBuilding)
-        {
-            if (!TurretManager.isOpen && Input.GetKeyDown(KeyCode.E)) //Açma
-            {
-                TurretManager.OpenCraftScreen();
-            }
-            else if (Input.GetKeyDown(KeyCode.E)) //Kapama
-            {
-                TurretManager.CloseCraftScreen();
-            }
-            else if (TurretManager.isOpen)
-            {
-                TurretManager.TurretPanel.GetComponent<TurretPanelCreator>().UpdateRequiredResource();
-            }
-        }
+        //if (!InventoryManager.isOpen && !InventoryManager.isBuilding)
+        //{
+        //    if (!TurretManager.isOpen && Input.GetKeyDown(KeyCode.E)) //Açma
+        //    {
+        //        TurretManager.OpenCraftScreen();
+        //    }
+        //    else if (Input.GetKeyDown(KeyCode.E)) //Kapama
+        //    {
+        //        TurretManager.CloseCraftScreen();
+        //    }
+        //    else if (TurretManager.isOpen)
+        //    {
+        //        TurretManager.TurretPanel.GetComponent<TurretPanelCreator>().UpdateRequiredResource();
+        //    }
+        //}
 
         #endregion
 

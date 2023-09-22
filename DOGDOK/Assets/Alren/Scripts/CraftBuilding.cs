@@ -12,7 +12,7 @@ public class CraftBuilding : MonoBehaviour
     private void Awake()
     {
         InventoryManager = GameObject.Find("UI & Manager/Inventory Manager").GetComponent<InventoryManager>();
-        TurretPanelCreator = GameObject.Find("UI & Manager/Canvas/Panel/Turret Panel").GetComponent<TurretPanelCreator>();
+        TurretPanelCreator = GameObject.Find("UI & Manager/Canvas/Panel/Tablet/Turret Panel").GetComponent<TurretPanelCreator>();
         TurretManager = GameObject.Find("UI & Manager/Turret Manager").GetComponent<TurretManager>();
     }
 
@@ -28,6 +28,8 @@ public class CraftBuilding : MonoBehaviour
         {
             print("it can");
             TurretManager.CloseCraftScreen();
+            InventoryManager.CloseInventoryMenu();
+            InventoryManager.Tablet.SetActive(false);
             InventoryManager.SetCurrentBuild(TurretPanelCreator.builds[id]);
         }
         else print("it cant");
