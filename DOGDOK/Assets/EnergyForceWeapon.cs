@@ -15,6 +15,7 @@ public class EnergyForceWeapon : MonoBehaviour
     AudioSource audioSource;
 
     [Header("WeaponInfo")]
+    Quaternion defaultRotation;
     [SerializeField] int damage;
     [SerializeField] List<Vector3> pushRotations;
     [SerializeField] bool isImpulsive;
@@ -47,13 +48,20 @@ public class EnergyForceWeapon : MonoBehaviour
         forceEffectMaterial = forceEffect.GetComponent<Renderer>().material;
     }
 
+    private void Start()
+    {
+        defaultRotation = forceEffect.transform.localRotation;
+    }
+
     private void Update()
     {
         if (Input.GetButtonDown("Fire1") && weaponController.canShoot && firingTimer >= FiringInterval)
         {
             Fire();
         }
-        firingTimer += Time.deltaTime;
+
+        //firingTimer += Time.deltaTime;//niþan almýyorken saymýyor
+
         
     }
     private void FixedUpdate()
@@ -69,6 +77,11 @@ public class EnergyForceWeapon : MonoBehaviour
             forceEffectMaterial.SetFloat("_EffectOfset", _effectRatio);
             if (_effectRatio >= 1)
             {
+                //return the effect to it's parent
+                forceEffect.transform.parent = pivotPosition.transform;
+                forceEffect.transform.localRotation= defaultRotation;
+                forceEffect.transform.localPosition = Vector3.zero;
+
                 forceEffect.SetActive(false);
             }
             if (pushTimer <= 0)
@@ -76,6 +89,7 @@ public class EnergyForceWeapon : MonoBehaviour
                 isPushing = false;
             }
         }
+        firingTimer += Time.fixedDeltaTime;
     }
     void OnDrawGizmosSelected()
     {
@@ -118,6 +132,7 @@ public class EnergyForceWeapon : MonoBehaviour
     {
         enemyRbList.Clear();
         pushRotations.Clear();
+        forceEffect.transform.parent = player.transform;//send the effect the out to keep the position with weapon rotation
         forceEffect.SetActive(true);
         firingTimer = 0;
         // Calculate the direction of the weapon's forward vector.
@@ -140,16 +155,16 @@ public class EnergyForceWeapon : MonoBehaviour
                 {
                     // Handle enemy hit, apply damage, etc.
                     GameObject _enemyObject = _hit.collider.gameObject;
-                    int _damage = Mathf.RoundToInt(damage * ((forceRange - _hit.distance) / forceRange) );
-
-                    _enemyObject.GetComponent<EnemyHealth>().GetDamage(_damage, EnemyHealth.HitSource.Player);
-                    Debug.Log(_damage);
-
+                    
                     Rigidbody _enemyRb = _enemyObject.GetComponent<Rigidbody>();
                     if (!enemyRbList.Contains(_enemyRb))
                     {
+                        int _damage = Mathf.RoundToInt(damage * ((forceRange - _hit.distance) / forceRange));
+
+                        _enemyObject.GetComponent<EnemyHealth>().GetDamage(_damage, EnemyHealth.HitSource.Player);
+
                         Vector3 pushDirection = (_hit.point - pivotPosition.position).normalized;
-                        pushRotations.Add(pushDirection);
+                        pushRotations.Add(pushDirection * (forceRange - _hit.distance) / forceRange);
                         enemyRbList.Add(_enemyRb);
                     }
                 }

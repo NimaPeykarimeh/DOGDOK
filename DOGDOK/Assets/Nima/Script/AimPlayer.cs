@@ -42,10 +42,11 @@ public class AimPlayer : MonoBehaviour
     [Header("WeaponAnimation")]
     [SerializeField] float animationDuration;
     float currentAnimationValue = 0f;
-    [SerializeField] Rig[] rigLayers;
-    float currentWeight;
+    public Rig[] rigLayers;
+    public float currentWeight;
     float newWeight;
-    int aimWeightLayerIndex = 1;//change Later
+    int rifleAimWeightLayerIndex = 1;//change Later
+    int pistolAimWeightLayerIndex = 4;//change Later
     [Header("AimDelay")]
     [SerializeField] bool waitForAim;
     [SerializeField] float aimDelayDuration = 0.2f;
@@ -172,51 +173,55 @@ public class AimPlayer : MonoBehaviour
         }
 
 
-        if (isAiming)
-        {
+        //if (isAiming)
+        //{
             
-            newWeight = 1;
-            if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.Melee)
-            {
-                rigLayers[0].weight = Mathf.MoveTowards(rigLayers[0].weight, 1, (1 / animationDuration) * Time.deltaTime);
-            }
-            else if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.OneHanded)
-            {
-                rigLayers[1].weight = Mathf.MoveTowards(rigLayers[1].weight, 1, (1 / animationDuration) * Time.deltaTime);
-            }
-            else if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.TwoHanded)
-            {
-                currentWeight = Mathf.MoveTowards(currentWeight, newWeight, (1 / animationDuration) * Time.deltaTime);
-                aimWeightLayerIndex = 1;
-                playerController.animator.SetLayerWeight(aimWeightLayerIndex, currentWeight);
-                rigLayers[2].weight = Mathf.MoveTowards(rigLayers[2].weight, 1, (1 / animationDuration) * Time.deltaTime);
-            }
-            //currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, -0.05f, (1 / animationDuration) * Time.deltaTime);
-            //wepMaterial = currentWeapon.GetComponent<Renderer>().material;
-            //wepMaterial.SetFloat("_Dissolve", currentAnimationValue);
+        //    newWeight = 1;
+        //    if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.Melee)
+        //    {
+        //        rigLayers[0].weight = Mathf.MoveTowards(rigLayers[0].weight, 1, (1 / animationDuration) * Time.deltaTime);
+        //    }
 
-        }
-        else
-        {
-            newWeight = 0;
-            if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.Melee)
-            {
-                rigLayers[0].weight = Mathf.MoveTowards(rigLayers[0].weight, 0, (1 / animationDuration) * Time.deltaTime);
-            }
-            else if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.OneHanded)
-            {
-                rigLayers[1].weight = Mathf.MoveTowards(rigLayers[1].weight, 0, (1 / animationDuration) * Time.deltaTime);
-            }
-            else if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.TwoHanded)
-            {
-                aimWeightLayerIndex = 1;
-                currentWeight = Mathf.MoveTowards(currentWeight, newWeight, (1 / animationDuration) * Time.deltaTime);
-                playerController.animator.SetLayerWeight(aimWeightLayerIndex, currentWeight);
-                rigLayers[2].weight = Mathf.MoveTowards(rigLayers[2].weight, 0, (1 / animationDuration) * Time.deltaTime);
-            }
-            //currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, 1, (1 / animationDuration) * Time.deltaTime);
-            //wepMaterial = currentWeapon.GetComponent<Renderer>().material;
-            //wepMaterial.SetFloat("_Dissolve", currentAnimationValue);
-        }
+        //    else if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.OneHanded)
+        //    {
+        //        currentWeight = Mathf.MoveTowards(currentWeight, newWeight, (1 / animationDuration) * Time.deltaTime);
+        //        playerController.animator.SetLayerWeight(pistolAimWeightLayerIndex, currentWeight);
+        //        rigLayers[1].weight = Mathf.MoveTowards(rigLayers[1].weight, 1, (1 / animationDuration) * Time.deltaTime);
+        //    }
+            
+        //    else if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.TwoHanded)
+        //    {
+        //        currentWeight = Mathf.MoveTowards(currentWeight, newWeight, (1 / animationDuration) * Time.deltaTime);
+        //        rifleAimWeightLayerIndex = 1;
+        //        playerController.animator.SetLayerWeight(rifleAimWeightLayerIndex, currentWeight);
+        //        rigLayers[2].weight = Mathf.MoveTowards(rigLayers[2].weight, 1, (1 / animationDuration) * Time.deltaTime);
+        //    }
+        //    //currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, -0.05f, (1 / animationDuration) * Time.deltaTime);
+        //    //wepMaterial = currentWeapon.GetComponent<Renderer>().material;
+        //    //wepMaterial.SetFloat("_Dissolve", currentAnimationValue);
+
+        //}
+        //else
+        //{
+        //    newWeight = 0;
+        //    if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.Melee)
+        //    {
+        //        rigLayers[0].weight = Mathf.MoveTowards(rigLayers[0].weight, 0, (1 / animationDuration) * Time.deltaTime);
+        //    }
+        //    else if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.OneHanded)
+        //    {
+        //        rigLayers[1].weight = Mathf.MoveTowards(rigLayers[1].weight, 0, (1 / animationDuration) * Time.deltaTime);
+        //    }
+        //    else if (weaponManager.CurrentWeaponController.weaponType == WeaponController.WeaponType.TwoHanded)
+        //    {
+        //        rifleAimWeightLayerIndex = 1;
+        //        currentWeight = Mathf.MoveTowards(currentWeight, newWeight, (1 / animationDuration) * Time.deltaTime);
+        //        playerController.animator.SetLayerWeight(rifleAimWeightLayerIndex, currentWeight);
+        //        rigLayers[2].weight = Mathf.MoveTowards(rigLayers[2].weight, 0, (1 / animationDuration) * Time.deltaTime);
+        //    }
+        //    //currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, 1, (1 / animationDuration) * Time.deltaTime);
+        //    //wepMaterial = currentWeapon.GetComponent<Renderer>().material;
+        //    //wepMaterial.SetFloat("_Dissolve", currentAnimationValue);
+        //}
     }
 }

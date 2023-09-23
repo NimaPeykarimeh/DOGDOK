@@ -386,7 +386,7 @@ MonoBehaviour:
   active: 0
   mode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   meteringMode:
     m_OverrideState: 0
     m_Value: 1
@@ -404,7 +404,7 @@ MonoBehaviour:
     m_Value: 0.8615307
   limitMax:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: -0.4761903
   curveMap:
     m_OverrideState: 0
     m_Value:
@@ -570,7 +570,7 @@ MonoBehaviour:
     m_Value: 50
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 46.8
+    m_Value: 23.4
   enableVolumetricFog:
     m_OverrideState: 0
     m_Value: 0
@@ -806,46 +806,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa3b8214f75b354e9ba2caadd022259, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   quality:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 2
   focusMode:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
   focusDistance:
     m_OverrideState: 1
-    m_Value: 1.45
+    m_Value: 3.36
   focusDistanceMode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   nearFocusStart:
     m_OverrideState: 1
     m_Value: 0
   nearFocusEnd:
     m_OverrideState: 1
-    m_Value: 2.4785452
+    m_Value: 11.06403
   farFocusStart:
     m_OverrideState: 1
-    m_Value: 10.478545
+    m_Value: 19.06403
   farFocusEnd:
     m_OverrideState: 1
-    m_Value: 64.78545
+    m_Value: 150.64029
   m_NearSampleCount:
     m_OverrideState: 1
-    m_Value: 5
+    m_Value: 8
   m_NearMaxBlur:
     m_OverrideState: 1
-    m_Value: 0.35
+    m_Value: 7
   m_FarSampleCount:
     m_OverrideState: 1
-    m_Value: 7
+    m_Value: 14
   m_FarMaxBlur:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 13
   m_Resolution:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
   m_HighQualityFiltering:
     m_OverrideState: 1
     m_Value: 1

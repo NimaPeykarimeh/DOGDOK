@@ -18,6 +18,17 @@ public class TurretController : MonoBehaviour
     public LayerMask _layer;
 
 
+    private void Start()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer))
+            {
+                meshRenderer.material = holoMat;
+            }
+        }
+    }
+
     public void StartGenerating()
     {
         transform.gameObject.layer = 9;
@@ -41,10 +52,6 @@ public class TurretController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            StartGenerating();
-        }
         if (isGenerating)
         {
             dissolveValue = Mathf.MoveTowards(dissolveValue, generatedValue, (1 / build.buildingDuration) * Time.deltaTime);

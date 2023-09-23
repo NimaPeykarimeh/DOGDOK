@@ -23,7 +23,8 @@ public class EnemyBodyPartDamageDetection : MonoBehaviour
     public enum BodyParts
     {
         Head,
-        arm,
+        rightArm,
+        leftArm,
         leg,
         torso
     }
@@ -53,6 +54,14 @@ public class EnemyBodyPartDamageDetection : MonoBehaviour
             {
                 enemyHealth.enemyController.animator.SetTrigger("LegOff");
                 enemyHealth.enemyController.enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Crawl);
+            }
+            if (bodyPart == BodyParts.rightArm)
+            {
+                enemyHealth.itHasRightHand = false;
+            }
+            if (bodyPart == BodyParts.leftArm)
+            {
+                enemyHealth.itHasLeftHand = false;
             }
             //falling part
             fallingPart.SetActive(true);

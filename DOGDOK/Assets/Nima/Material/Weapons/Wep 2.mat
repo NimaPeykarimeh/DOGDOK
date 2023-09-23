@@ -24,7 +24,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Wep 2
-  m_Shader: {fileID: -6465566751694194690, guid: b3c2646e7fcb6cc468a9d8a0e38d9f82, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 71ecff23014e5db4c97403727c21aa00, type: 3}
   m_ValidKeywords:
   - _ALPHATEST_ON
   - _DISABLE_SSR_TRANSPARENT

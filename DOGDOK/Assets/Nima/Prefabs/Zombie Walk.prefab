@@ -406,7 +406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
   headShotMult: 1
-  bodyPart: 1
+  bodyPart: 2
   maxPartDamageLimit: 25
   currentPartDamage: 25
   isPartOff: 0
@@ -900,7 +900,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3927814324438800317}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1518487412093101711
 GameObject:
@@ -1027,7 +1027,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6984789067457660222}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1913423818902272635
 GameObject:
@@ -1080,7 +1080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
   headShotMult: 1
-  bodyPart: 2
+  bodyPart: 3
   maxPartDamageLimit: 25
   currentPartDamage: 25
   isPartOff: 0
@@ -1282,7 +1282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
   headShotMult: 1
-  bodyPart: 2
+  bodyPart: 3
   maxPartDamageLimit: 25
   currentPartDamage: 25
   isPartOff: 0
@@ -1399,7 +1399,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3927814324438800317}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2186482320826068453
 GameObject:
@@ -1672,7 +1672,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3927814324438800317}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &4651953534826387076
 SkinnedMeshRenderer:
@@ -2145,9 +2145,10 @@ Transform:
   m_GameObject: {fileID: 4452290907956169991}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.55, y: 0.33110046, z: 2.33}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.05, y: 1.05, z: 1.05}
+  m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 7194994710474578328}
   - {fileID: 8433767100736908255}
   - {fileID: 8850194070745904937}
   - {fileID: 6090923764765944618}
@@ -2210,6 +2211,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 904
   eyes: {fileID: 7194994710474578328}
+  eyeSphereRadius: 0.5
   visualAngleLimit: 120
   cosValue: 0
   isInAngle: 0
@@ -2217,7 +2219,7 @@ MonoBehaviour:
   defaultSeeDistance: 1
   seeDistance: 1
   isInDistance: 0
-  outOfEyeDelay: 1
+  outOfEyeDelay: 5
   outOfEyeTimer: 0
   playerLastKnowPosition: {x: 0, y: 0, z: 0}
   rotationDuration: 0.35
@@ -2341,6 +2343,8 @@ MonoBehaviour:
   animationDuration: 2
   deadByPlayerColor: {r: 64, g: 0, b: 0, a: 1}
   deadByRegularTurret: {r: 0, g: 0, b: 85.445015, a: 1}
+  itHasLeftHand: 1
+  itHasRightHand: 1
 --- !u!114 &5725410851165250381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2356,7 +2360,7 @@ MonoBehaviour:
   damage: 5
   attackInterval: 2
   hitDistance: 1
-  attackTriggerDistance: 1.5
+  attackTriggerDistance: 2.5
   stopDelay: 0.3
   animationTimer: 0
   animationDelay: 1.1
@@ -2559,7 +2563,7 @@ Transform:
   - {fileID: 4636356051274317846}
   - {fileID: 9131836916144637114}
   m_Father: {fileID: 3927814324438800317}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2441444564806343785
 MonoBehaviour:
@@ -2575,7 +2579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
   headShotMult: 1
-  bodyPart: 3
+  bodyPart: 4
   maxPartDamageLimit: 100
   currentPartDamage: 25
   isPartOff: 0
@@ -2900,7 +2904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
   headShotMult: 1
-  bodyPart: 1
+  bodyPart: 2
   maxPartDamageLimit: 25
   currentPartDamage: 25
   isPartOff: 0
@@ -3113,7 +3117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
   headShotMult: 1
-  bodyPart: 3
+  bodyPart: 4
   maxPartDamageLimit: 100
   currentPartDamage: 25
   isPartOff: 0
@@ -3285,7 +3289,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7194994710474578328}
   - {fileID: 5311920447863095760}
   m_Father: {fileID: 7738497645997993028}
   m_RootOrder: 0
@@ -3668,12 +3671,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6908757082647269026}
-  m_LocalRotation: {x: -0.25235352, y: 0.055656232, z: -0.054228738, w: 0.96450984}
-  m_LocalPosition: {x: -0.0002, y: 0.1314, z: 0.1307}
+  m_LocalRotation: {x: 0.000000048428767, y: -0.000000029802319, z: 0.00000001536682, w: 1}
+  m_LocalPosition: {x: 0, y: 1.518, z: 0.148}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6984789067457660222}
+  m_Father: {fileID: 3927814324438800317}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7092182075855722145
@@ -3759,7 +3762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
   headShotMult: 1
-  bodyPart: 2
+  bodyPart: 3
   maxPartDamageLimit: 25
   currentPartDamage: 25
   isPartOff: 0
@@ -3991,7 +3994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -4859333179514968786}
   headShotMult: 1
-  bodyPart: 2
+  bodyPart: 3
   maxPartDamageLimit: 25
   currentPartDamage: 25
   isPartOff: 0

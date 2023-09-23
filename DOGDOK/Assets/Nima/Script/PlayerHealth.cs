@@ -13,6 +13,15 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] float UISpeed;
     [SerializeField] bool UIChanging;
     [SerializeField] int injuredLayerIndex;
+    [Header("HitAnimation")]
+    [SerializeField] float animationDuration;
+    [SerializeField] float hitAnimTimer;
+    [SerializeField] int animationHitLayer;
+    [SerializeField] float animationWeight;
+    [SerializeField] bool isGettingHit;
+    [SerializeField] bool hitFedeIn;
+    [SerializeField] float hitDelayTimer = 0.3f;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -23,6 +32,16 @@ public class PlayerHealth : MonoBehaviour
     {
         UIChanging = true;
         currentHealth += _changeAmount;
+        if (_changeAmount < 0 && !isGettingHit)//hit animation
+        {
+            playerController.animator.SetTrigger("GetHit");
+            playerController.characterMovement.ToggleRunState(CharacterMovement.MoveStates.Crouched);
+            hitAnimTimer = animationDuration;
+            hitFedeIn = true;
+            isGettingHit = true;
+            animationWeight = 0;
+            hitDelayTimer = 0.75f;
+        }
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -50,6 +69,46 @@ public class PlayerHealth : MonoBehaviour
                 UIChanging = false;
             }
         }
+
+        if (isGettingHit)
+        {
+            float _animationTimer = animationDuration;
+            if (hitFedeIn)
+            {
+                animationWeight = Mathf.MoveTowards(animationWeight,1,Time.deltaTime * 10);
+                playerController.animator.SetLayerWeight(animationHitLayer,animationWeight);
+                hitAnimTimer -= Time.deltaTime;
+                if (hitAnimTimer <= 0)
+                {
+                    hitFedeIn = false;
+                    if (playerController.characterMovement.isRunning)
+                    {
+                        playerController.characterMovement.ToggleRunState(CharacterMovement.MoveStates.Run);
+                    }
+                    else
+                    {
+                        playerController.characterMovement.ToggleRunState(CharacterMovement.MoveStates.Walk);
+                    }
+                    
+                }
+            }
+            else
+            {
+                animationWeight = Mathf.MoveTowards(animationWeight, 0, Time.deltaTime * 10);
+                playerController.animator.SetLayerWeight(animationHitLayer, animationWeight);
+                if (animationWeight == 0)
+                {
+                    hitDelayTimer -= Time.deltaTime;
+                    if (hitDelayTimer <= 0)
+                    {
+                        isGettingHit = false;
+
+                    }
+
+                }
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             ChangeHealth(-5);

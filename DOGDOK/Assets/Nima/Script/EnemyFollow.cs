@@ -11,6 +11,7 @@ public class EnemyFollow : MonoBehaviour
     [Header("Zombie eyes")]
     [SerializeField] LayerMask visibleLayers;
     [SerializeField] Transform eyes;
+    [SerializeField] float eyeSphereRadius = 0.5f;
     [SerializeField] int visualAngleLimit = 90;
     [SerializeField] float cosValue;
     [SerializeField] bool isInAngle;
@@ -20,7 +21,7 @@ public class EnemyFollow : MonoBehaviour
     [SerializeField] bool isInDistance;
     [SerializeField] float outOfEyeDelay = 0.5f;
     [SerializeField] float outOfEyeTimer;
-
+    bool isInVision;
     public Vector3 playerLastKnowPosition;
 
     [Header("Rotation")]
@@ -75,6 +76,10 @@ public class EnemyFollow : MonoBehaviour
             seeDistance = defaultSeeDistance;
         }
         isInDistance = _distance <= seeDistance;
+        if (isInDistance)
+        {
+            seeDistance = Mathf.RoundToInt(_distance + 1f);
+        }
     }
 
     void DetectThePlayer()
@@ -87,7 +92,7 @@ public class EnemyFollow : MonoBehaviour
             Ray ray = new Ray(eyes.position, _direction);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, seeDistance, visibleLayers))
+            if (Physics.SphereCast(ray, eyeSphereRadius,out hit, seeDistance, visibleLayers))
             {
                 Debug.DrawLine(ray.origin, hit.point, Color.red);
                 if (hit.transform.CompareTag("Player"))
@@ -95,18 +100,26 @@ public class EnemyFollow : MonoBehaviour
                     if (!enemyController.isAlerted)
                     {
                         enemyController.AlertEnemy(true);
-                        outOfEyeTimer = outOfEyeDelay;
                     }
+                    outOfEyeTimer = outOfEyeDelay;
+                    isInVision = true;
                     isPlayerPositionKnown = true;
                     playerLastKnowPosition = hit.transform.position;
                     positionToGo = playerLastKnowPosition;
 
                 }
-                else
+                else if(isInVision)
                 {
-                    isPlayerPositionKnown = false;
+                    isInVision = false;
+                    outOfEyeTimer = outOfEyeDelay;
                 }
-            }   
+            }
+            else if(isInVision)
+            {
+                isInVision = false;
+                outOfEyeTimer = outOfEyeDelay;
+
+            }
         }
     }
 
@@ -117,7 +130,7 @@ public class EnemyFollow : MonoBehaviour
         GetPlayerDistance();
         DetectThePlayer();
 
-        if (!isPlayerPositionKnown && enemyController.isAlerted)
+        if (!isInVision && enemyController.isAlerted)
         {
             outOfEyeTimer -= Time.deltaTime;
 
@@ -126,11 +139,14 @@ public class EnemyFollow : MonoBehaviour
                 playerLastKnowPosition = enemyController.player.transform.position;
                 positionToGo = playerLastKnowPosition;
             }
-
-            if (enemyController.isAlerted)
+            else
+            {
+                isPlayerPositionKnown = false;
+            }
+            if (!isPlayerPositionKnown)
             {
                 _dis = Vector3.Distance(transform.position, positionToGo);
-                if (_dis <= reachTolerance)
+                if (_dis <= reachTolerance && !isInDistance)
                 {
                     enemyController.AlertEnemy(false);
                 }

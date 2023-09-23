@@ -21,7 +21,9 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] Color deadByPlayerColor;
     [ColorUsage(true, true)]
     [SerializeField] Color deadByRegularTurret;
-
+    [Header("BodyPartInfo")]
+    public bool itHasLeftHand = true;
+    public bool itHasRightHand = true;
     public enum HitSource
     {
         Player,
@@ -38,6 +40,8 @@ public class EnemyHealth : MonoBehaviour
         bodyPartPositions = new Vector3[bodyPartRb.Length];
         bodyPartRotation = new Quaternion[bodyPartRb.Length];
         currentHealth = maxHealth;
+        itHasLeftHand = true;
+        itHasRightHand = true;
         for (int i = 0; i < bodyPartRb.Length; i++)
         {
             bodyPartRb[i].isKinematic = true;

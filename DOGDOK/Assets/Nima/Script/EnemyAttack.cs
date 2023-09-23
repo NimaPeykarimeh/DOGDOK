@@ -6,6 +6,7 @@ public class EnemyAttack : MonoBehaviour
 {
     EnemyController enemyController;
     EnemyMovement enemyMovement;
+    EnemyHealth enemyHealth;
     [SerializeField] int damage = 5;
     float attackTimer;
     [SerializeField] float attackInterval = 2;
@@ -19,6 +20,7 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] float animationDelay = 0.3f;
     [SerializeField] bool isDelaying = false;
     [Header("Animation layer")]
+    float randomAttackValue;
     bool isLayerChanging;
     int attackLayer = 1;
     float layerTargetValue;
@@ -39,6 +41,7 @@ public class EnemyAttack : MonoBehaviour
     {
         enemyController = GetComponent<EnemyController>();
         enemyMovement = GetComponent<EnemyMovement>();
+        enemyHealth = GetComponent<EnemyHealth>();
     }
     void Attack()
     {
@@ -55,7 +58,10 @@ public class EnemyAttack : MonoBehaviour
             }
             else
             {
-                enemyController.player.GetComponent<PlayerHealth>().ChangeHealth(-damage);
+                if ((randomAttackValue < 0.5f && enemyHealth.itHasLeftHand) || (randomAttackValue > 0.5f && enemyHealth.itHasRightHand))
+                {
+                    enemyController.player.GetComponent<PlayerHealth>().ChangeHealth(-damage);
+                }
             }
         }
         //enemyMovement.canMove = true;
@@ -87,9 +93,8 @@ public class EnemyAttack : MonoBehaviour
     {
         float _randomizer = Random.Range(0,3.9f);
         float _flooredRandom = Mathf.FloorToInt(_randomizer);
-        float _randomValue = _flooredRandom / 3;
-        Debug.Log(_randomValue);
-        enemyController.animator.SetFloat("AttackRandomizer",_randomValue);
+        randomAttackValue = _flooredRandom / 3;
+        enemyController.animator.SetFloat("AttackRandomizer", randomAttackValue);
 
     }
 

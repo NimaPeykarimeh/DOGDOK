@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
+    PlayerController playerController;
     [SerializeField] private List<GameObject> Weapons = new();
     [SerializeField] private AimPlayer AimPlayer;
     [SerializeField] private float shootDelayAfterChanging = 1f;
@@ -26,6 +27,8 @@ public class WeaponManager : MonoBehaviour
     private bool isGenerating; //Cismin generatingDuration sürecinin içinde olmasý durumunda true
     private bool isDissolving; //Cismin dissolvingDuration sürecinin içinde olmasý durumunda true
 
+    int rifleAimWeightLayerIndex = 1;//change Later
+    int pistolAimWeightLayerIndex = 4;//change Later
     private void Awake()
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -33,6 +36,7 @@ public class WeaponManager : MonoBehaviour
             Weapons.Add(transform.GetChild(i).gameObject);
         }
         UpdateToNewWeapon();
+        playerController = FindObjectOfType<PlayerController>();
     }
     void Start()
     {
@@ -41,6 +45,28 @@ public class WeaponManager : MonoBehaviour
 
     private void Update()
     {
+        //swichWeapon hold
+        //if (CurrentWeaponController.weaponType == WeaponController.WeaponType.Melee)
+        //{
+        //    AimPlayer.rigLayers[0].weight = Mathf.MoveTowards(rigLayers[0].weight, 1, (1 / animationDuration) * Time.deltaTime);
+        //}
+
+        //else if (CurrentWeaponController.weaponType == WeaponController.WeaponType.OneHanded)
+        //{
+        //    currentWeight = Mathf.MoveTowards(currentWeight, newWeight, (1 / animationDuration) * Time.deltaTime);
+        //    playerController.animator.SetLayerWeight(pistolAimWeightLayerIndex, currentWeight);
+        //    rigLayers[1].weight = Mathf.MoveTowards(rigLayers[1].weight, 1, (1 / animationDuration) * Time.deltaTime);
+        //}
+
+        //else if (CurrentWeaponController.weaponType == WeaponController.WeaponType.TwoHanded)
+        //{
+        //    currentWeight = Mathf.MoveTowards(currentWeight, newWeight, (1 / animationDuration) * Time.deltaTime);
+        //    rifleAimWeightLayerIndex = 1;
+        //    playerController.animator.SetLayerWeight(rifleAimWeightLayerIndex, currentWeight);
+        //    rigLayers[2].weight = Mathf.MoveTowards(rigLayers[2].weight, 1, (1 / animationDuration) * Time.deltaTime);
+        //}
+
+
         if (isGenerating && AimPlayer.isAiming)  // niþan alýyorken ve silah yükleniyorken silahý generate et.
         {
             GenerateWeaponMaterial();
@@ -159,6 +185,24 @@ public class WeaponManager : MonoBehaviour
     private void GenerateWeaponMaterial() // isGenerating == true olduðu durumda gelir. Silahý görünür hale getirir.
     {
         currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, unsolvedValue, (1 / generatingDuration) * Time.deltaTime);
+        float weaponHoldValue = Mathf.Clamp01(1 - currentAnimationValue * 2);
+        //changeWeaponHold
+        if (CurrentWeaponController.weaponType == WeaponController.WeaponType.Melee)
+        {
+            AimPlayer.rigLayers[0].weight = Mathf.Clamp01(weaponHoldValue);
+        }
+        else if (CurrentWeaponController.weaponType == WeaponController.WeaponType.OneHanded)
+        {
+            playerController.animator.SetLayerWeight(pistolAimWeightLayerIndex, weaponHoldValue);
+            AimPlayer.rigLayers[1].weight = weaponHoldValue;
+        }
+
+        else if (CurrentWeaponController.weaponType == WeaponController.WeaponType.TwoHanded)
+        {
+            playerController.animator.SetLayerWeight(rifleAimWeightLayerIndex, weaponHoldValue);
+            AimPlayer.rigLayers[2].weight = weaponHoldValue;
+        }
+
         currentRenderer.material.SetFloat("_Dissolve", currentAnimationValue);
         if (currentAnimationValue == unsolvedValue) // Generating bitince bool'u deðiþtirir, ateþ etmeye izin verir.
         {
@@ -171,6 +215,25 @@ public class WeaponManager : MonoBehaviour
     private void DissolveWeaponMaterial() // isDissolving == true olduðu durumda gelir. Silahý görünmez hale getirir.
     {
         currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, dissolvedValue, (1 / dissolvingDuration) * Time.deltaTime);
+
+        float weaponHoldValue = Mathf.Clamp01(1 - currentAnimationValue * 2);
+        //changeWeaponHold
+        if (CurrentWeaponController.weaponType == WeaponController.WeaponType.Melee)
+        {
+            AimPlayer.rigLayers[0].weight = Mathf.Clamp01(weaponHoldValue);
+        }
+        else if (CurrentWeaponController.weaponType == WeaponController.WeaponType.OneHanded)
+        {
+            playerController.animator.SetLayerWeight(pistolAimWeightLayerIndex, weaponHoldValue);
+            AimPlayer.rigLayers[1].weight = weaponHoldValue;
+        }
+
+        else if (CurrentWeaponController.weaponType == WeaponController.WeaponType.TwoHanded)
+        {
+            playerController.animator.SetLayerWeight(rifleAimWeightLayerIndex, weaponHoldValue);
+            AimPlayer.rigLayers[2].weight = weaponHoldValue;
+        }
+
         currentRenderer.material.SetFloat("_Dissolve", currentAnimationValue);
         if (currentAnimationValue == dissolvedValue) // çözünme bitince bool'u deðiþtirir.
         {

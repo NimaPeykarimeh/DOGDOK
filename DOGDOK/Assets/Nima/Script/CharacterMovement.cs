@@ -15,6 +15,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] float inputMagnitude;
     [SerializeField] Vector3 move;
     MoveStates currentMoveState;
+    public MoveStates previousMoveState;
     [Header("Speeds")]
     public float currentVelocity;
     public float speedToMove;
@@ -99,6 +100,7 @@ public class CharacterMovement : MonoBehaviour
 
     public void ToggleRunState(MoveStates _state)
     {
+        previousMoveState = currentMoveState;
         currentMoveState = _state;
         if (_state == MoveStates.Walk)
         {
