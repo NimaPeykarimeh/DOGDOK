@@ -6,6 +6,9 @@ public class DayNightCycle : MonoBehaviour
 {
     [Range(0, 24)]
     [SerializeField] float dayTime;
+    [SerializeField] int dayCounter = 0;
+    [SerializeField] float sunRiseHour = 6;
+    [SerializeField] float sunSetHour = 18;
     [SerializeField] int dayTimeDurationMin = 1;
     [SerializeField] Transform sunTransform;
     [SerializeField] HDAdditionalLightData[] sunLight;
@@ -13,10 +16,27 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField] float[] minLight;
     [SerializeField] float dayLigthPow;
     [SerializeField] List<Material> shaderMaterials;
+    [SerializeField] List<AutoLightSystem> autoLightList;
+    [SerializeField] List<float> maxIntensityList;
+    [SerializeField] float testValue;
     // Start is called before the first frame update
     void Start()
     {
-        
+        foreach (AutoLightSystem _autoLight in FindObjectsOfType<AutoLightSystem>())//findAllTheAreaLightsInScene
+        {
+            autoLightList.Add(_autoLight);
+            maxIntensityList.Add(_autoLight.targetLightIntensity);
+        }
+    }
+
+    void ChangeAreaLightValues()
+    {
+        foreach (AutoLightSystem _autoLight in autoLightList)//bir þekilde çalýþýyor, dokunma
+        {
+            float _lightValue =  6 - Mathf.Clamp(Mathf.Abs(12 - dayTime), 0,6);// - (sunSetHour - sunRiseHour)
+            testValue =  Mathf.Clamp(_lightValue,0.1f,5) / 5;//between 11 and 13 is max lights
+            _autoLight.targetLightIntensity = Mathf.Lerp(0, _autoLight.maxLightIntensity, testValue);
+        }
     }
 
     void ChangeDayValues(float _dayTime)
@@ -42,10 +62,12 @@ public class DayNightCycle : MonoBehaviour
     void FixedUpdate()
     {
         ChangeDayValues(dayTime);
+        ChangeAreaLightValues();
         dayTime += Time.fixedDeltaTime * (24f / ((float)dayTimeDurationMin * 60f));
         if (dayTime >= 24)
         {
             dayTime = 0;
+            dayCounter++;
         }
     }
 }

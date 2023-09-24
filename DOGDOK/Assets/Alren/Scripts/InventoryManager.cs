@@ -27,6 +27,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private List<Resource1> resources = new();
     [SerializeField] private byte buildDistance;
 
+    [SerializeField] LayerMask turretPlaceHitLayers;
+
     [HideInInspector] public bool isBuilding;
     [HideInInspector] public bool isOpen;
     [HideInInspector] public Dictionary<Resource1, int> resourceIndices = new();
@@ -167,7 +169,7 @@ public class InventoryManager : MonoBehaviour
         }
         //positionToPlace.y = 0;
         cubeTransform.position = PlaceObjectOnGrid(positionToPlace, currentBuild.buildingSize);
-        if (!isAired && BuildableArea.CheckBuildableArea(cubeTransform.position) && !Physics.CheckBox(cubeTransform.position + turretCollider.center, turretCollider.size / 2, turretCollider.transform.rotation))
+        if (!isAired && BuildableArea.CheckBuildableArea(cubeTransform.position) && !Physics.CheckBox(cubeTransform.position + turretCollider.center, turretCollider.size / 2, turretCollider.transform.rotation, turretPlaceHitLayers))
         {
             cubeTransform.gameObject.GetComponent<TurretNullControl>().TurretColorSelector(true);
             if (Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetKeyDown(KeyCode.E) && !Input.GetKeyDown(KeyCode.Escape))

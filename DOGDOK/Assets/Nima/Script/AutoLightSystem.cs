@@ -7,6 +7,7 @@ public class AutoLightSystem : MonoBehaviour
     public GameObject _lightObject;
     public Light _light;
     public float maxLightIntensity;
+    public float targetLightIntensity;
     public GameObject player;
     public bool theLightIsOn;
     public float playerSpeed = 15;
@@ -15,12 +16,19 @@ public class AutoLightSystem : MonoBehaviour
     public float activationDistance = 15f;
     public float lightFullLength = 5f;
     public float distance;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         _lightObject = transform.GetChild(0).gameObject;
         _light = _lightObject.GetComponent<Light>();
         maxLightIntensity = _light.intensity;
+        targetLightIntensity = maxLightIntensity;
+        
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        
         player = GameObject.FindGameObjectWithTag("Player"); // Adjust the tag
     }
 
@@ -37,6 +45,7 @@ public class AutoLightSystem : MonoBehaviour
         }
         else
         {
+            _light.intensity = 0;
             _lightObject.SetActive(false);
             theLightIsOn = false;
             nextTimeToCheck = (distance / playerSpeed) ;
@@ -53,7 +62,7 @@ public class AutoLightSystem : MonoBehaviour
         if (theLightIsOn)
         {
             float _lightRatio = Mathf.Clamp01(distance / (-lightFullLength));
-            float _newValue = Mathf.Lerp(0, maxLightIntensity, _lightRatio);
+            float _newValue = Mathf.Lerp(0, targetLightIntensity, _lightRatio);
             float _oldValue = _light.intensity;
             if(_oldValue!= _newValue)
             {
