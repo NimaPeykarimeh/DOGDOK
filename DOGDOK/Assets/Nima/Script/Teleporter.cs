@@ -4,7 +4,7 @@ using UnityEngine;
 public class Teleporter : MonoBehaviour
 {
     [SerializeField] List<EnemyTeleportManager> enemiesTeleport = new List<EnemyTeleportManager>();
-
+    TurretController turretController;
     [SerializeField] int teleportLimit;
     [SerializeField] float coolDown;
     [SerializeField] float coolDownTimer;
@@ -19,6 +19,10 @@ public class Teleporter : MonoBehaviour
     [SerializeField] bool isReadyToTeleport;
 
     [SerializeField] bool isEntered;
+    private void Awake()
+    {
+        turretController = GetComponent<TurretController>();//devame et
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))

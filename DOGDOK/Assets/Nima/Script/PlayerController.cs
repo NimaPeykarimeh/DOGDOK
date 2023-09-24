@@ -129,8 +129,8 @@ public class PlayerController : MonoBehaviour
         if (_state == PlayerStates.Building)
         {
             dofEffect.active = false;
-            basicCamera.SetActive(true);
-            combatCamera.SetActive(false);
+            basicCamera.SetActive(false);
+            combatCamera.SetActive(true);
             activeCinemachine = basicCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<Cinemachine3rdPersonFollow>();//Optimize Edilebilir
             activeCinemachine.CameraSide = currentShoulderSideValue;
             characterMovement.ToggleRunState(CharacterMovement.MoveStates.Walk);

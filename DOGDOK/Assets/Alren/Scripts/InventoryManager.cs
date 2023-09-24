@@ -8,6 +8,7 @@ using System.Linq;
 
 public class InventoryManager : MonoBehaviour
 {
+    private PlayerController playerController;
     private List<TextMeshProUGUI> UIAmount = new();
     private bool buildingSelected;
     private Build1 currentBuild;
@@ -36,6 +37,7 @@ public class InventoryManager : MonoBehaviour
     private void Awake() //resource id'leri otomatik atanýyor.
     {
         int i = 0;
+        playerController = FindAnyObjectByType<PlayerController>();
         foreach (var res in resources)
         {
             res.id = i;
@@ -72,8 +74,8 @@ public class InventoryManager : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //kamerayý cachle daha optimize.
         isBuilding = true;
-
-        if(AreaManager.areasMesh.Count > 0)
+        playerController.ChangePlayerState(PlayerController.PlayerStates.Building);
+        if (AreaManager.areasMesh.Count > 0)
         {
             foreach (var area in AreaManager.areasMesh)
             {
@@ -99,6 +101,15 @@ public class InventoryManager : MonoBehaviour
                 //turretRenderer = turretTransform.GetComponent<TurretNullControl>().Renderer;
                 turretCollider = turretTransform.GetComponent<BoxCollider>();
                 buildingSelected = false;
+
+                for (int i = 0; i < turretTransform.childCount; i++)
+                {
+                    if (turretTransform.GetChild(i).TryGetComponent<Collider>(out Collider _collider))
+                    {
+                        _collider.enabled = false;
+                    }
+                }
+
                 return turretTransform;
             }
         }
@@ -169,14 +180,14 @@ public class InventoryManager : MonoBehaviour
         }
         //positionToPlace.y = 0;
         cubeTransform.position = PlaceObjectOnGrid(positionToPlace, currentBuild.buildingSize);
-        if (!isAired && BuildableArea.CheckBuildableArea(cubeTransform.position) && !Physics.CheckBox(cubeTransform.position + turretCollider.center, turretCollider.size / 2, turretCollider.transform.rotation, turretPlaceHitLayers))
+        if (!isAired && BuildableArea.CheckBuildableArea(cubeTransform.position) && !Physics.CheckBox(cubeTransform.position, currentBuild.buildingSize / 2, turretCollider.transform.rotation, turretPlaceHitLayers))
         {
             cubeTransform.gameObject.GetComponent<TurretNullControl>().TurretColorSelector(true);
             if (Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetKeyDown(KeyCode.E) && !Input.GetKeyDown(KeyCode.Escape))
             {
                 UseResources(currentNeeds);
                 cubeTransform.gameObject.GetComponent<TurretController>().StartGenerating();
-                cubeTransform.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                //cubeTransform.gameObject.GetComponent<BoxCollider>().isTrigger = false;
                 cubeTransform.gameObject.GetComponent<TurretNullControl>().enabled = false;
                 isBuilding = false;
 
@@ -198,11 +209,21 @@ public class InventoryManager : MonoBehaviour
             cubeTransform.gameObject.GetComponent<TurretNullControl>().TurretColorSelector(false);
         }
     }
+    private void OnDrawGizmos()
+    {
+        // Set the color of the Gizmos
+        Gizmos.color = Color.green;
 
+        // Calculate the world space position of the CheckBox
+        Vector3 checkBoxPosition = cubeTransform.position;
+
+        // Draw the CheckBox using Gizmos
+        Gizmos.DrawWireCube(checkBoxPosition, currentBuild.buildingSize);
+    }
     public void CancelBuilding()
     {
         isBuilding = false;
-
+        playerController.ChangePlayerState(PlayerController.PlayerStates.Basic);
         if (AreaManager.areasMesh.Count > 0)
         {
             foreach (var area in AreaManager.areasMesh)

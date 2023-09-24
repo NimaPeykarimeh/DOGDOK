@@ -34,12 +34,16 @@ public class TurretController : MonoBehaviour
         transform.gameObject.layer = 9;
         isGenerating = true;
         dissolveValue = nonGeneratedValue;
-
+        
         for (int i = 0; i < transform.childCount; i++)
         {
             if (transform.GetChild(i).TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer))
             {
                 meshRenderer.material = mainMaterials[i];
+            }
+            if (transform.GetChild(i).TryGetComponent<Collider>(out Collider _collider))
+            {
+                _collider.enabled = true;
             }
         }
         //foreach (Transform _child in transform)
