@@ -8,6 +8,7 @@ public class ResourceCreation : MonoBehaviour
     //public List<int> resourceCountList = new();
     private Renderer Renderer;
     public List<ResourceClass> resource;
+    public float regenSec = 300;
     public float dissolvingDuration = 1;
     public float generatingDuration = 0.5f;
 

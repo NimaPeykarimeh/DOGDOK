@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5779169, g: 0.41554463, b: 0.3697041, a: 1}
+  m_IndirectSpecularColor: {r: 0.5779169, g: 0.4172073, b: 0.38417932, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10835,6 +10835,7 @@ MonoBehaviour:
   playerObject: {fileID: 1447001860}
   inputMagnitude: 0
   move: {x: 0, y: 0, z: 0}
+  previousMoveState: 0
   currentVelocity: 0
   speedToMove: 0
   currentMovementSpeed: 4
@@ -10895,6 +10896,7 @@ MonoBehaviour:
   - {fileID: 962766168}
   - {fileID: 962766168}
   - {fileID: 288942}
+  currentWeight: 0
   waitForAim: 0
   aimDelayDuration: 0.2
   aimDelayTimer: 0
@@ -11021,6 +11023,13 @@ MonoBehaviour:
   UISpeed: 1
   UIChanging: 0
   injuredLayerIndex: 3
+  animationDuration: 0
+  hitAnimTimer: 0
+  animationHitLayer: 0
+  animationWeight: 0
+  isGettingHit: 0
+  hitFedeIn: 0
+  hitDelayTimer: 0.3
 --- !u!136 &673692005
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -33120,6 +33129,7 @@ MonoBehaviour:
   playerObject: {fileID: 0}
   inputMagnitude: 0
   move: {x: 0, y: 0, z: 0}
+  previousMoveState: 0
   currentVelocity: 0
   speedToMove: 0
   currentMovementSpeed: 2
@@ -34941,6 +34951,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dayTime: 0
+  dayCounter: 0
+  sunRiseHour: 6
+  sunSetHour: 18
   dayTimeDurationMin: 1
   sunTransform: {fileID: 2088740748}
   sunLight:
@@ -34954,6 +34967,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ef13d9faf99cdd746b396daef8eba136, type: 2}
   - {fileID: 2100000, guid: 103b7d67f36acd04e8cf3ca821ab4f80, type: 2}
   - {fileID: 2100000, guid: 6dc468d78b1b2b642b48e5d21eebfcc4, type: 2}
+  autoLightList: []
+  maxIntensityList: []
+  testValue: 0
 --- !u!4 &1645931553
 Transform:
   m_ObjectHideFlags: 0
@@ -45213,8 +45229,9 @@ GameObject:
   m_Component:
   - component: {fileID: 343575695519596781}
   - component: {fileID: 343575695519596782}
+  - component: {fileID: 343575695519596783}
   m_Layer: 0
-  m_Name: CollectibleUI Manager
+  m_Name: Collectible Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45249,6 +45266,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollectiblePanel: {fileID: 343575694272937857}
   FeedbackText: {fileID: 4485166266708584387, guid: 443f993e5c4c8d14ea9fa33527c037d7, type: 3}
+--- !u!114 &343575695519596783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343575695519596780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e4e3cdbbbbfeb14b8d39058dd4fe008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponController: {fileID: 2934850790493520187}
+  InventoryManager: {fileID: 2403242125303770783}
+  CollectibleFeedback: {fileID: 343575695519596782}
+  collectingDistance: 5
 --- !u!4 &366175167941124487
 Transform:
   m_ObjectHideFlags: 0
@@ -46543,8 +46576,9 @@ MonoBehaviour:
     resourceCount: 3
   - resourceType: {fileID: 11400000, guid: 4a86babbc9e7f964cb25ab3fac7d7f3a, type: 2}
     resourceCount: 2
-  dissolvingDuration: 3
-  generatingDuration: 1
+  regenSec: 30
+  dissolvingDuration: 2
+  generatingDuration: 2
 --- !u!33 &1240562454459641774
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -46585,6 +46619,7 @@ MonoBehaviour:
     resourceCount: 50
   - resourceType: {fileID: 11400000, guid: b6e3c154aa2a23a4f991e1f88dae9f25, type: 2}
     resourceCount: 80
+  regenSec: 300
   dissolvingDuration: 1
   generatingDuration: 0.5
 --- !u!4 &1240562454910934954
@@ -48630,6 +48665,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 85c9facaf3e40ed469804a6de893d382, type: 2}
   - {fileID: 11400000, guid: a94dac6c3ffb85942badd54a09312df1, type: 2}
   buildDistance: 12
+  turretPlaceHitLayers:
+    serializedVersion: 2
+    m_Bits: 705
   isBuilding: 0
   isOpen: 0
 --- !u!114 &2403242125411307145
@@ -49379,16 +49417,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2934850790493520160}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e4e3cdbbbbfeb14b8d39058dd4fe008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WeaponController: {fileID: 2934850790493520187}
   InventoryManager: {fileID: 2403242125303770783}
   CollectibleFeedback: {fileID: 343575695519596782}
   collectingDistance: 5
-  generatingDuration: 1
-  dissolvingDuration: 1
 --- !u!4 &2934850791651725476
 Transform:
   m_ObjectHideFlags: 0
