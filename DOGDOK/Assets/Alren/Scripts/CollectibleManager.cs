@@ -18,19 +18,22 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
     private List<float> animationValueList = new(); // Çözünmekte olan cismi topla/býrak yaptýðýmýz zaman daha akýcý gözükmesi için ve birden fazla cismi generate/dissolve edebilmek için
     private List<int> objectIDList = new(); // Her cismin ID'si tutulur ve böylece daha önce kaydedilen bir cisim varsa ayný id ile baþvurulduðunda reddedilecektir. Listelerin hepsine tekrar ayný bir cisim eklenmez. Cisimler dissolve/generate olunca listeden kalkarlar.
 
+    private List<GameObject> disabledCollectible = new();
+    private List<float> disabledTimer = new();
+
     private float currentAnimationValue = -0.1f; // Collectible'ýn bozulma/generate edilme durumunda hangi sayý deðerinde olduðu
     private const float unsolvedValue = -0.1f; // Collectible'ýn generate olmasý için gerekli olan deðer
     private const float dissolvedValue = 1f; // Collectible'ýn bozulmasý için gerekli olan deðer
 
 
-    private WeaponController WeaponController;
+    [SerializeField] private WeaponController WeaponController;
     [SerializeField] private InventoryManager InventoryManager;
     [SerializeField] private CollectibleFeedback CollectibleFeedback;
 
     [Header("Attributes")]
     [SerializeField] private float collectingDistance = 5f; // Kaynak Toplama Raycast Uzunluðu
-    [SerializeField] private float generatingDuration = 1f; // Kaynak Toplamada bozulan cismin geri generatelenme uzunluðu
-    [SerializeField] private float dissolvingDuration = 1f; // Kaynak Toplama Süresi ve Cismin Bozulma Uzunluðu
+    //[SerializeField] private float generatingDuration = 1f; // Kaynak Toplamada bozulan cismin geri generatelenme uzunluðu
+    //[SerializeField] private float dissolvingDuration = 1f; // Kaynak Toplama Süresi ve Cismin Bozulma Uzunluðu
 
     private Ray ray;
 
@@ -39,7 +42,7 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
         //resourceCountList = new();
         //resourceTypeList = new();
         resourceList = new();
-        WeaponController = GetComponent<WeaponController>();
+        //WeaponController = GetComponent<WeaponController>();
         objectID = -1; //objectID için default deðeri -1,
         currentlyDissolvedID = -2; // DissolvedID için ise -2'yi kullandým.
     }
@@ -90,6 +93,27 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
                     animationValueList[i] = resCreationList[i].GenerateCollectible(animationValueList[i], unsolvedValue);
                 }
 
+            }
+        }
+
+        if(disabledCollectible.Count > 0)
+        {
+            print(disabledCollectible.Count);
+            for(int i = 0; i < disabledTimer.Count; i++)
+            {
+                disabledTimer[i] -= Time.deltaTime;
+                print(disabledTimer[i]);
+            }
+
+            for (int i = 0; i < disabledTimer.Count; i++)
+            {
+                if (disabledTimer[i] < 0)
+                {
+                    disabledTimer.RemoveAt(i);
+                    disabledCollectible[i].SetActive(true);
+                    disabledCollectible[i].GetComponent<ResourceCreation>().GenerateCollectible(unsolvedValue, unsolvedValue);
+                    disabledCollectible.RemoveAt(i);
+                }
             }
         }
     }
@@ -184,7 +208,10 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
                 if (currentAnimationValue == dissolvedValue)
                 {
                     // Cisim tamamen saydamlaþýnca cismi yok et ve envanteri güncelle
-                    Destroy(hitObject);
+                    disabledCollectible.Add(hitObject);
+                    disabledTimer.Add(ResourceCreation.regenSec);
+                    hitObject.SetActive(false);
+                    //Destroy(hitObject);
                     Dictionary<Resource1, int> addingResources = new();
                     for (int i = 0; i < resourceList.Count; i++)
                     {

@@ -215,10 +215,10 @@ public class InventoryManager : MonoBehaviour
         Gizmos.color = Color.green;
 
         // Calculate the world space position of the CheckBox
-        Vector3 checkBoxPosition = cubeTransform.position;
+        //Vector3 checkBoxPosition = cubeTransform.position;
 
         // Draw the CheckBox using Gizmos
-        Gizmos.DrawWireCube(checkBoxPosition, currentBuild.buildingSize);
+        //Gizmos.DrawWireCube(checkBoxPosition, currentBuild.buildingSize);
     }
     public void CancelBuilding()
     {
