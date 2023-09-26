@@ -45,14 +45,14 @@ public class EnemyAttack : MonoBehaviour
     }
     void Attack()
     {
-        bool isInAttackDistance = Vector3.Distance(transform.position, enemyController.enemyFollow.positionToGo) < hitDistance;
+        bool isInAttackDistance = Vector3.Distance(transform.position, enemyController.currentTargetTransform.position) < hitDistance;
         isLayerChanging = true;
         layerValue = 1;
         layerTargetValue = 0;
         layerChangeDuration = 0.7f;
         if (isInAttackDistance)
         {
-            if (isTargetedTurret)
+            if (enemyController.isTargetedTurret)
             {
                 turretHealthManager.GetDamage(damage);
             }
@@ -71,7 +71,7 @@ public class EnemyAttack : MonoBehaviour
 
     void CheckNearbyTurrets()
     {
-        if (!isTargetedTurret)
+        if (true)
         {
             turretObjectList.Clear();
             Collider[] _hitColliders = Physics.OverlapSphere(transform.position,turretDetectionRange);
@@ -80,16 +80,31 @@ public class EnemyAttack : MonoBehaviour
                 if (_collider.CompareTag("Turret"))
                 {
                     turretObjectList.Add(_collider.gameObject);
-                    turretHealthManager = _collider.gameObject.GetComponent<TurretHealthManager>();
-                    enemyController.enemyFollow.positionToGo = _collider.transform.position;
-                    isTargetedTurret = true;
                 }
             }
-            turretCheckTimer = turretCheckInterval;
+            if (turretObjectList.Count>0)
+            {
+                float _minValue = 100;
+                GameObject _selectedTurret = null;
+                foreach (GameObject _turretObject in turretObjectList)
+                {
+                    float _distance = Vector3.Distance(transform.position,_turretObject.transform.position);
+                    if (_distance < _minValue)
+                    {
+                        _selectedTurret = _turretObject;
+                        _minValue = _distance;
+                    }
+                }
+                turretHealthManager = _selectedTurret.GetComponent<TurretHealthManager>();
+                enemyController.enemyFollow.positionToGo = _selectedTurret.transform.position;
+                enemyController.currentTargetTransform = _selectedTurret.transform;
+                turretCheckTimer = turretCheckInterval;
+                isTargetedTurret = true;
+            }
         }
     }
 
-    void SetRandomAttackValue()
+    void SetRandomAttackValue()//get random value to attacking hand
     {
         float _randomizer = Random.Range(0,3.9f);
         float _flooredRandom = Mathf.FloorToInt(_randomizer);
@@ -102,7 +117,7 @@ public class EnemyAttack : MonoBehaviour
     void Update()
     {
         attackTimer += Time.deltaTime;
-        targetDistance = Vector3.Distance(transform.position, enemyController.enemyFollow.positionToGo);
+        targetDistance = Vector3.Distance(transform.position, enemyController.currentTargetTransform.position);
         readyToAttack = targetDistance < attackTriggerDistance && enemyController.isAlerted;
 
         turretCheckTimer -= Time.deltaTime;

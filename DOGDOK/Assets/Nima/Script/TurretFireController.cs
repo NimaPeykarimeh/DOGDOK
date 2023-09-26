@@ -151,7 +151,7 @@ public class TurretFireController : MonoBehaviour
                 audioSource.PlayOneShot(shootingSound);
                 GameObject _effect = Instantiate(bulletHitEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 _effect.transform.parent = hit.transform;
-                hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(Damage, EnemyHealth.HitSource.RegularTurret);
+                hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(Damage, EnemyHealth.HitSource.RegularTurret,transform);
             }
 
 

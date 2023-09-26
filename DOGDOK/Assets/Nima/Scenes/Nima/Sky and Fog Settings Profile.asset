@@ -291,7 +291,7 @@ MonoBehaviour:
     m_Value: 1
   enabled:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   colorMode:
     m_OverrideState: 0
     m_Value: 1
@@ -376,7 +376,7 @@ MonoBehaviour:
   active: 1
   opacity:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.672
   upperHemisphereOnly:
     m_OverrideState: 0
     m_Value: 1
@@ -387,7 +387,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1024
   shadowMultiplier:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   shadowTint:
     m_OverrideState: 0

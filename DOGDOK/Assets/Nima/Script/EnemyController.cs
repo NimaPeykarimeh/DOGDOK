@@ -12,6 +12,8 @@ public class EnemyController : MonoBehaviour
     public EnemySpawner enemySpawner;
     public AudioSource audioSource;
     public Collider enemyCollider;
+    public Transform currentTargetTransform;
+    public bool isTargetedTurret = false;
     public bool isAlerted;
     public bool isGrounded = false;
     [SerializeField] float isGroundedLimit = 5f;
@@ -43,6 +45,7 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         audioSource = GetComponent<AudioSource>();
         enemyHealth = GetComponent<EnemyHealth>();
+        currentTargetTransform = player.transform;
     }
 
     void Start()
@@ -53,7 +56,6 @@ public class EnemyController : MonoBehaviour
     {
         isGroundedTimer = isGroundedLimit;
         //enemyMovement.canMove = true;
-        AlertEnemy(false);
     }
 
     public void ActivateRagdoll(bool isActive)
@@ -132,13 +134,15 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void AlertEnemy(bool _isAlerted,bool _voiceAlerted = false)//add a distance for zombie to be alerted if were too far
+    public void AlertEnemy(bool _isAlerted,bool _voiceAlerted,bool _isTargetedTurret,Transform _targetTransform)//add a distance for zombie to be alerted if were too far
     {
-
         if (!isAlerted && _isAlerted)
         {
-            
             //enemyMovement.canMove = false;
+            isTargetedTurret = _isTargetedTurret;
+            currentTargetTransform = _targetTransform;
+            positionToGo = _targetTransform.position;
+            enemyFollow.positionToGo = _targetTransform.position;
             enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Idle);
             animator.SetLayerWeight(2,0f);
             if (_voiceAlerted)
@@ -181,7 +185,7 @@ public class EnemyController : MonoBehaviour
         {
             //enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Runnning);
             //enemyMovement.movementSpeed = enemyMovement.runSpeed;
-            enemyFollow.positionToGo = player.position;
+            //enemyFollow.positionToGo = player.position;
             float _speedRatio = (enemyMovement.runSpeed - enemyMovement.minRunSpeed)/ (enemyMovement.maxRunSpeed - enemyMovement.minRunSpeed);
             animator.SetFloat("SpeedRatio", _speedRatio);
         }

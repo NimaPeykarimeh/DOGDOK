@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51276ffec7d5e4b469eded478fd2f721, type: 3}
   m_Name: Circuit
   m_EditorClassIdentifier: 
-  id: 3
+  id: 2
   resourceName: Circuit
-  resourceImage: {fileID: 21300000, guid: 6e26a1758e4faca45b3e76fbf44398c3, type: 3}
+  resourceImage: {fileID: 21300000, guid: ed638ab028a6dfc40b68df27b7c5c611, type: 3}
   resourceMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}

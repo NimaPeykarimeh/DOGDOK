@@ -29,11 +29,15 @@ public class WeaponManager : MonoBehaviour
 
     int rifleAimWeightLayerIndex = 1;//change Later
     int pistolAimWeightLayerIndex = 4;//change Later
+    [SerializeField] float aimSpeedMult;
     private void Awake()
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            Weapons.Add(transform.GetChild(i).gameObject);
+            if (transform.GetChild(i).TryGetComponent<WeaponController>(out WeaponController _wepCont))
+            {
+                Weapons.Add(transform.GetChild(i).gameObject);
+            }
         }
         UpdateToNewWeapon();
         playerController = FindObjectOfType<PlayerController>();
@@ -185,22 +189,23 @@ public class WeaponManager : MonoBehaviour
     private void GenerateWeaponMaterial() // isGenerating == true olduðu durumda gelir. Silahý görünür hale getirir.
     {
         currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, unsolvedValue, (1 / generatingDuration) * Time.deltaTime);
-        float weaponHoldValue = Mathf.Clamp01(1 - currentAnimationValue * 2);
+        float weaponHoldValue = Mathf.Lerp(0, 1, Mathf.Clamp01(((dissolvedValue - currentAnimationValue) * aimSpeedMult) / 1.1f) ); //Mathf.Clamp01(1 - currentAnimationValue * 2);
+        float weaponHoldRigValue = Mathf.Lerp(0, 1, Mathf.Clamp01(((dissolvedValue - currentAnimationValue) * aimSpeedMult * 2) / 1.1f));
         //changeWeaponHold
         if (CurrentWeaponController.weaponType == WeaponController.WeaponType.Melee)
         {
-            AimPlayer.rigLayers[0].weight = Mathf.Clamp01(weaponHoldValue);
+            AimPlayer.rigLayers[0].weight = Mathf.Clamp01(weaponHoldRigValue);
         }
         else if (CurrentWeaponController.weaponType == WeaponController.WeaponType.OneHanded)
         {
             playerController.animator.SetLayerWeight(pistolAimWeightLayerIndex, weaponHoldValue);
-            AimPlayer.rigLayers[1].weight = weaponHoldValue;
+            AimPlayer.rigLayers[1].weight = weaponHoldRigValue;
         }
 
         else if (CurrentWeaponController.weaponType == WeaponController.WeaponType.TwoHanded)
         {
             playerController.animator.SetLayerWeight(rifleAimWeightLayerIndex, weaponHoldValue);
-            AimPlayer.rigLayers[2].weight = weaponHoldValue;
+            AimPlayer.rigLayers[2].weight = weaponHoldRigValue;
         }
 
         currentRenderer.material.SetFloat("_Dissolve", currentAnimationValue);
@@ -216,22 +221,23 @@ public class WeaponManager : MonoBehaviour
     {
         currentAnimationValue = Mathf.MoveTowards(currentAnimationValue, dissolvedValue, (1 / dissolvingDuration) * Time.deltaTime);
 
-        float weaponHoldValue = Mathf.Clamp01(1 - currentAnimationValue * 2);
+        float weaponHoldValue = Mathf.Lerp(1,0, Mathf.Clamp01(((currentAnimationValue - unsolvedValue) * aimSpeedMult) / 1.1f)); //Mathf.Clamp01(1 - currentAnimationValue * 2);
+        float weaponHoldRigValue = Mathf.Lerp(1,0, Mathf.Clamp01(((currentAnimationValue - unsolvedValue) * aimSpeedMult *2) / 1.1f));
         //changeWeaponHold
         if (CurrentWeaponController.weaponType == WeaponController.WeaponType.Melee)
         {
-            AimPlayer.rigLayers[0].weight = Mathf.Clamp01(weaponHoldValue);
+            AimPlayer.rigLayers[0].weight = Mathf.Clamp01(weaponHoldRigValue);
         }
         else if (CurrentWeaponController.weaponType == WeaponController.WeaponType.OneHanded)
         {
             playerController.animator.SetLayerWeight(pistolAimWeightLayerIndex, weaponHoldValue);
-            AimPlayer.rigLayers[1].weight = weaponHoldValue;
+            AimPlayer.rigLayers[1].weight = weaponHoldRigValue;
         }
 
         else if (CurrentWeaponController.weaponType == WeaponController.WeaponType.TwoHanded)
         {
             playerController.animator.SetLayerWeight(rifleAimWeightLayerIndex, weaponHoldValue);
-            AimPlayer.rigLayers[2].weight = weaponHoldValue;
+            AimPlayer.rigLayers[2].weight = weaponHoldRigValue;
         }
 
         currentRenderer.material.SetFloat("_Dissolve", currentAnimationValue);

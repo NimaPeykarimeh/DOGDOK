@@ -16,7 +16,7 @@ public class TurretController : MonoBehaviour
     public bool readyToUse = false;
     public bool itHasEnergy;
     public LayerMask _layer;
-
+    [SerializeField] int turretLayerIndex = 9;
 
     private void Start()
     {
@@ -31,7 +31,7 @@ public class TurretController : MonoBehaviour
 
     public void StartGenerating()
     {
-        transform.gameObject.layer = 9;
+        transform.gameObject.layer = turretLayerIndex;
         isGenerating = true;
         dissolveValue = nonGeneratedValue;
         

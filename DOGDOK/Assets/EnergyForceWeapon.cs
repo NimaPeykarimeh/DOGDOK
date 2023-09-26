@@ -161,7 +161,7 @@ public class EnergyForceWeapon : MonoBehaviour
                     {
                         int _damage = Mathf.RoundToInt(damage * ((forceRange - _hit.distance) / forceRange));
 
-                        _enemyObject.GetComponent<EnemyHealth>().GetDamage(_damage, EnemyHealth.HitSource.Player);
+                        _enemyObject.GetComponent<EnemyHealth>().GetDamage(_damage, EnemyHealth.HitSource.Player,transform);
 
                         Vector3 pushDirection = (_hit.point - pivotPosition.position).normalized;
                         pushRotations.Add(pushDirection * (forceRange - _hit.distance) / forceRange);

@@ -5,7 +5,7 @@ public class NoiseMaker : MonoBehaviour
     [SerializeField] float noiseRange;
     [SerializeField] Transform center;
     [SerializeField] LayerMask enemyLayer;
-
+    [SerializeField] bool isTurret;
     [Header("Gizmo")]
     private bool showGizmos = false;
     [SerializeField] float gizmoTimer;
@@ -37,11 +37,15 @@ public class NoiseMaker : MonoBehaviour
             // Do something with the detected enemy (e.g., damage, apply an effect, etc.)
             if (_methodCaller.GetType() == typeof(Shooting))
             {
-                collider.gameObject.GetComponent<EnemyController>().AlertEnemy(true, true);
+                collider.gameObject.GetComponent<EnemyController>().AlertEnemy(true, true,false,transform);
+            }
+            else if (_methodCaller.GetType() == typeof(TurretController))
+            {
+                collider.gameObject.GetComponent<EnemyController>().AlertEnemy(true, false, true, transform);
             }
             else
             {
-                collider.gameObject.GetComponent<EnemyController>().AlertEnemy(true,false);
+                collider.gameObject.GetComponent<EnemyController>().AlertEnemy(true,false,isTurret,transform);
             }
             //Debug.Log("Enemy detected: " + collider.gameObject.name);
         }

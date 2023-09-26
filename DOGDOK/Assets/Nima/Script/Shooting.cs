@@ -166,7 +166,7 @@ public class Shooting : MonoBehaviour
                     {
                         //Instantiate(enemyHitParticle,hit.point,hit.transform.rotation);
                         
-                        hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(_damage,EnemyHealth.HitSource.Player);
+                        hit.collider.gameObject.GetComponent<EnemyBodyPartDamageDetection>().GetPartDamage(_damage,EnemyHealth.HitSource.Player,transform);
                     }
                 }
                 

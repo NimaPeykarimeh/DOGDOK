@@ -247,9 +247,10 @@ public class InventoryManager : MonoBehaviour
         foreach (var element in resources)
         {
             GameObject resBlock = Instantiate(resBlockPrefab, InventoryPanel.transform);
-            resBlock.transform.Find("resText").GetComponent<TextMeshProUGUI>().text = element.resourceName;
+            //resBlock.transform.Find("resText").GetComponent<TextMeshProUGUI>().text = element.resourceName;
+            resBlock.transform.Find("resImage").GetComponent<Image>().sprite = element.resourceImage;
             UIAmount.Add(resBlock.transform.Find("resAmountText").GetComponent<TextMeshProUGUI>());
-            UIAmount[i].text = "0";
+            UIAmount[i].text = "X0";
             i++;
         }
         InventoryPanel.SetActive(false);
@@ -260,7 +261,7 @@ public class InventoryManager : MonoBehaviour
         int i = 0;
         foreach (var element in resourceIndices.Values)
         {
-            UIAmount[i].text = element.ToString();
+            UIAmount[i].text ="X" + element.ToString();
             i++;
         }
     }

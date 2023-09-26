@@ -29,7 +29,7 @@ public class EnemyTeleportManager : MonoBehaviour
     public void Teleport(Vector3 _positon)
     {
         wasItAlerted = enemyController.isAlerted;
-        enemyController.AlertEnemy(false);
+        enemyController.AlertEnemy(false,false,false,transform);
         enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Idle);
         //enemyMovement.canMove = false;
         isDissolving = true;
@@ -66,7 +66,7 @@ public class EnemyTeleportManager : MonoBehaviour
                 //enemyMovement.canMove = true;
                 if (wasItAlerted)
                 {
-                    enemyController.AlertEnemy(true);
+                    enemyController.AlertEnemy(true,false,true,transform);
                 }
                 _dissolveRatio = dissolveStart;
                 

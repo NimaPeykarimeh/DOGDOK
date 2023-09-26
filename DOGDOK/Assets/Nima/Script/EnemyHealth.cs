@@ -129,9 +129,9 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    public void GetDamage(int _damage, HitSource _damageSource)
+    public void GetDamage(int _damage, HitSource _damageSource,Transform _hitTransform)
     {
-        enemyController.AlertEnemy(true);
+        enemyController.AlertEnemy(true,false, _damageSource == HitSource.RegularTurret, _hitTransform);
         currentHealth -= _damage;
         if (currentHealth <= 0)
         {

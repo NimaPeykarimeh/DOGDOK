@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4874709444433576852}
   - component: {fileID: 1550986662194640904}
   - component: {fileID: 575933956166644850}
+  - component: {fileID: 5983360395643194027}
   m_Layer: 2
   m_Name: Teleporter
   m_TagString: Turret
@@ -77,6 +78,7 @@ MonoBehaviour:
   _layer:
     serializedVersion: 2
     m_Bits: 512
+  turretLayerIndex: 14
 --- !u!65 &1550986662194640904
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -113,6 +115,20 @@ MonoBehaviour:
   teleportingX: 2
   isReadyToTeleport: 0
   isEntered: 0
+--- !u!114 &5983360395643194027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644945241560761620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ee31a4c90b81bf44b8de876351c00af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 200
+  currentHealth: 0
 --- !u!1 &3350656270908939247
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +153,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3350656270908939247}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7, y: 0, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -156,7 +172,7 @@ GameObject:
   - component: {fileID: 2453056353286958518}
   - component: {fileID: 5775072019874493426}
   - component: {fileID: 3989099805156189560}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: TransporterTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +269,7 @@ GameObject:
   - component: {fileID: 7210117054416607756}
   - component: {fileID: 4318357530423367376}
   - component: {fileID: 3103773182599304669}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: TransporterBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +353,7 @@ GameObject:
   - component: {fileID: 6615588337622256908}
   - component: {fileID: 5461606421226858559}
   - component: {fileID: 4111158866607018602}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: TransporterCylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -99,7 +99,7 @@ public class EnemyFollow : MonoBehaviour
                 {
                     if (!enemyController.isAlerted)
                     {
-                        enemyController.AlertEnemy(true);
+                        enemyController.AlertEnemy(true,false,false,hit.transform);
                     }
                     outOfEyeTimer = outOfEyeDelay;
                     isInVision = true;
@@ -126,9 +126,13 @@ public class EnemyFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!enemyController.isTargetedTurret)
+        {
         GetPlayerDirection();
         GetPlayerDistance();
         DetectThePlayer();
+
+        }
 
         if (!isInVision && enemyController.isAlerted)
         {
@@ -148,16 +152,16 @@ public class EnemyFollow : MonoBehaviour
                 _dis = Vector3.Distance(transform.position, positionToGo);
                 if (_dis <= reachTolerance && !isInDistance)
                 {
-                    enemyController.AlertEnemy(false);
+                    enemyController.AlertEnemy(false,false,false,transform);
                 }
             }
         }
 
         
 
-        else if (enemyController.isMoving && !enemyController.isAlerted)
+        else if (enemyController.isMoving && !enemyController.isAlerted && !enemyController.isTargetedTurret)
         {
-            positionToGo = enemyController.positionToGo;
+            positionToGo = enemyController.currentTargetTransform.position;
             _dis = Vector3.Distance(transform.position, positionToGo);
             if (_dis <= reachTolerance)
             {
