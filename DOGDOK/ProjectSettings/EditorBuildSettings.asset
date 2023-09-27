@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Nima/Scenes/MainMenu.unity
     guid: 80fda3bd9a33bb043a13eef48272be9d
   - enabled: 1
-    path: Assets/Nima/Scenes/Nima.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Nima/Scenes/MergedScene.unity
+    guid: 206dba22f644e5345ae98fefaa70c6c7
   m_configObjects: {}

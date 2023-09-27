@@ -49,6 +49,7 @@ public class SceneLoadManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        AudioManager.Instance.PlayAudio(AudioManager.Instance.menuClickButton);
         MainMenuPanel.SetActive(true);
         CreditsPanel.SetActive(false);
         OptionsPanel.SetActive(false);
@@ -57,18 +58,21 @@ public class SceneLoadManager : MonoBehaviour
 
     public void LoadScene(int _sceneId) //New Game Button
     {
+        AudioManager.Instance.audioSouce.Stop();
         StartCoroutine(LoadSceneAsync(_sceneId));
         buttonText.SetActive(false);
     }
 
     public void LoadCredits() //Credits Button
     {
+        AudioManager.Instance.PlayAudio(AudioManager.Instance.menuClickButton);
         MainMenuPanel.SetActive(false);
         CreditsPanel.SetActive(true);
     }
 
     public void LoadOptions() //Options Button
     {
+        AudioManager.Instance.PlayAudio(AudioManager.Instance.menuClickButton);
         MainMenuPanel.SetActive(false);
         OptionsPanel.SetActive(true);
     }
