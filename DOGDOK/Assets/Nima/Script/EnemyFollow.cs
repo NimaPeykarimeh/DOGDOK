@@ -134,7 +134,7 @@ public class EnemyFollow : MonoBehaviour
 
         }
 
-        if (!isInVision && enemyController.isAlerted)
+        if (!isInVision && enemyController.isAlerted && !enemyController.isTargetedTurret)
         {
             outOfEyeTimer -= Time.deltaTime;
 
@@ -161,7 +161,7 @@ public class EnemyFollow : MonoBehaviour
 
         else if (enemyController.isMoving && !enemyController.isAlerted && !enemyController.isTargetedTurret)
         {
-            positionToGo = enemyController.currentTargetTransform.position;
+            //positionToGo = enemyController.player.position;
             _dis = Vector3.Distance(transform.position, positionToGo);
             if (_dis <= reachTolerance)
             {

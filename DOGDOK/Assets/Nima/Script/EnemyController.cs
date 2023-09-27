@@ -85,6 +85,7 @@ public class EnemyController : MonoBehaviour
                 float ranX = Random.Range(-movingDistance,movingDistance);
                 float ranZ = Random.Range(-movingDistance, movingDistance);
                 positionToGo = transform.position + new Vector3(ranX,0,ranZ);
+                enemyFollow.positionToGo = positionToGo;
             }
             else
             {
@@ -178,7 +179,14 @@ public class EnemyController : MonoBehaviour
             //animator.SetBool("IsMoving", false);
 
         }
-
+        else if ( !isTargetedTurret&& _isTargetedTurret && _isAlerted)
+        {
+            _targetTransform.GetComponent<TurretHealthManager>().alertedEnemiesList.Add(this);
+            isTargetedTurret = _isTargetedTurret;
+            currentTargetTransform = _targetTransform;
+            positionToGo = _targetTransform.position;
+            enemyFollow.positionToGo = _targetTransform.position;
+        }
         
         isAlerted = _isAlerted;
         if (_isAlerted)
@@ -191,9 +199,11 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
+            isTargetedTurret = false;
             animator.SetBool("IsAlerted", _isAlerted);
             animator.SetLayerWeight(2, 1f);
             enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Walking);
+            isTargetedTurret = false;
             //enemyMovement.movementSpeed = enemyMovement.walkSpeed;
             float _speedRatio = (enemyMovement.walkSpeed - enemyMovement.minWalkSpeed) / (enemyMovement.maxWalkSpeed- enemyMovement.minWalkSpeed);
             animator.SetFloat("SpeedRatio", _speedRatio);

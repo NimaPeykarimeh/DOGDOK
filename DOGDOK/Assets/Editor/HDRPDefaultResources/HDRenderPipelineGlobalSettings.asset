@@ -94,8 +94,39 @@ MonoBehaviour:
   supportRuntimeDebugDisplay: 0
   apvScenesData:
     serializedBounds: []
-    serializedHasVolumes: []
-    serializedProfiles: []
-    serializedBakeSettings: []
-    serializedBakingSets: []
+    serializedHasVolumes:
+    - sceneGUID: 206dba22f644e5345ae98fefaa70c6c7
+      hasProbeVolumes: 0
+    serializedProfiles:
+    - sceneGUID: 206dba22f644e5345ae98fefaa70c6c7
+      profile: {fileID: 11400000, guid: 5a212daf46e1edc408238a90755e8a32, type: 2}
+    serializedBakeSettings:
+    - sceneGUID: 206dba22f644e5345ae98fefaa70c6c7
+      settings:
+        dilationSettings:
+          enableDilation: 1
+          dilationDistance: 1
+          dilationValidityThreshold: 0.25
+          dilationIterations: 1
+          squaredDistWeighting: 1
+        virtualOffsetSettings:
+          useVirtualOffset: 1
+          outOfGeoOffset: 0.01
+          searchMultiplier: 0.2
+    serializedBakingSets:
+    - name: Default
+      sceneGUIDs:
+      - 206dba22f644e5345ae98fefaa70c6c7
+      settings:
+        dilationSettings:
+          enableDilation: 1
+          dilationDistance: 1
+          dilationValidityThreshold: 0.25
+          dilationIterations: 1
+          squaredDistWeighting: 1
+        virtualOffsetSettings:
+          useVirtualOffset: 1
+          outOfGeoOffset: 0.01
+          searchMultiplier: 0.2
+      profile: {fileID: 11400000, guid: 5a212daf46e1edc408238a90755e8a32, type: 2}
   m_Version: 3

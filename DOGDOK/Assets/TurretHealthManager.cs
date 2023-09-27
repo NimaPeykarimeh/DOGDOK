@@ -7,6 +7,7 @@ public class TurretHealthManager : MonoBehaviour
     TurretController turretController;
     [SerializeField] int maxHealth = 200;
     [SerializeField] int currentHealth;
+    public List<EnemyController> alertedEnemiesList;
     private void Awake()
     {
         turretController = GetComponent<TurretController>();
@@ -28,6 +29,12 @@ public class TurretHealthManager : MonoBehaviour
 
     void DestroyTurret()
     {
+        foreach (EnemyController _enemy in alertedEnemiesList)
+        {
+            _enemy.isTargetedTurret = false;
+            _enemy.AlertEnemy(false,false,false,transform);
+        }
+        alertedEnemiesList.Clear();
         Destroy(gameObject);
     }
 }

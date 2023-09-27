@@ -112,6 +112,7 @@ public class EnemyHealth : MonoBehaviour
         enemyController.enemyFollow.enabled = false;
         enemyController.enemyMovement.enabled = false;
         enemyController.animator.enabled = false;
+        enemyController.isTargetedTurret = false;
         //enemyController.enemyMovement.enemyRb.isKinematic = true;
         enemyController.enabled = false;
     }

@@ -11,6 +11,9 @@ public class TurretFireController : MonoBehaviour
     TurretController turretController;
     AudioSource audioSource;
     [SerializeField] AudioClip shootingSound;
+    [Header("Noise")]
+    NoiseMaker noiseMaker;
+    [SerializeField] float noiseRange;
 
     [SerializeField] private Transform _bodyTransform;
     //[SerializeField] private Transform _headTransform;
@@ -40,7 +43,7 @@ public class TurretFireController : MonoBehaviour
     {
         turretController = GetComponent<TurretController>();
         audioSource = GetComponent<AudioSource>();
-        
+        noiseMaker = GetComponent<NoiseMaker>();
     }
     void Start()
     {
@@ -148,6 +151,7 @@ public class TurretFireController : MonoBehaviour
             {
                 print("BulletRayHit");
                 ammoPooling.SpawnAmmo(hit.distance);
+                noiseMaker.MakeNoise(noiseRange, _firePoint,this);
                 audioSource.PlayOneShot(shootingSound);
                 GameObject _effect = Instantiate(bulletHitEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 _effect.transform.parent = hit.transform;

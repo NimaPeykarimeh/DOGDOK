@@ -48,13 +48,14 @@ MonoBehaviour:
   _lightObject: {fileID: 0}
   _light: {fileID: 0}
   maxLightIntensity: 0
+  targetLightIntensity: 0
   player: {fileID: 0}
   theLightIsOn: 0
   playerSpeed: 15
   checkTimer: 0
   nextTimeToCheck: 0
   activationDistance: 15
-  fullLightDistance: 10
+  lightFullLength: 5
   distance: 0
 --- !u!1 &479419811937548465
 GameObject:
@@ -215,7 +216,7 @@ MonoBehaviour:
   m_EvsmBlurPasses: 0
   m_LightlayersMask: 2
   m_LinkShadowLayers: 1
-  m_ShadowNearPlane: 0.1
+  m_ShadowNearPlane: 0.5
   m_BlockerSampleCount: 24
   m_FilterSampleCount: 16
   m_MinFilterSize: 0.1
@@ -238,7 +239,7 @@ MonoBehaviour:
   m_PenumbraTint: 0
   m_NormalBias: 0.75
   m_SlopeBias: 0.5
-  m_ShadowUpdateMode: 1
+  m_ShadowUpdateMode: 0
   m_AlwaysDrawDynamicShadows: 0
   m_UpdateShadowOnLightMovement: 0
   m_CachedShadowTranslationThreshold: 0.01

@@ -34,6 +34,11 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] float turretCheckTimer;
     [SerializeField] TurretHealthManager turretHealthManager;
 
+    [Header("AttackSpehreCast")]
+    [SerializeField] Transform attackCenter;
+    [SerializeField] float sphereRadius;
+    [SerializeField] LayerMask attackLayerMask;
+
     [Header("Test")]
     [SerializeField] float targetDistance;
     [SerializeField] float stopDistance = 0.75f;
@@ -43,27 +48,67 @@ public class EnemyAttack : MonoBehaviour
         enemyMovement = GetComponent<EnemyMovement>();
         enemyHealth = GetComponent<EnemyHealth>();
     }
+    private void OnDrawGizmos()
+    {
+        // Set the color of the Gizmos
+        Gizmos.color = Color.red;
+
+        // Calculate the direction of the SphereCast (forward from the transform)
+        Vector3 castDirection = transform.forward;
+
+        // Draw the SphereCast using Gizmos
+        Gizmos.DrawWireSphere(attackCenter.position, sphereRadius);
+
+        Gizmos.DrawWireSphere(attackCenter.position, sphereRadius/2);
+        // Draw a line to visualize the SphereCast direction
+    }
     void Attack()
     {
-        bool isInAttackDistance = Vector3.Distance(transform.position, enemyController.currentTargetTransform.position) < hitDistance;
+        //if (Physics.SphereCast(attackCenter.position,sphereRadius,transform.forward, out RaycastHit _hit,hitDistance,attackLayerMask))
+        //if(Physics.CheckSphere(attackCenter.position,sphereRadius,attackLayerMask))
+        //{
+        //    //Debug.Log(_hit.collider.name);
+
+        //    if (enemyController.isTargetedTurret)
+        //    {
+        //        turretHealthManager.GetDamage(damage);
+        //    }
+        //    else
+        //    {
+        //        if ((randomAttackValue < 0.5f && enemyHealth.itHasLeftHand) || (randomAttackValue > 0.5f && enemyHealth.itHasRightHand))
+        //        {
+        //            enemyController.player.GetComponent<PlayerHealth>().ChangeHealth(-damage);
+        //        }
+        //    }
+        //}
+        Collider[] _hitColliders = Physics.OverlapSphere(attackCenter.position, sphereRadius, attackLayerMask);
+        foreach (Collider _collider in _hitColliders)
+        {
+            if (_collider.CompareTag("Player"))
+            {
+                enemyController.player.GetComponent<PlayerHealth>().ChangeHealth(-damage);
+            }
+            else if (_collider.CompareTag("Turret"))
+            {
+                if (_collider.transform.parent.TryGetComponent<TurretHealthManager>(out TurretHealthManager _health))
+                {
+                    _health.GetDamage(damage);
+
+                }
+                
+            }
+        }
+
+
+        //bool isInAttackDistance = Vector3.Distance(transform.position, enemyController.currentTargetTransform.position) < hitDistance;
         isLayerChanging = true;
         layerValue = 1;
         layerTargetValue = 0;
         layerChangeDuration = 0.7f;
-        if (isInAttackDistance)
-        {
-            if (enemyController.isTargetedTurret)
-            {
-                turretHealthManager.GetDamage(damage);
-            }
-            else
-            {
-                if ((randomAttackValue < 0.5f && enemyHealth.itHasLeftHand) || (randomAttackValue > 0.5f && enemyHealth.itHasRightHand))
-                {
-                    enemyController.player.GetComponent<PlayerHealth>().ChangeHealth(-damage);
-                }
-            }
-        }
+        //if (isInAttackDistance)
+        //{
+            
+        //}
         //enemyMovement.canMove = true;
         isDelaying = true;
         animationTimer = 0;
@@ -98,10 +143,25 @@ public class EnemyAttack : MonoBehaviour
                 turretHealthManager = _selectedTurret.GetComponent<TurretHealthManager>();
                 enemyController.enemyFollow.positionToGo = _selectedTurret.transform.position;
                 enemyController.currentTargetTransform = _selectedTurret.transform;
+                enemyController.enemyFollow.positionToGo = _selectedTurret.transform.position;
                 turretCheckTimer = turretCheckInterval;
+                enemyController.isTargetedTurret = true;
                 isTargetedTurret = true;
             }
         }
+    }
+    bool IsTargetInDistance()
+    {
+        Collider[] _hitColliders = Physics.OverlapSphere(attackCenter.position, sphereRadius/2, attackLayerMask);
+        foreach (Collider _collider in _hitColliders)
+        {
+            if (_collider.CompareTag("Player") || _collider.CompareTag("Turret"))
+            {
+                return true;
+            }
+            
+        }
+        return false;
     }
 
     void SetRandomAttackValue()//get random value to attacking hand
@@ -117,45 +177,52 @@ public class EnemyAttack : MonoBehaviour
     void Update()
     {
         attackTimer += Time.deltaTime;
-        targetDistance = Vector3.Distance(transform.position, enemyController.currentTargetTransform.position);
-        readyToAttack = targetDistance < attackTriggerDistance && enemyController.isAlerted;
+        if (enemyController.isAlerted)
+        {
+            targetDistance = Vector3.Distance(transform.position, enemyController.currentTargetTransform.position);
+            readyToAttack = targetDistance < attackTriggerDistance;
+
+            if (readyToAttack)
+            {
+                if (IsTargetInDistance())
+                {
+                    enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Idle);
+                }
+                else
+                {
+                    enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Runnning);
+                }
+                //enemyMovement.canMove = playerDistance >= stopDistance;
+
+            }
+
+            if (attackTimer >= attackInterval && readyToAttack)
+            {
+                attackTimer = 0;
+                SetRandomAttackValue();
+                enemyController.animator.SetTrigger("Attack");
+                Debug.Log("TriggerCounter");
+                layerValue = 0;
+                isLayerChanging = true;
+                layerTargetValue = 1;
+                layerChangeDuration = 0.2f;
+                //Attack();
+            }
+        }
 
         turretCheckTimer -= Time.deltaTime;
-        if (turretCheckTimer <= 0)
-        {
-            CheckNearbyTurrets();
-        }
+        //if (turretCheckTimer <= 0)
+        //{
+        //    CheckNearbyTurrets();
+        //}
 
-        if (readyToAttack)
-        {
-            if (targetDistance <= stopDistance)
-            {
-                enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Idle);
-            }
-            else
-            {
-                enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Runnning);
-            }
-            //enemyMovement.canMove = playerDistance >= stopDistance;
-
-        }
+        
         //if (attackTimer >= attackInterval - stopDelay && readyToAttack)
         //{
         //    enemyMovement.canMove = false;
         //}
 
-        if (attackTimer >= attackInterval && readyToAttack)
-        {
-            attackTimer = 0;
-            SetRandomAttackValue();
-            enemyController.animator.SetTrigger("Attack");
-            Debug.Log("TriggerCounter");
-            layerValue = 0;
-            isLayerChanging = true;
-            layerTargetValue = 1;
-            layerChangeDuration = 0.2f;
-            //Attack();
-        }
+        
 
         if (isLayerChanging)
         {
