@@ -681,7 +681,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   reflectionLightingLayers:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 2
   reflectionProbeIntensityMultiplier:
     m_OverrideState: 0
@@ -824,13 +824,13 @@ MonoBehaviour:
     m_Value: 0
   nearFocusEnd:
     m_OverrideState: 1
-    m_Value: 8.130342
+    m_Value: 0.76263475
   farFocusStart:
     m_OverrideState: 1
-    m_Value: 16.13034
+    m_Value: 8.762634
   farFocusEnd:
     m_OverrideState: 1
-    m_Value: 121.30341
+    m_Value: 47.626347
   m_NearSampleCount:
     m_OverrideState: 1
     m_Value: 5

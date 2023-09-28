@@ -34,6 +34,11 @@ public class InventoryManager : MonoBehaviour
     [HideInInspector] public bool isOpen;
     [HideInInspector] public Dictionary<Resource1, int> resourceIndices = new();
 
+    [Header("TurretRotation")]
+    [SerializeField] float totalRotation;
+    [SerializeField] float rotationSpeed;
+    [SerializeField] Quaternion targetRotation;
+    [SerializeField] bool isRotating;
     private void Awake() //resource id'leri otomatik atanýyor.
     {
         int i = 0;
@@ -61,9 +66,30 @@ public class InventoryManager : MonoBehaviour
         {
             TrackMouseForBuilding();
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RotateTurret();
+        }
+        if (isRotating)
+        {
+            if (cubeTransform.rotation == targetRotation)
+            {
+                isRotating = false;
+            }
+            cubeTransform.rotation = Quaternion.RotateTowards(cubeTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
     }
 
     #region Turret Building
+    void RotateTurret()
+    {
+        isRotating = true;
+        targetRotation = cubeTransform.rotation * Quaternion.Euler(0f, 90f, 0f);
+        //cubeTransform.Rotate(transform.up,90);
+        float _z = currentBuild.buildingSize.z;
+        currentBuild.buildingSize.z = currentBuild.buildingSize.x;
+        currentBuild.buildingSize.x = _z;
+    }
     public void SetCurrentBuild(Build1 build)
     {
         buildingSelected = true;
@@ -158,6 +184,9 @@ public class InventoryManager : MonoBehaviour
         Vector3 snappedPosition = new Vector3(xPosition, 0, zPosition);//sonra zemin konumu alýrýz
         return snappedPosition;
     }
+
+    
+
     private void TrackMouseForBuilding()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -187,6 +216,7 @@ public class InventoryManager : MonoBehaviour
             {
                 UseResources(currentNeeds);
                 cubeTransform.gameObject.GetComponent<TurretController>().StartGenerating();
+                playerController.ChangePlayerState(PlayerController.PlayerStates.Basic);
                 //cubeTransform.gameObject.GetComponent<BoxCollider>().isTrigger = false;
                 cubeTransform.gameObject.GetComponent<TurretNullControl>().enabled = false;
                 isBuilding = false;
@@ -215,10 +245,10 @@ public class InventoryManager : MonoBehaviour
         Gizmos.color = Color.green;
 
         // Calculate the world space position of the CheckBox
-        //Vector3 checkBoxPosition = cubeTransform.position;
+        Vector3 checkBoxPosition = cubeTransform.position;
 
         // Draw the CheckBox using Gizmos
-        //Gizmos.DrawWireCube(checkBoxPosition, currentBuild.buildingSize);
+        Gizmos.DrawWireCube(checkBoxPosition, currentBuild.buildingSize);
     }
     public void CancelBuilding()
     {

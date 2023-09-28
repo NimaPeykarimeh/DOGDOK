@@ -46,7 +46,7 @@ public class DayNightCycle : MonoBehaviour
         float _sunIntensity = Mathf.Pow((0.5f - Mathf.Abs((0.5f - (_dayTime/24f)))) / 0.5f, dayLigthPow);
         for (int i = 0; i < sunLight.Length; i++)
         {
-            sunLight[i].intensity = Mathf.Lerp(minLight[i], maxLight[i], _sunIntensity);
+            sunLight[i].intensity = Mathf.Lerp(minLight[i], maxLight[i], testValue);
         }
 
         foreach (Material _mat in shaderMaterials)
