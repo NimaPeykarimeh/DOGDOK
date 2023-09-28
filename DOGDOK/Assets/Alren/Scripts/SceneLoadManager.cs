@@ -89,9 +89,9 @@ public class SceneLoadManager : MonoBehaviour
         Screen.SetResolution(res.width, res.height, Screen.fullScreen);
     }
 
-    public void SetVolume(float value)
+    public void SetVolume()
     {
-        audioMixer.SetFloat("volume", value);
+        audioMixer.SetFloat("volume", slider.value);
     }
     
     IEnumerator LoadSceneAsync(int _sceneId)

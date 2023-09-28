@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
     [Header("Other")]
     [SerializeField] SkinnedMeshRenderer mesh;
     public Material material;
-
+    public bool willAttackWall;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -139,6 +139,9 @@ public class EnemyController : MonoBehaviour
     {
         if (!isAlerted && _isAlerted)
         {
+            float _wallAttackRandomizer = Random.Range(0f,1f);
+            willAttackWall = _wallAttackRandomizer <= 0.3f;
+
             //enemyMovement.canMove = false;
             isTargetedTurret = _isTargetedTurret;
             currentTargetTransform = _targetTransform;
@@ -200,6 +203,7 @@ public class EnemyController : MonoBehaviour
         else
         {
             isTargetedTurret = false;
+            willAttackWall = false;
             animator.SetBool("IsAlerted", _isAlerted);
             animator.SetLayerWeight(2, 1f);
             enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Walking);

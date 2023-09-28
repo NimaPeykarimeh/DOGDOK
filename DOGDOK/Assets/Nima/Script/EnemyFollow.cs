@@ -236,14 +236,27 @@ public class EnemyFollow : MonoBehaviour
             Ray ray = new Ray(rayCastCenter.position, direction);
             Debug.DrawRay(ray.origin, ray.direction * rayRange, Color.red);
 
+            bool _doesHit = Physics.Raycast(ray, out RaycastHit hit, rayRange, obstacleLayer);
+
             // Perform actions based on raycast hits here
-            if (!Physics.Raycast(ray, out RaycastHit hit, rayRange, obstacleLayer))
+            if (!_doesHit)
             {
                 startingRotation = transform.rotation;
                 pivotRotation = Quaternion.LookRotation(direction);
                 rotationToLook = pivotRotation;
                 rotationTimer = 0;
                 return;
+            }
+            else
+            {
+                if (enemyController.willAttackWall && hit.collider.CompareTag("Wall"))
+                {
+                    startingRotation = transform.rotation;
+                    pivotRotation = Quaternion.LookRotation(direction);
+                    rotationToLook = pivotRotation;
+                    rotationTimer = 0;
+                    return;
+                }
             }
         }
     }

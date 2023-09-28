@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   builds:
+  - {fileID: 11400000, guid: ba586f089ee94434d83b9f04be36d89e, type: 2}
   - {fileID: 11400000, guid: 1c45739f1efdefa47943175c24820913, type: 2}
   - {fileID: 11400000, guid: 63e81a2499c82d948abd2e435b1c9bd3, type: 2}
   - {fileID: 11400000, guid: f341d18ed80c11648b2ecd86a654b772, type: 2}
@@ -268,6 +269,10 @@ MonoBehaviour:
     m_Bits: 16577
   isBuilding: 0
   isOpen: 0
+  totalRotation: 0
+  rotationSpeed: 720
+  targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  isRotating: 0
 --- !u!222 &5711743710708839393
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -664,6 +669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7699632643281001877}
   - component: {fileID: 7699632643281001878}
+  - component: {fileID: 2102150338}
   m_Layer: 0
   m_Name: CollectibleUI Manager
   m_TagString: Untagged
@@ -700,6 +706,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollectiblePanel: {fileID: 7699632643985105657}
   FeedbackText: {fileID: 4485166266708584387, guid: 443f993e5c4c8d14ea9fa33527c037d7, type: 3}
+--- !u!114 &2102150338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7699632643281001876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e4e3cdbbbbfeb14b8d39058dd4fe008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponController: {fileID: 0}
+  InventoryManager: {fileID: 5711743710708839399}
+  CollectibleFeedback: {fileID: 7699632643281001878}
+  collectingDistance: 5
 --- !u!1 &7699632643442018319
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,7 +962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7934840471733008327
 RectTransform:
   m_ObjectHideFlags: 0

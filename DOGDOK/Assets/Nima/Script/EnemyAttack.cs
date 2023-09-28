@@ -164,6 +164,20 @@ public class EnemyAttack : MonoBehaviour
         return false;
     }
 
+    bool IsWallInDistance()
+    {
+        Collider[] _hitColliders = Physics.OverlapSphere(attackCenter.position, sphereRadius / 2, attackLayerMask);
+        foreach (Collider _collider in _hitColliders)
+        {
+            if (_collider.CompareTag("Wall"))
+            {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
     void SetRandomAttackValue()//get random value to attacking hand
     {
         float _randomizer = Random.Range(0,3.9f);
@@ -194,6 +208,12 @@ public class EnemyAttack : MonoBehaviour
                 }
                 //enemyMovement.canMove = playerDistance >= stopDistance;
 
+            }
+
+            if (enemyController.willAttackWall)
+            {
+                readyToAttack = IsWallInDistance();
+                enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Idle);
             }
 
             if (attackTimer >= attackInterval && readyToAttack)

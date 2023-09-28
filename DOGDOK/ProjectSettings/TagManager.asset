@@ -11,6 +11,7 @@ TagManager:
   - EnemyBodyPart
   - CrafatbleArea
   - EnergySource
+  - Wall
   layers:
   - Default
   - TransparentFX
