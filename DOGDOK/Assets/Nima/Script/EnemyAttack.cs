@@ -88,7 +88,7 @@ public class EnemyAttack : MonoBehaviour
             {
                 enemyController.player.GetComponent<PlayerHealth>().ChangeHealth(-damage);
             }
-            else if (_collider.CompareTag("Turret"))
+            else if (_collider.CompareTag("Turret") || _collider.CompareTag("Wall"))
             {
                 if (_collider.transform.parent.TryGetComponent<TurretHealthManager>(out TurretHealthManager _health))
                 {
@@ -159,7 +159,12 @@ public class EnemyAttack : MonoBehaviour
             {
                 return true;
             }
-            
+            else if (enemyController.willAttackWall && _collider.CompareTag("Wall"))
+            {
+                Debug.Log("ATTACK WALL");
+                return true;
+            }
+            Debug.Log(_collider.name +":" + _collider.tag);
         }
         return false;
     }
@@ -193,28 +198,23 @@ public class EnemyAttack : MonoBehaviour
         attackTimer += Time.deltaTime;
         if (enemyController.isAlerted)
         {
-            targetDistance = Vector3.Distance(transform.position, enemyController.currentTargetTransform.position);
-            readyToAttack = targetDistance < attackTriggerDistance;
-
+            //targetDistance = Vector3.Distance(transform.position, enemyController.currentTargetTransform.position);
+            //readyToAttack = targetDistance < attackTriggerDistance;
+            readyToAttack = IsTargetInDistance();
             if (readyToAttack)
             {
-                if (IsTargetInDistance())
-                {
-                    enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Idle);
-                }
-                else
-                {
-                    enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Runnning);
-                }
-                //enemyMovement.canMove = playerDistance >= stopDistance;
-
-            }
-
-            if (enemyController.willAttackWall)
-            {
-                readyToAttack = IsWallInDistance();
                 enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Idle);
             }
+            else
+            {
+                enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Runnning);
+            }
+
+            //if (enemyController.willAttackWall)
+            //{
+            //    readyToAttack = IsWallInDistance();
+            //    enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Idle);
+            //}
 
             if (attackTimer >= attackInterval && readyToAttack)
             {

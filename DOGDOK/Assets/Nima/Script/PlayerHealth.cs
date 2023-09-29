@@ -7,12 +7,19 @@ public class PlayerHealth : MonoBehaviour
 {
 
     PlayerController playerController;
+    PlayerEnergyController playerEnergyController;
     [SerializeField] int maxHealth;
     [SerializeField] int currentHealth;
     [SerializeField] Image healthImage;
+    [SerializeField] Image alienImage;
     [SerializeField] float UISpeed;
     [SerializeField] bool UIChanging;
     [SerializeField] int injuredLayerIndex;
+
+    [Header("HealValues")]
+    [SerializeField] float energyToHealMult = 2;
+    [SerializeField] float healFillDuration= 0.5f;
+
     [Header("HitAnimation")]
     [SerializeField] float animationDuration;
     [SerializeField] float hitAnimTimer;
@@ -21,11 +28,15 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] bool isGettingHit;
     [SerializeField] bool hitFedeIn;
     [SerializeField] float hitDelayTimer = 0.3f;
+    private void Awake()
+    {
+        playerEnergyController = GetComponent<PlayerEnergyController>();
+        playerController = GetComponent<PlayerController>();
+    }
 
     void Start()
     {
         currentHealth = maxHealth;
-        playerController = GetComponent<PlayerController>();
     }
 
     public void ChangeHealth(int _changeAmount)
@@ -50,6 +61,22 @@ public class PlayerHealth : MonoBehaviour
         //healthImage.fillAmount = (float)currentHealth / maxHealth;
     }
 
+    public void HealCompletly()
+    {
+        float _energyUsage = (maxHealth - currentHealth) / energyToHealMult;
+        if (playerEnergyController.UseEnergy(_energyUsage))
+        {
+            UIChanging = true;
+            currentHealth = maxHealth;
+        }
+        else
+        {
+            UIChanging = true;
+            currentHealth += Mathf.RoundToInt(playerEnergyController.UseAllEnergy() * energyToHealMult);
+        }
+        //healthImage.fillAmount = currentHealth / maxHealth;
+        //alienImage.fillAmount = currentHealth / maxHealth;
+    }
     void PlayerDead()
     {
         Debug.Log("YouDead");
@@ -62,10 +89,12 @@ public class PlayerHealth : MonoBehaviour
         if (UIChanging)
         {
             healthImage.fillAmount = Mathf.MoveTowards(healthImage.fillAmount, (float)currentHealth / maxHealth,UISpeed * Time.deltaTime);
+            alienImage.fillAmount = Mathf.MoveTowards(alienImage.fillAmount, (float)currentHealth / maxHealth, UISpeed * Time.deltaTime);
             //playerController.animator.SetLayerWeight(injuredLayerIndex,1 - (float)currentHealth / maxHealth);
             if (Mathf.Abs(healthImage.fillAmount - (float)currentHealth / maxHealth) <= 0.1f)
             {
                 healthImage.fillAmount = (float)currentHealth / maxHealth;
+                alienImage.fillAmount = (float)currentHealth / maxHealth;
                 UIChanging = false;
             }
         }
@@ -107,15 +136,6 @@ public class PlayerHealth : MonoBehaviour
 
                 }
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            ChangeHealth(-5);
-        }
-        else if (Input.GetKeyDown(KeyCode.H))
-        {
-            ChangeHealth(5);
         }
     }
 }

@@ -1,4 +1,5 @@
 using Cinemachine;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.Rendering;
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public CharacterMovement characterMovement;
     //public PlayerMouseLook playerMouseLook;
     public Animator animator;
+    public PlayerEnergyController playerEnergyController;
 
     [Header("States")]
     public bool isAiming;
@@ -39,6 +41,7 @@ public class PlayerController : MonoBehaviour
     [Header("Other")]
     [SerializeField] Material weaponMat;
     [SerializeField] float aimDistance;
+    [SerializeField] TextMeshProUGUI interactionText;
 
     [Header("dof Effect")]
     [SerializeField] Volume volume;
@@ -68,15 +71,26 @@ public class PlayerController : MonoBehaviour
         Building
     }
 
+    private void Awake()
+    {
+        characterMovement = GetComponent<CharacterMovement>();
+        aimPlayer = GetComponent<AimPlayer>();
+        playerEnergyController = GetComponent<PlayerEnergyController>();
+    }
+
     void Start()
     {
         volume.profile = volProf;
         volProf.TryGet<DepthOfField>(out dofEffect);
 
         Cursor.lockState = CursorLockMode.Locked;
-        characterMovement = GetComponent<CharacterMovement>();
-        aimPlayer = GetComponent<AimPlayer>();
         //playerMouseLook = GetComponent<PlayerMouseLook>();
+    }
+
+    public void SetInteractionText(bool isActivate, string _text = "")
+    {
+        interactionText.gameObject.SetActive(isActivate);
+        interactionText.text = _text;
     }
 
     float GetFocusDistance()
@@ -88,6 +102,8 @@ public class PlayerController : MonoBehaviour
 
         return maxFocusRange;
     }
+
+
 
     public void ChangePlayerState(PlayerStates _state)
     {

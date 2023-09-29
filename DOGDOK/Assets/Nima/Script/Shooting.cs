@@ -29,6 +29,7 @@ public class Shooting : MonoBehaviour
 
     [SerializeField] int fireRate = 2;
     [SerializeField] int damage = 5;
+    [SerializeField] float energyUsage;
     [SerializeField] float shootRange = 100;
     [SerializeField] float noiseRange = 15.6f;
     [SerializeField] bool isAutomatic;
@@ -109,12 +110,15 @@ public class Shooting : MonoBehaviour
 
         if (isShooting && fireTimer >= fireInterval && weaponController.canShoot)
         {
-            fireTimer = 0;
-            Recoil();
+            if (playerController.playerEnergyController.UseEnergy(energyUsage))
+            {
+                fireTimer = 0;
+                Recoil();
 
-            Shoot(shootPoint, playerController.aimPlayer.GetAimHitInfo(), shootRange, noiseRange, isPiercing, damage);
-            audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, accelerationTimer / accelerationDuration);
-            audioSource.PlayOneShot(gunSounds[0]);
+                Shoot(shootPoint, playerController.aimPlayer.GetAimHitInfo(), shootRange, noiseRange, isPiercing, damage);
+                audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, accelerationTimer / accelerationDuration);
+                audioSource.PlayOneShot(gunSounds[0]);
+            }
 
         }
 

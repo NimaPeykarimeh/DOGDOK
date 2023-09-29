@@ -2234,7 +2234,7 @@ MonoBehaviour:
   isPlayerPositionKnown: 0
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 2176
+    m_Bits: 2688
   pivotRotation: {x: 0, y: 0, z: 0, w: 0}
   currentAngle: 0
   targetRotation: 0
@@ -2283,6 +2283,7 @@ MonoBehaviour:
   voiceAlertedScream: {fileID: 8300000, guid: 1164ab0b7b5ec3b4d9c352f7f5d5edc6, type: 3}
   mesh: {fileID: 4651953534826387076}
   material: {fileID: 0}
+  willAttackWall: 0
 --- !u!114 &919132147925547877
 MonoBehaviour:
   m_ObjectHideFlags: 0

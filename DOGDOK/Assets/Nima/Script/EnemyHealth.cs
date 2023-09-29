@@ -78,6 +78,7 @@ public class EnemyHealth : MonoBehaviour
         enemyController.enabled = true;
         dissolveValue = 0;
         enemyController.material.SetFloat("_Dissolve", dissolveValue);
+        enemyController.AlertEnemy(false,false,false,enemyController.player);
         enemyController.enemySpawner.BackToPooler(transform);
         //enemyController.enemyMovement.enemyRb.isKinematic = true;
     }
@@ -88,33 +89,38 @@ public class EnemyHealth : MonoBehaviour
         //enemyController.animator.SetFloat("DeathRandomizer", Random.Range(0f,1f));
         //enemyController.animator.SetTrigger("Dead");
         //enemyController.enemyMovement.enemyRb.AddForce(transform.forward * (-dieForce),ForceMode.Impulse);
-        isDying = true;
-        enemyController.enemyCollider.enabled = false;
+        if (!isDying)
+        {
+            isDying = true;
+            ScoreManager.Instance.killCounter++;
+            enemyController.enemyCollider.enabled = false;
 
-        if (_deathSource == HitSource.Player)
-        {
-            enemyController.material.SetColor("_EdgeColor", deadByPlayerColor);
-        }
-        else if (_deathSource == HitSource.RegularTurret)
-        {
-            enemyController.material.SetColor("_EdgeColor", deadByRegularTurret);
-        }
-        foreach (Rigidbody _rb in bodyPartRb )
-        {
-            
-            _rb.isKinematic = false;
-            //_rb.GetComponent<Collider>().isTrigger = false;
-            if (_rb.gameObject.name == "mixamorig:Head")
+            if (_deathSource == HitSource.Player)
             {
-                _rb.AddForce(-transform.forward * dieForce, ForceMode.Impulse);
+                enemyController.material.SetColor("_EdgeColor", deadByPlayerColor);
             }
+            else if (_deathSource == HitSource.RegularTurret)
+            {
+                enemyController.material.SetColor("_EdgeColor", deadByRegularTurret);
+            }
+            foreach (Rigidbody _rb in bodyPartRb)
+            {
+
+                _rb.isKinematic = false;
+                //_rb.GetComponent<Collider>().isTrigger = false;
+                if (_rb.gameObject.name == "mixamorig:Head")
+                {
+                    _rb.AddForce(-transform.forward * dieForce, ForceMode.Impulse);
+                }
+            }
+            enemyController.enemyFollow.enabled = false;
+            enemyController.enemyMovement.enabled = false;
+            enemyController.animator.enabled = false;
+            enemyController.isTargetedTurret = false;
+            //enemyController.enemyMovement.enemyRb.isKinematic = true;
+            enemyController.enabled = false;
         }
-        enemyController.enemyFollow.enabled = false;
-        enemyController.enemyMovement.enabled = false;
-        enemyController.animator.enabled = false;
-        enemyController.isTargetedTurret = false;
-        //enemyController.enemyMovement.enemyRb.isKinematic = true;
-        enemyController.enabled = false;
+        
     }
 
     private void Update()
