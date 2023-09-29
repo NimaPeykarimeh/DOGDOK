@@ -27,7 +27,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject resBlockPrefab;
     [SerializeField] private List<Resource1> resources = new();
     [SerializeField] private byte buildDistance;
-
+    [SerializeField] private CollectibleFeedback collectibleFeedback;
     [SerializeField] LayerMask turretPlaceHitLayers;
 
     [HideInInspector] public bool isBuilding;
@@ -245,10 +245,10 @@ public class InventoryManager : MonoBehaviour
         Gizmos.color = Color.green;
 
         // Calculate the world space position of the CheckBox
-        Vector3 checkBoxPosition = cubeTransform.position;
+        //Vector3 checkBoxPosition = cubeTransform.position;
 
         // Draw the CheckBox using Gizmos
-        Gizmos.DrawWireCube(checkBoxPosition, currentBuild.buildingSize);
+        //Gizmos.DrawWireCube(checkBoxPosition, currentBuild.buildingSize);
     }
     public void CancelBuilding()
     {
@@ -345,7 +345,7 @@ public class InventoryManager : MonoBehaviour
         }
         currentNeeds.Clear();
     }
-    public void AddResources(Dictionary<Resource1, int> addingResources) //Kaynak harcanýmý
+    public void AddResources(Dictionary<Resource1, int> addingResources) //Kaynak alýnýmý
     {
         Dictionary<Resource1, int> tempHave = resourceIndices.ToDictionary(entry => entry.Key, entry => entry.Value);
         //Deðeri Güncelle
@@ -359,6 +359,7 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
+        collectibleFeedback.GiveFeedback(addingResources);
     }
 
     #endregion

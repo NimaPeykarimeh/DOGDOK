@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class WeaponUIManager : MonoBehaviour
 {
-    [SerializeField] private WeaponManager weaponManager;
+    public WeaponManager weaponManager;
     [SerializeField] private GameObject Image;
 
     private void Start()

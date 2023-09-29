@@ -22,7 +22,7 @@ public class WeaponManager : MonoBehaviour
     private float generatingDuration;
     private float dissolvingDuration;
 
-    private int currentWeaponIndex = 0; //Silah seçme index'i
+    public int currentWeaponIndex = 0; //Silah seçme index'i
 
     private bool isGenerating; //Cismin generatingDuration sürecinin içinde olmasý durumunda true
     private bool isDissolving; //Cismin dissolvingDuration sürecinin içinde olmasý durumunda true
