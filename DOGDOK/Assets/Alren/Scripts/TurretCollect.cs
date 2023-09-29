@@ -6,6 +6,7 @@ public class TurretCollect : MonoBehaviour
 {
     private InventoryManager inventoryManager;
     private WeaponUIManager weaponUIManager;
+    [SerializeField] LayerMask turretHitLayer;
     [SerializeField] private List<Renderer> Renderers;
     [SerializeField] private float dissolvingDuration = 1f;
     [SerializeField] private float collectingDistance = 15f;
@@ -16,8 +17,13 @@ public class TurretCollect : MonoBehaviour
     private const float unsolvedValue = 0f;
     private bool isDissolving;
     private Ray ray;
+    private Camera mainCamera;
+    
 
-
+    private void Awake()
+    {
+        mainCamera = Camera.main;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -35,10 +41,10 @@ public class TurretCollect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (turretController.readyToUse && Physics.Raycast(ray, out RaycastHit hit, collectingDistance))
+        ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (turretController.readyToUse && Physics.Raycast(ray, out RaycastHit hit, collectingDistance, turretHitLayer))
         {
-            if(gameObject == hit.transform.gameObject && Input.GetMouseButton(1) && weaponUIManager.weaponManager.currentWeaponIndex == 0)
+            if(gameObject == hit.transform.parent.gameObject && Input.GetMouseButton(1) && weaponUIManager.weaponManager.currentWeaponIndex == 0)
             {
                 print("hits object");
                 for (int i = 0; i < Renderers.Count; i++)

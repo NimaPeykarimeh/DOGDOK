@@ -6,7 +6,12 @@ using UnityEngine.UI;
 public class WeaponUIManager : MonoBehaviour
 {
     public WeaponManager weaponManager;
-    [SerializeField] private GameObject Image;
+    [SerializeField] private Image weaponImage;
+
+    private void Awake()
+    {
+     Debug.Log(weaponImage.gameObject.name);   
+    }
 
     private void Start()
     {
@@ -15,6 +20,6 @@ public class WeaponUIManager : MonoBehaviour
 
     public void SetWeaponImage()
     {
-        Image.GetComponent<Image>().sprite = weaponManager.CurrentWeapon1.weaponImage;
+        weaponImage.sprite = weaponManager.CurrentWeapon1.weaponImage;
     }
 }

@@ -34,17 +34,22 @@ public class EnergyAreaDisable : MonoBehaviour
     {
         if (other.CompareTag("Turret"))
         {
-            other.gameObject.TryGetComponent<TurretController>(out TurretController _controller);
-            _controller.itHasEnergy = true;//change it to turretController
-            turrets.Add(other.gameObject);
+            if (other.gameObject.TryGetComponent<TurretController>(out TurretController _controller))
+            {
+                _controller.itHasEnergy = true;//change it to turretController
+                turrets.Add(other.gameObject);
+            }
+             
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Turret"))
         {
-            other.gameObject.TryGetComponent<TurretController>(out TurretController _controller);
-            _controller.itHasEnergy = false;
+            if (other.gameObject.TryGetComponent<TurretController>(out TurretController _controller))
+            {
+                _controller.itHasEnergy = false;
+            }
             //other.gameObject.GetComponent<TurretController>().itHasEnergy = false;
         }
     }
@@ -52,8 +57,10 @@ public class EnergyAreaDisable : MonoBehaviour
     {
         if (other.CompareTag("Turret"))
         {
-            other.gameObject.TryGetComponent<TurretController>(out TurretController _controller);
-            _controller.itHasEnergy = true;
+            if (other.gameObject.TryGetComponent<TurretController>(out TurretController _controller))
+            {
+                _controller.itHasEnergy = true;
+            }
             //turrets.Add(other.gameObject);
         }
     }

@@ -147,6 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c218b07f551c746923fe38bc30208d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turretHitLayer:
+    serializedVersion: 2
+    m_Bits: 512
   Renderers: []
   dissolvingDuration: 1
   collectingDistance: 15
