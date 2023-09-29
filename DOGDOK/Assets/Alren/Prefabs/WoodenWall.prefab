@@ -473,5 +473,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Renderers: []
-  dissolvingDuration: 1
+  dissolvingDuration: 2
   collectingDistance: 15
