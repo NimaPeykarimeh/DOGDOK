@@ -10,7 +10,7 @@ public class SceneLoadManager : MonoBehaviour
 {
     [SerializeField] GameObject buttonText;
     [SerializeField] GameObject loadPanel;
-    [SerializeField] Slider slider;
+    [SerializeField] Slider volumeSlider;
     [SerializeField] int sceneId;
 
     [SerializeField] private GameObject MainMenuPanel;
@@ -91,7 +91,7 @@ public class SceneLoadManager : MonoBehaviour
 
     public void SetVolume()
     {
-        audioMixer.SetFloat("volume", slider.value);
+        audioMixer.SetFloat("volume", Mathf.Log10(volumeSlider.value) * 20);
     }
     
     IEnumerator LoadSceneAsync(int _sceneId)
@@ -103,7 +103,7 @@ public class SceneLoadManager : MonoBehaviour
         while (!_operation.isDone)
         {
             float _progress = Mathf.Clamp01(_operation.progress);
-            slider.value = _progress;
+            volumeSlider.value = _progress;
             yield return null;
         }
     }

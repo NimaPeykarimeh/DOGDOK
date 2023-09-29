@@ -10,6 +10,7 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private AimPlayer AimPlayer;
     [SerializeField] private float shootDelayAfterChanging = 1f;
     [SerializeField] private WeaponUIManager weaponUIManager;
+    [SerializeField] private PauseManager pauseManager;
 
     private GameObject CurrentWeaponObject;
     [HideInInspector] public Weapon1 CurrentWeapon1;
@@ -95,63 +96,66 @@ public class WeaponManager : MonoBehaviour
 
     private void WeaponSelectionInput()
     {
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if (scroll > 0)
+        if (!pauseManager.gameIsPaused)
         {
-            currentRenderer.material.SetFloat("_Dissolve", 1);
-            currentWeaponIndex++;
-            CurrentWeaponController.canShoot = false;
-            isGenerating = false;
-            isDissolving = true;
-            DissolveWeaponMaterial();
-            //SelectWeapon(currentWeaponIndex + 1);
-        }
-        else if (scroll < 0)
-        {
-            currentRenderer.material.SetFloat("_Dissolve", 1);
-            currentWeaponIndex--;
-            CurrentWeaponController.canShoot = false;
-            isGenerating = false;
-            isDissolving = true;
-            DissolveWeaponMaterial();
-            //electWeapon(currentWeaponIndex - 1);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha1) && currentWeaponIndex != 0)
-        {
-            currentWeaponIndex = 0;
-            CurrentWeaponController.canShoot = false;
-            isGenerating = false;
-            isDissolving = true;
-            DissolveWeaponMaterial();
-            //SelectWeapon(currentWeaponIndex);
-        }
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            if (scroll > 0)
+            {
+                currentRenderer.material.SetFloat("_Dissolve", 1);
+                currentWeaponIndex++;
+                CurrentWeaponController.canShoot = false;
+                isGenerating = false;
+                isDissolving = true;
+                DissolveWeaponMaterial();
+                //SelectWeapon(currentWeaponIndex + 1);
+            }
+            else if (scroll < 0)
+            {
+                currentRenderer.material.SetFloat("_Dissolve", 1);
+                currentWeaponIndex--;
+                CurrentWeaponController.canShoot = false;
+                isGenerating = false;
+                isDissolving = true;
+                DissolveWeaponMaterial();
+                //electWeapon(currentWeaponIndex - 1);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha1) && currentWeaponIndex != 0)
+            {
+                currentWeaponIndex = 0;
+                CurrentWeaponController.canShoot = false;
+                isGenerating = false;
+                isDissolving = true;
+                DissolveWeaponMaterial();
+                //SelectWeapon(currentWeaponIndex);
+            }
 
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && currentWeaponIndex != 1)
-        {
-            currentWeaponIndex = 1;
-            CurrentWeaponController.canShoot = false;
-            isGenerating = false;
-            isDissolving = true;
-            DissolveWeaponMaterial();
-            //SelectWeapon(currentWeaponIndex);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && currentWeaponIndex != 2)
-        {
-            currentWeaponIndex = 2;
-            CurrentWeaponController.canShoot = false;
-            isGenerating = false;
-            isDissolving = true;
-            DissolveWeaponMaterial();
-            //SelectWeapon(currentWeaponIndex);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4) && currentWeaponIndex != 3)
-        {
-            currentWeaponIndex = 3;
-            CurrentWeaponController.canShoot = false;
-            isGenerating = false;
-            isDissolving = true;
-            DissolveWeaponMaterial();
-            //SelectWeapon(currentWeaponIndex);
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && currentWeaponIndex != 1)
+            {
+                currentWeaponIndex = 1;
+                CurrentWeaponController.canShoot = false;
+                isGenerating = false;
+                isDissolving = true;
+                DissolveWeaponMaterial();
+                //SelectWeapon(currentWeaponIndex);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && currentWeaponIndex != 2)
+            {
+                currentWeaponIndex = 2;
+                CurrentWeaponController.canShoot = false;
+                isGenerating = false;
+                isDissolving = true;
+                DissolveWeaponMaterial();
+                //SelectWeapon(currentWeaponIndex);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4) && currentWeaponIndex != 3)
+            {
+                currentWeaponIndex = 3;
+                CurrentWeaponController.canShoot = false;
+                isGenerating = false;
+                isDissolving = true;
+                DissolveWeaponMaterial();
+                //SelectWeapon(currentWeaponIndex);
+            }
         }
 
         if(currentAnimationValue == 1f) // Silah tamamen görünmez olduysa silahý deðiþ.
