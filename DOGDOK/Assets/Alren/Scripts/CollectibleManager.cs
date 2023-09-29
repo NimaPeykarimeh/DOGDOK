@@ -28,7 +28,6 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
 
     [SerializeField] private WeaponController WeaponController;
     [SerializeField] private InventoryManager InventoryManager;
-    [SerializeField] private CollectibleFeedback CollectibleFeedback;
 
     [Header("Attributes")]
     [SerializeField] private float collectingDistance = 5f; // Kaynak Toplama Raycast Uzunluðu
@@ -98,11 +97,9 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
 
         if(disabledCollectible.Count > 0)
         {
-            print(disabledCollectible.Count);
             for(int i = 0; i < disabledTimer.Count; i++)
             {
                 disabledTimer[i] -= Time.deltaTime;
-                print(disabledTimer[i]);
             }
 
             for (int i = 0; i < disabledTimer.Count; i++)
@@ -219,7 +216,6 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
                     }
 
                     InventoryManager.AddResources(addingResources);
-                    CollectibleFeedback.GiveFeedback(addingResources);
                 }
             }
             else

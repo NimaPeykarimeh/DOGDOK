@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1550986662194640904}
   - component: {fileID: 575933956166644850}
   - component: {fileID: 5983360395643194027}
+  - component: {fileID: 4298048212759795702}
   m_Layer: 2
   m_Name: Teleporter
   m_TagString: Turret
@@ -134,6 +135,21 @@ MonoBehaviour:
   healthBarCanvas: {fileID: 2319396787508606323}
   healthBarImage: {fileID: 7576271851688180329}
   barSpeed: 0.5
+--- !u!114 &4298048212759795702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644945241560761620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c218b07f551c746923fe38bc30208d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Renderers: []
+  dissolvingDuration: 1
+  collectingDistance: 15
 --- !u!1 &3350656270908939247
 GameObject:
   m_ObjectHideFlags: 0

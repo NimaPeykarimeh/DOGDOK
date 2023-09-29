@@ -5,9 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(TurretNullControl))]
 public class TurretController : MonoBehaviour
 {
-    [SerializeField] Build1 build;
+    public Build1 build;
     [Header("Generating")]
-    [SerializeField] List<Material> mainMaterials;
+    public List<Material> mainMaterials;
     public Material holoMat;
     [SerializeField] const float generatedValue = -0.1f;
     [SerializeField] float dissolveValue;
@@ -17,9 +17,11 @@ public class TurretController : MonoBehaviour
     public bool itHasEnergy;
     public LayerMask _layer;
     [SerializeField] int turretLayerIndex = 9;
+    private TurretCollect TurretCollect;
 
     private void Start()
     {
+        TurretCollect = GetComponent<TurretCollect>();
         for (int i = 0; i < transform.childCount; i++)
         {
             if (transform.GetChild(i).TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer))
@@ -71,6 +73,7 @@ public class TurretController : MonoBehaviour
             {
                 isGenerating = false;
                 readyToUse = true;
+                TurretCollect.GatherRenderer();
             }
         }
     }

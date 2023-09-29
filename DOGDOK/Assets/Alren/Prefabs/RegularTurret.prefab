@@ -631,6 +631,7 @@ GameObject:
   - component: {fileID: 3950894911762290574}
   - component: {fileID: -8496570471590407313}
   - component: {fileID: 2677364927380963899}
+  - component: {fileID: 4985203844909384165}
   m_Layer: 2
   m_Name: RegularTurret
   m_TagString: Turret
@@ -693,8 +694,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.35, y: 0.74531734, z: 2.35}
-  m_Center: {x: 0.0037537813, y: 0.3926587, z: -0.005630374}
+  m_Size: {x: 2.35, y: 1.0152999, z: 2.35}
+  m_Center: {x: 0.0037537813, y: 0.52764994, z: -0.005630374}
 --- !u!114 &8026873225010496785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -899,3 +900,18 @@ MonoBehaviour:
   isTurret: 1
   gizmoTimer: 0
   gizmoDuration: 0.1
+--- !u!114 &4985203844909384165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8961350585211728618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c218b07f551c746923fe38bc30208d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Renderers: []
+  dissolvingDuration: 1
+  collectingDistance: 15

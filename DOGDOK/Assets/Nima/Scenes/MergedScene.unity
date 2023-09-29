@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.8855758, g: 0.69922686, b: 0.6519985, a: 1}
+  m_IndirectSpecularColor: {r: 0.88467216, g: 0.69631857, b: 0.63685864, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -26358,9 +26358,9 @@ Transform:
   - {fileID: 1727039429}
   - {fileID: 552622739}
   - {fileID: 1077733218}
+  - {fileID: 1899859201}
   - {fileID: 1015556907}
   - {fileID: 66240495}
-  - {fileID: 1899859201}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -40276,6 +40276,7 @@ MonoBehaviour:
   weaponUIManager: {fileID: 902301873}
   CurrentWeapon1: {fileID: 0}
   CurrentWeaponController: {fileID: 0}
+  currentWeaponIndex: 0
   aimSpeedMult: 0
 --- !u!114 &902301873
 MonoBehaviour:
@@ -91857,6 +91858,10 @@ PrefabInstance:
       propertyPath: BuildableArea
       value: 
       objectReference: {fileID: 928718925}
+    - target: {fileID: 5711743710708839399, guid: d8f08d9aaf1545a41b30853edf9ade0c, type: 3}
+      propertyPath: collectibleFeedback
+      value: 
+      objectReference: {fileID: 1522245780}
     - target: {fileID: 5711743710753916838, guid: d8f08d9aaf1545a41b30853edf9ade0c, type: 3}
       propertyPath: m_RootOrder
       value: 47
@@ -104457,6 +104462,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 85c9facaf3e40ed469804a6de893d382, type: 2}
   - {fileID: 11400000, guid: a94dac6c3ffb85942badd54a09312df1, type: 2}
   buildDistance: 12
+  collectibleFeedback: {fileID: 0}
   turretPlaceHitLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -106030,7 +106036,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponController: {fileID: 0}
   InventoryManager: {fileID: 401848033}
-  CollectibleFeedback: {fileID: 1522245780}
   collectingDistance: 5
 --- !u!4 &2934850791651725476
 Transform:
@@ -106081,6 +106086,7 @@ MonoBehaviour:
   weaponUIManager: {fileID: 343575695508650578}
   CurrentWeapon1: {fileID: 0}
   CurrentWeaponController: {fileID: 0}
+  currentWeaponIndex: 0
   aimSpeedMult: 1.5
 --- !u!4 &2934850791751702477
 Transform:
