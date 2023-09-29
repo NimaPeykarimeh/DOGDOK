@@ -12,7 +12,7 @@ public class CraftBuilding : MonoBehaviour
     private void Awake()
     {
         InventoryManager = GameObject.Find("UI & Manager/Inventory Manager").GetComponent<InventoryManager>();
-        TurretPanelCreator = GameObject.Find("UI & Manager/Canvas/Panel/Tablet/Turret Panel").GetComponent<TurretPanelCreator>();
+        TurretPanelCreator = GameObject.Find("UI & Manager/Canvas/IngamePanel/Tablet/Turret Panel").GetComponent<TurretPanelCreator>();
         TurretManager = GameObject.Find("UI & Manager/Turret Manager").GetComponent<TurretManager>();
     }
 

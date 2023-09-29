@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1.206425, g: 0.8851466, b: 0.72327995, a: 1}
+  m_IndirectSpecularColor: {r: 1.2051619, g: 0.8838948, b: 0.72198224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3088,7 +3088,7 @@ GameObject:
   - component: {fileID: 1113446277}
   - component: {fileID: 1113446276}
   m_Layer: 5
-  m_Name: SoundText
+  m_Name: VolumeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3134,7 +3134,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sound
+  m_text: Volume
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3502,7 +3502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1265027338}
   m_Layer: 5
-  m_Name: Sound
+  m_Name: Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6055,7 +6055,7 @@ GameObject:
   - component: {fileID: 1625835152}
   - component: {fileID: 1625835153}
   m_Layer: 5
-  m_Name: SoundSlider
+  m_Name: VolumeSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6128,17 +6128,17 @@ MonoBehaviour:
   m_FillRect: {fileID: 1011075723}
   m_HandleRect: {fileID: 1028160590}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.0001
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2064962241}
         m_TargetAssemblyTypeName: SceneLoadManager, Assembly-CSharp
         m_MethodName: SetVolume
-        m_Mode: 4
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7885,7 +7885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 841489952}
   loadPanel: {fileID: 1479050721}
-  slider: {fileID: 584980408}
+  volumeSlider: {fileID: 1625835153}
   sceneId: 1
   MainMenuPanel: {fileID: 1318959601}
   CreditsPanel: {fileID: 419505068}
