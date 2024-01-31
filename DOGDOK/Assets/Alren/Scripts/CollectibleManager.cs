@@ -23,7 +23,7 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
 
     private float currentAnimationValue = -0.1f; // Collectible'ýn bozulma/generate edilme durumunda hangi sayý deðerinde olduðu
     private const float unsolvedValue = -0.1f; // Collectible'ýn generate olmasý için gerekli olan deðer
-    private const float dissolvedValue = 1f; // Collectible'ýn bozulmasý için gerekli olan deðer
+    private const float dissolvedValue = 0.7f; // Collectible'ýn bozulmasý için gerekli olan deðer
 
 
     [SerializeField] private WeaponController WeaponController;

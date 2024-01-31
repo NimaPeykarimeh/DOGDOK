@@ -69,6 +69,7 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
         currentStamina = maxStamina;
+
     }
 
     void MovePlayer()

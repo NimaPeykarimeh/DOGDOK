@@ -41,12 +41,8 @@ public class AimPlayer : MonoBehaviour
 
     [Header("WeaponAnimation")]
     [SerializeField] float animationDuration;
-    float currentAnimationValue = 0f;
     public Rig[] rigLayers;
     public float currentWeight;
-    float newWeight;
-    int rifleAimWeightLayerIndex = 1;//change Later
-    int pistolAimWeightLayerIndex = 4;//change Later
     [Header("AimDelay")]
     [SerializeField] bool waitForAim;
     [SerializeField] float aimDelayDuration = 0.2f;

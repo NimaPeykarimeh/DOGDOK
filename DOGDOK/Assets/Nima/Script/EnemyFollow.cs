@@ -249,7 +249,7 @@ public class EnemyFollow : MonoBehaviour
             }
             else
             {
-                if (enemyController.willAttackWall && hit.collider.CompareTag("Wall"))
+                if ((enemyController.willAttackWall && hit.collider.CompareTag("Wall")) || enemyController.isTargetedTurret)
                 {
                     startingRotation = transform.rotation;
                     pivotRotation = Quaternion.LookRotation(direction);

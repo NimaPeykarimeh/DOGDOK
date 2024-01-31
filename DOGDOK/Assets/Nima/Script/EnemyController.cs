@@ -32,10 +32,12 @@ public class EnemyController : MonoBehaviour
     [Header("Audios")]
     [SerializeField] AudioClip alertedScream;
     [SerializeField] AudioClip voiceAlertedScream;
+    [SerializeField] AudioClip breathVoice;
     [Header("Other")]
     [SerializeField] SkinnedMeshRenderer mesh;
     public Material material;
     public bool willAttackWall;
+    public bool readyToRun;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -51,7 +53,18 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         material = mesh.material;
+        PlayBreathAudio();
     }
+
+    void PlayBreathAudio()
+    {
+        audioSource.clip = breathVoice;
+        audioSource.loop = true;
+
+        audioSource.pitch = Random.Range(0.85f, 1.1f); ;
+        audioSource.Play();
+    }
+
     private void OnEnable()//fix Later
     {
         isGroundedTimer = isGroundedLimit;
@@ -117,14 +130,15 @@ public class EnemyController : MonoBehaviour
     {
         enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Runnning);
         //enemyMovement.canMove = true;
+        readyToRun = true;
         animator.SetBool("IsAlerted", true);
     }
 
     void AlertScream(bool _isVoiceAlert)
     {
-        float _randomPitch = Random.Range(0.85f,1.15f);
-
-        audioSource.pitch = _randomPitch;
+        audioSource.Stop();
+        enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Idle);
+        audioSource.pitch = Random.Range(0.85f, 1.15f);
         if (_isVoiceAlert)
         {
             audioSource.PlayOneShot(voiceAlertedScream);
@@ -148,6 +162,7 @@ public class EnemyController : MonoBehaviour
             positionToGo = _targetTransform.position;
             enemyFollow.positionToGo = _targetTransform.position;
             enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Idle);
+            readyToRun = false;
             animator.SetLayerWeight(2,0f);
             if (_voiceAlerted)
             {
@@ -169,10 +184,12 @@ public class EnemyController : MonoBehaviour
                 if (_randomizer < 0.4f)
                 {
                     animator.SetTrigger("Alerted");
+                    
                     AlertScream(false);
                 }
                 else
                 {
+                    readyToRun = true;
                     enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Runnning);
                     //enemyMovement.canMove = true;
                     //animator.SetBool("IsMoving", true);
@@ -204,6 +221,7 @@ public class EnemyController : MonoBehaviour
         {
             isTargetedTurret = false;
             willAttackWall = false;
+            PlayBreathAudio();
             animator.SetBool("IsAlerted", _isAlerted);
             animator.SetLayerWeight(2, 1f);
             enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Walking);

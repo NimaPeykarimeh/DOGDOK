@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
@@ -10,12 +11,15 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] float currentScore;
     [SerializeField] float scoreMultiplier = 10;
     public int killCounter = 0;
+    bool isGameEnded;
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI KillsText;
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -31,6 +35,22 @@ public class ScoreManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        currentScore += Time.fixedDeltaTime * scoreMultiplier;
+        if (!isGameEnded)
+        {
+            currentScore += Time.fixedDeltaTime * scoreMultiplier;
+        }
+    }
+
+    public void ResetScore()
+    {
+        isGameEnded = false;
+        currentScore = 0;
+    }
+
+    public void SetScoreValue()
+    {
+        isGameEnded = true;
+        scoreText.text = "SCORE:" + currentScore.ToString("0");
+        KillsText.text = "KILLS:" + killCounter.ToString();
     }
 }

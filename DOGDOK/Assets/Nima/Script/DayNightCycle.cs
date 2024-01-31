@@ -19,6 +19,9 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField] List<AutoLightSystem> autoLightList;
     [SerializeField] List<float> maxIntensityList;
     [SerializeField] float testValue;
+    public bool isDay;
+
+    [SerializeField] bool doesCycle;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,8 @@ public class DayNightCycle : MonoBehaviour
             autoLightList.Add(_autoLight);
             maxIntensityList.Add(_autoLight.targetLightIntensity);
         }
+        ChangeDayValues(dayTime);
+        ChangeAreaLightValues();
     }
 
     void ChangeAreaLightValues()
@@ -42,7 +47,7 @@ public class DayNightCycle : MonoBehaviour
     void ChangeDayValues(float _dayTime)
     {
         float _sunAngle = Mathf.Lerp(-90,270,_dayTime/24);
-        sunTransform.rotation = Quaternion.Euler(_sunAngle,-30f,0f);
+        sunTransform.rotation = Quaternion.Euler(_sunAngle, -41.5f, 0f);
         float _sunIntensity = Mathf.Pow((0.5f - Mathf.Abs((0.5f - (_dayTime/24f)))) / 0.5f, dayLigthPow);
         for (int i = 0; i < sunLight.Length; i++)
         {
@@ -61,13 +66,27 @@ public class DayNightCycle : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        ChangeDayValues(dayTime);
-        ChangeAreaLightValues();
-        dayTime += Time.fixedDeltaTime * (24f / ((float)dayTimeDurationMin * 60f));
-        if (dayTime >= 24)
+        if (doesCycle)
         {
-            dayTime = 0;
-            dayCounter++;
+            ChangeDayValues(dayTime);
+            ChangeAreaLightValues();
+            dayTime += Time.fixedDeltaTime * (24f / ((float)dayTimeDurationMin * 60f));
+            if (dayTime >= 6 && !isDay && dayTime <= 18)
+            {
+                isDay = true;
+                Debug.Log("DayTimeChanged");
+            }
+            if ((dayTime > 18 || dayTime < 6) && isDay)
+            {
+                isDay = false;
+                Debug.Log("DayTimeChanged");
+            }
+            if (dayTime >= 24)
+            {
+                dayTime = 0;
+                dayCounter++;
+            }
         }
+        
     }
 }

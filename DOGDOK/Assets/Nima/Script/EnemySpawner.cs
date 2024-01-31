@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Spawning")]
-    [SerializeField] float spawnInterval;
+    public float spawnInterval;
     [SerializeField] float spawnTimer;
     [SerializeField] GameObject enemyPrefab;
     EnemySpawnArea enemySpawnArea;
@@ -18,6 +18,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int playerVisibleAngle = 90;
     [SerializeField] Transform playerOriantation;
 
+    DayNightCycle dayNightCycle;
+
     [Header("Timer")]
     [SerializeField] float distanceTimer;
     [SerializeField] float distanceInterval;
@@ -31,6 +33,7 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         enemySpawnArea = GetComponent<EnemySpawnArea>();
+        dayNightCycle = FindObjectOfType<DayNightCycle>();
     }
 
     void Start()
@@ -120,8 +123,13 @@ public class EnemySpawner : MonoBehaviour
             Vector3 _randomPositon = GetRandomPositionInSpawner();
             if (_randomPositon != Vector3.zero)
             {
+                
                 _spawnedEnemy.transform.position = _randomPositon;
                 _spawnedEnemy.SetActive(true);
+                if (!dayNightCycle.isDay)
+                {
+                    _spawnedEnemy.GetComponent<EnemyController>().AlertEnemy(true, false, false, player.transform);
+                }
                 _spawnedEnemy.transform.parent = null;
                 spawnTimer = 0;
             }

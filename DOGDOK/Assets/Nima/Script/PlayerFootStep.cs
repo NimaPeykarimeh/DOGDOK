@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerFootStep : MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
-    AudioSource audioSource;
+    AudioSource footStepAudioSource;
     [Header("Foot Step")]
     [SerializeField] AudioClip footStepSound;
     [SerializeField] float footStepTimer;
@@ -17,16 +17,16 @@ public class PlayerFootStep : MonoBehaviour
     
     void Start()
     {
-        audioSource = GetComponentInParent<AudioSource>();
+        footStepAudioSource = GetComponent<AudioSource>();
         playerController = GetComponentInParent<PlayerController>();
         
     }
     public void PlayFootStep()
     {
-        audioSource.pitch = Random.Range(minFootStepPitch, maxFootStepPitch);
+        footStepAudioSource.pitch = Random.Range(minFootStepPitch, maxFootStepPitch);
         maxSpeed = playerController.characterMovement.runningSpeed;
-        audioSource.volume = playerController.characterMovement.currentVelocity / maxSpeed;
-        audioSource.PlayOneShot(footStepSound);
+        footStepAudioSource.volume = playerController.characterMovement.currentVelocity / maxSpeed;
+        footStepAudioSource.PlayOneShot(footStepSound);
     }
 
 }

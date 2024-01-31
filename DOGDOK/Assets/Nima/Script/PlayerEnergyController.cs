@@ -12,11 +12,11 @@ public class PlayerEnergyController : MonoBehaviour
     [Header("EnergyInfo")]
     [SerializeField] float maxEnergy = 500;
     public float currentEnergy;
-    [SerializeField] bool isFilling;
+    bool isFilling;
     [SerializeField] float fillDuration = 0.5f;
     [SerializeField] float fillSpeed;
-
-
+    bool isUsing;
+    float targetEnergy;
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
@@ -32,7 +32,7 @@ public class PlayerEnergyController : MonoBehaviour
         {
             if (other.name == "InteractionArea")
             {
-                playerController.SetInteractionText(true, "Press F To Fill Energy");
+                DisplayText.Instance.ShowText(true, "Press 'F' To Fill");
                 isInEnergyArea = true;
             }
         }
@@ -48,7 +48,7 @@ public class PlayerEnergyController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Out Of Energy");
+            DisplayText.Instance.ShowText(true, "Out Of Energy\r\n(Use Generetor To Refill)",2f,DisplayText.TextType.Warning);
         }
         return false;
     }
@@ -67,7 +67,7 @@ public class PlayerEnergyController : MonoBehaviour
         {
             if (other.name == "InteractionArea")
             {
-                playerController.SetInteractionText(false);
+                DisplayText.Instance.ShowText(false);
                 isInEnergyArea = false;
             }
         }

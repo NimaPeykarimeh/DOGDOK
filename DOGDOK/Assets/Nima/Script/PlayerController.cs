@@ -84,6 +84,7 @@ public class PlayerController : MonoBehaviour
         volProf.TryGet<DepthOfField>(out dofEffect);
 
         Cursor.lockState = CursorLockMode.Locked;
+        ChangePlayerState(PlayerStates.Basic);
         //playerMouseLook = GetComponent<PlayerMouseLook>();
     }
 

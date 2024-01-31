@@ -18,17 +18,22 @@ public class TurretController : MonoBehaviour
     public LayerMask _layer;
     [SerializeField] int turretLayerIndex = 9;
     private TurretCollect TurretCollect;
+    [SerializeField] bool isBuilded = true;
 
     private void Start()
     {
-        TurretCollect = GetComponent<TurretCollect>();
-        for (int i = 0; i < transform.childCount; i++)
+        if (isBuilded)
         {
-            if (transform.GetChild(i).TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer))
+            for (int i = 0; i < transform.childCount; i++)
             {
-                meshRenderer.material = holoMat;
+                if (transform.GetChild(i).TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer))
+                {
+                    meshRenderer.material = holoMat;
+                }
             }
+
         }
+        TurretCollect = GetComponent<TurretCollect>();
     }
 
     public void StartGenerating()
@@ -75,6 +80,10 @@ public class TurretController : MonoBehaviour
                 readyToUse = true;
                 TurretCollect.GatherRenderer();
             }
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            StartGenerating();
         }
     }
 }

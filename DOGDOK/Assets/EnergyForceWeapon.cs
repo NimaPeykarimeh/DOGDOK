@@ -15,6 +15,7 @@ public class EnergyForceWeapon : MonoBehaviour
     AudioSource audioSource;
 
     [Header("WeaponInfo")]
+    [SerializeField] float energyUsage = 10f;
     Quaternion defaultRotation;
     [SerializeField] int damage;
     [SerializeField] List<Vector3> pushRotations;
@@ -55,7 +56,7 @@ public class EnergyForceWeapon : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1") && weaponController.canShoot && firingTimer >= FiringInterval)
+        if (Input.GetButtonDown("Fire1") && weaponController.canShoot && firingTimer >= FiringInterval && playerController.playerEnergyController.UseEnergy(energyUsage))
         {
             Fire();
         }
@@ -68,6 +69,7 @@ public class EnergyForceWeapon : MonoBehaviour
     {
         if (isPushing)
         {
+
             PushEnemies();
             pushTimer -= Time.fixedDeltaTime;
             float _effectRatio = Mathf.Clamp01(((pushDuration - pushTimer) * effectSpeedMult) / pushDuration) ;

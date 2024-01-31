@@ -207,7 +207,11 @@ public class EnemyAttack : MonoBehaviour
             }
             else
             {
-                enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Runnning);
+                if (enemyController.readyToRun)
+                {
+                    enemyMovement.SwitchMovmentState(EnemyMovement.MovementState.Runnning);
+                }
+                
             }
 
             //if (enemyController.willAttackWall)

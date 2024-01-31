@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
 {
 
     PlayerController playerController;
+    AudioSource audioSource;
     PlayerEnergyController playerEnergyController;
     [SerializeField] int maxHealth;
     [SerializeField] int currentHealth;
@@ -15,6 +17,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] float UISpeed;
     [SerializeField] bool UIChanging;
     [SerializeField] int injuredLayerIndex;
+
+    [SerializeField] AudioClip hitAudio;
 
     [Header("HealValues")]
     [SerializeField] float energyToHealMult = 2;
@@ -28,15 +32,21 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] bool isGettingHit;
     [SerializeField] bool hitFedeIn;
     [SerializeField] float hitDelayTimer = 0.3f;
+
+    [Header("DeadUI")]
+    [SerializeField] ScoreManager scoreManager;
+    [SerializeField] GameObject deadPanel;
     private void Awake()
     {
         playerEnergyController = GetComponent<PlayerEnergyController>();
         playerController = GetComponent<PlayerController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
     {
         currentHealth = maxHealth;
+        scoreManager = FindObjectOfType<ScoreManager>();
     }
 
     public void ChangeHealth(int _changeAmount)
@@ -46,6 +56,8 @@ public class PlayerHealth : MonoBehaviour
         if (_changeAmount < 0 && !isGettingHit)//hit animation
         {
             playerController.animator.SetTrigger("GetHit");
+            audioSource.pitch = Random.Range(0.85f, 1.1f);
+            audioSource.PlayOneShot(hitAudio);
             playerController.characterMovement.ToggleRunState(CharacterMovement.MoveStates.Crouched);
             hitAnimTimer = animationDuration;
             hitFedeIn = true;
@@ -79,8 +91,10 @@ public class PlayerHealth : MonoBehaviour
     }
     void PlayerDead()
     {
-        Debug.Log("YouDead");
-        currentHealth = 100;
+        deadPanel.SetActive(true);
+        scoreManager.SetScoreValue();
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0;
     }
 
     // Update is called once per frame
@@ -94,7 +108,7 @@ public class PlayerHealth : MonoBehaviour
             if (Mathf.Abs(healthImage.fillAmount - (float)currentHealth / maxHealth) <= 0.1f)
             {
                 healthImage.fillAmount = (float)currentHealth / maxHealth;
-                alienImage.fillAmount = (float)currentHealth / maxHealth;
+                //alienImage.fillAmount = (float)currentHealth / maxHealth;
                 UIChanging = false;
             }
         }

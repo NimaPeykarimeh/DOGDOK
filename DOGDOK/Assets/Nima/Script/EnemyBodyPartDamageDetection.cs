@@ -41,9 +41,9 @@ public class EnemyBodyPartDamageDetection : MonoBehaviour
     }
     public void GetPartDamage(int _damage, EnemyHealth.HitSource _hitSource,Transform _hitTransform)//move headshot to enemyhealth
     {
+        currentPartDamage -= _damage;
         if (currentPartDamage > 0)
         {
-            currentPartDamage -= _damage;
             enemyHealth.GetDamage(_damage * headShotMult, _hitSource,_hitTransform);
         }
         else if (currentPartDamage <= 0 && !isPartOff && isTearable)

@@ -10,7 +10,13 @@ public class PauseManager : MonoBehaviour
     [HideInInspector] public bool gameIsPaused;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject optionsPanel;
+
     [SerializeField] Slider volumeSlider;
+    [SerializeField] TextMeshProUGUI volumeText;
+
+    [SerializeField] Slider sensitivitySlider;
+    [SerializeField] TextMeshProUGUI sensitivityText;
+    public float sensitivityValue;
 
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private TMP_Dropdown resDropdown;
@@ -40,6 +46,7 @@ public class PauseManager : MonoBehaviour
         resDropdown.AddOptions(options);
         resDropdown.value = currentResIndex;
         resDropdown.RefreshShownValue();
+        Resume();
     }
 
     public void PauseGame()
@@ -78,7 +85,15 @@ public class PauseManager : MonoBehaviour
 
     public void SetVolume()
     {
-        audioMixer.SetFloat("volume", Mathf.Log10(volumeSlider.value)*20);
+        volumeText.text = (volumeSlider.value*5).ToString();
+        float _volumeValue = Mathf.Clamp(volumeSlider.value/20,0.0001f,20f);
+        audioMixer.SetFloat("volume", Mathf.Log10(_volumeValue) * 20);
+    }
+
+    public void SetSensitivity()
+    {
+        sensitivityText.text = (sensitivitySlider.value*5).ToString();
+        sensitivityValue = sensitivitySlider.value;
     }
 
     public void ReturnToMenu()

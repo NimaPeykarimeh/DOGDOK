@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4499aa73d8e7693488841bbf692b8991, type: 3}
   m_Name: WoodenWall
   m_EditorClassIdentifier: 
-  buildingName: Turret B
+  buildingName: Wall
   buildingImage: {fileID: 21300000, guid: 516f974e5d1661e429a104e31b059995, type: 3}
   buildingDuration: 2
   buildingSize: {x: 2, y: 1, z: 2}

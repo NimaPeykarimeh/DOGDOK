@@ -2281,9 +2281,11 @@ MonoBehaviour:
   movingTimer: 0
   alertedScream: {fileID: 8300000, guid: cfa49efabc9935745933ae4b9874192d, type: 3}
   voiceAlertedScream: {fileID: 8300000, guid: 1164ab0b7b5ec3b4d9c352f7f5d5edc6, type: 3}
+  breathVoice: {fileID: 8300000, guid: fa61150c70c82924ba73e2408c887140, type: 3}
   mesh: {fileID: 4651953534826387076}
   material: {fileID: 0}
   willAttackWall: 0
+  readyToRun: 0
 --- !u!114 &919132147925547877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2302,8 +2304,8 @@ MonoBehaviour:
   minWalkSpeed: 0.35
   maxWalkSpeed: 0.525
   runSpeed: 2
-  minRunSpeed: 2.4
-  maxRunSpeed: 3.3
+  minRunSpeed: 2.88
+  maxRunSpeed: 3.96
   movementSpeed: 0
   testVal: 0
   speedToMove: 0
@@ -2361,7 +2363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b6d2d442928ee48b685b43b06ded5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 7
   attackInterval: 2
   hitDistance: 1
   attackTriggerDistance: 2.5
@@ -2423,10 +2425,10 @@ AudioSource:
   m_GameObject: {fileID: 4452290907956169991}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4440461279501303356, guid: e190b4f724733034d828ab8101d06cca, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3296,7 +3298,7 @@ Transform:
   m_LocalRotation: {x: -0.10025221, y: 0.07252421, z: 0.13337429, w: 0.9833113}
   m_LocalPosition: {x: -0, y: 0.07757995, z: 0.032724462}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5311920447863095760}
   m_Father: {fileID: 7738497645997993028}
