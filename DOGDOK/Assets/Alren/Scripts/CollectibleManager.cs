@@ -31,6 +31,7 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
 
     [Header("Attributes")]
     [SerializeField] private float collectingDistance = 5f; // Kaynak Toplama Raycast Uzunluðu
+    [SerializeField] private LayerMask collectibleLayer;//toplanabilir kaynak layer
     //[SerializeField] private float generatingDuration = 1f; // Kaynak Toplamada bozulan cismin geri generatelenme uzunluðu
     //[SerializeField] private float dissolvingDuration = 1f; // Kaynak Toplama Süresi ve Cismin Bozulma Uzunluðu
 
@@ -153,7 +154,7 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
 
     private void FirstCollectibleHit() // Ýlk defa cisimle etkileþim ve cismin bilgilerini alma
     {
-        if (Physics.Raycast(ray, out RaycastHit hit, collectingDistance))
+        if (Physics.Raycast(ray, out RaycastHit hit, collectingDistance, collectibleLayer))
         {
             GameObject hitObject = hit.transform.gameObject;
             if (hitObject.TryGetComponent<ResourceCreation>(out ResourceCreation)) //Cisim resource ise gir
@@ -195,7 +196,7 @@ public class CollectibleManager : MonoBehaviour //Collect iþlemi ve kontrolünün 
 
     private void Gathering()
     {
-        if (Physics.Raycast(ray, out RaycastHit hit, collectingDistance))
+        if (Physics.Raycast(ray, out RaycastHit hit, collectingDistance, collectibleLayer))
         {
             GameObject hitObject = hit.transform.gameObject;
             if (hitObject.GetInstanceID() == objectID)

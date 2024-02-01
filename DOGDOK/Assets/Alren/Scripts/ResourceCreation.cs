@@ -22,6 +22,7 @@ public class ResourceCreation : MonoBehaviour
     void Start()
     {
         Renderer = gameObject.GetComponent<Renderer>();
+        gameObject.layer = 15;
     }
 
     public float DissolveCollectible(float currentAnimationValue, float dissolvedValue)

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9e4ed5a6f56fb4ebd693e39684f36f, type: 3}
   m_Name: VolumetricClouds
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enable:
     m_OverrideState: 1
     m_Value: 1
@@ -703,7 +703,7 @@ MonoBehaviour:
     m_Value: 53.9
   enableVolumetricFog:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   albedo:
     m_OverrideState: 0
     m_Value: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
@@ -984,13 +984,13 @@ MonoBehaviour:
     m_Value: 0
   nearFocusEnd:
     m_OverrideState: 1
-    m_Value: 0.36295223
+    m_Value: 45.902973
   farFocusStart:
     m_OverrideState: 1
-    m_Value: 8.362952
+    m_Value: 53.902973
   farFocusEnd:
     m_OverrideState: 1
-    m_Value: 43.629524
+    m_Value: 499.02972
   m_NearSampleCount:
     m_OverrideState: 1
     m_Value: 5

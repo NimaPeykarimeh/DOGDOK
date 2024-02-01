@@ -147,15 +147,15 @@ public class WeaponManager : MonoBehaviour
                 DissolveWeaponMaterial();
                 //SelectWeapon(currentWeaponIndex);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha4) && currentWeaponIndex != 3)
-            {
-                currentWeaponIndex = 3;
-                CurrentWeaponController.canShoot = false;
-                isGenerating = false;
-                isDissolving = true;
-                DissolveWeaponMaterial();
-                //SelectWeapon(currentWeaponIndex);
-            }
+            //else if (Input.GetKeyDown(KeyCode.Alpha4) && currentWeaponIndex != 3)
+            //{
+            //    currentWeaponIndex = 3;
+            //    CurrentWeaponController.canShoot = false;
+            //    isGenerating = false;
+            //    isDissolving = true;
+            //    DissolveWeaponMaterial();
+            //    //SelectWeapon(currentWeaponIndex);
+            //}
         }
 
         if(currentAnimationValue == 1f) // Silah tamamen görünmez olduysa silahý deðiþ.
